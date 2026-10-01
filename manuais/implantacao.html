@@ -687,7 +687,7 @@ details.err .body li{margin:5px 0}
           <div class="tabpanel" role="tabpanel" data-key="zip">
             <ol class="steps">
               <li><h4>Baixe o ZIP</h4><p>Pelo link direto <a href="https://github.com/BRIANICK-dev/reels-engine-ia/archive/refs/heads/main.zip">reels-engine-ia-main.zip</a>, ou na página <a href="https://github.com/BRIANICK-dev/reels-engine-ia" target="_blank" rel="noopener">github.com/BRIANICK-dev/reels-engine-ia <svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a> → botão verde <strong>Code</strong> → <strong>Download ZIP</strong>.</p></li>
-              <li><h4>Windows: desbloqueie o ZIP antes de extrair</h4><p>Botão direito no ZIP → <strong>Propriedades</strong> → marque <strong>Desbloquear</strong> (no pé da janela) → OK. Assim o Windows não reclama depois, ao instalar o Agente de Render. Se a opção não aparecer, siga em frente.</p></li>
+              <li><h4>Windows: desbloqueie o ZIP antes de extrair</h4><p>Botão direito no ZIP → <strong>Propriedades</strong> → no pé da aba Geral, em <strong>Segurança</strong> (“Este arquivo veio de outro computador…”), marque <strong>Desbloquear</strong> → OK. Assim o Windows não reclama depois, ao instalar o Agente de Render. Se a opção não aparecer, siga em frente.</p></li>
               <li><h4>Extraia direto no lugar definitivo</h4><p>Botão direito → <strong>Extrair tudo…</strong>. No campo de destino, escolha a pasta que você definiu em <a href="#onde-guardar">Onde guardar</a> (por exemplo, <code>C:\Projetos</code>) e <strong>apague o final <code>\reels-engine-ia-main</code></strong> que o Windows sugere. Isso evita a “pasta dentro da pasta”. No Mac, basta dar dois cliques no ZIP.</p></li>
               <li><h4>Renomeie a pasta</h4><p>De <code>reels-engine-ia-main</code> para <code>reels-engine-ia</code>. Não é obrigatório, mas deixa os caminhos mais curtos e combina com este manual. Se você baixou o ZIP de uma versão, na página <strong>Releases</strong>, a pasta vem com o número dela (por exemplo, <code>reels-engine-ia-1.0.0</code>): renomeie do mesmo jeito.</p></li>
             </ol>
@@ -706,7 +706,7 @@ details.err .body li{margin:5px 0}
                         <ul><li class="fade"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>package.json</span></div></li></ul></li></ul></li></ul></li>
                 </ul></div>
             </div>
-            <p class="muted">Já extraiu com a pasta dupla? Recorte a pasta de dentro, cole em <code>C:\Projetos</code> e apague a de fora, que ficou vazia.</p>
+            <p class="muted">Nas versões mais novas do Windows 11 a pasta dupla nem chega a aparecer; a conferência é a mesma: a pasta certa é a que tem <code>package.json</code>. Já extraiu com a pasta dupla? Recorte a pasta de dentro, cole em <code>C:\Projetos</code> e apague a de fora, que ficou vazia.</p>
           </div>
           <div class="tabpanel" role="tabpanel" data-key="git" hidden>
             <p>Com o <a href="https://git-scm.com/downloads" target="_blank" rel="noopener">git <svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a> instalado, abra o terminal na pasta onde o projeto vai morar (por exemplo, <code>C:\Projetos</code>) e rode:</p>
@@ -942,7 +942,7 @@ found <span class="ok">0 vulnerabilities</span></pre></div>
           <div class="tabpanel" role="tabpanel" data-key="clique">
             <ol class="steps">
               <li><h4>Na raiz, dê dois cliques em <code>INSTALAR-AGENTE-DE-RENDER.cmd</code></h4><p>Abre uma janela preta, que mostra o andamento.</p></li>
-              <li><h4>Apareceu um aviso de segurança do Windows?</h4><p>Ele aparece porque o arquivo veio de um ZIP baixado da internet (você evita isso <a href="#baixar">desbloqueando o ZIP</a> antes de extrair). Conforme a versão do Windows, é uma de duas janelas:</p><ul><li><strong>“O Windows protegeu o computador”</strong>: clique em <strong>Mais informações</strong> → <strong>Executar assim mesmo</strong>.</li><li><strong>“Abrir arquivo – Aviso de Segurança”</strong>: clique em <strong>Executar</strong>.</li></ul><p>Prefere não passar por isso? Use a aba <strong>Pelo terminal</strong>.</p></li>
+              <li><h4>Apareceu “Abrir Arquivo - Aviso de Segurança”?</h4><p>A janela diz <em>“O fornecedor não pôde ser verificado. Tem certeza de que deseja executar este software?”</em>. Clique em <strong>Executar</strong>. O aviso aparece porque o arquivo veio de um ZIP baixado da internet; você o evita <a href="#baixar">desbloqueando o ZIP</a> antes de extrair.</p><p class="muted">Em alguns computadores o aviso é outro, “O Windows protegeu o computador”: clique em <strong>Mais informações</strong> → <strong>Executar assim mesmo</strong>. Prefere não passar por nenhum aviso? Use a aba <strong>Pelo terminal</strong>.</p></li>
               <li><h4>Espere a mensagem final e aperte qualquer tecla</h4></li>
             </ol>
           </div>
@@ -1222,7 +1222,7 @@ npm test</pre></div>
           <dt id="g-remotion">Remotion</dt><dd>A biblioteca que transforma código em vídeo. Tem licença própria. <a href="#licenca-remotion">ver seção</a></dd>
           <dt id="g-render">Render</dt><dd>A etapa em que o vídeo vira um arquivo MP4. <a href="#caminhos">ver seção</a></dd>
           <dt id="g-slug">Slug</dt><dd>O nome curto do projeto, só com minúsculas, números e hífens. <a href="uso.html#pastas">ver no Manual de Uso</a></dd>
-          <dt id="g-smartscreen">SmartScreen</dt><dd>Aviso de segurança do Windows para arquivos baixados da internet (“O Windows protegeu o computador” ou “Abrir arquivo – Aviso de Segurança”). <a href="#agente-instalar">ver seção</a></dd>
+          <dt id="g-smartscreen">SmartScreen</dt><dd>Aviso de segurança do Windows para arquivos baixados da internet (“Abrir Arquivo - Aviso de Segurança” ou “O Windows protegeu o computador”). <a href="#agente-instalar">ver seção</a></dd>
           <dt id="g-studio">Studio</dt><dd>A tela de pré-visualização do vídeo, no navegador. <a href="#studio">ver seção</a></dd>
           <dt id="g-terminal">Terminal</dt><dd>Janela onde você escreve comandos. No Windows: Prompt de Comando. <a href="#terminal">ver seção</a></dd>
           <dt id="g-zip">ZIP</dt><dd>Arquivo compactado com todas as pastas do projeto. <a href="#baixar">ver seção</a></dd>

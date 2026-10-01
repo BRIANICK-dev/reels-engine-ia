@@ -52,6 +52,7 @@ Cada vídeo escolhe uma **linguagem visual** de um catálogo de 10 (`npm run lin
 | `engine/` | Biblioteca reutilizável de componentes. Não renderiza vídeos |
 | `projects/` | Um diretório independente por vídeo. `_MOLDE/` é o molde |
 | `clients/` | DNA de clientes recorrentes (molde: `_MOLDE-DNA-DE-CLIENTE.md`) |
+| `manuais/` | Manuais de implantação e de uso (HTML, abrem com dois cliques). Fonte em `manuais/fonte/`; gerar com `npm run manuais` |
 | `local.exemplo/` | Molde da camada local: copie para `local/` e personalize |
 | `local/` | **Suas** regras e configurações (fora do Git). Prevalecem sobre o núcleo em preferências, sem alterar as travas |
 | `scripts/` | Automação: criar projeto, preview, render versionado, estado de produção (`status`), `assets`, `preflight`, `inspect`, `archive`, camada local, verificação pública e Agente de Render |
