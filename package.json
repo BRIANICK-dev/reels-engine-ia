@@ -1,0 +1,47 @@
+{
+  "name": "reels-engine-ia",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Reels Engine IA — ambiente Remotion para produzir Instagram Reels a partir de briefing e assets, compatível com Claude. Cada vídeo vive em projects/<slug>/.",
+  "license": "MIT",
+  "author": "BRIANICK-dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BRIANICK-dev/reels-engine-ia.git"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "new": "node scripts/new-project.mjs",
+    "studio": "node scripts/studio.mjs",
+    "render": "node scripts/render.mjs",
+    "status": "node scripts/status.mjs",
+    "assets": "node scripts/assets.mjs",
+    "preflight": "node scripts/preflight.mjs",
+    "inspect": "node scripts/inspect.mjs",
+    "archive": "node scripts/archive.mjs",
+    "local:check": "node scripts/local-config.mjs",
+    "verificar-publico": "node scripts/verificar-publico.mjs",
+    "linguagens": "node scripts/linguagens.mjs",
+    "manuais": "node scripts/manuais.mjs",
+    "agent": "node scripts/agent.mjs",
+    "agent:install": "node scripts/agent-install.mjs",
+    "agent:status": "node scripts/agent-install.mjs --status",
+    "agent:check": "node scripts/agent.mjs --diagnostico",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "node --test \"scripts/tests/*.test.mjs\""
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.529",
+    "@remotion/media-utils": "4.0.529",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "remotion": "4.0.529"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "typescript": "5.9.3"
+  }
+}

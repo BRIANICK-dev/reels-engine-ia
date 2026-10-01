@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manual de Implantação — Reels Engine IA</title>
+<meta name="description" content="Do zero ao primeiro teste: instalar, testar e escolher como trabalhar com o Reels Engine IA.">
+<style>{{CSS}}</style>
+</head>
+<body>
+<div class="app">
+  <div class="scrim" data-menu></div>
+  <aside class="side" aria-label="Índice">
+    <div class="side-head">
+      <a class="brand" href="#topo">{{LOGO}}<span><b>Reels Engine IA</b><span>Manual de Implantação</span></span></a>
+      <span class="ver">motor v{{VERSION}}</span>
+    </div>
+    <div class="search" role="search">
+      {{I:search}}
+      <input type="search" placeholder="Buscar no manual" aria-label="Buscar no manual" autocomplete="off">
+      <kbd>/</kbd>
+    </div>
+    <ul class="results" aria-live="polite"></ul>
+    <nav class="toc">
+      <div class="grp">Instalar</div>
+      <ol>
+        <li><a href="#antes"><span class="n">1</span>Antes de começar</a></li>
+        <li><a href="#node"><span class="n">2</span>Instalar o Node 24</a></li>
+        <li><a href="#baixar"><span class="n">3</span>Baixar o projeto</a></li>
+        <li><a href="#terminal"><span class="n">4</span>Abrir o terminal e testar</a></li>
+      </ol>
+      <div class="grp">Escolher como trabalhar</div>
+      <ol start="5">
+        <li><a href="#caminhos"><span class="n">5</span>Cowork ou Claude Code?</a></li>
+        <li><a href="#agente"><span class="n">6</span>Agente de Render <span class="tag">Windows</span></a></li>
+        <li><a href="#studio"><span class="n">7</span>Primeiro teste no Studio</a></li>
+      </ol>
+      <div class="grp">Conferir</div>
+      <ol start="8">
+        <li><a href="#pronto"><span class="n">8</span>Está tudo pronto?</a></li>
+      </ol>
+      <div class="grp">Consulta</div>
+      <ol start="9">
+        <li><a href="#atualizar"><span class="n">9</span>Atualizar o motor</a></li>
+        <li><a href="#erros"><span class="n">10</span>Deu erro?</a></li>
+        <li><a href="#licencas"><span class="n">11</span>Licenças</a></li>
+        <li><a href="#glossario"><span class="n">12</span>Glossário</a></li>
+      </ol>
+    </nav>
+    <div class="side-foot">
+      <div class="theme" role="group" aria-label="Tema">
+        <button data-t="auto" aria-pressed="true">Auto</button><button data-t="light">Claro</button><button data-t="dark">Escuro</button>
+      </div>
+      <a class="other" href="uso.html"><span><small>Próximo manual</small>Manual de Uso</span>→</a>
+    </div>
+  </aside>
+
+  <main id="topo">
+    <div class="topbar"><button data-menu aria-label="Abrir índice">{{I:menu}} Índice</button><b>Manual de Implantação</b></div>
+    <div class="wrap">
+
+      <header style="margin-bottom:56px">
+        <div class="kicker">Manual de Implantação</div>
+        <h1>Do zero ao primeiro teste</h1>
+        <p class="lede">Instale, teste e deixe o Reels Engine IA pronto para trabalhar com o Claude. Não precisa saber programar: cada comando vem pronto para copiar, e cada termo técnico é explicado na primeira vez em que aparece.</p>
+        <ol class="route" aria-label="Etapas da implantação">
+          <li><a href="#node"><b>Node 24</b></a><small>5 min</small></li>
+          <li><a href="#baixar"><b>Baixar o projeto</b></a><small>3 min</small></li>
+          <li><a href="#terminal"><b>Terminal e testes</b></a><small>5 min</small></li>
+          <li><a href="#caminhos"><b>Cowork ou Claude Code</b></a><small>escolha</small></li>
+          <li class="opt"><a href="#agente"><b>Agente de Render</b></a><small>só Windows · 2 min</small></li>
+          <li><a href="#studio"><b>Studio</b></a><small>2 min</small></li>
+          <li><a href="#pronto"><b>Conferir</b></a><small>1 min</small></li>
+        </ol>
+        <p class="muted" style="font-size:14px">Depois de instalar, siga para o <a href="uso.html">Manual de Uso</a>: ele mostra como pedir um vídeo, do briefing ao MP4.</p>
+      </header>
+
+      <!-- ============ 1 ============ -->
+      <section class="sec" id="antes" data-titulo="Antes de começar" data-busca="Antes de começar">
+        <div class="sec-head"><div class="sec-num">1</div><div><h2>Antes de começar</h2><div class="meta"><span>{{I:clock}} 2 minutos de leitura</span></div></div></div>
+
+        <p>O Reels Engine IA é um conjunto de pastas e arquivos que fica no seu computador. O Claude lê as regras que estão nele, monta o vídeo em código e gera um arquivo <strong>MP4</strong> pronto para o Instagram, sempre com a sua aprovação nas etapas importantes.</p>
+
+        <h3 id="precisa" data-busca="O que você precisa">O que você precisa</h3>
+        <table class="tbl">
+          <thead><tr><th>Item</th><th>Detalhe</th></tr></thead>
+          <tbody>
+            <tr><td>Computador</td><td>Windows 10 ou 11, macOS ou Linux. O <a href="#agente">Agente de Render</a> (render sem terminal) é só para Windows.</td></tr>
+            <tr><td>Espaço livre</td><td>Cerca de 1 GB para o motor e as peças dele, mais o espaço dos seus vídeos.</td></tr>
+            <tr><td>Internet</td><td>Na instalação, nas atualizações e no primeiro render (o Remotion baixa um navegador interno de uns 100 MB).</td></tr>
+            <tr><td>Claude</td><td>O app Claude para computador com o <strong>Cowork</strong>, ou o <strong>Claude Code</strong>. A diferença está em <a href="#caminhos">Cowork ou Claude Code?</a></td></tr>
+            <tr><td>Tempo</td><td>Uns 20 minutos, do zero ao primeiro teste.</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="onde-guardar" data-busca="Onde guardar a pasta (OneDrive)">Onde guardar a pasta</h3>
+        <p>Escolha <strong>agora</strong> o lugar definitivo. Mudar depois é possível, mas dá trabalho (veja <a href="#agente-mover">Mudar a pasta de lugar</a>).</p>
+        <div class="cols">
+          <div class="col pick"><h4>{{I:check}} Bom</h4><div class="sub">Caminho curto, fora de pastas sincronizadas</div>
+            <ul><li><code>C:\Projetos\reels-engine-ia</code></li><li><code>/Users/voce/Projetos/reels-engine-ia</code></li><li>Nomes sem acento e sem espaço</li></ul></div>
+          <div class="col"><h4>{{I:x}} Evite</h4><div class="sub">Pastas que a nuvem sincroniza</div>
+            <ul><li><code>C:\Users\voce\OneDrive\…</code></li><li>Área de Trabalho e Documentos, quando o OneDrive, o iCloud ou o Dropbox cuidam delas</li><li><code>C:\Users\voce\Vídeos\Reels Engine (cópia)\</code></li></ul></div>
+        </div>
+        <div class="note warn">{{I:warn}}<div><strong class="t">Por que fora do OneDrive?</strong><p>O motor guarda milhares de arquivos pequenos (a pasta <code>node_modules</code>) e gera vídeos grandes. A sincronização deixa tudo lento e pode travar arquivos no meio de um render. No Windows 11, a Área de Trabalho e os Documentos costumam estar no OneDrive: se o caminho tiver <code>OneDrive</code>, ou se o Explorador mostrar uma nuvem na coluna “Status”, escolha outro lugar.</p></div></div>
+
+        <h3 id="como-ler" data-busca="Como ler este manual">Como ler este manual</h3>
+        <div class="cmd"><div class="cmd-bar"><span class="where"><i></i>Comando · digite ou cole no terminal</span><button class="copy" type="button">{{I:copy}}<span>Copiar</span></button></div>
+<pre>node -v</pre></div>
+        <div class="out"><div class="out-bar"><i></i><i></i><i></i><span>O que aparece na tela (não é para copiar)</span></div><pre>v24.13.0</pre></div>
+        <p class="def"><b>Termos técnicos</b> aparecem assim, explicados na primeira vez. Todos estão também no <a href="#glossario">Glossário</a>.</p>
+        <div class="note adv">{{I:code}}<div><strong class="t">Para quem já programa</strong><p>Blocos tracejados como este trazem atalhos e detalhes técnicos. Quem não programa pode pular sem perder nada.</p></div></div>
+      </section>
+
+      <!-- ============ 2 ============ -->
+      <section class="sec" id="node" data-titulo="Instalar o Node 24" data-busca="Instalar o Node 24">
+        <div class="sec-head"><div class="sec-num">2</div><div><h2>Instalar o Node 24</h2><div class="meta"><span>{{I:clock}} 5 minutos</span><span>{{I:check}} Resultado: <code>node -v</code> mostra <code>v24</code></span></div></div></div>
+
+        <p class="def"><b>Node.js</b> (ou só “Node”) é o programa que roda o motor no seu computador. Ele é gratuito, e o motor foi testado na <b>versão 24</b>. Instale uma vez; ele não abre janela nenhuma depois.</p>
+
+        <div class="tabs" data-group="os">
+          <div class="tablist" role="tablist" aria-label="Sistema operacional">
+            <button role="tab" data-key="win">Windows</button><button role="tab" data-key="mac">macOS</button><button role="tab" data-key="linux">Linux</button>
+          </div>
+          <div class="tabpanel" role="tabpanel" data-key="win">
+            <ol class="steps">
+              <li><h4>Abra a página da versão 24</h4><p><a href="https://nodejs.org/dist/latest-v24.x/" target="_blank" rel="noopener">nodejs.org/dist/latest-v24.x/ {{I:out}}</a></p><p>É uma lista simples de arquivos. Baixe o que termina em <code>-x64.msi</code> (por exemplo, <code>node-v24.x.x-x64.msi</code>). Se o seu notebook tem processador Snapdragon (ARM), baixe o que termina em <code>-arm64.msi</code>.</p></li>
+              <li><h4>Dê dois cliques no arquivo baixado</h4><p>Vá clicando em <strong>Next</strong> e aceite a licença. Os caminhos sugeridos podem ficar como estão.</p></li>
+              <li><h4>Na tela “Tools for Native Modules”, deixe a caixa desmarcada</h4><p>Essa opção instala Python, Visual Studio e outras ferramentas que o motor não usa: são vários gigabytes e muito tempo de instalação.</p></li>
+              <li><h4>Clique em Install e depois em Finish</h4><p>Se o Windows pedir permissão, confirme.</p></li>
+            </ol>
+          </div>
+          <div class="tabpanel" role="tabpanel" data-key="mac" hidden>
+            <ol class="steps">
+              <li><h4>Abra a página da versão 24</h4><p><a href="https://nodejs.org/dist/latest-v24.x/" target="_blank" rel="noopener">nodejs.org/dist/latest-v24.x/ {{I:out}}</a></p><p>Baixe o arquivo que termina em <code>.pkg</code> (por exemplo, <code>node-v24.x.x.pkg</code>). Ele serve para Mac com chip Apple e com Intel.</p></li>
+              <li><h4>Dê dois cliques no arquivo e siga o instalador</h4><p>Continuar, aceitar a licença, Instalar. O Mac pede a senha do seu usuário.</p></li>
+            </ol>
+          </div>
+          <div class="tabpanel" role="tabpanel" data-key="linux" hidden>
+            <ol class="steps">
+              <li><h4>Abra a página oficial de download</h4><p><a href="https://nodejs.org/en/download" target="_blank" rel="noopener">nodejs.org/en/download {{I:out}}</a> → escolha a versão <strong>24</strong>, o sistema <strong>Linux</strong> e o método <strong>nvm</strong>. A página mostra os comandos exatos.</p></li>
+              <li><h4>Rode os comandos da página no terminal</h4><p>O último deles instala a versão 24:</p>
+                <div class="cmd"><div class="cmd-bar"><span class="where"><i></i>Terminal</span><button class="copy" type="button">{{I:copy}}<span>Copiar</span></button></div>
+<pre>nvm install 24</pre></div></li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="note info">{{I:info}}<div><strong class="t">A página oficial sugere outra versão?</strong><p>O site do Node destaca sempre a versão mais nova. Versões mais novas também funcionam, mas a 24 é a testada: prefira o link direto acima.</p></div></div>
+
+        <h3 id="node-v" data-busca="Conferir a versão do Node (node -v)">Confira a instalação</h3>
+        <p>Abra um terminal <strong>novo</strong> (os que já estavam abertos não enxergam o Node recém-instalado). Pode ser em qualquer pasta: no Windows, aperte <kbd>Win</kbd>, digite <code>cmd</code> e aperte <kbd>Enter</kbd>. Depois rode:</p>
+        <div class="cmd"><div class="cmd-bar"><span class="where"><i></i>Terminal · qualquer pasta</span><button class="copy" type="button">{{I:copy}}<span>Copiar</span></button></div>
+<pre>node -v</pre></div>
+        <div class="duo">
+          <div><div class="out ok"><div class="out-bar">{{I:check}}<span>Certo</span></div><pre><span class="hl">v24</span>.13.0</pre></div><p>Começa com <code>v24</code>. Os números depois podem ser outros.</p></div>
+          <div><div class="out bad"><div class="out-bar">{{I:x}}<span>Errado</span></div><pre>v20.11.1
+<span class="dim">ou</span>
+'node' não é reconhecido como um comando…</pre></div><p>Veja <a href="#err-node">Node errado</a> ou <a href="#err-node-ausente">Node não encontrado</a>.</p></div>
+        </div>
+        <div class="note adv">{{I:code}}<div><strong class="t">Para quem já programa</strong><p>O repositório tem <code>.nvmrc</code> com <code>24</code> e <code>engines</code> pedindo <code>&gt;=24</code>; nvm, fnm e Volta funcionam normalmente.</p></div></div>
+      </section>
+
+      <!-- ============ 3 ============ -->
+      <section class="sec" id="baixar" data-titulo="Baixar o projeto" data-busca="Baixar o projeto (ZIP ou git clone)">
+        <div class="sec-head"><div class="sec-num">3</div><div><h2>Baixar o projeto</h2><div class="meta"><span>{{I:clock}} 3 minutos</span><span>{{I:check}} Resultado: uma pasta <code>reels-engine-ia</code> com <code>package.json</code> dentro</span></div></div></div>
+
+        <div class="tabs" data-group="baixar">
+          <div class="tablist" role="tablist" aria-label="Forma de baixar">
+            <button role="tab" data-key="zip">ZIP (sem programar)</button><button role="tab" data-key="git">git clone</button>
+          </div>
+          <div class="tabpanel" role="tabpanel" data-key="zip">
+            <ol class="steps">
+              <li><h4>Baixe o ZIP</h4><p>Pelo link direto <a href="https://github.com/BRIANICK-dev/reels-engine-ia/archive/refs/heads/main.zip">reels-engine-ia-main.zip</a>, ou na página <a href="https://github.com/BRIANICK-dev/reels-engine-ia" target="_blank" rel="noopener">github.com/BRIANICK-dev/reels-engine-ia {{I:out}}</a> → botão verde <strong>Code</strong> → <strong>Download ZIP</strong>.</p></li>
+              <li><h4>Windows: desbloqueie o ZIP antes de extrair</h4><p>Botão direito no ZIP → <strong>Propriedades</strong> → marque <strong>Desbloquear</strong> (no pé da janela) → OK. Assim o Windows não reclama depois, ao instalar o Agente de Render. Se a opção não aparecer, siga em frente.</p></li>
+              <li><h4>Extraia direto no lugar definitivo</h4><p>Botão direito → <strong>Extrair tudo…</strong>. No campo de destino, escolha a pasta que você definiu em <a href="#onde-guardar">Onde guardar</a> (por exemplo, <code>C:\Projetos</code>) e <strong>apague o final <code>\reels-engine-ia-main</code></strong> que o Windows sugere. Isso evita a “pasta dentro da pasta”. No Mac, basta dar dois cliques no ZIP.</p></li>
+              <li><h4>Renomeie a pasta</h4><p>De <code>reels-engine-ia-main</code> para <code>reels-engine-ia</code>. Não é obrigatório, mas deixa os caminhos mais curtos e combina com este manual. Se você baixou o ZIP de uma versão, na página <strong>Releases</strong>, a pasta vem com o número dela (por exemplo, <code>reels-engine-ia-1.0.0</code>): renomeie do mesmo jeito.</p></li>
+            </ol>
+            <div class="cols">
+              <div class="tree-card"><div class="cap" style="color:var(--ok)">Certo</div>
+                <ul class="tree">
+                  <li class="sys"><div class="row"><span class="nm">{{I:folder}}C:\Projetos</span></div>
+                    <ul><li class="here"><div class="row"><span class="nm">{{I:folder}}reels-engine-ia</span></div>
+                      <ul><li><div class="row"><span class="nm">{{I:folder}}docs</span></div></li><li><div class="row"><span class="nm">{{I:folder}}projects</span></div></li><li class="you"><div class="row"><span class="nm">{{I:file}}package.json</span><span class="why"><b>aqui é a raiz</b></span></div></li></ul></li></ul></li>
+                </ul></div>
+              <div class="tree-card"><div class="cap" style="color:var(--err)">Pasta dentro da pasta</div>
+                <ul class="tree">
+                  <li class="sys"><div class="row"><span class="nm">{{I:folder}}C:\Projetos</span></div>
+                    <ul><li class="no"><div class="row"><span class="nm">{{I:folder}}reels-engine-ia-main</span><span class="why">só tem outra pasta dentro</span></div>
+                      <ul><li class="fade"><div class="row"><span class="nm">{{I:folder}}reels-engine-ia-main</span></div>
+                        <ul><li class="fade"><div class="row"><span class="nm">{{I:file}}package.json</span></div></li></ul></li></ul></li></ul></li>
+                </ul></div>
+            </div>
+            <p class="muted">Já extraiu com a pasta dupla? Recorte a pasta de dentro, cole em <code>C:\Projetos</code> e apague a de fora, que ficou vazia.</p>
+          </div>
+          <div class="tabpanel" role="tabpanel" data-key="git" hidden>
+            <p>Com o <a href="https://git-scm.com/downloads" target="_blank" rel="noopener">git {{I:out}}</a> instalado, abra o terminal na pasta onde o projeto vai morar (por exemplo, <code>C:\Projetos</code>) e rode:</p>
+            <div class="cmd"><div class="cmd-bar"><span class="where"><i></i>Terminal · na pasta escolhida</span><button class="copy" type="button">{{I:copy}}<span>Copiar</span></button></div>
+<pre>git clone https://github.com/BRIANICK-dev/reels-engine-ia.git
+cd reels-engine-ia</pre></div>
+            <p class="def"><b>git</b> é a ferramenta que baixa e atualiza projetos guardados no GitHub. <b>clone</b> é a cópia completa, que depois se atualiza com um comando (veja <a href="#atualizar">Atualizar o motor</a>).</p>
+            <div class="note adv">{{I:code}}<div><strong class="t">Para quem já programa</strong><p>Para versionar os seus vídeos, use um repositório <strong>privado</strong> seu: <code>projects/*</code>, <code>clients/*</code> e <code>local/</code> são ignorados no repositório público de propósito.</p></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 4 ============ -->
+      <section class="sec" id="terminal" data-titulo="Abrir o terminal e testar" data-busca="Abrir o terminal e testar">
+        <div class="sec-head"><div class="sec-num">4</div><div>
+          <h2>Abrir o terminal e testar</h2>
+          <div class="meta"><span>{{I:clock}} 5 minutos</span><span>{{I:check}} Resultado: “fail 0”</span></div>
+        </div></div>
+
+        <p>Agora você vai dar os dois primeiros comandos: um que <strong>instala as peças</strong> de que o motor precisa e outro que <strong>confere se está tudo certo</strong>. Os dois são digitados no terminal.</p>
+        <p class="def"><b>Terminal</b> é uma janela onde você escreve ordens para o computador em vez de clicar. No Windows ele se chama <em>Prompt de Comando</em>. Cada ordem é um <b>comando</b>: você digita (ou cola) e aperta <kbd>Enter</kbd>.</p>
+
+        <h3 id="raiz" data-busca="Abrir o terminal na raiz">Abra o terminal na raiz do projeto</h3>
+        <p>O terminal sempre “está” dentro de alguma pasta, e os comandos do motor só funcionam na <dfn title="A pasta principal do projeto">raiz</dfn>.</p>
+        <p class="def"><b>Raiz</b> é a pasta principal do projeto: a que tem dentro <code>package.json</code>, <code>CLAUDE.md</code> e <code>INSTALAR-AGENTE-DE-RENDER.cmd</code>. Se você vê só outra pasta com o mesmo nome lá dentro, entre nela: a raiz é a de dentro.</p>
+
+        <div class="tabs" data-group="os">
+          <div class="tablist" role="tablist" aria-label="Sistema operacional">
+            <button role="tab" data-key="win">Windows</button><button role="tab" data-key="mac">macOS</button><button role="tab" data-key="linux">Linux</button>
+          </div>
+
+          <div class="tabpanel" role="tabpanel" data-key="win">
+            <div class="board">
+              <div class="frame">
+                <svg viewBox="0 0 240 170" role="img" aria-label="Explorador de Arquivos aberto na pasta do projeto, com package.json em destaque">
+                  <rect x="8" y="8" width="224" height="154" rx="9" class="f-surface s-line" stroke-width="1"/>
+                  <rect x="8" y="8" width="224" height="22" rx="9" class="f-surface2"/><rect x="8" y="22" width="224" height="8" class="f-surface2"/>
+                  <text x="18" y="23" font-size="9" font-weight="600" class="f-ink2">reels-engine-ia</text>
+                  <rect x="18" y="36" width="204" height="16" rx="4" class="f-surface2"/>
+                  <text x="25" y="47" font-size="7.5" class="f-ink3">›  Projetos  ›  reels-engine-ia</text>
+                  <g font-size="8.5" class="f-ink">
+                    <rect x="20" y="62" width="10" height="7" rx="1.5" class="f-codeacc"/><text x="36" y="69">docs</text>
+                    <rect x="20" y="77" width="10" height="7" rx="1.5" class="f-codeacc"/><text x="36" y="84">engine</text>
+                    <rect x="20" y="92" width="10" height="7" rx="1.5" class="f-codeacc"/><text x="36" y="99">projects</text>
+                    <rect x="20" y="107" width="10" height="7" rx="1.5" class="f-codeacc"/><text x="36" y="114">scripts</text>
+                    <rect x="21" y="121" width="8" height="10" rx="1" class="f-line"/><text x="36" y="129">CLAUDE.md</text>
+                    <rect x="14" y="134" width="212" height="17" rx="4" class="f-asoft s-accent" stroke-width="1.2"/>
+                    <rect x="21" y="137" width="8" height="10" rx="1" class="f-accent"/><text x="36" y="146" font-weight="700">package.json</text>
+                  </g>
+                  <text x="218" y="146" font-size="7.5" text-anchor="end" class="f-accent" font-weight="700">raiz ✓</text>
+                </svg>
+                <p><b>1</b><span>Abra a pasta do projeto no Explorador e confira se <code>package.json</code> está nela.</span></p>
+              </div>
+              <div class="frame">
+                <svg viewBox="0 0 240 170" role="img" aria-label="Barra de endereço clicada, com o caminho selecionado">
+                  <rect x="8" y="8" width="224" height="154" rx="9" class="f-surface s-line" stroke-width="1"/>
+                  <rect x="8" y="8" width="224" height="22" rx="9" class="f-surface2"/><rect x="8" y="22" width="224" height="8" class="f-surface2"/>
+                  <text x="18" y="23" font-size="9" font-weight="600" class="f-ink2">reels-engine-ia</text>
+                  <rect x="14" y="36" width="212" height="22" rx="5" class="f-surface s-accent" stroke-width="1.6"/>
+                  <rect x="19" y="40" width="140" height="14" rx="2" class="f-accent"/>
+                  <text x="22" y="50.5" font-size="7.6" class="f-aink mono">C:\Projetos\reels-engine-ia</text>
+                  <g opacity=".35" class="f-ink3"><rect x="20" y="72" width="70" height="6" rx="3"/><rect x="20" y="87" width="90" height="6" rx="3"/><rect x="20" y="102" width="60" height="6" rx="3"/><rect x="20" y="117" width="80" height="6" rx="3"/><rect x="20" y="132" width="66" height="6" rx="3"/></g>
+                  <path d="M180 46 l0 16 l4 -4 l3 7 l3 -1.4 l-3 -7 l6 0 z" class="f-ink" stroke="var(--surface)" stroke-width="1"/>
+                </svg>
+                <p><b>2</b><span>Clique num espaço vazio da <strong>barra de endereço</strong>. O caminho fica selecionado.</span></p>
+              </div>
+              <div class="frame">
+                <svg viewBox="0 0 240 170" role="img" aria-label="Barra de endereço com a palavra cmd digitada">
+                  <rect x="8" y="8" width="224" height="154" rx="9" class="f-surface s-line" stroke-width="1"/>
+                  <rect x="8" y="8" width="224" height="22" rx="9" class="f-surface2"/><rect x="8" y="22" width="224" height="8" class="f-surface2"/>
+                  <text x="18" y="23" font-size="9" font-weight="600" class="f-ink2">reels-engine-ia</text>
+                  <rect x="14" y="36" width="212" height="22" rx="5" class="f-surface s-accent" stroke-width="1.6"/>
+                  <text x="22" y="51.5" font-size="11" font-weight="700" class="f-ink mono">cmd</text>
+                  <rect x="46" y="41" width="1.6" height="13" class="f-accent caret"/>
+                  <g opacity=".35" class="f-ink3"><rect x="20" y="72" width="70" height="6" rx="3"/><rect x="20" y="87" width="90" height="6" rx="3"/><rect x="20" y="102" width="60" height="6" rx="3"/><rect x="20" y="117" width="80" height="6" rx="3"/><rect x="20" y="132" width="66" height="6" rx="3"/></g>
+                  <g transform="translate(150 98)"><rect width="66" height="40" rx="7" class="f-surface s-ink3" stroke-width="1.2"/><rect y="34" width="66" height="6" rx="3" class="f-line"/><text x="33" y="25" font-size="11" font-weight="700" text-anchor="middle" class="f-ink">Enter ↵</text></g>
+                </svg>
+                <p><b>3</b><span>Digite <code>cmd</code> por cima do caminho e aperte <kbd>Enter</kbd>.</span></p>
+              </div>
+              <div class="frame">
+                <svg viewBox="0 0 240 170" role="img" aria-label="Prompt de Comando aberto na pasta reels-engine-ia">
+                  <rect x="8" y="8" width="224" height="154" rx="9" class="f-code"/>
+                  <text x="18" y="23" font-size="8.5" font-weight="600" class="f-codedim">Prompt de Comando</text>
+                  <line x1="8" y1="30" x2="232" y2="30" stroke="rgba(255,255,255,.08)"/>
+                  <text x="18" y="48" font-size="7.4" class="f-codedim mono">Microsoft Windows [versão 10.0…]</text>
+                  <text x="18" y="74" font-size="7.6" class="f-codeink mono">C:\Projetos\</text>
+                  <rect x="17" y="80" width="78" height="13" rx="3" fill="rgba(179,166,255,.22)"/>
+                  <text x="19" y="90" font-size="7.6" font-weight="700" class="f-codeacc mono">reels-engine-ia&gt;</text>
+                  <rect x="99" y="81" width="6" height="11" class="f-codeink caret"/>
+                  <text x="18" y="124" font-size="8" class="f-codedim">o caminho termina no nome</text>
+                  <text x="18" y="136" font-size="8" class="f-codedim">da pasta: você está na raiz ✓</text>
+                </svg>
+                <p><b>4</b><span>Abre o terminal <strong>já dentro da pasta</strong>. Deixe essa janela aberta.</span></p>
+              </div>
+            </div>
+            <div class="note warn" id="powershell">{{I:warn}}<div><strong class="t">Abriu “PowerShell” em vez de “Prompt de Comando”?</strong><p>Feche e repita digitando exatamente <code>cmd</code>. No PowerShell, o <code>npm</code> pode ser bloqueado por uma regra de segurança do Windows (“a execução de scripts foi desabilitada”).</p></div></div>
+          </div>
+
+          <div class="tabpanel" role="tabpanel" data-key="mac" hidden>
+            <ol class="steps">
+              <li><h4>Abra o app Terminal</h4><p>Aperte <kbd>⌘</kbd> + <kbd>Espaço</kbd>, digite <code>Terminal</code> e aperte <kbd>Enter</kbd>.</p></li>
+              <li><h4>Digite <code>cd</code> e um espaço</h4><p>Não aperte <kbd>Enter</kbd> ainda. <code>cd</code> quer dizer “entre na pasta”.</p></li>
+              <li><h4>Arraste a pasta do projeto para dentro da janela</h4><p>Do Finder para o Terminal. O caminho da pasta é escrito sozinho. Agora aperte <kbd>Enter</kbd>.</p>
+                <div class="out"><div class="out-bar"><i></i><i></i><i></i><span>Terminal</span></div><pre><span class="dim">voce@mac ~ %</span> cd /Users/voce/Projetos/reels-engine-ia
+<span class="dim">voce@mac</span> <span class="hl">reels-engine-ia</span> <span class="dim">%</span></pre></div>
+                <p class="muted">O nome da pasta antes do <code>%</code> mostra que você está na raiz.</p></li>
+            </ol>
+          </div>
+
+          <div class="tabpanel" role="tabpanel" data-key="linux" hidden>
+            <ol class="steps">
+              <li><h4>Abra a pasta do projeto no gerenciador de arquivos</h4><p>Confira se <code>package.json</code> está nela.</p></li>
+              <li><h4>Clique com o botão direito num espaço vazio → “Abrir no terminal”</h4><p>O nome pode variar conforme a distribuição. Alternativa: abra o terminal, digite <code>cd</code>, um espaço, arraste a pasta e aperte <kbd>Enter</kbd>.</p></li>
+            </ol>
+          </div>
+        </div>
+
+        <h3 id="npm-ci" data-busca="npm ci: instalar as dependências">Instale as peças do motor</h3>
+        <p>Copie o comando abaixo, cole no terminal (<kbd>Ctrl</kbd> + <kbd>V</kbd> ou botão direito do mouse; no Mac, <kbd>⌘</kbd> + <kbd>V</kbd>) e aperte <kbd>Enter</kbd>.</p>
+        <div class="cmd"><div class="cmd-bar"><span class="where"><i></i>Terminal · na raiz</span><button class="copy" type="button">{{I:copy}}<span>Copiar</span></button></div>
+<pre>npm ci</pre></div>
+        <p class="def"><b>npm</b> é o instalador que vem junto com o Node. <b>npm ci</b> baixa as <b>dependências</b> — os programas prontos que o motor usa, como o Remotion — nas versões exatas que foram testadas. Tudo vai para a pasta <code>node_modules</code>, dentro do projeto.</p>
+        <p>Demora de 1 a 3 minutos e só precisa ser feito <strong>uma vez</strong> (e de novo depois de cada <a href="#atualizar">atualização do motor</a>). No fim, aparece algo assim:</p>
+        <div class="out"><div class="out-bar"><i></i><i></i><i></i><span>O que esperar</span></div><pre><span class="dim">npm warn deprecated …</span>          <span class="dim">← avisos assim são normais</span>
+added 254 packages, and audited 255 packages in 52s
+<span class="dim">49 packages are looking for funding</span>
+found <span class="ok">0 vulnerabilities</span></pre></div>
+        <p class="muted">Os números podem ser diferentes. O que importa é não aparecer <code>npm error</code> no final. Apareceu? Veja <a href="#err-ci">npm ci falhou</a>.</p>
+
+        <h3 id="npm-test" data-busca="npm test: conferir a instalação">Confira se está tudo certo</h3>
+        <div class="cmd"><div class="cmd-bar"><span class="where"><i></i>Terminal · na raiz</span><button class="copy" type="button">{{I:copy}}<span>Copiar</span></button></div>
+<pre>npm test</pre></div>
+        <p>O motor testa a si mesmo: são dezenas de verificações automáticas, que levam cerca de 1 minuto. Muita coisa passa pela tela; <strong>só o resumo do final importa</strong>.</p>
+
+        <div class="duo">
+          <div>
+            <div class="out ok"><div class="out-bar">{{I:check}}<span>Tudo certo</span></div><pre><span class="dim">✔ … (dezenas de linhas)</span>
+ℹ tests <span class="hl">102</span>
+ℹ suites 0
+ℹ pass <span class="hl">102</span>
+ℹ fail <span class="ok">0</span>
+ℹ cancelled 0
+<span class="dim">ℹ duration_ms 41897</span></pre></div>
+            <p><strong><code>tests</code> e <code>pass</code> iguais, <code>fail 0</code>.</strong> Pode seguir. O total muda de uma versão para outra.</p>
+          </div>
+          <div>
+            <div class="out bad"><div class="out-bar">{{I:x}}<span>Algo falhou</span></div><pre><span class="bad">✖ nome do teste que falhou</span>
+  AssertionError: …
+ℹ tests 102
+ℹ suites 0
+ℹ pass 101
+ℹ fail <span class="bad">1</span>
+<span class="dim">ℹ duration_ms 40112</span></pre></div>
+            <p><strong><code>fail</code> maior que 0.</strong> Copie desde a primeira linha com <code>✖</code> até o fim e mande para o Claude no chat, ou veja <a href="#err-teste">Um teste falhou</a>.</p>
+          </div>
+        </div>
+
+        <div class="note ok">{{I:check}}<div><strong class="t">Pronto: o motor está instalado e testado.</strong><p>Pode fechar o terminal. No próximo passo você escolhe como vai trabalhar com o Claude.</p></div></div>
+
+        <div class="note adv">{{I:code}}<div><strong class="t">Para quem já programa</strong>
+          <p><code>npm ci</code> instala exatamente o que está no <code>package-lock.json</code> e nunca o altera; prefira-o a <code>npm install</code>. O npm sobe até a raiz se você rodar de uma subpasta, mas os scripts e este manual assumem a raiz. Para checar tipos: <code>npm run typecheck</code>.</p></div></div>
+      </section>
+
+      <!-- ============ 5 ============ -->
+      <section class="sec" id="caminhos" data-titulo="Cowork ou Claude Code?" data-busca="Cowork ou Claude Code?">
+        <div class="sec-head"><div class="sec-num">5</div><div><h2>Cowork ou Claude Code?</h2><div class="meta"><span>{{I:clock}} 3 minutos</span><span>{{I:check}} Resultado: você sabe quem vai gerar o MP4 final</span></div></div></div>
+
+        <p>O motor funciona com as duas formas de usar o Claude no computador. A diferença principal é <strong>quem roda os comandos</strong> — e, por isso, quem gera o MP4 final.</p>
+        <p class="def"><b>Render</b> é a etapa em que o vídeo, que até então é código, vira um arquivo <b>MP4</b> de verdade, pronto para postar. Leva de um a alguns minutos, conforme a duração e o computador.</p>
+
+        <div class="cols">
+          <div class="col"><h4>{{I:chat}} Cowork</h4><div class="sub">No app Claude para computador, sem terminal</div>
+            <ul>
+              <li>Você <strong>conecta a pasta</strong> <code>reels-engine-ia</code> no app e conversa normalmente.</li>
+              <li>O Claude trabalha numa área própria na nuvem e grava os arquivos na sua pasta.</li>
+              <li>Para assistir ao vídeo, <strong>você</strong> abre o Studio com um comando que o Claude indica.</li>
+              <li>Render final: no Windows, o <strong>Agente de Render</strong> faz sozinho; no Mac e no Linux, você roda um comando quando o Claude pedir.</li>
+            </ul></div>
+          <div class="col"><h4>{{I:term}} Claude Code</h4><div class="sub">O Claude dentro do terminal, no seu computador</div>
+            <ul>
+              <li>Você abre o terminal na raiz e digita <code>claude</code>.</li>
+              <li>O Claude <strong>roda os comandos</strong> direto no seu computador: cria o projeto, abre o Studio, renderiza.</li>
+              <li>Não precisa do Agente de Render, em nenhum sistema.</li>
+              <li>Combina com quem já está à vontade no terminal.</li>
+            </ul></div>
+        </div>
+
+        <h3 id="quem-renderiza" data-busca="Quem gera o MP4 final">Quem gera o MP4 final</h3>
+        <table class="tbl">
+          <thead><tr><th></th><th>Cowork</th><th>Claude Code</th></tr></thead>
+          <tbody>
+            <tr><td>Windows</td><td>O <a href="#agente">Agente de Render</a>, sozinho, depois da sua autorização</td><td>O Claude, no terminal</td></tr>
+            <tr><td>macOS</td><td>Você: <code>npm run render -- &lt;slug&gt;</code></td><td>O Claude, no terminal</td></tr>
+            <tr><td>Linux</td><td>Você: <code>npm run render -- &lt;slug&gt;</code></td><td>O Claude, no terminal</td></tr>
+          </tbody>
+        </table>
+        <p class="muted">O <code>&lt;slug&gt;</code> é o nome curto do projeto (por exemplo, <code>loja-exemplo-promo-natal</code>). O <a href="uso.html#pastas">Manual de Uso</a> explica.</p>
+        <div class="note info">{{I:info}}<div><strong class="t">Por que o MP4 final não vem da nuvem?</strong><p>Um Reels final costuma ter de 40 a 100 MB, acima do limite de transferência da nuvem para o seu computador. Por isso o MP4 definitivo sempre nasce no seu computador. Prévias e imagens de conferência o Claude pode mandar pelo chat.</p></div></div>
+
+        <h3 id="comecar-cowork" data-busca="Começar no Cowork">Começar no Cowork</h3>
+        <ol class="steps">
+          <li><h4>Abra o app Claude para computador e entre no Cowork</h4></li>
+          <li><h4>Conecte a pasta <code>reels-engine-ia</code></h4><p>Escolha a <a href="#raiz">raiz</a>, a pasta que tem o <code>package.json</code>. É a única pasta que o Claude precisa enxergar.</p></li>
+          <li><h4>No Windows, instale o Agente de Render</h4><p>Uma vez só. Está na <a href="#agente">próxima seção</a>.</p></li>
+          <li><h4>Mande a primeira mensagem</h4>
+            <div class="cmd chat"><div class="cmd-bar"><span class="where"><i></i>Mensagem para o Claude</span><button class="copy" type="button">{{I:copy}}<span>Copiar</span></button></div>
+<pre>Leia o CLAUDE.md da raiz e siga as regras dele. Depois me diga a situação dos projetos.</pre></div></li>
+        </ol>
+        <div class="note info">{{I:info}}<div><strong class="t">Uma pasta “Claude outputs” apareceu?</strong><p>É onde o app guarda os arquivos que o Claude manda no chat (prévias, imagens de conferência). Não faz parte do motor nem dos seus projetos: pode apagar quando quiser.</p></div></div>
+
+        <h3 id="comecar-code" data-busca="Começar no Claude Code">Começar no Claude Code</h3>
+        <ol class="steps">
+          <li><h4>Instale o Claude Code</h4><p>Siga a <a href="https://code.claude.com/docs/en/overview" target="_blank" rel="noopener">documentação oficial {{I:out}}</a>.</p></li>
+          <li><h4>Abra o terminal na raiz e digite <code>claude</code></h4><p>Como em <a href="#raiz">Abrir o terminal na raiz</a>.</p>
+            <div class="cmd"><div class="cmd-bar"><span class="where"><i></i>Terminal · na raiz</span><button class="copy" type="button">{{I:copy}}<span>Copiar</span></button></div>
+<pre>claude</pre></div></li>
+          <li><h4>Mande a mesma primeira mensagem</h4><p>“Leia o CLAUDE.md da raiz e siga as regras dele. Depois me diga a situação dos projetos.”</p></li>
+        </ol>
+      </section>
+
+      <!-- ============ 6 ============ -->
+      <section class="sec" id="agente" data-titulo="Agente de Render" data-busca="Agente de Render (Windows)">
+        <div class="sec-head"><div class="sec-num">6</div><div><h2>Agente de Render <span class="badge win">Windows</span></h2><div class="meta"><span>{{I:clock}} 2 minutos</span><span>{{I:check}} Resultado: “Agente ativo agora: sim”</span></div></div></div>
+
+        <p class="def"><b>Agente de Render</b> é um programa pequeno que fica ligado em segundo plano no seu Windows, sem janela. Quando você autoriza o render no chat do Cowork, o Claude deixa um pedido numa pasta e o agente gera o MP4 no seu computador.</p>
+        <div class="note info">{{I:info}}<div><strong class="t">Precisa dele?</strong><p>Só se você usa o <strong>Cowork no Windows</strong>. Com o Claude Code, ou no Mac e no Linux, pule para o <a href="#studio">Studio</a>.</p></div></div>
+
+        <h3 id="agente-instalar" data-busca="Instalar o Agente de Render">Instale (uma vez só)</h3>
+        <div class="tabs" data-group="agente">
+          <div class="tablist" role="tablist" aria-label="Forma de instalar">
+            <button role="tab" data-key="clique">Dois cliques</button><button role="tab" data-key="term">Pelo terminal</button>
+          </div>
+          <div class="tabpanel" role="tabpanel" data-key="clique">
+            <ol class="steps">
+              <li><h4>Na raiz, dê dois cliques em <code>INSTALAR-AGENTE-DE-RENDER.cmd</code></h4><p>Abre uma janela preta, que mostra o andamento.</p></li>
+              <li><h4>Apareceu um aviso de segurança do Windows?</h4><p>Ele aparece porque o arquivo veio de um ZIP baixado da internet (você evita isso <a href="#baixar">desbloqueando o ZIP</a> antes de extrair). Conforme a versão do Windows, é uma de duas janelas:</p><ul><li><strong>“O Windows protegeu o computador”</strong>: clique em <strong>Mais informações</strong> → <strong>Executar assim mesmo</strong>.</li><li><strong>“Abrir arquivo – Aviso de Segurança”</strong>: clique em <strong>Executar</strong>.</li></ul><p>Prefere não passar por isso? Use a aba <strong>Pelo terminal</strong>.</p></li>
+              <li><h4>Espere a mensagem final e aperte qualquer tecla</h4></li>
+            </ol>
+          </div>
+          <div class="tabpanel" role="tabpanel" data-key="term" hidden>
+            <div class="cmd"><div class="cmd-bar"><span class="where"><i></i>Terminal · na raiz</span><button class="copy" type="button">{{I:copy}}<span>Copiar</span></button></div>
+<pre>npm run agent:install</pre></div>
+          </div>
+        </div>
+        <div class="out ok"><div class="out-bar">{{I:check}}<span>O que esperar no final</span></div><pre>✔ Início automático criado:
+  <span class="dim">C:\Users\voce\AppData\…\Inicializar\ReelsEngineIA-AgenteRender-….vbs</span>
+
+✔ Agente de Render ATIVO (pid 1234).
+  Ele liga sozinho a cada login no Windows e trabalha em segundo plano.</pre></div>
+
+        <h3 id="agente-conferir" data-busca="Conferir o Agente de Render (agent:status)">Confira</h3>
+        <div class="cmd"><div class="cmd-bar"><span class="where"><i></i>Terminal · na raiz</span><button class="copy" type="button">{{I:copy}}<span>Copiar</span></button></div>
+<pre>npm run agent:status</pre></div>
+        <div class="out ok"><div class="out-bar">{{I:check}}<span>Certo</span></div><pre>Agente de Render — início automático: <span class="hl">INSTALADO</span>
+Agente ativo agora: <span class="hl">sim</span> <span class="dim">(pid 1234, último sinal 2026-…)</span></pre></div>
+        <p>Aparece “não (sem sinal…)”? Veja <a href="#err-agente">Agente sem sinal</a>. Para um diagnóstico completo (projetos, etapas, pedidos pendentes), rode <code>npm run agent:check</code>: ele só lê, não muda nada.</p>
+
+        <h3 id="agente-dia" data-busca="O agente no dia a dia">No dia a dia</h3>
+        <ul>
+          <li>Ele liga sozinho quando você entra no Windows. Não precisa abrir nada.</li>
+          <li>Só renderiza depois que você autoriza o render no chat (o <a href="uso.html#gates">GATE 4</a>).</li>
+          <li>Nunca sobrescreve um vídeo: cada render vira uma versão nova (<code>v01</code>, <code>v02</code>…), em <code>projects/&lt;slug&gt;/renders/</code>.</li>
+          <li>Um pedido nunca roda duas vezes, e um erro nunca se repete sozinho.</li>
+        </ul>
+
+        <h3 id="agente-mover" data-busca="Mudar a pasta de lugar ou remover o agente">Mudar a pasta de lugar ou remover</h3>
+        <p>O agente guarda o caminho da pasta. Para mudar a pasta de lugar: <strong>antes</strong> de mover, rode o comando abaixo; <strong>depois</strong> de mover, instale de novo. Para desinstalar, só o comando abaixo basta.</p>
+        <div class="cmd"><div class="cmd-bar"><span class="where"><i></i>Terminal · na raiz</span><button class="copy" type="button">{{I:copy}}<span>Copiar</span></button></div>
+<pre>npm run agent:install -- --remover</pre></div>
+        <p class="muted">Remover o agente não toca nos seus projetos nem nos vídeos já gerados.</p>
+      </section>
+
+      <!-- ============ 7 ============ -->
+      <section class="sec" id="studio" data-titulo="Primeiro teste no Studio" data-busca="Primeiro teste no Studio">
+        <div class="sec-head"><div class="sec-num">7</div><div><h2>Primeiro teste no Studio</h2><div class="meta"><span>{{I:clock}} 2 minutos</span><span>{{I:check}} Resultado: o vídeo de exemplo tocando no navegador</span></div></div></div>
+
+        <p class="def"><b>Studio</b> (Remotion Studio) é a tela de pré-visualização que abre no seu navegador. Ela mostra o vídeo de verdade, quadro a quadro, antes de virar MP4. É nela que você aprova cada vídeo.</p>
+        <p>O motor vem com um projeto de exemplo, <code>exemplo-loja-promo</code>: o mesmo texto em três estilos visuais diferentes. Abra-o assim:</p>
+        <div class="cmd"><div class="cmd-bar"><span class="where"><i></i>Terminal · na raiz</span><button class="copy" type="button">{{I:copy}}<span>Copiar</span></button></div>
+<pre>npm run studio -- exemplo-loja-promo</pre></div>
+        <div class="out"><div class="out-bar"><i></i><i></i><i></i><span>O que esperar</span></div><pre>▶ Studio: exemplo-loja-promo
+  assets: projects/exemplo-loja-promo/assets/
+
+Server ready - Local: <span class="hl">http://localhost:3000</span>
+Built in 3891ms</pre></div>
+        <p>O navegador abre sozinho. Se não abrir, digite o endereço <code>http://localhost:3000</code> no navegador. <strong>Deixe o terminal aberto</strong> enquanto usa o Studio.</p>
+
+        <figure class="illus">
+          <svg viewBox="0 0 720 400" role="img" aria-label="Tela do Remotion Studio: lista de composições à esquerda, prévia vertical no centro e linha do tempo embaixo">
+            <rect width="720" height="400" class="f-surface2"/>
+            <rect x="0" y="0" width="720" height="30" class="f-surface"/><circle cx="18" cy="15" r="4.5" class="f-line"/><circle cx="32" cy="15" r="4.5" class="f-line"/><circle cx="46" cy="15" r="4.5" class="f-line"/>
+            <rect x="200" y="8" width="320" height="15" rx="7" class="f-surface2"/><text x="360" y="19" font-size="9" text-anchor="middle" class="f-ink3 mono">localhost:3000</text>
+            <rect x="0" y="30" width="180" height="290" class="f-surface"/>
+            <text x="16" y="54" font-size="10" font-weight="700" class="f-ink3" letter-spacing=".8">COMPOSIÇÕES</text>
+            <rect x="10" y="64" width="160" height="24" rx="6" class="f-asoft s-accent" stroke-width="1.4"/>
+            <text x="22" y="80" font-size="11" font-weight="700" class="f-ink">Main</text>
+            <text x="22" y="108" font-size="11" class="f-ink2">Vitrine-elegante-premium</text>
+            <text x="22" y="132" font-size="11" class="f-ink2">Vitrine-colagem-recorte</text>
+            <rect x="290" y="44" width="148" height="262" rx="6" fill="#111"/>
+            <rect x="290" y="44" width="148" height="262" rx="6" fill="#FFD400" opacity=".95"/>
+            <text x="364" y="185" font-size="40" font-weight="900" text-anchor="middle" fill="#111">SÓ</text>
+            <rect x="0" y="320" width="720" height="80" class="f-surface"/>
+            <circle cx="40" cy="342" r="11" class="f-accent"/><path d="M36.5 336.5v11l9-5.5z" class="f-aink"/>
+            <text x="62" y="346" font-size="10" class="f-ink2 mono">00:00.15 / 00:10.00</text>
+            <rect x="20" y="366" width="680" height="8" rx="4" class="f-line"/><rect x="20" y="366" width="150" height="8" rx="4" class="f-accent"/>
+            <rect x="166" y="360" width="3" height="20" rx="1.5" class="f-ink"/>
+            <g font-size="11" font-weight="700">
+              <circle cx="190" cy="76" r="11" class="f-accent"/><text x="190" y="80" text-anchor="middle" class="f-aink">1</text>
+              <circle cx="462" cy="60" r="11" class="f-accent"/><text x="462" y="64" text-anchor="middle" class="f-aink">2</text>
+              <circle cx="40" cy="306" r="11" class="f-accent"/><text x="40" y="310" text-anchor="middle" class="f-aink">3</text>
+            </g>
+          </svg>
+          <figcaption><b>1</b> Lista de composições: clique para trocar de versão. <b>2</b> Prévia vertical, do jeito que vai ao ar. <b>3</b> Tocar e pausar (ou barra de espaço) e a linha do tempo, que você pode arrastar.</figcaption>
+        </figure>
+
+        <p class="def"><b>Composição</b> é cada vídeo dentro de um projeto. No exemplo, <code>Main</code> é o vídeo principal e as <code>Vitrine-…</code> mostram o mesmo texto em outros estilos.</p>
+        <h3 id="studio-fechar" data-busca="Fechar o Studio">Para fechar</h3>
+        <p>Volte ao terminal e aperte <kbd>Ctrl</kbd> + <kbd>C</kbd>. No Windows, se ele perguntar “Deseja finalizar o arquivo em lotes (S/N)?”, digite <code>S</code> e aperte <kbd>Enter</kbd>. Fechar a janela do terminal também funciona.</p>
+        <div class="note info">{{I:info}}<div><strong class="t">O Studio não gera o MP4</strong><p>Ele só mostra o vídeo. O arquivo final vem do render, depois da sua autorização: o <a href="uso.html">Manual de Uso</a> mostra o caminho completo.</p></div></div>
+        <p>Feche o Studio e confira a instalação no <a href="#pronto">checklist</a>, logo abaixo.</p>
+      </section>
+
+      <!-- ============ 8 ============ -->
+      <section class="sec" id="pronto" data-titulo="Está tudo pronto?" data-busca="Está tudo pronto? (checklist)">
+        <div class="sec-head"><div class="sec-num">8</div><div><h2>Está tudo pronto se…</h2><div class="meta"><span>Marque cada item ao conferir. As marcações ficam salvas neste navegador.</span></div></div></div>
+        <ul class="checklist">
+          <li><input type="checkbox" id="ck-node"><label for="ck-node"><code>node -v</code> mostra <code>v24</code><small>Num terminal novo, em qualquer pasta.</small></label><a href="#node-v">Instalar o Node 24 →</a></li>
+          <li><input type="checkbox" id="ck-test"><label for="ck-test"><code>npm test</code> termina com <code>fail 0</code><small>Na raiz, depois do <code>npm ci</code>.</small></label><a href="#npm-test">Abrir o terminal e testar →</a></li>
+          <li><input type="checkbox" id="ck-studio"><label for="ck-studio">O Studio abriu o <code>exemplo-loja-promo</code><small>E o vídeo toca no navegador.</small></label><a href="#studio">Primeiro teste no Studio →</a></li>
+          <li><input type="checkbox" id="ck-agente"><label for="ck-agente"><code>npm run agent:status</code> mostra “Agente ativo agora: sim” <span class="badge win">Windows + Cowork</span><small>Com o Claude Code, ou no Mac e no Linux, pode marcar direto.</small></label><a href="#agente-conferir">Agente de Render →</a></li>
+        </ul>
+        <div class="note ok done-all">{{I:check}}<div><strong class="t">Tudo pronto.</strong><p>Siga para o <a href="uso.html#rapido">primeiro vídeo em ~15 minutos</a>, no Manual de Uso.</p></div></div>
+        <p class="muted">Algum item não deu certo? Veja <a href="#erros">Deu erro?</a> Daqui em diante, o manual é de consulta: volte a ele para atualizar o motor, resolver um erro ou conferir as licenças.</p>
+      </section>
+
+      <!-- ============ 9 ============ -->
+      <section class="sec" id="atualizar" data-titulo="Atualizar o motor" data-busca="Atualizar o motor">
+        <div class="sec-head"><div class="sec-num">9</div><div><h2>Atualizar o motor</h2><div class="meta"><span>{{I:clock}} 5 minutos</span><span>{{I:check}} Resultado: versão nova, seus projetos intactos</span></div></div></div>
+
+        <p>Quando sair uma versão nova, leia o <code>CHANGELOG.md</code> dela para saber o que mudou. A sua versão atual está no arquivo <code>VERSION</code>, na raiz, e no topo deste manual.</p>
+        <div class="cols">
+          <div class="tree-card"><div class="cap">A atualização substitui</div>
+            <ul class="tree">
+              <li class="sys"><div class="row"><span class="nm">{{I:folder}}docs, engine, scripts, manuais</span></div></li>
+              <li class="sys"><div class="row"><span class="nm">{{I:folder}}local.exemplo</span></div></li>
+              <li class="sys"><div class="row"><span class="nm">{{I:folder}}projects/_MOLDE</span></div></li>
+              <li class="sys"><div class="row"><span class="nm">{{I:folder}}projects/exemplo-loja-promo</span></div></li>
+              <li class="sys"><div class="row"><span class="nm">{{I:file}}CLAUDE.md, package.json…</span></div></li>
+            </ul></div>
+          <div class="tree-card"><div class="cap">Nunca é tocado</div>
+            <ul class="tree">
+              <li class="you"><div class="row"><span class="nm">{{I:folder}}projects/&lt;seus projetos&gt;</span></div></li>
+              <li class="you"><div class="row"><span class="nm">{{I:folder}}clients/&lt;suas fichas&gt;</span></div></li>
+              <li class="you"><div class="row"><span class="nm">{{I:folder}}local</span><span class="why">suas regras</span></div></li>
+              <li class="you"><div class="row"><span class="nm">{{I:folder}}.reels-engine</span><span class="why">fila do agente</span></div></li>
+            </ul></div>
+        </div>
+        <div class="note warn">{{I:warn}}<div><strong class="t">Personalizações vão em <code>local/</code></strong><p>O que você mudar dentro de <code>projects/_MOLDE</code>, <code>docs</code> ou <code>CLAUDE.md</code> é substituído na atualização. Suas regras e preferências ficam em <code>local/</code> (veja <a href="uso.html#local">Camada local</a>), que nenhuma atualização toca.</p></div></div>
+
+        <div class="tabs" data-group="baixar">
+          <div class="tablist" role="tablist" aria-label="Forma de atualizar">
+            <button role="tab" data-key="zip">Baixei o ZIP</button><button role="tab" data-key="git">Usei git clone</button>
+          </div>
+          <div class="tabpanel" role="tabpanel" data-key="zip">
+            <ol class="steps">
+              <li><h4>Feche o Studio e os terminais abertos</h4></li>
+              <li><h4>Baixe o ZIP novo e extraia numa pasta temporária</h4><p>Por exemplo, <code>C:\Projetos\reels-engine-ia-nova</code> (desbloqueie o ZIP antes, como em <a href="#baixar">Baixar o projeto</a>).</p></li>
+              <li><h4>Copie tudo da pasta nova para a sua</h4><p>Selecione todo o conteúdo da pasta nova (<kbd>Ctrl</kbd> + <kbd>A</kbd>), copie e cole dentro da sua pasta <code>reels-engine-ia</code>. Quando o Windows perguntar, escolha <strong>Substituir os arquivos no destino</strong>. Seus projetos, fichas e a pasta <code>local</code> não estão no ZIP, então continuam como estavam.</p></li>
+              <li><h4>Apague a pasta temporária</h4></li>
+              <li><h4>Reinstale as peças e teste</h4><p>No terminal, na raiz: <code>npm ci</code> e depois <code>npm test</code> (o resultado precisa ter <code>fail 0</code>).</p></li>
+              <li><h4>Windows com o agente: reinicie o computador</h4><p>O agente volta já com a versão nova.</p></li>
+            </ol>
+            <p class="muted">Se o <code>CHANGELOG.md</code> da versão nova disser que algum arquivo foi removido, apague-o da sua pasta também.</p>
+          </div>
+          <div class="tabpanel" role="tabpanel" data-key="git" hidden>
+            <div class="cmd"><div class="cmd-bar"><span class="where"><i></i>Terminal · na raiz</span><button class="copy" type="button">{{I:copy}}<span>Copiar</span></button></div>
+<pre>git pull
+npm ci
+npm test</pre></div>
+            <p>No Windows com o agente, reinicie o computador depois (ou rode <code>npm run agent:install</code> de novo).</p>
+          </div>
+        </div>
+        <div class="note adv">{{I:code}}<div><strong class="t">Para quem já programa</strong><p>Projetos já criados guardam uma cópia congelada do engine em <code>src/engine/</code> e a versão em <code>project.json → engineVersion</code>: atualizar o motor não muda vídeos em andamento.</p></div></div>
+      </section>
+
+      <!-- ============ 10 ============ -->
+      <section class="sec" id="erros" data-titulo="Deu erro?" data-busca="Deu erro?">
+        <div class="sec-head"><div class="sec-num">10</div><div><h2>Deu erro?</h2><div class="meta"><span>Clique no problema para ver a solução</span></div></div></div>
+        <p>Cada item mostra o sintoma (a mensagem que aparece), a causa e o que fazer. Se nada aqui resolver, copie as últimas linhas do terminal e mande para o Claude no chat: ele sabe ler esses erros.</p>
+
+        <details class="err" id="err-node" data-busca="Node errado (EBADENGINE)">
+          <summary><b>Node na versão errada</b><small>npm warn EBADENGINE Unsupported engine · node -v mostra v20 ou v22</small></summary>
+          <div class="body">
+            <h5>Causa</h5><p>Há uma versão mais antiga do Node instalada, e o motor precisa da 24 ou mais nova.</p>
+            <h5>Solução</h5><ol><li>Instale a versão 24 como em <a href="#node">Instalar o Node 24</a> (ela substitui a antiga).</li><li>Feche <strong>todos</strong> os terminais e abra um novo.</li><li>Confira com <code>node -v</code> e rode <code>npm ci</code> de novo.</li></ol>
+            <div class="note adv">{{I:code}}<div><p>Com nvm: <code>nvm install 24</code> e <code>nvm use 24</code>.</p></div></div>
+          </div>
+        </details>
+
+        <details class="err" id="err-node-ausente" data-busca="Node não encontrado ('node' não é reconhecido)">
+          <summary><b>Node não encontrado</b><small>'node' não é reconhecido como um comando interno… · command not found: node</small></summary>
+          <div class="body">
+            <h5>Causa</h5><p>O Node não foi instalado, ou o terminal foi aberto antes da instalação terminar.</p>
+            <h5>Solução</h5><ol><li>Feche o terminal e abra um novo.</li><li>Se continuar, instale o Node de novo (<a href="#node">Instalar o Node 24</a>) e reinicie o computador.</li></ol>
+          </div>
+        </details>
+
+        <details class="err" id="err-raiz" data-busca="Terminal fora da raiz (Could not read package.json)">
+          <summary><b>Terminal fora da raiz</b><small>npm error enoent Could not read package.json</small></summary>
+          <div class="body">
+            <h5>Causa</h5><p>O terminal está em outra pasta. O caso mais comum é a “pasta dentro da pasta” do ZIP: o terminal foi aberto na pasta de fora.</p>
+            <h5>Solução</h5><ol><li>Abra no Explorador a pasta que tem <code>package.json</code> (veja <a href="#baixar">Baixar o projeto</a>).</li><li>Abra o terminal a partir dela, como em <a href="#raiz">Abrir o terminal na raiz</a>.</li><li>Rode o comando de novo.</li></ol>
+          </div>
+        </details>
+
+        <details class="err" id="err-ci" data-busca="npm ci falhou">
+          <summary><b>npm ci falhou</b><small>npm error code ECONNRESET · ETIMEDOUT · EPERM · EBUSY</small></summary>
+          <div class="body">
+            <h5>Causas mais comuns</h5><ul><li><code>ECONNRESET</code>, <code>ETIMEDOUT</code>: internet instável, rede corporativa ou proxy.</li><li><code>EPERM</code>, <code>EBUSY</code>: algum arquivo travado, quase sempre pelo OneDrive, pelo antivírus ou por um Studio ainda aberto.</li></ul>
+            <h5>Solução</h5><ol><li>Feche o Studio e os outros terminais.</li><li>Confira se a pasta está fora do OneDrive (<a href="#onde-guardar">Onde guardar</a>).</li><li>Rode <code>npm ci</code> de novo: ele recomeça do zero sozinho.</li><li>Se persistir, copie as últimas 20 linhas do terminal e mande para o Claude.</li></ol>
+          </div>
+        </details>
+
+        <details class="err" id="err-teste" data-busca="Um teste falhou (fail maior que 0)">
+          <summary><b>Um teste falhou</b><small>ℹ fail 1 (ou mais)</small></summary>
+          <div class="body">
+            <h5>Causas mais comuns</h5><ul><li>Node fora da versão 24 (<a href="#err-node">veja acima</a>).</li><li>Uma atualização copiada pela metade.</li><li>Arquivos do motor (<code>docs</code>, <code>engine</code>, <code>scripts</code>) alterados à mão: os testes conferem a integridade deles.</li></ul>
+            <h5>Solução</h5><ol><li>Rode <code>npm test</code> mais uma vez.</li><li>Se repetir, copie desde a primeira linha com <code>✖</code> até o fim e mande para o Claude no chat. Não comece um vídeo com teste falhando.</li></ol>
+          </div>
+        </details>
+
+        <details class="err" id="err-powershell" data-busca="PowerShell: execução de scripts desabilitada">
+          <summary><b>O npm não roda no PowerShell</b><small>…a execução de scripts foi desabilitada neste sistema</small></summary>
+          <div class="body">
+            <h5>Causa</h5><p>Uma regra de segurança do Windows bloqueia o <code>npm</code> no PowerShell.</p>
+            <h5>Solução</h5><p>Use o Prompt de Comando: na barra de endereço da pasta, digite <code>cmd</code> (veja <a href="#raiz">Abrir o terminal na raiz</a>).</p>
+          </div>
+        </details>
+
+        <details class="err" id="err-fonte" data-busca="A fonte não aparece no vídeo">
+          <summary><b>A fonte não aparece no vídeo</b><small>o texto sai com outra letra no Studio ou no MP4</small></summary>
+          <div class="body">
+            <h5>Causas mais comuns</h5><ul><li>O arquivo da fonte não está em <code>projects/&lt;slug&gt;/assets/fonts/</code>.</li><li>A fonte está instalada no computador, mas não na pasta: o vídeo só usa os arquivos da pasta do projeto.</li><li>O nome do arquivo mudou depois que o Claude escreveu o código.</li></ul>
+            <h5>Solução</h5><ol><li>Coloque o arquivo (<code>.woff2</code>, <code>.ttf</code> ou <code>.otf</code>) em <code>assets/fonts/</code> do projeto.</li><li>Peça ao Claude: “a fonte X não aparece; confira assets/fonts e rode o preflight”.</li><li>Quem usa o terminal pode rodar <code>npm run preflight -- &lt;slug&gt;</code>, que avisa os erros de fonte mais comuns.</li></ol>
+          </div>
+        </details>
+
+        <details class="err" id="err-agente" data-busca="Agente sem sinal">
+          <summary><b>Agente sem sinal</b><small>Agente ativo agora: não (sem sinal nos últimos 90 s)</small></summary>
+          <div class="body">
+            <h5>Causas mais comuns</h5><ul><li>O computador acabou de ligar: espere 1 minuto e confira de novo.</li><li>A pasta mudou de lugar depois da instalação.</li><li>O antivírus bloqueou o arquivo de início automático.</li><li>O Node foi atualizado ou removido.</li></ul>
+            <h5>Solução</h5><ol><li>Rode <code>npm run agent:install</code> de novo: ele reinstala e liga o agente.</li><li>Confira com <code>npm run agent:status</code>.</li><li>Se continuar sem sinal, rode <code>npm run agent:check</code> e mande o resultado e o arquivo <code>.reels-engine/agente.log</code> para o Claude.</li></ol>
+          </div>
+        </details>
+
+        <details class="err" id="err-lento" data-busca="Tudo muito lento ou arquivo travado (OneDrive)">
+          <summary><b>Tudo muito lento, ou “arquivo em uso”</b><small>EBUSY · o render trava · o OneDrive não para de sincronizar</small></summary>
+          <div class="body">
+            <h5>Causa</h5><p>A pasta está dentro do OneDrive (ou outra pasta sincronizada).</p>
+            <h5>Solução</h5><ol><li>No Windows com o agente: <code>npm run agent:install -- --remover</code>.</li><li>Mova a pasta para um lugar fora da nuvem (<a href="#onde-guardar">Onde guardar</a>).</li><li>Na nova pasta: <code>npm ci</code>, <code>npm test</code> e, se for o caso, <code>npm run agent:install</code>.</li></ol>
+          </div>
+        </details>
+
+        <details class="err" id="err-studio" data-busca="O Studio não abre">
+          <summary><b>O Studio não abre no navegador</b><small>o terminal mostra “Server ready”, mas nada acontece</small></summary>
+          <div class="body">
+            <h5>Solução</h5><ol><li>Abra o navegador e digite o endereço que o terminal mostrou (normalmente <code>http://localhost:3000</code>; se essa porta estiver ocupada, ele usa outra, como <code>3001</code>).</li><li>Mantenha o terminal aberto: fechar o terminal fecha o Studio.</li></ol>
+          </div>
+        </details>
+      </section>
+
+      <!-- ============ 11 ============ -->
+      <section class="sec" id="licencas" data-titulo="Licenças" data-busca="Licenças (MIT, Remotion, músicas e fontes)">
+        <div class="sec-head"><div class="sec-num">11</div><div><h2>Licenças</h2><div class="meta"><span>{{I:clock}} 2 minutos de leitura</span></div></div></div>
+
+        <h3 id="licenca-motor" data-busca="Licença do motor (MIT)">O motor: licença MIT</h3>
+        <p>O Reels Engine IA é gratuito e de código aberto (licença MIT, no arquivo <code>LICENSE</code>): você pode usar, modificar e distribuir, inclusive em trabalhos comerciais, mantendo o aviso de licença.</p>
+
+        <h3 id="licenca-remotion" data-busca="Licença do Remotion">O Remotion tem licença própria</h3>
+        <p>O motor usa o <strong>Remotion</strong> para montar e renderizar os vídeos, e ele <strong>não</strong> é MIT.</p>
+        <div class="note warn" id="remotion-resumo">{{I:warn}}<div><strong class="t">Resumo — não substitui a licença oficial</strong>
+          <p>Pelo texto da licença conferido em 30/09/2026, o uso é gratuito para <strong>pessoas físicas</strong>, <strong>empresas com fins lucrativos de até 3 funcionários</strong>, <strong>organizações sem fins lucrativos</strong> e para <strong>avaliação</strong>. Empresas acima desse limite precisam comprar uma licença de empresa da Remotion.</p>
+          <p>Leia a <a href="https://www.remotion.dev/license" target="_blank" rel="noopener">licença oficial da Remotion {{I:out}}</a>. <strong>Em caso de dúvida, vale o texto oficial.</strong></p></div></div>
+
+        <h3 id="licenca-midia" data-busca="Músicas, fontes e imagens">Músicas, fontes, imagens e vídeos</h3>
+        <p>Tudo o que você coloca nos projetos tem a licença de quem criou. O motor <strong>não</strong> dá nenhum direito sobre isso. Antes de publicar:</p>
+        <ul>
+          <li><strong>Música:</strong> use trilhas com licença para uso comercial em redes sociais. O Instagram pode silenciar ou bloquear vídeos com música sem direitos.</li>
+          <li><strong>Fontes:</strong> confira se a licença permite uso em vídeo. A fonte do projeto de exemplo (Inter) é de licença livre (SIL OFL), com o arquivo da licença ao lado.</li>
+          <li><strong>Fotos e vídeos:</strong> só os seus, os do cliente com autorização, ou de bancos com licença.</li>
+          <li>Anote a origem de cada arquivo no <code>manifesto-de-assets.md</code> do projeto.</li>
+        </ul>
+        <p class="muted">“Claude” é marca da Anthropic. O Reels Engine IA é um projeto independente, compatível com Claude.</p>
+      </section>
+
+      <!-- ============ 12 ============ -->
+      <section class="sec" id="glossario" data-titulo="Glossário" data-busca="Glossário">
+        <div class="sec-head"><div class="sec-num">12</div><div><h2>Glossário</h2><div class="meta"><span>Em ordem alfabética, com link para onde o termo aparece</span></div></div></div>
+        <dl class="gloss">
+          <dt id="g-agente">Agente de Render</dt><dd>Programa que fica em segundo plano no Windows e gera o MP4 final quando você autoriza no Cowork. <a href="#agente">ver seção</a></dd>
+          <dt id="g-claude-code">Claude Code</dt><dd>O Claude dentro do terminal, rodando comandos direto no seu computador. <a href="#caminhos">ver seção</a></dd>
+          <dt id="g-comando">Comando</dt><dd>Uma ordem digitada no terminal, confirmada com Enter. <a href="#terminal">ver seção</a></dd>
+          <dt id="g-composicao">Composição</dt><dd>Cada vídeo dentro de um projeto, listado à esquerda no Studio. <a href="#studio">ver seção</a></dd>
+          <dt id="g-cowork">Cowork</dt><dd>Modo do app Claude para computador em que o Claude trabalha com uma pasta conectada, sem terminal. <a href="#caminhos">ver seção</a></dd>
+          <dt id="g-dependencias">Dependências</dt><dd>Programas prontos que o motor usa (como o Remotion), instalados pelo <code>npm ci</code> na pasta <code>node_modules</code>. <a href="#npm-ci">ver seção</a></dd>
+          <dt id="g-gate">Gate</dt><dd>Um ponto de aprovação: o vídeo só segue depois que você aprova. São 4. <a href="uso.html#gates">ver no Manual de Uso</a></dd>
+          <dt id="g-git">git / clone</dt><dd>Ferramenta que baixa e atualiza projetos do GitHub; clone é a cópia completa. <a href="#baixar">ver seção</a></dd>
+          <dt id="g-mp4">MP4</dt><dd>O arquivo de vídeo final, pronto para postar. <a href="#caminhos">ver seção</a></dd>
+          <dt id="g-node">Node.js</dt><dd>O programa que roda o motor. Use a versão 24. <a href="#node">ver seção</a></dd>
+          <dt id="g-npm">npm</dt><dd>O instalador que vem com o Node; também roda os comandos do motor (<code>npm run …</code>). <a href="#npm-ci">ver seção</a></dd>
+          <dt id="g-onedrive">OneDrive</dt><dd>Serviço que sincroniza pastas com a nuvem. Guarde o motor fora dele. <a href="#onde-guardar">ver seção</a></dd>
+          <dt id="g-raiz">Raiz</dt><dd>A pasta principal do projeto, a que tem o <code>package.json</code>. <a href="#raiz">ver seção</a></dd>
+          <dt id="g-remotion">Remotion</dt><dd>A biblioteca que transforma código em vídeo. Tem licença própria. <a href="#licenca-remotion">ver seção</a></dd>
+          <dt id="g-render">Render</dt><dd>A etapa em que o vídeo vira um arquivo MP4. <a href="#caminhos">ver seção</a></dd>
+          <dt id="g-slug">Slug</dt><dd>O nome curto do projeto, só com minúsculas, números e hífens. <a href="uso.html#pastas">ver no Manual de Uso</a></dd>
+          <dt id="g-smartscreen">SmartScreen</dt><dd>Aviso de segurança do Windows para arquivos baixados da internet (“O Windows protegeu o computador” ou “Abrir arquivo – Aviso de Segurança”). <a href="#agente-instalar">ver seção</a></dd>
+          <dt id="g-studio">Studio</dt><dd>A tela de pré-visualização do vídeo, no navegador. <a href="#studio">ver seção</a></dd>
+          <dt id="g-terminal">Terminal</dt><dd>Janela onde você escreve comandos. No Windows: Prompt de Comando. <a href="#terminal">ver seção</a></dd>
+          <dt id="g-zip">ZIP</dt><dd>Arquivo compactado com todas as pastas do projeto. <a href="#baixar">ver seção</a></dd>
+        </dl>
+      </section>
+
+
+    </div>
+  </main>
+</div>
+<script>{{JS}}</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+# Testes do motor a cada envio para o GitHub e a cada pull request.
+# Usa a mesma versão do Node do projeto (.nvmrc) e o lock exato (npm ci).
+name: Testes
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: testes-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Instalar dependências (versões exatas do lock)
+        run: npm ci
+
+      - name: Tipos
+        run: npm run typecheck
+
+      - name: Testes
+        run: npm test
+
+      - name: Manuais em dia com manuais/fonte/
+        run: npm run manuais -- --verificar
+
+      - name: Verificação pública (mídia, arquivos locais, segredos)
+        run: npm run verificar-publico

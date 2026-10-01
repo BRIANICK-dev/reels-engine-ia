@@ -1,0 +1,1391 @@
+<!doctype html>
+<!-- Gerado por "npm run manuais" a partir de manuais/fonte/. Não edite este arquivo: edite a fonte e gere de novo. -->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manual de Implantação — Reels Engine IA</title>
+<meta name="description" content="Do zero ao primeiro teste: instalar, testar e escolher como trabalhar com o Reels Engine IA.">
+<style>/* Reels Engine IA — manuais. Fonte do estilo: edite aqui e rode "npm run manuais". */
+:root{
+  --bg:#F7F6F2; --surface:#FFFFFF; --surface-2:#EFEDE6; --ink:#17171C; --ink-2:#5A5A66; --ink-3:#8A8A95;
+  --line:#E2DFD6; --accent:#5236F0; --accent-soft:#ECE8FF; --accent-ink:#FFFFFF;
+  --ok:#1C7F47; --ok-soft:#E3F4EA; --warn:#9A5B00; --warn-soft:#FFF1D9; --err:#B8292F; --err-soft:#FDE6E6;
+  --code-bg:#16161C; --code-ink:#ECECF2; --code-dim:#8C8C9C; --code-acc:#B3A6FF;
+  --radius:14px; --radius-s:9px;
+  --sans: "Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,"SF Pro Text","Helvetica Neue",Arial,sans-serif;
+  --display: "Segoe UI Variable Display","Segoe UI",system-ui,-apple-system,"SF Pro Display","Helvetica Neue",Arial,sans-serif;
+  --mono: ui-monospace,"Cascadia Mono","Cascadia Code",Consolas,"SF Mono",Menlo,monospace;
+  --shadow: 0 1px 0 rgba(20,20,30,.04), 0 8px 24px -12px rgba(20,20,30,.18);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E0E12; --surface:#16161C; --surface-2:#1E1E26; --ink:#ECECF2; --ink-2:#A3A3B0; --ink-3:#71717E;
+    --line:#2A2A34; --accent:#9584FF; --accent-soft:#25213F; --accent-ink:#0E0E12;
+    --ok:#4FC88B; --ok-soft:#15291F; --warn:#F2AE45; --warn-soft:#2D2312; --err:#FF7272; --err-soft:#331718;
+    --code-bg:#09090C; --code-ink:#ECECF2; --code-dim:#7B7B8A; --code-acc:#B3A6FF;
+    --shadow: 0 1px 0 rgba(0,0,0,.3), 0 10px 30px -14px rgba(0,0,0,.7);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E0E12; --surface:#16161C; --surface-2:#1E1E26; --ink:#ECECF2; --ink-2:#A3A3B0; --ink-3:#71717E;
+  --line:#2A2A34; --accent:#9584FF; --accent-soft:#25213F; --accent-ink:#0E0E12;
+  --ok:#4FC88B; --ok-soft:#15291F; --warn:#F2AE45; --warn-soft:#2D2312; --err:#FF7272; --err-soft:#331718;
+  --code-bg:#09090C; --code-ink:#ECECF2; --code-dim:#7B7B8A; --code-acc:#B3A6FF;
+  --shadow: 0 1px 0 rgba(0,0,0,.3), 0 10px 30px -14px rgba(0,0,0,.7);
+  color-scheme: dark;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:24px}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+body{margin:0; background:var(--bg); color:var(--ink); font:16px/1.65 var(--sans); -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility}
+a{color:var(--accent); text-underline-offset:3px; text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+code{font:0.88em/1.4 var(--mono); background:var(--surface-2); border:1px solid var(--line); padding:.1em .38em; border-radius:6px; white-space:nowrap}
+kbd{font:600 .8em/1 var(--mono); padding:.28em .5em; border:1px solid var(--line); border-bottom-width:2px; border-radius:6px; background:var(--surface)}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:6px}
+
+/* ---------- Layout ---------- */
+.app{display:grid; grid-template-columns:292px minmax(0,1fr); min-height:100vh}
+.side{position:sticky; top:0; height:100vh; overflow:auto; border-right:1px solid var(--line); background:var(--surface); display:flex; flex-direction:column}
+.side-head{padding:22px 20px 14px}
+.brand{display:flex; gap:11px; align-items:center; text-decoration:none; color:var(--ink)}
+.brand svg{flex:none}
+.brand b{display:block; font:700 15px/1.2 var(--display); letter-spacing:-.01em}
+.brand span{display:block; font-size:12.5px; color:var(--ink-2)}
+.ver{display:inline-block; margin-top:12px; font:600 11px/1 var(--mono); color:var(--ink-2); border:1px solid var(--line); border-radius:99px; padding:5px 8px}
+.search{position:relative; margin:4px 16px 8px}
+.search input{width:100%; font:15px var(--sans); color:var(--ink); background:var(--surface-2); border:1px solid transparent; border-radius:10px; padding:10px 34px 10px 36px}
+.search input:focus{outline:none; border-color:var(--accent); background:var(--surface)}
+.search svg{position:absolute; left:11px; top:11px; color:var(--ink-3)}
+.search kbd{position:absolute; right:9px; top:9px}
+.results{margin:0 16px; padding:0; list-style:none}
+.results li a{display:block; padding:8px 10px; border-radius:8px; color:var(--ink); text-decoration:none; font-size:14px}
+.results li a:hover,.results li a.on{background:var(--accent-soft)}
+.results small{display:block; color:var(--ink-2); font-size:12.5px; line-height:1.4}
+.results mark{background:transparent; color:var(--accent); font-weight:700}
+.results .none{padding:8px 10px; color:var(--ink-2); font-size:14px}
+nav.toc{padding:6px 10px 20px; flex:1}
+nav.toc ol{list-style:none; margin:0; padding:0; counter-reset:t}
+nav.toc > ol > li > a{counter-increment:t}
+nav.toc a{display:flex; gap:10px; align-items:baseline; padding:7px 10px; border-radius:8px; color:var(--ink-2); text-decoration:none; font-size:14.5px; line-height:1.35}
+nav.toc a:hover{background:var(--surface-2); color:var(--ink)}
+nav.toc a.on{background:var(--accent-soft); color:var(--ink); font-weight:600}
+nav.toc .n{font:600 11.5px/1 var(--mono); color:var(--ink-3); min-width:18px}
+nav.toc a.on .n{color:var(--accent)}
+nav.toc .tag{margin-left:auto; font:600 10.5px/1 var(--sans); text-transform:uppercase; letter-spacing:.06em; color:var(--ink-3)}
+nav.toc .grp{margin:14px 10px 4px; font:700 11px/1 var(--sans); letter-spacing:.09em; text-transform:uppercase; color:var(--ink-3)}
+.side-foot{border-top:1px solid var(--line); padding:12px 16px 16px; display:flex; flex-direction:column; gap:10px; font-size:13.5px}
+.theme{display:flex; background:var(--surface-2); border-radius:10px; padding:3px}
+.theme button{flex:1; font:600 12.5px var(--sans); color:var(--ink-2); background:none; border:0; border-radius:8px; padding:7px 4px; cursor:pointer}
+.theme button[aria-pressed="true"]{background:var(--surface); color:var(--ink); box-shadow:var(--shadow)}
+.other{display:flex; justify-content:space-between; align-items:center; text-decoration:none; color:var(--ink); padding:9px 11px; border:1px solid var(--line); border-radius:10px}
+.other:hover{border-color:var(--accent)}
+.other small{color:var(--ink-2); display:block; font-size:12px}
+
+main{min-width:0; padding:56px clamp(16px,5vw,72px) 120px}
+.wrap{max-width:780px; margin:0 auto}
+.topbar{display:none}
+.scrim{display:none}
+
+/* ---------- Tipografia ---------- */
+.kicker{font:700 12px/1 var(--sans); letter-spacing:.12em; text-transform:uppercase; color:var(--accent)}
+h1{font:750 clamp(34px,5vw,50px)/1.05 var(--display); letter-spacing:-.025em; margin:14px 0 16px}
+h2{font:720 clamp(26px,3.4vw,34px)/1.12 var(--display); letter-spacing:-.02em; margin:0 0 12px}
+h3{font:680 20px/1.3 var(--display); letter-spacing:-.01em; margin:40px 0 10px}
+h4{font:700 15px/1.3 var(--sans); margin:22px 0 6px}
+p{margin:0 0 14px}
+.lede{font-size:19px; line-height:1.55; color:var(--ink-2); max-width:62ch}
+.muted{color:var(--ink-2)}
+section.sec{padding-top:64px; margin-top:64px; border-top:1px solid var(--line)}
+section.sec:first-of-type{border-top:0; margin-top:0; padding-top:0}
+.sec-head{display:flex; gap:16px; align-items:flex-start; margin-bottom:18px}
+.sec-num{flex:none; width:44px; height:44px; border-radius:12px; display:grid; place-items:center; font:700 17px/1 var(--mono); background:var(--ink); color:var(--bg)}
+.sec-head .meta{font-size:13.5px; color:var(--ink-2); margin-top:4px; display:flex; flex-wrap:wrap; gap:6px 14px}
+.sec-head .meta span{display:inline-flex; gap:6px; align-items:center}
+
+/* Termo explicado na primeira aparição */
+dfn{font-style:normal; font-weight:650; border-bottom:1.5px dotted var(--accent); cursor:help}
+.def{display:block; margin:6px 0 16px; padding:10px 14px; border-radius:var(--radius-s); background:var(--accent-soft); font-size:14.5px; line-height:1.55}
+.def b{color:var(--accent)}
+
+/* ---------- Passos ---------- */
+.steps{list-style:none; padding:0; margin:22px 0; counter-reset:s}
+.steps > li{position:relative; padding:0 0 26px 54px; counter-increment:s}
+.steps > li::before{content:counter(s); position:absolute; left:0; top:-2px; width:34px; height:34px; border-radius:50%; display:grid; place-items:center; font:700 15px/1 var(--mono); background:var(--accent); color:var(--accent-ink)}
+.steps > li::after{content:""; position:absolute; left:16.5px; top:38px; bottom:6px; width:1.5px; background:var(--line)}
+.steps > li:last-child::after{display:none}
+.steps > li > h4{margin:3px 0 6px; font-size:16.5px}
+
+/* ---------- Comandos ---------- */
+.cmd{margin:14px 0 18px; border-radius:var(--radius-s); background:var(--code-bg); color:var(--code-ink); overflow:hidden; box-shadow:var(--shadow)}
+.cmd-bar{display:flex; align-items:center; gap:10px; padding:8px 8px 8px 14px; border-bottom:1px solid rgba(255,255,255,.07); font:600 11.5px/1 var(--sans); letter-spacing:.04em; color:var(--code-dim); text-transform:uppercase}
+.cmd-bar .where{display:inline-flex; gap:6px; align-items:center}
+.cmd-bar .where i{width:7px; height:7px; border-radius:50%; background:var(--code-acc); display:inline-block}
+.copy{margin-left:auto; display:inline-flex; gap:6px; align-items:center; font:600 12px/1 var(--sans); color:var(--code-ink); background:rgba(255,255,255,.08); border:0; border-radius:7px; padding:7px 10px; cursor:pointer; text-transform:none; letter-spacing:0}
+.copy:hover{background:rgba(255,255,255,.16)}
+.copy.done{background:var(--ok); color:#fff}
+.cmd pre{margin:0; padding:14px 16px 16px; overflow-x:auto; font:14.5px/1.6 var(--mono)}
+.cmd pre .p{color:var(--code-dim); user-select:none}
+.cmd pre .c{color:var(--code-dim)}
+
+/* Saída do terminal (não é para copiar) */
+.out{margin:14px 0; border-radius:var(--radius-s); border:1px solid var(--line); background:var(--surface); overflow:hidden}
+.out-bar{display:flex; gap:7px; align-items:center; padding:9px 12px; background:var(--surface-2); font:600 12px/1 var(--sans); color:var(--ink-2)}
+.out-bar i{width:10px; height:10px; border-radius:50%; background:var(--line)}
+.out-bar span{margin-left:6px}
+.out pre{margin:0; padding:12px 16px 14px; font:13.5px/1.7 var(--mono); overflow-x:auto; color:var(--ink)}
+.out pre .dim{color:var(--ink-3)}
+.out pre .ok{color:var(--ok); font-weight:700}
+.out pre .bad{color:var(--err); font-weight:700}
+.out pre .hl{background:var(--accent-soft); outline:1.5px solid var(--accent); border-radius:4px; padding:0 3px}
+.out.ok{border-color:color-mix(in srgb,var(--ok) 50%,var(--line))}
+.out.bad{border-color:color-mix(in srgb,var(--err) 50%,var(--line))}
+.out.ok .out-bar{background:var(--ok-soft); color:var(--ok)}
+.out.bad .out-bar{background:var(--err-soft); color:var(--err)}
+
+/* ---------- Abas por sistema ---------- */
+.tabs{margin:18px 0}
+.tablist{display:inline-flex; gap:2px; padding:3px; background:var(--surface-2); border-radius:11px; margin-bottom:12px}
+.tablist button{font:600 13.5px var(--sans); color:var(--ink-2); background:none; border:0; border-radius:8px; padding:8px 14px; cursor:pointer}
+.tablist button[aria-selected="true"]{background:var(--surface); color:var(--ink); box-shadow:var(--shadow)}
+.tabpanel[hidden]{display:none}
+
+/* ---------- Avisos ---------- */
+.note{display:grid; grid-template-columns:28px 1fr; gap:4px 12px; margin:18px 0; padding:14px 16px; border-radius:var(--radius-s); border:1px solid var(--line); background:var(--surface); font-size:15px}
+.note > svg{margin-top:2px}
+.note p:last-child{margin-bottom:0}
+.note strong.t{display:block; margin-bottom:2px}
+.note.adv{border-style:dashed}
+.note.adv > svg{color:var(--ink-2)}
+.note.warn{background:var(--warn-soft); border-color:transparent}
+.note.warn > svg{color:var(--warn)}
+.note.ok{background:var(--ok-soft); border-color:transparent}
+.note.ok > svg{color:var(--ok)}
+.note.info{background:var(--accent-soft); border-color:transparent}
+.note.info > svg{color:var(--accent)}
+
+/* ---------- Figuras ---------- */
+figure{margin:26px 0}
+figure.wide{margin-left:clamp(-120px,-6vw,0px); margin-right:clamp(-120px,-6vw,0px)}
+.fig{border-radius:var(--radius); background:var(--surface); border:1px solid var(--line); padding:clamp(14px,3vw,28px); box-shadow:var(--shadow)}
+.fig svg{display:block; width:100%; height:auto}
+figcaption{font-size:13.5px; color:var(--ink-2); margin-top:10px; text-align:center}
+
+/* ---------- Comparação lado a lado ---------- */
+.duo{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:18px 0}
+.duo h4{margin:0 0 8px; display:flex; gap:8px; align-items:center}
+.duo .out{margin:0}
+.duo p{font-size:14.5px; margin:10px 0 0}
+
+/* ---------- Selos ---------- */
+.badge{display:inline-flex; align-items:center; gap:6px; font:700 11px/1 var(--sans); letter-spacing:.07em; text-transform:uppercase; padding:6px 9px; border-radius:99px; background:var(--surface-2); color:var(--ink-2)}
+.badge.win{background:var(--accent-soft); color:var(--accent)}
+
+/* ---------- Chips ---------- */
+.chips{display:flex; flex-wrap:wrap; gap:6px}
+.chip{font:600 12px/1 var(--sans); padding:6px 9px; border-radius:99px; background:var(--surface-2); color:var(--ink-2); white-space:nowrap}
+.chip b{color:var(--ink); font-weight:700}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 960px){
+  .app{grid-template-columns:1fr}
+  .side{position:fixed; inset:0 auto 0 0; width:min(320px,88vw); z-index:20; transform:translateX(-102%); transition:transform .25s ease; box-shadow:var(--shadow)}
+  .app.open .side{transform:none}
+  .scrim{display:block; position:fixed; inset:0; background:rgba(0,0,0,.35); z-index:15; opacity:0; pointer-events:none; transition:opacity .2s}
+  .app.open .scrim{opacity:1; pointer-events:auto}
+  .topbar{display:flex; position:sticky; top:0; z-index:10; align-items:center; gap:12px; padding:10px 16px; background:color-mix(in srgb,var(--bg) 88%,transparent); backdrop-filter:blur(10px); border-bottom:1px solid var(--line)}
+  .topbar button{display:inline-flex; align-items:center; gap:8px; font:600 14px var(--sans); color:var(--ink); background:var(--surface); border:1px solid var(--line); border-radius:9px; padding:8px 12px}
+  .topbar b{font:700 14px var(--display)}
+  main{padding:28px 16px 96px}
+  figure.wide{margin-left:0; margin-right:0}
+}
+@media (max-width: 640px){
+  .duo{grid-template-columns:1fr}
+  body{font-size:15.5px}
+  .lede{font-size:17px}
+  .steps > li{padding-left:46px}
+}
+@media print{
+  .side,.topbar,.copy,.scrim{display:none!important}
+  .app{display:block}
+  main{padding:0}
+  section.sec{break-before:page}
+  .cmd,.out{box-shadow:none}
+}
+
+/* ---------- Classes de ilustração (SVG segue o tema) ---------- */
+.f-surface{fill:var(--surface)} .f-surface2{fill:var(--surface-2)} .f-bg{fill:var(--bg)} .f-ink{fill:var(--ink)} .f-ink2{fill:var(--ink-2)} .f-ink3{fill:var(--ink-3)}
+.f-line{fill:var(--line)} .f-accent{fill:var(--accent)} .f-asoft{fill:var(--accent-soft)} .f-aink{fill:var(--accent-ink)} .f-code{fill:var(--code-bg)} .f-codeink{fill:var(--code-ink)} .f-codedim{fill:var(--code-dim)} .f-codeacc{fill:var(--code-acc)} .f-ok{fill:var(--ok)} .f-none{fill:none}
+.s-line{stroke:var(--line)} .s-accent{stroke:var(--accent)} .s-ink3{stroke:var(--ink-3)} .s-ink{stroke:var(--ink)}
+svg text{font-family:var(--sans)} svg .mono{font-family:var(--mono)}
+.caret{animation:blink 1.05s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+@media (prefers-reduced-motion: reduce){ .caret{animation:none} }
+
+/* Storyboard de passos (4 quadros) */
+.board{display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin:22px 0}
+.board .frame{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:10px 10px 12px; box-shadow:var(--shadow)}
+.board svg{display:block; width:100%; height:auto; border-radius:8px; background:var(--bg)}
+.board p{display:flex; gap:10px; align-items:flex-start; margin:12px 4px 2px; font-size:15px; line-height:1.45}
+.board p b{flex:none; width:22px; height:22px; border-radius:50%; display:grid; place-items:center; font:700 12px/1 var(--mono); background:var(--accent); color:var(--accent-ink)}
+@media (max-width:520px){ .board{grid-template-columns:1fr} }
+
+/* Mapa de etapas no topo */
+.route{display:flex; flex-wrap:wrap; gap:8px; margin:26px 0 8px; padding:0; list-style:none; counter-reset:r}
+.route li{counter-increment:r; flex:1 1 130px; display:flex; flex-direction:column; gap:2px; padding:12px 14px; border-radius:12px; background:var(--surface); border:1px solid var(--line); font-size:14px; line-height:1.35; position:relative}
+.route li::before{content:counter(r); font:700 11px/1 var(--mono); color:var(--accent)}
+.route li b{font-weight:650}
+.route li small{color:var(--ink-2); font-size:12.5px}
+.route li.here{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
+.route li.opt{border-style:dashed}
+
+/* ---------- Linguagens: cartões e miniaturas ---------- */
+.axes{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:22px 0}
+.axis{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:14px 14px 12px}
+.axis svg{display:block; width:100%; height:46px; margin-bottom:10px}
+.axis b{display:block; font:700 15px/1.2 var(--display)}
+.axis span{display:block; font-size:13px; color:var(--ink-2); line-height:1.45; margin-top:4px}
+@media (max-width:820px){ .axes{grid-template-columns:repeat(2,1fr)} }
+
+.curves{display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:10px; margin:12px 0 26px}
+.curve{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:10px 10px 9px; text-align:center}
+.curve svg{display:block; width:100%; height:auto; overflow:visible}
+.curve svg .g{stroke:var(--line)} .curve svg .k{stroke:var(--accent); fill:none; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round}
+.curve svg .dot{fill:var(--accent)}
+.curve b{display:block; font:700 12.5px/1.2 var(--sans); margin-top:6px; overflow-wrap:anywhere}
+.curve small{display:block; font-size:11.5px; color:var(--ink-2); line-height:1.35}
+@media (max-width:820px){ .curves{grid-template-columns:repeat(3,minmax(0,1fr))} }
+
+.tools{display:flex; justify-content:space-between; align-items:center; gap:12px; margin:30px 0 12px; flex-wrap:wrap}
+.tools h3{margin:0}
+.btn{display:inline-flex; gap:8px; align-items:center; font:600 13.5px var(--sans); color:var(--ink); background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:8px 12px; cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+
+.langs{display:grid; grid-template-columns:1fr; gap:14px}
+.lang{display:grid; grid-template-columns:128px 1fr; grid-template-rows:auto 1fr; gap:0 20px; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:14px; scroll-margin-top:24px}
+.lang:target{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
+.lang .thumb{grid-row:1/3}
+.thumb{width:128px; aspect-ratio:9/16; border-radius:10px; overflow:hidden; box-shadow:0 0 0 1px rgba(0,0,0,.08), 0 6px 18px -8px rgba(0,0,0,.4)}
+.thumb svg{display:block; width:100%; height:100%}
+.lang h4{margin:0 0 2px; font:700 17px/1.25 var(--display)}
+.lang .id{font:12px var(--mono); color:var(--ink-3)}
+.lang p{font-size:14px; line-height:1.5; margin:8px 0 0}
+.lang .chips{margin-top:10px}
+.lang dl{margin:12px 0 0; font-size:13.5px; line-height:1.45; display:grid; grid-template-columns:auto 1fr; gap:4px 10px}
+.lang dt{font-weight:700; color:var(--ink-2)}
+.lang dd{margin:0}
+@media (max-width:640px){ .lang{grid-template-columns:84px 1fr; gap:0 14px} .lang .thumb{grid-row:1} .thumb{width:84px} .lang .lb{grid-column:1/-1; margin-top:4px} .lang dl{grid-template-columns:1fr; gap:0} .lang dd{margin-bottom:8px} .lang p{font-size:13.5px} }
+
+/* Animações: só tocam quando visíveis (.live) e nunca com movimento reduzido */
+.thumb *{transform-box:fill-box; transform-origin:center}
+.thumb .a{animation-play-state:paused}
+.thumb.live .a{animation-play-state:running}
+.thumbs-paused .thumb .a{animation-play-state:paused!important}
+@media (prefers-reduced-motion: reduce){ .thumb .a{animation:none!important} }
+
+/* 1 editorial · suave · maskUp */
+.t-ed .a.m{animation:edMask 4s cubic-bezier(.22,1,.36,1) infinite}
+.t-ed .a.m2{animation:edMask 4s cubic-bezier(.22,1,.36,1) infinite; animation-delay:.18s}
+.t-ed .a.ph{animation:edPh 4s cubic-bezier(.22,1,.36,1) infinite}
+@keyframes edMask{0%{transform:translateY(110%)} 18%,86%{transform:none} 100%{transform:translateY(-110%)}}
+@keyframes edPh{0%{opacity:0; transform:translateX(6px)} 20%,88%{opacity:1; transform:none} 100%{opacity:0}}
+
+/* 2 elegante · cinematográfica · blurIn */
+.t-el .a.bl{animation:elBlur 6s cubic-bezier(.65,0,.35,1) infinite}
+.t-el .a.ln{animation:elLine 6s cubic-bezier(.65,0,.35,1) infinite}
+
+.t-el .a.bl,.t-el .a.ln{animation-delay:-2.6s}
+@keyframes elBlur{0%{opacity:0; filter:blur(5px)} 26%,82%{opacity:1; filter:blur(0)} 100%{opacity:0; filter:blur(3px)}}
+@keyframes elLine{0%,14%{transform:scaleX(0)} 40%,82%{transform:scaleX(1)} 100%{transform:scaleX(0)}}
+
+/* 3 tipografia cinética · seca · cortes rápidos */
+.t-tc .a.f{animation:tcCut 2.4s step-end infinite; opacity:0}
+.t-tc .a.f2{animation-delay:.8s} .t-tc .a.f3{animation-delay:1.6s}
+.t-tc .a.w{animation:tcPop 2.4s cubic-bezier(.9,0,.1,1) infinite}
+.t-tc .a.w2{animation-delay:.8s} .t-tc .a.w3{animation-delay:1.6s}
+@keyframes tcCut{0%{opacity:1} 33.33%{opacity:0} 100%{opacity:0}}
+@keyframes tcPop{0%{transform:scale(.4)} 4%,100%{transform:none}}
+
+/* 4 cinematográfico · Ken Burns lento */
+.t-ci .a.kb{animation:ciKB 9s cubic-bezier(.45,0,.55,1) infinite alternate}
+.t-ci .a.cap{animation:ciCap 9s ease infinite alternate}
+@keyframes ciKB{from{transform:scale(1)} to{transform:scale(1.16) translateX(-3%)}}
+@keyframes ciCap{0%,20%{opacity:0} 45%,100%{opacity:1}}
+
+/* 5 colagem · degraus (12 fps) · popIn */
+.t-co .a.pc{animation:coPop 3.6s steps(3,end) infinite}
+.t-co .a.pc2{animation-delay:.25s} .t-co .a.pc3{animation-delay:.5s}
+@keyframes coPop{0%{transform:scale(.3) rotate(-12deg); opacity:0} 12%,88%{transform:none; opacity:1} 100%{opacity:0}}
+
+/* 6 interface/tech · mecânica · maskLeft */
+.t-it .a.bar{animation:itBar 3.2s linear infinite}
+.t-it .a.bar2{animation-delay:.12s} .t-it .a.bar3{animation-delay:.24s} .t-it .a.bar4{animation-delay:.36s}
+.t-it .a.num{animation:itNum 3.2s linear infinite}
+@keyframes itBar{0%{transform:scaleY(0)} 14%,86%{transform:scaleY(1)} 100%{transform:scaleY(0)}}
+@keyframes itNum{0%{clip-path:inset(0 100% 0 0)} 14%,86%{clip-path:inset(0 0 0 0)} 100%{clip-path:inset(0 100% 0 0)}}
+.t-it .bar{transform-origin:bottom}
+
+/* 7 retrô · degraus · tremor de projeção */
+.t-re .a.wv{animation:reWeave .5s steps(2,end) infinite}
+.t-re .a.fl{animation:reFlick .25s steps(2,end) infinite}
+.t-re .a.ti{animation:reTitle 4s steps(4,end) infinite}
+@keyframes reWeave{0%{transform:translate(0,0)} 50%{transform:translate(.6px,-.8px)} 100%{transform:translate(-.4px,.5px)}}
+@keyframes reFlick{0%{opacity:.08} 100%{opacity:.16}}
+@keyframes reTitle{0%{opacity:0; transform:translateY(8px)} 20%,85%{opacity:1; transform:none} 100%{opacity:0}}
+
+/* 8 orgânico · degraus lento · fadeUp */
+.t-or .a.up{animation:orUp 5s steps(4,end) infinite}
+.t-or .a.up2{animation-delay:.4s} .t-or .a.up3{animation-delay:.8s}
+@keyframes orUp{0%{opacity:0; transform:translateY(10px)} 26%,86%{opacity:1; transform:none} 100%{opacity:0}}
+
+/* 9 pop colorido · elástica · popIn */
+.t-po .a.bk{animation:poPop 3s cubic-bezier(.34,1.9,.64,1) infinite}
+.t-po .a.bk2{animation-delay:.08s} .t-po .a.bk3{animation-delay:.16s} .t-po .a.bk4{animation-delay:.24s} .t-po .a.bk5{animation-delay:.4s}
+@keyframes poPop{0%{transform:scale(0)} 22%,88%{transform:scale(1)} 100%{transform:scale(0)}}
+
+/* 10 nativo de rede · seca · legendas que entram palavra a palavra */
+.t-na .a.wd{animation:naWord 3s cubic-bezier(.9,0,.1,1) infinite}
+.t-na .a.wd2{animation-delay:.35s} .t-na .a.wd3{animation-delay:.7s}
+.t-na .a.pr{animation:naProg 3s linear infinite}
+@keyframes naWord{0%{opacity:0; transform:scale(.6)} 5%,88%{opacity:1; transform:none} 100%{opacity:0}}
+@keyframes naProg{from{transform:scaleX(0)} to{transform:scaleX(1)}}
+.t-na .pr{transform-origin:left}
+@media (prefers-reduced-motion: reduce){ .t-tc .a.f{opacity:0} .t-tc .a.f:not(.f2):not(.f3){opacity:1} }
+
+
+/* ---------- Tabelas ---------- */
+.tbl{width:100%; border-collapse:separate; border-spacing:0; margin:18px 0; font-size:14.5px; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden}
+.tbl th,.tbl td{text-align:left; vertical-align:top; padding:11px 14px; border-bottom:1px solid var(--line)}
+.tbl tr:last-child td{border-bottom:0}
+.tbl th{font:700 12px/1.3 var(--sans); letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2); background:var(--surface-2)}
+.tbl td:first-child{font-weight:600}
+.tbl code{white-space:normal}
+.tbl-scroll{overflow-x:auto; margin:18px 0}
+.tbl-scroll .tbl{margin:0; min-width:560px}
+
+/* ---------- Comparação em colunas ---------- */
+.cols{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:20px 0}
+.col{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:18px 18px 8px}
+.col h4{margin:0 0 4px; font:700 18px/1.25 var(--display); display:flex; gap:10px; align-items:center}
+.col .sub{font-size:13.5px; color:var(--ink-2); margin-bottom:12px}
+.col ul{margin:0 0 12px; padding-left:18px; font-size:14.5px}
+.col li{margin:4px 0}
+.col.pick{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
+@media (max-width:720px){ .cols{grid-template-columns:1fr} }
+
+/* ---------- Árvore de pastas ---------- */
+.tree-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:18px 20px 16px; box-shadow:var(--shadow); margin:18px 0}
+.tree-card > .cap{font:700 12px/1 var(--sans); letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); margin-bottom:12px}
+.tree,.tree ul{list-style:none; margin:0; padding:0}
+.tree ul{margin-left:9px; padding-left:18px; border-left:1.5px solid var(--line)}
+.tree li{position:relative; padding:4px 0}
+.tree ul > li::before{content:""; position:absolute; left:-18px; top:17px; width:13px; border-top:1.5px solid var(--line)}
+.tree .row{display:grid; grid-template-columns:minmax(210px,max-content) 1fr; gap:2px 18px; align-items:baseline}
+.tree .nm{display:inline-flex; gap:8px; align-items:center; font:600 14px/1.5 var(--mono); color:var(--ink); white-space:nowrap}
+.tree .nm .ico{flex:none; color:var(--ink-3)}
+.tree .why{font-size:13.5px; line-height:1.5; color:var(--ink-2)}
+.tree .why b{color:var(--ink); font-weight:650}
+.tree .you > .row .nm{color:var(--accent)} .tree .you > .row .nm .ico{color:var(--accent)}
+.tree .here > .row .nm{background:var(--accent); color:var(--accent-ink); padding:1px 8px; border-radius:7px} .tree .here > .row .nm .ico{color:var(--accent-ink)}
+.tree .sys > .row .nm{color:var(--ink-2)}
+.tree .no > .row .nm{color:var(--ink-3)} .tree .no > .row .nm .ico{color:var(--warn)}
+.tree .fade > .row{opacity:.55}
+.tree .new > .row .nm::after{content:"novo"; font:700 10px/1 var(--sans); letter-spacing:.06em; text-transform:uppercase; color:var(--ok); background:var(--ok-soft); padding:3px 6px; border-radius:99px; margin-left:4px}
+.legend{display:flex; flex-wrap:wrap; gap:8px 16px; font-size:13px; color:var(--ink-2); margin:4px 0 2px}
+.legend span{display:inline-flex; gap:7px; align-items:center}
+.legend i{width:11px; height:11px; border-radius:3px; display:inline-block}
+.legend .l-you{background:var(--accent)} .legend .l-sys{background:var(--ink-2)} .legend .l-no{background:var(--warn)}
+@media (max-width:720px){ .tree .row{grid-template-columns:1fr} .tree .why{padding-left:26px} }
+
+/* Caminho até a pasta do projeto */
+.crumbs{display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin:16px 0; padding:14px 16px; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius)}
+.crumbs span{display:inline-flex; align-items:center; gap:7px; font:600 13.5px var(--mono); padding:6px 10px; border-radius:8px; background:var(--surface-2); color:var(--ink-2)}
+.crumbs span.on{background:var(--accent); color:var(--accent-ink)}
+.crumbs em{font-style:normal; color:var(--ink-3)}
+
+/* ---------- Cartões de pergunta (briefing) ---------- */
+.qs{display:grid; gap:16px; margin:22px 0; counter-reset:q}
+.q{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:18px 20px; scroll-margin-top:24px}
+.q-head{display:flex; gap:14px; align-items:flex-start}
+.q-num{flex:none; width:36px; height:36px; border-radius:10px; display:grid; place-items:center; font:700 16px/1 var(--mono); background:var(--accent); color:var(--accent-ink)}
+.q-head h4{margin:5px 0 0; font:700 17.5px/1.3 var(--display)}
+.q > p{margin:12px 0 0; font-size:15px}
+.gb{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:14px}
+.gb > div{border-radius:11px; padding:12px 14px; font-size:14.5px; line-height:1.5}
+.gb .good{background:var(--ok-soft)} .gb .bad{background:var(--err-soft)}
+.gb .lbl{display:flex; gap:6px; align-items:center; font:700 12px/1 var(--sans); letter-spacing:.06em; text-transform:uppercase; margin-bottom:7px}
+.gb .good .lbl{color:var(--ok)} .gb .bad .lbl{color:var(--err)}
+.gb blockquote{margin:0; font-weight:600; color:var(--ink)}
+.gb small{display:block; margin-top:6px; color:var(--ink-2); font-size:13px}
+.q .tip{margin-top:12px; font-size:13.5px; color:var(--ink-2); display:flex; gap:8px}
+@media (max-width:640px){ .gb{grid-template-columns:1fr} .q{padding:16px} }
+
+/* ---------- Linha de produção ---------- */
+.flow{list-style:none; margin:22px 0; padding:0; display:flex; flex-wrap:wrap; gap:8px; align-items:stretch}
+.flow li{display:flex; flex-direction:column; justify-content:center; gap:2px; padding:10px 12px; border-radius:11px; background:var(--surface); border:1px solid var(--line); font-size:13.5px; line-height:1.3; min-width:118px; flex:1 1 118px}
+.flow li small{font:600 11px/1 var(--mono); color:var(--ink-3)}
+.flow li b{font-weight:650}
+.flow li em{font-style:normal; font-size:12px; color:var(--ink-2)}
+.flow li.you{border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
+.flow li.gate{flex:0 0 auto; min-width:0; background:var(--ink); color:var(--bg); border-color:var(--ink); align-items:center; text-align:center; padding:10px 12px}
+.flow li.gate small{color:inherit; opacity:.7}
+.flow li.gate.lock{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+@media (max-width:640px){ .flow{flex-direction:column} .flow li,.flow li.gate{flex:none; align-items:flex-start; text-align:left} }
+
+/* ---------- Gates ---------- */
+.gates{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin:20px 0}
+.gate-c{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:18px; position:relative}
+.gate-c .gn{font:700 12px/1 var(--mono); color:var(--accent); letter-spacing:.06em}
+.gate-c h4{margin:6px 0 8px; font:700 19px/1.2 var(--display)}
+.gate-c p{font-size:14.5px; margin:0 0 8px}
+.gate-c .pill{display:inline-flex; gap:6px; align-items:center; font:700 11.5px/1 var(--sans); padding:6px 9px; border-radius:99px; background:var(--surface-2); color:var(--ink-2)}
+.gate-c.lock{border-color:var(--accent)}
+.gate-c.lock .pill{background:var(--accent); color:var(--accent-ink)}
+.gate-c .say{margin-top:10px; padding:9px 12px; border-radius:10px; background:var(--surface-2); font-size:14px}
+.gate-c .say b{font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:2px}
+@media (max-width:720px){ .gates{grid-template-columns:1fr} }
+
+/* ---------- Mensagem para o Claude (copiar) ---------- */
+.cmd.chat{background:var(--surface); color:var(--ink); border:1px solid var(--line)}
+.cmd.chat .cmd-bar{color:var(--ink-2); border-bottom-color:var(--line)}
+.cmd.chat .cmd-bar .where i{background:var(--accent)}
+.cmd.chat .copy{background:var(--surface-2); color:var(--ink)}
+.cmd.chat .copy:hover{background:var(--accent-soft)}
+.cmd.chat pre{font:15px/1.6 var(--sans); white-space:pre-wrap}
+
+/* ---------- Deu erro? ---------- */
+details.err{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); margin:10px 0; scroll-margin-top:24px}
+details.err > summary{list-style:none; cursor:pointer; padding:14px 18px; display:grid; grid-template-columns:1fr auto; gap:4px 12px; align-items:center}
+details.err > summary::-webkit-details-marker{display:none}
+details.err > summary b{font:700 16px/1.35 var(--display)}
+details.err > summary small{grid-column:1; font:13px/1.45 var(--mono); color:var(--err); overflow-wrap:anywhere}
+details.err > summary::after{content:"+"; grid-row:1/3; grid-column:2; font:400 22px/1 var(--sans); color:var(--ink-3); transition:transform .2s}
+details.err[open] > summary::after{transform:rotate(45deg)}
+details.err[open]{border-color:color-mix(in srgb,var(--accent) 40%,var(--line))}
+details.err .body{padding:0 18px 16px; font-size:15px}
+details.err .body h5{font:700 12px/1 var(--sans); letter-spacing:.07em; text-transform:uppercase; color:var(--ink-3); margin:14px 0 6px}
+details.err .body ol,details.err .body ul{margin:0; padding-left:20px}
+details.err .body li{margin:5px 0}
+
+/* ---------- Checklist final ---------- */
+.checklist{list-style:none; padding:0; margin:20px 0; display:grid; gap:10px}
+.checklist li{display:grid; grid-template-columns:auto 1fr auto; gap:14px; align-items:center; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:14px 16px}
+.checklist input{appearance:none; -webkit-appearance:none; width:24px; height:24px; border-radius:7px; border:2px solid var(--ink-3); display:grid; place-items:center; cursor:pointer; margin:0}
+.checklist input:checked{background:var(--ok); border-color:var(--ok)}
+.checklist input:checked::after{content:""; width:6px; height:11px; border:solid #fff; border-width:0 2.5px 2.5px 0; transform:translateY(-1px) rotate(45deg)}
+.checklist li:has(input:checked){border-color:color-mix(in srgb,var(--ok) 50%,var(--line))}
+.checklist label{cursor:pointer; font-size:15.5px; line-height:1.45}
+.checklist label small{display:block; color:var(--ink-2); font-size:13px}
+.checklist a{font-size:13.5px; white-space:nowrap; text-decoration:none; font-weight:600}
+.checklist .badge{margin-left:6px; vertical-align:2px}
+.done-all{display:none}
+.checklist:not(:has(input:not(:checked))) + .done-all{display:grid}
+@media (max-width:520px){ .checklist li{grid-template-columns:auto 1fr} .checklist a{grid-column:2} }
+
+/* ---------- Glossário ---------- */
+.gloss{display:grid; grid-template-columns:minmax(150px,max-content) 1fr; gap:0; margin:20px 0; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden}
+.gloss dt,.gloss dd{padding:12px 16px; border-bottom:1px solid var(--line); margin:0}
+.gloss dt{font-weight:700; scroll-margin-top:24px}
+.gloss dd{font-size:14.5px; color:var(--ink-2)}
+.gloss dd a{font-size:13px; white-space:nowrap}
+.gloss dt:nth-last-of-type(1),.gloss dd:last-child{border-bottom:0}
+@media (max-width:600px){ .gloss{grid-template-columns:1fr} .gloss dt{border-bottom:0; padding-bottom:0} }
+
+/* ---------- Figura do Studio e outras ilustrações ---------- */
+.illus{margin:20px 0; border-radius:var(--radius); overflow:hidden; border:1px solid var(--line); background:var(--surface); box-shadow:var(--shadow)}
+.illus svg{display:block; width:100%; height:auto}
+.illus figcaption{margin:0; padding:10px 14px; text-align:left; border-top:1px solid var(--line)}
+
+/* Etapas numeradas grandes no "primeiro vídeo" */
+.quick{list-style:none; padding:0; margin:22px 0; display:grid; gap:12px; counter-reset:k}
+.quick > li{counter-increment:k; display:grid; grid-template-columns:auto 1fr; gap:4px 16px; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:16px 18px}
+.quick > li::before{content:counter(k); grid-row:1/4; width:38px; height:38px; border-radius:11px; display:grid; place-items:center; font:700 17px/1 var(--mono); background:var(--accent); color:var(--accent-ink)}
+.quick > li > h4{margin:6px 0 2px; font-size:16.5px}
+.quick > li > p{margin:0; font-size:15px}
+.quick > li > .cmd,.quick > li > .note,.quick > li > .out{grid-column:2}
+.quick .who{display:inline-flex; gap:6px; align-items:center; font:700 11px/1 var(--sans); letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3); margin-left:8px}
+.route li a{color:var(--ink); text-decoration:none}
+.route li a::after{content:""; position:absolute; inset:0; border-radius:12px}
+.route li:hover{border-color:var(--accent)}
+.cols .tree .row{display:flex; flex-wrap:wrap; gap:0 10px; align-items:baseline}
+.cols .tree .why{padding-left:0}
+.route li{flex:1 1 96px}
+.note code,.def code,.q code,.col code{white-space:normal; overflow-wrap:anywhere}
+/* Coluna "o que é" alinhada em todos os níveis da árvore (recuo de 28,5 px por nível) */
+.tree > li > .row{grid-template-columns:minmax(370px,max-content) 1fr}
+.tree > li > ul > li > .row{grid-template-columns:minmax(341.5px,max-content) 1fr}
+.tree > li > ul > li > ul > li > .row{grid-template-columns:minmax(313px,max-content) 1fr}
+.tree > li > ul > li > ul > li > ul > li > .row{grid-template-columns:minmax(284.5px,max-content) 1fr}
+@media (max-width:900px){ .tree .row,.tree > li .row{grid-template-columns:1fr !important} .tree .why{padding-left:26px} .tree .nm{white-space:normal; overflow-wrap:anywhere} }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="scrim" data-menu></div>
+  <aside class="side" aria-label="Índice">
+    <div class="side-head">
+      <a class="brand" href="#topo"><svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="9" class="f-ink"/><rect x="11" y="6" width="12" height="22" rx="2.5" fill="none" stroke="var(--bg)" stroke-width="1.8"/><path d="M15 13.5v7l5.5-3.5z" class="f-accent"/></svg><span><b>Reels Engine IA</b><span>Manual de Implantação</span></span></a>
+      <span class="ver">motor v1.0.0</span>
+    </div>
+    <div class="search" role="search">
+      <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" placeholder="Buscar no manual" aria-label="Buscar no manual" autocomplete="off">
+      <kbd>/</kbd>
+    </div>
+    <ul class="results" aria-live="polite"></ul>
+    <nav class="toc">
+      <div class="grp">Instalar</div>
+      <ol>
+        <li><a href="#antes"><span class="n">1</span>Antes de começar</a></li>
+        <li><a href="#node"><span class="n">2</span>Instalar o Node 24</a></li>
+        <li><a href="#baixar"><span class="n">3</span>Baixar o projeto</a></li>
+        <li><a href="#terminal"><span class="n">4</span>Abrir o terminal e testar</a></li>
+      </ol>
+      <div class="grp">Escolher como trabalhar</div>
+      <ol start="5">
+        <li><a href="#caminhos"><span class="n">5</span>Cowork ou Claude Code?</a></li>
+        <li><a href="#agente"><span class="n">6</span>Agente de Render <span class="tag">Windows</span></a></li>
+        <li><a href="#studio"><span class="n">7</span>Primeiro teste no Studio</a></li>
+      </ol>
+      <div class="grp">Conferir</div>
+      <ol start="8">
+        <li><a href="#pronto"><span class="n">8</span>Está tudo pronto?</a></li>
+      </ol>
+      <div class="grp">Consulta</div>
+      <ol start="9">
+        <li><a href="#atualizar"><span class="n">9</span>Atualizar o motor</a></li>
+        <li><a href="#erros"><span class="n">10</span>Deu erro?</a></li>
+        <li><a href="#licencas"><span class="n">11</span>Licenças</a></li>
+        <li><a href="#glossario"><span class="n">12</span>Glossário</a></li>
+      </ol>
+    </nav>
+    <div class="side-foot">
+      <div class="theme" role="group" aria-label="Tema">
+        <button data-t="auto" aria-pressed="true">Auto</button><button data-t="light">Claro</button><button data-t="dark">Escuro</button>
+      </div>
+      <a class="other" href="uso.html"><span><small>Próximo manual</small>Manual de Uso</span>→</a>
+    </div>
+  </aside>
+
+  <main id="topo">
+    <div class="topbar"><button data-menu aria-label="Abrir índice"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg> Índice</button><b>Manual de Implantação</b></div>
+    <div class="wrap">
+
+      <header style="margin-bottom:56px">
+        <div class="kicker">Manual de Implantação</div>
+        <h1>Do zero ao primeiro teste</h1>
+        <p class="lede">Instale, teste e deixe o Reels Engine IA pronto para trabalhar com o Claude. Não precisa saber programar: cada comando vem pronto para copiar, e cada termo técnico é explicado na primeira vez em que aparece.</p>
+        <ol class="route" aria-label="Etapas da implantação">
+          <li><a href="#node"><b>Node 24</b></a><small>5 min</small></li>
+          <li><a href="#baixar"><b>Baixar o projeto</b></a><small>3 min</small></li>
+          <li><a href="#terminal"><b>Terminal e testes</b></a><small>5 min</small></li>
+          <li><a href="#caminhos"><b>Cowork ou Claude Code</b></a><small>escolha</small></li>
+          <li class="opt"><a href="#agente"><b>Agente de Render</b></a><small>só Windows · 2 min</small></li>
+          <li><a href="#studio"><b>Studio</b></a><small>2 min</small></li>
+          <li><a href="#pronto"><b>Conferir</b></a><small>1 min</small></li>
+        </ol>
+        <p class="muted" style="font-size:14px">Depois de instalar, siga para o <a href="uso.html">Manual de Uso</a>: ele mostra como pedir um vídeo, do briefing ao MP4.</p>
+      </header>
+
+      <!-- ============ 1 ============ -->
+      <section class="sec" id="antes" data-titulo="Antes de começar" data-busca="Antes de começar">
+        <div class="sec-head"><div class="sec-num">1</div><div><h2>Antes de começar</h2><div class="meta"><span><svg class="ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 2 minutos de leitura</span></div></div></div>
+
+        <p>O Reels Engine IA é um conjunto de pastas e arquivos que fica no seu computador. O Claude lê as regras que estão nele, monta o vídeo em código e gera um arquivo <strong>MP4</strong> pronto para o Instagram, sempre com a sua aprovação nas etapas importantes.</p>
+
+        <h3 id="precisa" data-busca="O que você precisa">O que você precisa</h3>
+        <table class="tbl">
+          <thead><tr><th>Item</th><th>Detalhe</th></tr></thead>
+          <tbody>
+            <tr><td>Computador</td><td>Windows 10 ou 11, macOS ou Linux. O <a href="#agente">Agente de Render</a> (render sem terminal) é só para Windows.</td></tr>
+            <tr><td>Espaço livre</td><td>Cerca de 1 GB para o motor e as peças dele, mais o espaço dos seus vídeos.</td></tr>
+            <tr><td>Internet</td><td>Na instalação, nas atualizações e no primeiro render (o Remotion baixa um navegador interno de uns 100 MB).</td></tr>
+            <tr><td>Claude</td><td>O app Claude para computador com o <strong>Cowork</strong>, ou o <strong>Claude Code</strong>. A diferença está em <a href="#caminhos">Cowork ou Claude Code?</a></td></tr>
+            <tr><td>Tempo</td><td>Uns 20 minutos, do zero ao primeiro teste.</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="onde-guardar" data-busca="Onde guardar a pasta (OneDrive)">Onde guardar a pasta</h3>
+        <p>Escolha <strong>agora</strong> o lugar definitivo. Mudar depois é possível, mas dá trabalho (veja <a href="#agente-mover">Mudar a pasta de lugar</a>).</p>
+        <div class="cols">
+          <div class="col pick"><h4><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg> Bom</h4><div class="sub">Caminho curto, fora de pastas sincronizadas</div>
+            <ul><li><code>C:\Projetos\reels-engine-ia</code></li><li><code>/Users/voce/Projetos/reels-engine-ia</code></li><li>Nomes sem acento e sem espaço</li></ul></div>
+          <div class="col"><h4><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></svg> Evite</h4><div class="sub">Pastas que a nuvem sincroniza</div>
+            <ul><li><code>C:\Users\voce\OneDrive\…</code></li><li>Área de Trabalho e Documentos, quando o OneDrive, o iCloud ou o Dropbox cuidam delas</li><li><code>C:\Users\voce\Vídeos\Reels Engine (cópia)\</code></li></ul></div>
+        </div>
+        <div class="note warn"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17.5v.01"/></svg><div><strong class="t">Por que fora do OneDrive?</strong><p>O motor guarda milhares de arquivos pequenos (a pasta <code>node_modules</code>) e gera vídeos grandes. A sincronização deixa tudo lento e pode travar arquivos no meio de um render. No Windows 11, a Área de Trabalho e os Documentos costumam estar no OneDrive: se o caminho tiver <code>OneDrive</code>, ou se o Explorador mostrar uma nuvem na coluna “Status”, escolha outro lugar.</p></div></div>
+
+        <h3 id="como-ler" data-busca="Como ler este manual">Como ler este manual</h3>
+        <div class="cmd"><div class="cmd-bar"><span class="where"><i></i>Comando · digite ou cole no terminal</span><button class="copy" type="button"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h9"/></svg><span>Copiar</span></button></div>
+<pre>node -v</pre></div>
+        <div class="out"><div class="out-bar"><i></i><i></i><i></i><span>O que aparece na tela (não é para copiar)</span></div><pre>v24.13.0</pre></div>
+        <p class="def"><b>Termos técnicos</b> aparecem assim, explicados na primeira vez. Todos estão também no <a href="#glossario">Glossário</a>.</p>
+        <div class="note adv"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-5 4 5 4M16 8l5 4-5 4M13.5 5l-3 14"/></svg><div><strong class="t">Para quem já programa</strong><p>Blocos tracejados como este trazem atalhos e detalhes técnicos. Quem não programa pode pular sem perder nada.</p></div></div>
+      </section>
+
+      <!-- ============ 2 ============ -->
+      <section class="sec" id="node" data-titulo="Instalar o Node 24" data-busca="Instalar o Node 24">
+        <div class="sec-head"><div class="sec-num">2</div><div><h2>Instalar o Node 24</h2><div class="meta"><span><svg class="ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 5 minutos</span><span><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg> Resultado: <code>node -v</code> mostra <code>v24</code></span></div></div></div>
+
+        <p class="def"><b>Node.js</b> (ou só “Node”) é o programa que roda o motor no seu computador. Ele é gratuito, e o motor foi testado na <b>versão 24</b>. Instale uma vez; ele não abre janela nenhuma depois.</p>
+
+        <div class="tabs" data-group="os">
+          <div class="tablist" role="tablist" aria-label="Sistema operacional">
+            <button role="tab" data-key="win">Windows</button><button role="tab" data-key="mac">macOS</button><button role="tab" data-key="linux">Linux</button>
+          </div>
+          <div class="tabpanel" role="tabpanel" data-key="win">
+            <ol class="steps">
+              <li><h4>Abra a página da versão 24</h4><p><a href="https://nodejs.org/dist/latest-v24.x/" target="_blank" rel="noopener">nodejs.org/dist/latest-v24.x/ <svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></p><p>É uma lista simples de arquivos. Baixe o que termina em <code>-x64.msi</code> (por exemplo, <code>node-v24.x.x-x64.msi</code>). Se o seu notebook tem processador Snapdragon (ARM), baixe o que termina em <code>-arm64.msi</code>.</p></li>
+              <li><h4>Dê dois cliques no arquivo baixado</h4><p>Vá clicando em <strong>Next</strong> e aceite a licença. Os caminhos sugeridos podem ficar como estão.</p></li>
+              <li><h4>Na tela “Tools for Native Modules”, deixe a caixa desmarcada</h4><p>Essa opção instala Python, Visual Studio e outras ferramentas que o motor não usa: são vários gigabytes e muito tempo de instalação.</p></li>
+              <li><h4>Clique em Install e depois em Finish</h4><p>Se o Windows pedir permissão, confirme.</p></li>
+            </ol>
+          </div>
+          <div class="tabpanel" role="tabpanel" data-key="mac" hidden>
+            <ol class="steps">
+              <li><h4>Abra a página da versão 24</h4><p><a href="https://nodejs.org/dist/latest-v24.x/" target="_blank" rel="noopener">nodejs.org/dist/latest-v24.x/ <svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></p><p>Baixe o arquivo que termina em <code>.pkg</code> (por exemplo, <code>node-v24.x.x.pkg</code>). Ele serve para Mac com chip Apple e com Intel.</p></li>
+              <li><h4>Dê dois cliques no arquivo e siga o instalador</h4><p>Continuar, aceitar a licença, Instalar. O Mac pede a senha do seu usuário.</p></li>
+            </ol>
+          </div>
+          <div class="tabpanel" role="tabpanel" data-key="linux" hidden>
+            <ol class="steps">
+              <li><h4>Abra a página oficial de download</h4><p><a href="https://nodejs.org/en/download" target="_blank" rel="noopener">nodejs.org/en/download <svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a> → escolha a versão <strong>24</strong>, o sistema <strong>Linux</strong> e o método <strong>nvm</strong>. A página mostra os comandos exatos.</p></li>
+              <li><h4>Rode os comandos da página no terminal</h4><p>O último deles instala a versão 24:</p>
+                <div class="cmd"><div class="cmd-bar"><span class="where"><i></i>Terminal</span><button class="copy" type="button"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h9"/></svg><span>Copiar</span></button></div>
+<pre>nvm install 24</pre></div></li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="note info"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></svg><div><strong class="t">A página oficial sugere outra versão?</strong><p>O site do Node destaca sempre a versão mais nova. Versões mais novas também funcionam, mas a 24 é a testada: prefira o link direto acima.</p></div></div>
+
+        <h3 id="node-v" data-busca="Conferir a versão do Node (node -v)">Confira a instalação</h3>
+        <p>Abra um terminal <strong>novo</strong> (os que já estavam abertos não enxergam o Node recém-instalado). Pode ser em qualquer pasta: no Windows, aperte <kbd>Win</kbd>, digite <code>cmd</code> e aperte <kbd>Enter</kbd>. Depois rode:</p>
+        <div class="cmd"><div class="cmd-bar"><span class="where"><i></i>Terminal · qualquer pasta</span><button class="copy" type="button"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h9"/></svg><span>Copiar</span></button></div>
+<pre>node -v</pre></div>
+        <div class="duo">
+          <div><div class="out ok"><div class="out-bar"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><span>Certo</span></div><pre><span class="hl">v24</span>.13.0</pre></div><p>Começa com <code>v24</code>. Os números depois podem ser outros.</p></div>
+          <div><div class="out bad"><div class="out-bar"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></svg><span>Errado</span></div><pre>v20.11.1
+<span class="dim">ou</span>
+'node' não é reconhecido como um comando…</pre></div><p>Veja <a href="#err-node">Node errado</a> ou <a href="#err-node-ausente">Node não encontrado</a>.</p></div>
+        </div>
+        <div class="note adv"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-5 4 5 4M16 8l5 4-5 4M13.5 5l-3 14"/></svg><div><strong class="t">Para quem já programa</strong><p>O repositório tem <code>.nvmrc</code> com <code>24</code> e <code>engines</code> pedindo <code>&gt;=24</code>; nvm, fnm e Volta funcionam normalmente.</p></div></div>
+      </section>
+
+      <!-- ============ 3 ============ -->
+      <section class="sec" id="baixar" data-titulo="Baixar o projeto" data-busca="Baixar o projeto (ZIP ou git clone)">
+        <div class="sec-head"><div class="sec-num">3</div><div><h2>Baixar o projeto</h2><div class="meta"><span><svg class="ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 3 minutos</span><span><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg> Resultado: uma pasta <code>reels-engine-ia</code> com <code>package.json</code> dentro</span></div></div></div>
+
+        <div class="tabs" data-group="baixar">
+          <div class="tablist" role="tablist" aria-label="Forma de baixar">
+            <button role="tab" data-key="zip">ZIP (sem programar)</button><button role="tab" data-key="git">git clone</button>
+          </div>
+          <div class="tabpanel" role="tabpanel" data-key="zip">
+            <ol class="steps">
+              <li><h4>Baixe o ZIP</h4><p>Pelo link direto <a href="https://github.com/BRIANICK-dev/reels-engine-ia/archive/refs/heads/main.zip">reels-engine-ia-main.zip</a>, ou na página <a href="https://github.com/BRIANICK-dev/reels-engine-ia" target="_blank" rel="noopener">github.com/BRIANICK-dev/reels-engine-ia <svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a> → botão verde <strong>Code</strong> → <strong>Download ZIP</strong>.</p></li>
+              <li><h4>Windows: desbloqueie o ZIP antes de extrair</h4><p>Botão direito no ZIP → <strong>Propriedades</strong> → marque <strong>Desbloquear</strong> (no pé da janela) → OK. Assim o Windows não reclama depois, ao instalar o Agente de Render. Se a opção não aparecer, siga em frente.</p></li>
+              <li><h4>Extraia direto no lugar definitivo</h4><p>Botão direito → <strong>Extrair tudo…</strong>. No campo de destino, escolha a pasta que você definiu em <a href="#onde-guardar">Onde guardar</a> (por exemplo, <code>C:\Projetos</code>) e <strong>apague o final <code>\reels-engine-ia-main</code></strong> que o Windows sugere. Isso evita a “pasta dentro da pasta”. No Mac, basta dar dois cliques no ZIP.</p></li>
+              <li><h4>Renomeie a pasta</h4><p>De <code>reels-engine-ia-main</code> para <code>reels-engine-ia</code>. Não é obrigatório, mas deixa os caminhos mais curtos e combina com este manual. Se você baixou o ZIP de uma versão, na página <strong>Releases</strong>, a pasta vem com o número dela (por exemplo, <code>reels-engine-ia-1.0.0</code>): renomeie do mesmo jeito.</p></li>
+            </ol>
+            <div class="cols">
+              <div class="tree-card"><div class="cap" style="color:var(--ok)">Certo</div>
+                <ul class="tree">
+                  <li class="sys"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>C:\Projetos</span></div>
+                    <ul><li class="here"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>reels-engine-ia</span></div>
+                      <ul><li><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>docs</span></div></li><li><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>projects</span></div></li><li class="you"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>package.json</span><span class="why"><b>aqui é a raiz</b></span></div></li></ul></li></ul></li>
+                </ul></div>
+              <div class="tree-card"><div class="cap" style="color:var(--err)">Pasta dentro da pasta</div>
+                <ul class="tree">
+                  <li class="sys"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>C:\Projetos</span></div>
+                    <ul><li class="no"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>reels-engine-ia-main</span><span class="why">só tem outra pasta dentro</span></div>
+                      <ul><li class="fade"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>reels-engine-ia-main</span></div>
+                        <ul><li class="fade"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>package.json</span></div></li></ul></li></ul></li></ul></li>
+                </ul></div>
+            </div>
+            <p class="muted">Já extraiu com a pasta dupla? Recorte a pasta de dentro, cole em <code>C:\Projetos</code> e apague a de fora, que ficou vazia.</p>
+          </div>
+          <div class="tabpanel" role="tabpanel" data-key="git" hidden>
+            <p>Com o <a href="https://git-scm.com/downloads" target="_blank" rel="noopener">git <svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a> instalado, abra o terminal na pasta onde o projeto vai morar (por exemplo, <code>C:\Projetos</code>) e rode:</p>
+            <div class="cmd"><div class="cmd-bar"><span class="where"><i></i>Terminal · na pasta escolhida</span><button class="copy" type="button"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h9"/></svg><span>Copiar</span></button></div>
+<pre>git clone https://github.com/BRIANICK-dev/reels-engine-ia.git
+cd reels-engine-ia</pre></div>
+            <p class="def"><b>git</b> é a ferramenta que baixa e atualiza projetos guardados no GitHub. <b>clone</b> é a cópia completa, que depois se atualiza com um comando (veja <a href="#atualizar">Atualizar o motor</a>).</p>
+            <div class="note adv"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-5 4 5 4M16 8l5 4-5 4M13.5 5l-3 14"/></svg><div><strong class="t">Para quem já programa</strong><p>Para versionar os seus vídeos, use um repositório <strong>privado</strong> seu: <code>projects/*</code>, <code>clients/*</code> e <code>local/</code> são ignorados no repositório público de propósito.</p></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 4 ============ -->
+      <section class="sec" id="terminal" data-titulo="Abrir o terminal e testar" data-busca="Abrir o terminal e testar">
+        <div class="sec-head"><div class="sec-num">4</div><div>
+          <h2>Abrir o terminal e testar</h2>
+          <div class="meta"><span><svg class="ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 5 minutos</span><span><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg> Resultado: “fail 0”</span></div>
+        </div></div>
+
+        <p>Agora você vai dar os dois primeiros comandos: um que <strong>instala as peças</strong> de que o motor precisa e outro que <strong>confere se está tudo certo</strong>. Os dois são digitados no terminal.</p>
+        <p class="def"><b>Terminal</b> é uma janela onde você escreve ordens para o computador em vez de clicar. No Windows ele se chama <em>Prompt de Comando</em>. Cada ordem é um <b>comando</b>: você digita (ou cola) e aperta <kbd>Enter</kbd>.</p>
+
+        <h3 id="raiz" data-busca="Abrir o terminal na raiz">Abra o terminal na raiz do projeto</h3>
+        <p>O terminal sempre “está” dentro de alguma pasta, e os comandos do motor só funcionam na <dfn title="A pasta principal do projeto">raiz</dfn>.</p>
+        <p class="def"><b>Raiz</b> é a pasta principal do projeto: a que tem dentro <code>package.json</code>, <code>CLAUDE.md</code> e <code>INSTALAR-AGENTE-DE-RENDER.cmd</code>. Se você vê só outra pasta com o mesmo nome lá dentro, entre nela: a raiz é a de dentro.</p>
+
+        <div class="tabs" data-group="os">
+          <div class="tablist" role="tablist" aria-label="Sistema operacional">
+            <button role="tab" data-key="win">Windows</button><button role="tab" data-key="mac">macOS</button><button role="tab" data-key="linux">Linux</button>
+          </div>
+
+          <div class="tabpanel" role="tabpanel" data-key="win">
+            <div class="board">
+              <div class="frame">
+                <svg viewBox="0 0 240 170" role="img" aria-label="Explorador de Arquivos aberto na pasta do projeto, com package.json em destaque">
+                  <rect x="8" y="8" width="224" height="154" rx="9" class="f-surface s-line" stroke-width="1"/>
+                  <rect x="8" y="8" width="224" height="22" rx="9" class="f-surface2"/><rect x="8" y="22" width="224" height="8" class="f-surface2"/>
+                  <text x="18" y="23" font-size="9" font-weight="600" class="f-ink2">reels-engine-ia</text>
+                  <rect x="18" y="36" width="204" height="16" rx="4" class="f-surface2"/>
+                  <text x="25" y="47" font-size="7.5" class="f-ink3">›  Projetos  ›  reels-engine-ia</text>
+                  <g font-size="8.5" class="f-ink">
+                    <rect x="20" y="62" width="10" height="7" rx="1.5" class="f-codeacc"/><text x="36" y="69">docs</text>
+                    <rect x="20" y="77" width="10" height="7" rx="1.5" class="f-codeacc"/><text x="36" y="84">engine</text>
+                    <rect x="20" y="92" width="10" height="7" rx="1.5" class="f-codeacc"/><text x="36" y="99">projects</text>
+                    <rect x="20" y="107" width="10" height="7" rx="1.5" class="f-codeacc"/><text x="36" y="114">scripts</text>
+                    <rect x="21" y="121" width="8" height="10" rx="1" class="f-line"/><text x="36" y="129">CLAUDE.md</text>
+                    <rect x="14" y="134" width="212" height="17" rx="4" class="f-asoft s-accent" stroke-width="1.2"/>
+                    <rect x="21" y="137" width="8" height="10" rx="1" class="f-accent"/><text x="36" y="146" font-weight="700">package.json</text>
+                  </g>
+                  <text x="218" y="146" font-size="7.5" text-anchor="end" class="f-accent" font-weight="700">raiz ✓</text>
+                </svg>
+                <p><b>1</b><span>Abra a pasta do projeto no Explorador e confira se <code>package.json</code> está nela.</span></p>
+              </div>
+              <div class="frame">
+                <svg viewBox="0 0 240 170" role="img" aria-label="Barra de endereço clicada, com o caminho selecionado">
+                  <rect x="8" y="8" width="224" height="154" rx="9" class="f-surface s-line" stroke-width="1"/>
+                  <rect x="8" y="8" width="224" height="22" rx="9" class="f-surface2"/><rect x="8" y="22" width="224" height="8" class="f-surface2"/>
+                  <text x="18" y="23" font-size="9" font-weight="600" class="f-ink2">reels-engine-ia</text>
+                  <rect x="14" y="36" width="212" height="22" rx="5" class="f-surface s-accent" stroke-width="1.6"/>
+                  <rect x="19" y="40" width="140" height="14" rx="2" class="f-accent"/>
+                  <text x="22" y="50.5" font-size="7.6" class="f-aink mono">C:\Projetos\reels-engine-ia</text>
+                  <g opacity=".35" class="f-ink3"><rect x="20" y="72" width="70" height="6" rx="3"/><rect x="20" y="87" width="90" height="6" rx="3"/><rect x="20" y="102" width="60" height="6" rx="3"/><rect x="20" y="117" width="80" height="6" rx="3"/><rect x="20" y="132" width="66" height="6" rx="3"/></g>
+                  <path d="M180 46 l0 16 l4 -4 l3 7 l3 -1.4 l-3 -7 l6 0 z" class="f-ink" stroke="var(--surface)" stroke-width="1"/>
+                </svg>
+                <p><b>2</b><span>Clique num espaço vazio da <strong>barra de endereço</strong>. O caminho fica selecionado.</span></p>
+              </div>
+              <div class="frame">
+                <svg viewBox="0 0 240 170" role="img" aria-label="Barra de endereço com a palavra cmd digitada">
+                  <rect x="8" y="8" width="224" height="154" rx="9" class="f-surface s-line" stroke-width="1"/>
+                  <rect x="8" y="8" width="224" height="22" rx="9" class="f-surface2"/><rect x="8" y="22" width="224" height="8" class="f-surface2"/>
+                  <text x="18" y="23" font-size="9" font-weight="600" class="f-ink2">reels-engine-ia</text>
+                  <rect x="14" y="36" width="212" height="22" rx="5" class="f-surface s-accent" stroke-width="1.6"/>
+                  <text x="22" y="51.5" font-size="11" font-weight="700" class="f-ink mono">cmd</text>
+                  <rect x="46" y="41" width="1.6" height="13" class="f-accent caret"/>
+                  <g opacity=".35" class="f-ink3"><rect x="20" y="72" width="70" height="6" rx="3"/><rect x="20" y="87" width="90" height="6" rx="3"/><rect x="20" y="102" width="60" height="6" rx="3"/><rect x="20" y="117" width="80" height="6" rx="3"/><rect x="20" y="132" width="66" height="6" rx="3"/></g>
+                  <g transform="translate(150 98)"><rect width="66" height="40" rx="7" class="f-surface s-ink3" stroke-width="1.2"/><rect y="34" width="66" height="6" rx="3" class="f-line"/><text x="33" y="25" font-size="11" font-weight="700" text-anchor="middle" class="f-ink">Enter ↵</text></g>
+                </svg>
+                <p><b>3</b><span>Digite <code>cmd</code> por cima do caminho e aperte <kbd>Enter</kbd>.</span></p>
+              </div>
+              <div class="frame">
+                <svg viewBox="0 0 240 170" role="img" aria-label="Prompt de Comando aberto na pasta reels-engine-ia">
+                  <rect x="8" y="8" width="224" height="154" rx="9" class="f-code"/>
+                  <text x="18" y="23" font-size="8.5" font-weight="600" class="f-codedim">Prompt de Comando</text>
+                  <line x1="8" y1="30" x2="232" y2="30" stroke="rgba(255,255,255,.08)"/>
+                  <text x="18" y="48" font-size="7.4" class="f-codedim mono">Microsoft Windows [versão 10.0…]</text>
+                  <text x="18" y="74" font-size="7.6" class="f-codeink mono">C:\Projetos\</text>
+                  <rect x="17" y="80" width="78" height="13" rx="3" fill="rgba(179,166,255,.22)"/>
+                  <text x="19" y="90" font-size="7.6" font-weight="700" class="f-codeacc mono">reels-engine-ia&gt;</text>
+                  <rect x="99" y="81" width="6" height="11" class="f-codeink caret"/>
+                  <text x="18" y="124" font-size="8" class="f-codedim">o caminho termina no nome</text>
+                  <text x="18" y="136" font-size="8" class="f-codedim">da pasta: você está na raiz ✓</text>
+                </svg>
+                <p><b>4</b><span>Abre o terminal <strong>já dentro da pasta</strong>. Deixe essa janela aberta.</span></p>
+              </div>
+            </div>
+            <div class="note warn" id="powershell"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17.5v.01"/></svg><div><strong class="t">Abriu “PowerShell” em vez de “Prompt de Comando”?</strong><p>Feche e repita digitando exatamente <code>cmd</code>. No PowerShell, o <code>npm</code> pode ser bloqueado por uma regra de segurança do Windows (“a execução de scripts foi desabilitada”).</p></div></div>
+          </div>
+
+          <div class="tabpanel" role="tabpanel" data-key="mac" hidden>
+            <ol class="steps">
+              <li><h4>Abra o app Terminal</h4><p>Aperte <kbd>⌘</kbd> + <kbd>Espaço</kbd>, digite <code>Terminal</code> e aperte <kbd>Enter</kbd>.</p></li>
+              <li><h4>Digite <code>cd</code> e um espaço</h4><p>Não aperte <kbd>Enter</kbd> ainda. <code>cd</code> quer dizer “entre na pasta”.</p></li>
+              <li><h4>Arraste a pasta do projeto para dentro da janela</h4><p>Do Finder para o Terminal. O caminho da pasta é escrito sozinho. Agora aperte <kbd>Enter</kbd>.</p>
+                <div class="out"><div class="out-bar"><i></i><i></i><i></i><span>Terminal</span></div><pre><span class="dim">voce@mac ~ %</span> cd /Users/voce/Projetos/reels-engine-ia
+<span class="dim">voce@mac</span> <span class="hl">reels-engine-ia</span> <span class="dim">%</span></pre></div>
+                <p class="muted">O nome da pasta antes do <code>%</code> mostra que você está na raiz.</p></li>
+            </ol>
+          </div>
+
+          <div class="tabpanel" role="tabpanel" data-key="linux" hidden>
+            <ol class="steps">
+              <li><h4>Abra a pasta do projeto no gerenciador de arquivos</h4><p>Confira se <code>package.json</code> está nela.</p></li>
+              <li><h4>Clique com o botão direito num espaço vazio → “Abrir no terminal”</h4><p>O nome pode variar conforme a distribuição. Alternativa: abra o terminal, digite <code>cd</code>, um espaço, arraste a pasta e aperte <kbd>Enter</kbd>.</p></li>
+            </ol>
+          </div>
+        </div>
+
+        <h3 id="npm-ci" data-busca="npm ci: instalar as dependências">Instale as peças do motor</h3>
+        <p>Copie o comando abaixo, cole no terminal (<kbd>Ctrl</kbd> + <kbd>V</kbd> ou botão direito do mouse; no Mac, <kbd>⌘</kbd> + <kbd>V</kbd>) e aperte <kbd>Enter</kbd>.</p>
+        <div class="cmd"><div class="cmd-bar"><span class="where"><i></i>Terminal · na raiz</span><button class="copy" type="button"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h9"/></svg><span>Copiar</span></button></div>
+<pre>npm ci</pre></div>
+        <p class="def"><b>npm</b> é o instalador que vem junto com o Node. <b>npm ci</b> baixa as <b>dependências</b> — os programas prontos que o motor usa, como o Remotion — nas versões exatas que foram testadas. Tudo vai para a pasta <code>node_modules</code>, dentro do projeto.</p>
+        <p>Demora de 1 a 3 minutos e só precisa ser feito <strong>uma vez</strong> (e de novo depois de cada <a href="#atualizar">atualização do motor</a>). No fim, aparece algo assim:</p>
+        <div class="out"><div class="out-bar"><i></i><i></i><i></i><span>O que esperar</span></div><pre><span class="dim">npm warn deprecated …</span>          <span class="dim">← avisos assim são normais</span>
+added 254 packages, and audited 255 packages in 52s
+<span class="dim">49 packages are looking for funding</span>
+found <span class="ok">0 vulnerabilities</span></pre></div>
+        <p class="muted">Os números podem ser diferentes. O que importa é não aparecer <code>npm error</code> no final. Apareceu? Veja <a href="#err-ci">npm ci falhou</a>.</p>
+
+        <h3 id="npm-test" data-busca="npm test: conferir a instalação">Confira se está tudo certo</h3>
+        <div class="cmd"><div class="cmd-bar"><span class="where"><i></i>Terminal · na raiz</span><button class="copy" type="button"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h9"/></svg><span>Copiar</span></button></div>
+<pre>npm test</pre></div>
+        <p>O motor testa a si mesmo: são dezenas de verificações automáticas, que levam cerca de 1 minuto. Muita coisa passa pela tela; <strong>só o resumo do final importa</strong>.</p>
+
+        <div class="duo">
+          <div>
+            <div class="out ok"><div class="out-bar"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><span>Tudo certo</span></div><pre><span class="dim">✔ … (dezenas de linhas)</span>
+ℹ tests <span class="hl">102</span>
+ℹ suites 0
+ℹ pass <span class="hl">102</span>
+ℹ fail <span class="ok">0</span>
+ℹ cancelled 0
+<span class="dim">ℹ duration_ms 41897</span></pre></div>
+            <p><strong><code>tests</code> e <code>pass</code> iguais, <code>fail 0</code>.</strong> Pode seguir. O total muda de uma versão para outra.</p>
+          </div>
+          <div>
+            <div class="out bad"><div class="out-bar"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></svg><span>Algo falhou</span></div><pre><span class="bad">✖ nome do teste que falhou</span>
+  AssertionError: …
+ℹ tests 102
+ℹ suites 0
+ℹ pass 101
+ℹ fail <span class="bad">1</span>
+<span class="dim">ℹ duration_ms 40112</span></pre></div>
+            <p><strong><code>fail</code> maior que 0.</strong> Copie desde a primeira linha com <code>✖</code> até o fim e mande para o Claude no chat, ou veja <a href="#err-teste">Um teste falhou</a>.</p>
+          </div>
+        </div>
+
+        <div class="note ok"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><div><strong class="t">Pronto: o motor está instalado e testado.</strong><p>Pode fechar o terminal. No próximo passo você escolhe como vai trabalhar com o Claude.</p></div></div>
+
+        <div class="note adv"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-5 4 5 4M16 8l5 4-5 4M13.5 5l-3 14"/></svg><div><strong class="t">Para quem já programa</strong>
+          <p><code>npm ci</code> instala exatamente o que está no <code>package-lock.json</code> e nunca o altera; prefira-o a <code>npm install</code>. O npm sobe até a raiz se você rodar de uma subpasta, mas os scripts e este manual assumem a raiz. Para checar tipos: <code>npm run typecheck</code>.</p></div></div>
+      </section>
+
+      <!-- ============ 5 ============ -->
+      <section class="sec" id="caminhos" data-titulo="Cowork ou Claude Code?" data-busca="Cowork ou Claude Code?">
+        <div class="sec-head"><div class="sec-num">5</div><div><h2>Cowork ou Claude Code?</h2><div class="meta"><span><svg class="ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 3 minutos</span><span><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg> Resultado: você sabe quem vai gerar o MP4 final</span></div></div></div>
+
+        <p>O motor funciona com as duas formas de usar o Claude no computador. A diferença principal é <strong>quem roda os comandos</strong> — e, por isso, quem gera o MP4 final.</p>
+        <p class="def"><b>Render</b> é a etapa em que o vídeo, que até então é código, vira um arquivo <b>MP4</b> de verdade, pronto para postar. Leva de um a alguns minutos, conforme a duração e o computador.</p>
+
+        <div class="cols">
+          <div class="col"><h4><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg> Cowork</h4><div class="sub">No app Claude para computador, sem terminal</div>
+            <ul>
+              <li>Você <strong>conecta a pasta</strong> <code>reels-engine-ia</code> no app e conversa normalmente.</li>
+              <li>O Claude trabalha numa área própria na nuvem e grava os arquivos na sua pasta.</li>
+              <li>Para assistir ao vídeo, <strong>você</strong> abre o Studio com um comando que o Claude indica.</li>
+              <li>Render final: no Windows, o <strong>Agente de Render</strong> faz sozinho; no Mac e no Linux, você roda um comando quando o Claude pedir.</li>
+            </ul></div>
+          <div class="col"><h4><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3M12 15h5"/></svg> Claude Code</h4><div class="sub">O Claude dentro do terminal, no seu computador</div>
+            <ul>
+              <li>Você abre o terminal na raiz e digita <code>claude</code>.</li>
+              <li>O Claude <strong>roda os comandos</strong> direto no seu computador: cria o projeto, abre o Studio, renderiza.</li>
+              <li>Não precisa do Agente de Render, em nenhum sistema.</li>
+              <li>Combina com quem já está à vontade no terminal.</li>
+            </ul></div>
+        </div>
+
+        <h3 id="quem-renderiza" data-busca="Quem gera o MP4 final">Quem gera o MP4 final</h3>
+        <table class="tbl">
+          <thead><tr><th></th><th>Cowork</th><th>Claude Code</th></tr></thead>
+          <tbody>
+            <tr><td>Windows</td><td>O <a href="#agente">Agente de Render</a>, sozinho, depois da sua autorização</td><td>O Claude, no terminal</td></tr>
+            <tr><td>macOS</td><td>Você: <code>npm run render -- &lt;slug&gt;</code></td><td>O Claude, no terminal</td></tr>
+            <tr><td>Linux</td><td>Você: <code>npm run render -- &lt;slug&gt;</code></td><td>O Claude, no terminal</td></tr>
+          </tbody>
+        </table>
+        <p class="muted">O <code>&lt;slug&gt;</code> é o nome curto do projeto (por exemplo, <code>loja-exemplo-promo-natal</code>). O <a href="uso.html#pastas">Manual de Uso</a> explica.</p>
+        <div class="note info"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></svg><div><strong class="t">Por que o MP4 final não vem da nuvem?</strong><p>Um Reels final costuma ter de 40 a 100 MB, acima do limite de transferência da nuvem para o seu computador. Por isso o MP4 definitivo sempre nasce no seu computador. Prévias e imagens de conferência o Claude pode mandar pelo chat.</p></div></div>
+
+        <h3 id="comecar-cowork" data-busca="Começar no Cowork">Começar no Cowork</h3>
+        <ol class="steps">
+          <li><h4>Abra o app Claude para computador e entre no Cowork</h4></li>
+          <li><h4>Conecte a pasta <code>reels-engine-ia</code></h4><p>Escolha a <a href="#raiz">raiz</a>, a pasta que tem o <code>package.json</code>. É a única pasta que o Claude precisa enxergar.</p></li>
+          <li><h4>No Windows, instale o Agente de Render</h4><p>Uma vez só. Está na <a href="#agente">próxima seção</a>.</p></li>
+          <li><h4>Mande a primeira mensagem</h4>
+            <div class="cmd chat"><div class="cmd-bar"><span class="where"><i></i>Mensagem para o Claude</span><button class="copy" type="button"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h9"/></svg><span>Copiar</span></button></div>
+<pre>Leia o CLAUDE.md da raiz e siga as regras dele. Depois me diga a situação dos projetos.</pre></div></li>
+        </ol>
+        <div class="note info"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></svg><div><strong class="t">Uma pasta “Claude outputs” apareceu?</strong><p>É onde o app guarda os arquivos que o Claude manda no chat (prévias, imagens de conferência). Não faz parte do motor nem dos seus projetos: pode apagar quando quiser.</p></div></div>
+
+        <h3 id="comecar-code" data-busca="Começar no Claude Code">Começar no Claude Code</h3>
+        <ol class="steps">
+          <li><h4>Instale o Claude Code</h4><p>Siga a <a href="https://code.claude.com/docs/en/overview" target="_blank" rel="noopener">documentação oficial <svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>.</p></li>
+          <li><h4>Abra o terminal na raiz e digite <code>claude</code></h4><p>Como em <a href="#raiz">Abrir o terminal na raiz</a>.</p>
+            <div class="cmd"><div class="cmd-bar"><span class="where"><i></i>Terminal · na raiz</span><button class="copy" type="button"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h9"/></svg><span>Copiar</span></button></div>
+<pre>claude</pre></div></li>
+          <li><h4>Mande a mesma primeira mensagem</h4><p>“Leia o CLAUDE.md da raiz e siga as regras dele. Depois me diga a situação dos projetos.”</p></li>
+        </ol>
+      </section>
+
+      <!-- ============ 6 ============ -->
+      <section class="sec" id="agente" data-titulo="Agente de Render" data-busca="Agente de Render (Windows)">
+        <div class="sec-head"><div class="sec-num">6</div><div><h2>Agente de Render <span class="badge win">Windows</span></h2><div class="meta"><span><svg class="ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 2 minutos</span><span><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg> Resultado: “Agente ativo agora: sim”</span></div></div></div>
+
+        <p class="def"><b>Agente de Render</b> é um programa pequeno que fica ligado em segundo plano no seu Windows, sem janela. Quando você autoriza o render no chat do Cowork, o Claude deixa um pedido numa pasta e o agente gera o MP4 no seu computador.</p>
+        <div class="note info"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></svg><div><strong class="t">Precisa dele?</strong><p>Só se você usa o <strong>Cowork no Windows</strong>. Com o Claude Code, ou no Mac e no Linux, pule para o <a href="#studio">Studio</a>.</p></div></div>
+
+        <h3 id="agente-instalar" data-busca="Instalar o Agente de Render">Instale (uma vez só)</h3>
+        <div class="tabs" data-group="agente">
+          <div class="tablist" role="tablist" aria-label="Forma de instalar">
+            <button role="tab" data-key="clique">Dois cliques</button><button role="tab" data-key="term">Pelo terminal</button>
+          </div>
+          <div class="tabpanel" role="tabpanel" data-key="clique">
+            <ol class="steps">
+              <li><h4>Na raiz, dê dois cliques em <code>INSTALAR-AGENTE-DE-RENDER.cmd</code></h4><p>Abre uma janela preta, que mostra o andamento.</p></li>
+              <li><h4>Apareceu um aviso de segurança do Windows?</h4><p>Ele aparece porque o arquivo veio de um ZIP baixado da internet (você evita isso <a href="#baixar">desbloqueando o ZIP</a> antes de extrair). Conforme a versão do Windows, é uma de duas janelas:</p><ul><li><strong>“O Windows protegeu o computador”</strong>: clique em <strong>Mais informações</strong> → <strong>Executar assim mesmo</strong>.</li><li><strong>“Abrir arquivo – Aviso de Segurança”</strong>: clique em <strong>Executar</strong>.</li></ul><p>Prefere não passar por isso? Use a aba <strong>Pelo terminal</strong>.</p></li>
+              <li><h4>Espere a mensagem final e aperte qualquer tecla</h4></li>
+            </ol>
+          </div>
+          <div class="tabpanel" role="tabpanel" data-key="term" hidden>
+            <div class="cmd"><div class="cmd-bar"><span class="where"><i></i>Terminal · na raiz</span><button class="copy" type="button"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h9"/></svg><span>Copiar</span></button></div>
+<pre>npm run agent:install</pre></div>
+          </div>
+        </div>
+        <div class="out ok"><div class="out-bar"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><span>O que esperar no final</span></div><pre>✔ Início automático criado:
+  <span class="dim">C:\Users\voce\AppData\…\Inicializar\ReelsEngineIA-AgenteRender-….vbs</span>
+
+✔ Agente de Render ATIVO (pid 1234).
+  Ele liga sozinho a cada login no Windows e trabalha em segundo plano.</pre></div>
+
+        <h3 id="agente-conferir" data-busca="Conferir o Agente de Render (agent:status)">Confira</h3>
+        <div class="cmd"><div class="cmd-bar"><span class="where"><i></i>Terminal · na raiz</span><button class="copy" type="button"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h9"/></svg><span>Copiar</span></button></div>
+<pre>npm run agent:status</pre></div>
+        <div class="out ok"><div class="out-bar"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><span>Certo</span></div><pre>Agente de Render — início automático: <span class="hl">INSTALADO</span>
+Agente ativo agora: <span class="hl">sim</span> <span class="dim">(pid 1234, último sinal 2026-…)</span></pre></div>
+        <p>Aparece “não (sem sinal…)”? Veja <a href="#err-agente">Agente sem sinal</a>. Para um diagnóstico completo (projetos, etapas, pedidos pendentes), rode <code>npm run agent:check</code>: ele só lê, não muda nada.</p>
+
+        <h3 id="agente-dia" data-busca="O agente no dia a dia">No dia a dia</h3>
+        <ul>
+          <li>Ele liga sozinho quando você entra no Windows. Não precisa abrir nada.</li>
+          <li>Só renderiza depois que você autoriza o render no chat (o <a href="uso.html#gates">GATE 4</a>).</li>
+          <li>Nunca sobrescreve um vídeo: cada render vira uma versão nova (<code>v01</code>, <code>v02</code>…), em <code>projects/&lt;slug&gt;/renders/</code>.</li>
+          <li>Um pedido nunca roda duas vezes, e um erro nunca se repete sozinho.</li>
+        </ul>
+
+        <h3 id="agente-mover" data-busca="Mudar a pasta de lugar ou remover o agente">Mudar a pasta de lugar ou remover</h3>
+        <p>O agente guarda o caminho da pasta. Para mudar a pasta de lugar: <strong>antes</strong> de mover, rode o comando abaixo; <strong>depois</strong> de mover, instale de novo. Para desinstalar, só o comando abaixo basta.</p>
+        <div class="cmd"><div class="cmd-bar"><span class="where"><i></i>Terminal · na raiz</span><button class="copy" type="button"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h9"/></svg><span>Copiar</span></button></div>
+<pre>npm run agent:install -- --remover</pre></div>
+        <p class="muted">Remover o agente não toca nos seus projetos nem nos vídeos já gerados.</p>
+      </section>
+
+      <!-- ============ 7 ============ -->
+      <section class="sec" id="studio" data-titulo="Primeiro teste no Studio" data-busca="Primeiro teste no Studio">
+        <div class="sec-head"><div class="sec-num">7</div><div><h2>Primeiro teste no Studio</h2><div class="meta"><span><svg class="ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 2 minutos</span><span><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg> Resultado: o vídeo de exemplo tocando no navegador</span></div></div></div>
+
+        <p class="def"><b>Studio</b> (Remotion Studio) é a tela de pré-visualização que abre no seu navegador. Ela mostra o vídeo de verdade, quadro a quadro, antes de virar MP4. É nela que você aprova cada vídeo.</p>
+        <p>O motor vem com um projeto de exemplo, <code>exemplo-loja-promo</code>: o mesmo texto em três estilos visuais diferentes. Abra-o assim:</p>
+        <div class="cmd"><div class="cmd-bar"><span class="where"><i></i>Terminal · na raiz</span><button class="copy" type="button"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h9"/></svg><span>Copiar</span></button></div>
+<pre>npm run studio -- exemplo-loja-promo</pre></div>
+        <div class="out"><div class="out-bar"><i></i><i></i><i></i><span>O que esperar</span></div><pre>▶ Studio: exemplo-loja-promo
+  assets: projects/exemplo-loja-promo/assets/
+
+Server ready - Local: <span class="hl">http://localhost:3000</span>
+Built in 3891ms</pre></div>
+        <p>O navegador abre sozinho. Se não abrir, digite o endereço <code>http://localhost:3000</code> no navegador. <strong>Deixe o terminal aberto</strong> enquanto usa o Studio.</p>
+
+        <figure class="illus">
+          <svg viewBox="0 0 720 400" role="img" aria-label="Tela do Remotion Studio: lista de composições à esquerda, prévia vertical no centro e linha do tempo embaixo">
+            <rect width="720" height="400" class="f-surface2"/>
+            <rect x="0" y="0" width="720" height="30" class="f-surface"/><circle cx="18" cy="15" r="4.5" class="f-line"/><circle cx="32" cy="15" r="4.5" class="f-line"/><circle cx="46" cy="15" r="4.5" class="f-line"/>
+            <rect x="200" y="8" width="320" height="15" rx="7" class="f-surface2"/><text x="360" y="19" font-size="9" text-anchor="middle" class="f-ink3 mono">localhost:3000</text>
+            <rect x="0" y="30" width="180" height="290" class="f-surface"/>
+            <text x="16" y="54" font-size="10" font-weight="700" class="f-ink3" letter-spacing=".8">COMPOSIÇÕES</text>
+            <rect x="10" y="64" width="160" height="24" rx="6" class="f-asoft s-accent" stroke-width="1.4"/>
+            <text x="22" y="80" font-size="11" font-weight="700" class="f-ink">Main</text>
+            <text x="22" y="108" font-size="11" class="f-ink2">Vitrine-elegante-premium</text>
+            <text x="22" y="132" font-size="11" class="f-ink2">Vitrine-colagem-recorte</text>
+            <rect x="290" y="44" width="148" height="262" rx="6" fill="#111"/>
+            <rect x="290" y="44" width="148" height="262" rx="6" fill="#FFD400" opacity=".95"/>
+            <text x="364" y="185" font-size="40" font-weight="900" text-anchor="middle" fill="#111">SÓ</text>
+            <rect x="0" y="320" width="720" height="80" class="f-surface"/>
+            <circle cx="40" cy="342" r="11" class="f-accent"/><path d="M36.5 336.5v11l9-5.5z" class="f-aink"/>
+            <text x="62" y="346" font-size="10" class="f-ink2 mono">00:00.15 / 00:10.00</text>
+            <rect x="20" y="366" width="680" height="8" rx="4" class="f-line"/><rect x="20" y="366" width="150" height="8" rx="4" class="f-accent"/>
+            <rect x="166" y="360" width="3" height="20" rx="1.5" class="f-ink"/>
+            <g font-size="11" font-weight="700">
+              <circle cx="190" cy="76" r="11" class="f-accent"/><text x="190" y="80" text-anchor="middle" class="f-aink">1</text>
+              <circle cx="462" cy="60" r="11" class="f-accent"/><text x="462" y="64" text-anchor="middle" class="f-aink">2</text>
+              <circle cx="40" cy="306" r="11" class="f-accent"/><text x="40" y="310" text-anchor="middle" class="f-aink">3</text>
+            </g>
+          </svg>
+          <figcaption><b>1</b> Lista de composições: clique para trocar de versão. <b>2</b> Prévia vertical, do jeito que vai ao ar. <b>3</b> Tocar e pausar (ou barra de espaço) e a linha do tempo, que você pode arrastar.</figcaption>
+        </figure>
+
+        <p class="def"><b>Composição</b> é cada vídeo dentro de um projeto. No exemplo, <code>Main</code> é o vídeo principal e as <code>Vitrine-…</code> mostram o mesmo texto em outros estilos.</p>
+        <h3 id="studio-fechar" data-busca="Fechar o Studio">Para fechar</h3>
+        <p>Volte ao terminal e aperte <kbd>Ctrl</kbd> + <kbd>C</kbd>. No Windows, se ele perguntar “Deseja finalizar o arquivo em lotes (S/N)?”, digite <code>S</code> e aperte <kbd>Enter</kbd>. Fechar a janela do terminal também funciona.</p>
+        <div class="note info"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></svg><div><strong class="t">O Studio não gera o MP4</strong><p>Ele só mostra o vídeo. O arquivo final vem do render, depois da sua autorização: o <a href="uso.html">Manual de Uso</a> mostra o caminho completo.</p></div></div>
+        <p>Feche o Studio e confira a instalação no <a href="#pronto">checklist</a>, logo abaixo.</p>
+      </section>
+
+      <!-- ============ 8 ============ -->
+      <section class="sec" id="pronto" data-titulo="Está tudo pronto?" data-busca="Está tudo pronto? (checklist)">
+        <div class="sec-head"><div class="sec-num">8</div><div><h2>Está tudo pronto se…</h2><div class="meta"><span>Marque cada item ao conferir. As marcações ficam salvas neste navegador.</span></div></div></div>
+        <ul class="checklist">
+          <li><input type="checkbox" id="ck-node"><label for="ck-node"><code>node -v</code> mostra <code>v24</code><small>Num terminal novo, em qualquer pasta.</small></label><a href="#node-v">Instalar o Node 24 →</a></li>
+          <li><input type="checkbox" id="ck-test"><label for="ck-test"><code>npm test</code> termina com <code>fail 0</code><small>Na raiz, depois do <code>npm ci</code>.</small></label><a href="#npm-test">Abrir o terminal e testar →</a></li>
+          <li><input type="checkbox" id="ck-studio"><label for="ck-studio">O Studio abriu o <code>exemplo-loja-promo</code><small>E o vídeo toca no navegador.</small></label><a href="#studio">Primeiro teste no Studio →</a></li>
+          <li><input type="checkbox" id="ck-agente"><label for="ck-agente"><code>npm run agent:status</code> mostra “Agente ativo agora: sim” <span class="badge win">Windows + Cowork</span><small>Com o Claude Code, ou no Mac e no Linux, pode marcar direto.</small></label><a href="#agente-conferir">Agente de Render →</a></li>
+        </ul>
+        <div class="note ok done-all"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><div><strong class="t">Tudo pronto.</strong><p>Siga para o <a href="uso.html#rapido">primeiro vídeo em ~15 minutos</a>, no Manual de Uso.</p></div></div>
+        <p class="muted">Algum item não deu certo? Veja <a href="#erros">Deu erro?</a> Daqui em diante, o manual é de consulta: volte a ele para atualizar o motor, resolver um erro ou conferir as licenças.</p>
+      </section>
+
+      <!-- ============ 9 ============ -->
+      <section class="sec" id="atualizar" data-titulo="Atualizar o motor" data-busca="Atualizar o motor">
+        <div class="sec-head"><div class="sec-num">9</div><div><h2>Atualizar o motor</h2><div class="meta"><span><svg class="ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 5 minutos</span><span><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg> Resultado: versão nova, seus projetos intactos</span></div></div></div>
+
+        <p>Quando sair uma versão nova, leia o <code>CHANGELOG.md</code> dela para saber o que mudou. A sua versão atual está no arquivo <code>VERSION</code>, na raiz, e no topo deste manual.</p>
+        <div class="cols">
+          <div class="tree-card"><div class="cap">A atualização substitui</div>
+            <ul class="tree">
+              <li class="sys"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>docs, engine, scripts, manuais</span></div></li>
+              <li class="sys"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>local.exemplo</span></div></li>
+              <li class="sys"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>projects/_MOLDE</span></div></li>
+              <li class="sys"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>projects/exemplo-loja-promo</span></div></li>
+              <li class="sys"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>CLAUDE.md, package.json…</span></div></li>
+            </ul></div>
+          <div class="tree-card"><div class="cap">Nunca é tocado</div>
+            <ul class="tree">
+              <li class="you"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>projects/&lt;seus projetos&gt;</span></div></li>
+              <li class="you"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>clients/&lt;suas fichas&gt;</span></div></li>
+              <li class="you"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>local</span><span class="why">suas regras</span></div></li>
+              <li class="you"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>.reels-engine</span><span class="why">fila do agente</span></div></li>
+            </ul></div>
+        </div>
+        <div class="note warn"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17.5v.01"/></svg><div><strong class="t">Personalizações vão em <code>local/</code></strong><p>O que você mudar dentro de <code>projects/_MOLDE</code>, <code>docs</code> ou <code>CLAUDE.md</code> é substituído na atualização. Suas regras e preferências ficam em <code>local/</code> (veja <a href="uso.html#local">Camada local</a>), que nenhuma atualização toca.</p></div></div>
+
+        <div class="tabs" data-group="baixar">
+          <div class="tablist" role="tablist" aria-label="Forma de atualizar">
+            <button role="tab" data-key="zip">Baixei o ZIP</button><button role="tab" data-key="git">Usei git clone</button>
+          </div>
+          <div class="tabpanel" role="tabpanel" data-key="zip">
+            <ol class="steps">
+              <li><h4>Feche o Studio e os terminais abertos</h4></li>
+              <li><h4>Baixe o ZIP novo e extraia numa pasta temporária</h4><p>Por exemplo, <code>C:\Projetos\reels-engine-ia-nova</code> (desbloqueie o ZIP antes, como em <a href="#baixar">Baixar o projeto</a>).</p></li>
+              <li><h4>Copie tudo da pasta nova para a sua</h4><p>Selecione todo o conteúdo da pasta nova (<kbd>Ctrl</kbd> + <kbd>A</kbd>), copie e cole dentro da sua pasta <code>reels-engine-ia</code>. Quando o Windows perguntar, escolha <strong>Substituir os arquivos no destino</strong>. Seus projetos, fichas e a pasta <code>local</code> não estão no ZIP, então continuam como estavam.</p></li>
+              <li><h4>Apague a pasta temporária</h4></li>
+              <li><h4>Reinstale as peças e teste</h4><p>No terminal, na raiz: <code>npm ci</code> e depois <code>npm test</code> (o resultado precisa ter <code>fail 0</code>).</p></li>
+              <li><h4>Windows com o agente: reinicie o computador</h4><p>O agente volta já com a versão nova.</p></li>
+            </ol>
+            <p class="muted">Se o <code>CHANGELOG.md</code> da versão nova disser que algum arquivo foi removido, apague-o da sua pasta também.</p>
+          </div>
+          <div class="tabpanel" role="tabpanel" data-key="git" hidden>
+            <div class="cmd"><div class="cmd-bar"><span class="where"><i></i>Terminal · na raiz</span><button class="copy" type="button"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h9"/></svg><span>Copiar</span></button></div>
+<pre>git pull
+npm ci
+npm test</pre></div>
+            <p>No Windows com o agente, reinicie o computador depois (ou rode <code>npm run agent:install</code> de novo).</p>
+          </div>
+        </div>
+        <div class="note adv"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-5 4 5 4M16 8l5 4-5 4M13.5 5l-3 14"/></svg><div><strong class="t">Para quem já programa</strong><p>Projetos já criados guardam uma cópia congelada do engine em <code>src/engine/</code> e a versão em <code>project.json → engineVersion</code>: atualizar o motor não muda vídeos em andamento.</p></div></div>
+      </section>
+
+      <!-- ============ 10 ============ -->
+      <section class="sec" id="erros" data-titulo="Deu erro?" data-busca="Deu erro?">
+        <div class="sec-head"><div class="sec-num">10</div><div><h2>Deu erro?</h2><div class="meta"><span>Clique no problema para ver a solução</span></div></div></div>
+        <p>Cada item mostra o sintoma (a mensagem que aparece), a causa e o que fazer. Se nada aqui resolver, copie as últimas linhas do terminal e mande para o Claude no chat: ele sabe ler esses erros.</p>
+
+        <details class="err" id="err-node" data-busca="Node errado (EBADENGINE)">
+          <summary><b>Node na versão errada</b><small>npm warn EBADENGINE Unsupported engine · node -v mostra v20 ou v22</small></summary>
+          <div class="body">
+            <h5>Causa</h5><p>Há uma versão mais antiga do Node instalada, e o motor precisa da 24 ou mais nova.</p>
+            <h5>Solução</h5><ol><li>Instale a versão 24 como em <a href="#node">Instalar o Node 24</a> (ela substitui a antiga).</li><li>Feche <strong>todos</strong> os terminais e abra um novo.</li><li>Confira com <code>node -v</code> e rode <code>npm ci</code> de novo.</li></ol>
+            <div class="note adv"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-5 4 5 4M16 8l5 4-5 4M13.5 5l-3 14"/></svg><div><p>Com nvm: <code>nvm install 24</code> e <code>nvm use 24</code>.</p></div></div>
+          </div>
+        </details>
+
+        <details class="err" id="err-node-ausente" data-busca="Node não encontrado ('node' não é reconhecido)">
+          <summary><b>Node não encontrado</b><small>'node' não é reconhecido como um comando interno… · command not found: node</small></summary>
+          <div class="body">
+            <h5>Causa</h5><p>O Node não foi instalado, ou o terminal foi aberto antes da instalação terminar.</p>
+            <h5>Solução</h5><ol><li>Feche o terminal e abra um novo.</li><li>Se continuar, instale o Node de novo (<a href="#node">Instalar o Node 24</a>) e reinicie o computador.</li></ol>
+          </div>
+        </details>
+
+        <details class="err" id="err-raiz" data-busca="Terminal fora da raiz (Could not read package.json)">
+          <summary><b>Terminal fora da raiz</b><small>npm error enoent Could not read package.json</small></summary>
+          <div class="body">
+            <h5>Causa</h5><p>O terminal está em outra pasta. O caso mais comum é a “pasta dentro da pasta” do ZIP: o terminal foi aberto na pasta de fora.</p>
+            <h5>Solução</h5><ol><li>Abra no Explorador a pasta que tem <code>package.json</code> (veja <a href="#baixar">Baixar o projeto</a>).</li><li>Abra o terminal a partir dela, como em <a href="#raiz">Abrir o terminal na raiz</a>.</li><li>Rode o comando de novo.</li></ol>
+          </div>
+        </details>
+
+        <details class="err" id="err-ci" data-busca="npm ci falhou">
+          <summary><b>npm ci falhou</b><small>npm error code ECONNRESET · ETIMEDOUT · EPERM · EBUSY</small></summary>
+          <div class="body">
+            <h5>Causas mais comuns</h5><ul><li><code>ECONNRESET</code>, <code>ETIMEDOUT</code>: internet instável, rede corporativa ou proxy.</li><li><code>EPERM</code>, <code>EBUSY</code>: algum arquivo travado, quase sempre pelo OneDrive, pelo antivírus ou por um Studio ainda aberto.</li></ul>
+            <h5>Solução</h5><ol><li>Feche o Studio e os outros terminais.</li><li>Confira se a pasta está fora do OneDrive (<a href="#onde-guardar">Onde guardar</a>).</li><li>Rode <code>npm ci</code> de novo: ele recomeça do zero sozinho.</li><li>Se persistir, copie as últimas 20 linhas do terminal e mande para o Claude.</li></ol>
+          </div>
+        </details>
+
+        <details class="err" id="err-teste" data-busca="Um teste falhou (fail maior que 0)">
+          <summary><b>Um teste falhou</b><small>ℹ fail 1 (ou mais)</small></summary>
+          <div class="body">
+            <h5>Causas mais comuns</h5><ul><li>Node fora da versão 24 (<a href="#err-node">veja acima</a>).</li><li>Uma atualização copiada pela metade.</li><li>Arquivos do motor (<code>docs</code>, <code>engine</code>, <code>scripts</code>) alterados à mão: os testes conferem a integridade deles.</li></ul>
+            <h5>Solução</h5><ol><li>Rode <code>npm test</code> mais uma vez.</li><li>Se repetir, copie desde a primeira linha com <code>✖</code> até o fim e mande para o Claude no chat. Não comece um vídeo com teste falhando.</li></ol>
+          </div>
+        </details>
+
+        <details class="err" id="err-powershell" data-busca="PowerShell: execução de scripts desabilitada">
+          <summary><b>O npm não roda no PowerShell</b><small>…a execução de scripts foi desabilitada neste sistema</small></summary>
+          <div class="body">
+            <h5>Causa</h5><p>Uma regra de segurança do Windows bloqueia o <code>npm</code> no PowerShell.</p>
+            <h5>Solução</h5><p>Use o Prompt de Comando: na barra de endereço da pasta, digite <code>cmd</code> (veja <a href="#raiz">Abrir o terminal na raiz</a>).</p>
+          </div>
+        </details>
+
+        <details class="err" id="err-fonte" data-busca="A fonte não aparece no vídeo">
+          <summary><b>A fonte não aparece no vídeo</b><small>o texto sai com outra letra no Studio ou no MP4</small></summary>
+          <div class="body">
+            <h5>Causas mais comuns</h5><ul><li>O arquivo da fonte não está em <code>projects/&lt;slug&gt;/assets/fonts/</code>.</li><li>A fonte está instalada no computador, mas não na pasta: o vídeo só usa os arquivos da pasta do projeto.</li><li>O nome do arquivo mudou depois que o Claude escreveu o código.</li></ul>
+            <h5>Solução</h5><ol><li>Coloque o arquivo (<code>.woff2</code>, <code>.ttf</code> ou <code>.otf</code>) em <code>assets/fonts/</code> do projeto.</li><li>Peça ao Claude: “a fonte X não aparece; confira assets/fonts e rode o preflight”.</li><li>Quem usa o terminal pode rodar <code>npm run preflight -- &lt;slug&gt;</code>, que avisa os erros de fonte mais comuns.</li></ol>
+          </div>
+        </details>
+
+        <details class="err" id="err-agente" data-busca="Agente sem sinal">
+          <summary><b>Agente sem sinal</b><small>Agente ativo agora: não (sem sinal nos últimos 90 s)</small></summary>
+          <div class="body">
+            <h5>Causas mais comuns</h5><ul><li>O computador acabou de ligar: espere 1 minuto e confira de novo.</li><li>A pasta mudou de lugar depois da instalação.</li><li>O antivírus bloqueou o arquivo de início automático.</li><li>O Node foi atualizado ou removido.</li></ul>
+            <h5>Solução</h5><ol><li>Rode <code>npm run agent:install</code> de novo: ele reinstala e liga o agente.</li><li>Confira com <code>npm run agent:status</code>.</li><li>Se continuar sem sinal, rode <code>npm run agent:check</code> e mande o resultado e o arquivo <code>.reels-engine/agente.log</code> para o Claude.</li></ol>
+          </div>
+        </details>
+
+        <details class="err" id="err-lento" data-busca="Tudo muito lento ou arquivo travado (OneDrive)">
+          <summary><b>Tudo muito lento, ou “arquivo em uso”</b><small>EBUSY · o render trava · o OneDrive não para de sincronizar</small></summary>
+          <div class="body">
+            <h5>Causa</h5><p>A pasta está dentro do OneDrive (ou outra pasta sincronizada).</p>
+            <h5>Solução</h5><ol><li>No Windows com o agente: <code>npm run agent:install -- --remover</code>.</li><li>Mova a pasta para um lugar fora da nuvem (<a href="#onde-guardar">Onde guardar</a>).</li><li>Na nova pasta: <code>npm ci</code>, <code>npm test</code> e, se for o caso, <code>npm run agent:install</code>.</li></ol>
+          </div>
+        </details>
+
+        <details class="err" id="err-studio" data-busca="O Studio não abre">
+          <summary><b>O Studio não abre no navegador</b><small>o terminal mostra “Server ready”, mas nada acontece</small></summary>
+          <div class="body">
+            <h5>Solução</h5><ol><li>Abra o navegador e digite o endereço que o terminal mostrou (normalmente <code>http://localhost:3000</code>; se essa porta estiver ocupada, ele usa outra, como <code>3001</code>).</li><li>Mantenha o terminal aberto: fechar o terminal fecha o Studio.</li></ol>
+          </div>
+        </details>
+      </section>
+
+      <!-- ============ 11 ============ -->
+      <section class="sec" id="licencas" data-titulo="Licenças" data-busca="Licenças (MIT, Remotion, músicas e fontes)">
+        <div class="sec-head"><div class="sec-num">11</div><div><h2>Licenças</h2><div class="meta"><span><svg class="ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 2 minutos de leitura</span></div></div></div>
+
+        <h3 id="licenca-motor" data-busca="Licença do motor (MIT)">O motor: licença MIT</h3>
+        <p>O Reels Engine IA é gratuito e de código aberto (licença MIT, no arquivo <code>LICENSE</code>): você pode usar, modificar e distribuir, inclusive em trabalhos comerciais, mantendo o aviso de licença.</p>
+
+        <h3 id="licenca-remotion" data-busca="Licença do Remotion">O Remotion tem licença própria</h3>
+        <p>O motor usa o <strong>Remotion</strong> para montar e renderizar os vídeos, e ele <strong>não</strong> é MIT.</p>
+        <div class="note warn" id="remotion-resumo"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17.5v.01"/></svg><div><strong class="t">Resumo — não substitui a licença oficial</strong>
+          <p>Pelo texto da licença conferido em 30/09/2026, o uso é gratuito para <strong>pessoas físicas</strong>, <strong>empresas com fins lucrativos de até 3 funcionários</strong>, <strong>organizações sem fins lucrativos</strong> e para <strong>avaliação</strong>. Empresas acima desse limite precisam comprar uma licença de empresa da Remotion.</p>
+          <p>Leia a <a href="https://www.remotion.dev/license" target="_blank" rel="noopener">licença oficial da Remotion <svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>. <strong>Em caso de dúvida, vale o texto oficial.</strong></p></div></div>
+
+        <h3 id="licenca-midia" data-busca="Músicas, fontes e imagens">Músicas, fontes, imagens e vídeos</h3>
+        <p>Tudo o que você coloca nos projetos tem a licença de quem criou. O motor <strong>não</strong> dá nenhum direito sobre isso. Antes de publicar:</p>
+        <ul>
+          <li><strong>Música:</strong> use trilhas com licença para uso comercial em redes sociais. O Instagram pode silenciar ou bloquear vídeos com música sem direitos.</li>
+          <li><strong>Fontes:</strong> confira se a licença permite uso em vídeo. A fonte do projeto de exemplo (Inter) é de licença livre (SIL OFL), com o arquivo da licença ao lado.</li>
+          <li><strong>Fotos e vídeos:</strong> só os seus, os do cliente com autorização, ou de bancos com licença.</li>
+          <li>Anote a origem de cada arquivo no <code>manifesto-de-assets.md</code> do projeto.</li>
+        </ul>
+        <p class="muted">“Claude” é marca da Anthropic. O Reels Engine IA é um projeto independente, compatível com Claude.</p>
+      </section>
+
+      <!-- ============ 12 ============ -->
+      <section class="sec" id="glossario" data-titulo="Glossário" data-busca="Glossário">
+        <div class="sec-head"><div class="sec-num">12</div><div><h2>Glossário</h2><div class="meta"><span>Em ordem alfabética, com link para onde o termo aparece</span></div></div></div>
+        <dl class="gloss">
+          <dt id="g-agente">Agente de Render</dt><dd>Programa que fica em segundo plano no Windows e gera o MP4 final quando você autoriza no Cowork. <a href="#agente">ver seção</a></dd>
+          <dt id="g-claude-code">Claude Code</dt><dd>O Claude dentro do terminal, rodando comandos direto no seu computador. <a href="#caminhos">ver seção</a></dd>
+          <dt id="g-comando">Comando</dt><dd>Uma ordem digitada no terminal, confirmada com Enter. <a href="#terminal">ver seção</a></dd>
+          <dt id="g-composicao">Composição</dt><dd>Cada vídeo dentro de um projeto, listado à esquerda no Studio. <a href="#studio">ver seção</a></dd>
+          <dt id="g-cowork">Cowork</dt><dd>Modo do app Claude para computador em que o Claude trabalha com uma pasta conectada, sem terminal. <a href="#caminhos">ver seção</a></dd>
+          <dt id="g-dependencias">Dependências</dt><dd>Programas prontos que o motor usa (como o Remotion), instalados pelo <code>npm ci</code> na pasta <code>node_modules</code>. <a href="#npm-ci">ver seção</a></dd>
+          <dt id="g-gate">Gate</dt><dd>Um ponto de aprovação: o vídeo só segue depois que você aprova. São 4. <a href="uso.html#gates">ver no Manual de Uso</a></dd>
+          <dt id="g-git">git / clone</dt><dd>Ferramenta que baixa e atualiza projetos do GitHub; clone é a cópia completa. <a href="#baixar">ver seção</a></dd>
+          <dt id="g-mp4">MP4</dt><dd>O arquivo de vídeo final, pronto para postar. <a href="#caminhos">ver seção</a></dd>
+          <dt id="g-node">Node.js</dt><dd>O programa que roda o motor. Use a versão 24. <a href="#node">ver seção</a></dd>
+          <dt id="g-npm">npm</dt><dd>O instalador que vem com o Node; também roda os comandos do motor (<code>npm run …</code>). <a href="#npm-ci">ver seção</a></dd>
+          <dt id="g-onedrive">OneDrive</dt><dd>Serviço que sincroniza pastas com a nuvem. Guarde o motor fora dele. <a href="#onde-guardar">ver seção</a></dd>
+          <dt id="g-raiz">Raiz</dt><dd>A pasta principal do projeto, a que tem o <code>package.json</code>. <a href="#raiz">ver seção</a></dd>
+          <dt id="g-remotion">Remotion</dt><dd>A biblioteca que transforma código em vídeo. Tem licença própria. <a href="#licenca-remotion">ver seção</a></dd>
+          <dt id="g-render">Render</dt><dd>A etapa em que o vídeo vira um arquivo MP4. <a href="#caminhos">ver seção</a></dd>
+          <dt id="g-slug">Slug</dt><dd>O nome curto do projeto, só com minúsculas, números e hífens. <a href="uso.html#pastas">ver no Manual de Uso</a></dd>
+          <dt id="g-smartscreen">SmartScreen</dt><dd>Aviso de segurança do Windows para arquivos baixados da internet (“O Windows protegeu o computador” ou “Abrir arquivo – Aviso de Segurança”). <a href="#agente-instalar">ver seção</a></dd>
+          <dt id="g-studio">Studio</dt><dd>A tela de pré-visualização do vídeo, no navegador. <a href="#studio">ver seção</a></dd>
+          <dt id="g-terminal">Terminal</dt><dd>Janela onde você escreve comandos. No Windows: Prompt de Comando. <a href="#terminal">ver seção</a></dd>
+          <dt id="g-zip">ZIP</dt><dd>Arquivo compactado com todas as pastas do projeto. <a href="#baixar">ver seção</a></dd>
+        </dl>
+      </section>
+
+
+    </div>
+  </main>
+</div>
+<script>// Reels Engine IA — manuais. Fonte do comportamento: edite aqui e rode "npm run manuais".
+(function(){
+  'use strict';
+  var root = document.documentElement;
+  function store(k, v){ try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k, v); }catch(e){ return null; } }
+
+  /* Tema: auto / claro / escuro */
+  var themeBtns = document.querySelectorAll('.theme button');
+  function applyTheme(t){
+    if(t==='light'||t==='dark') root.setAttribute('data-theme', t); else root.removeAttribute('data-theme');
+    themeBtns.forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.t===(t||'auto'))); });
+  }
+  applyTheme(store('re-tema') || 'auto');
+  themeBtns.forEach(function(b){ b.addEventListener('click', function(){ store('re-tema', b.dataset.t); applyTheme(b.dataset.t); }); });
+
+  /* Menu no celular */
+  var app = document.querySelector('.app');
+  document.querySelectorAll('[data-menu]').forEach(function(b){ b.addEventListener('click', function(){ app.classList.toggle('open'); }); });
+  document.querySelectorAll('.side a[href^="#"]').forEach(function(a){ a.addEventListener('click', function(){ app.classList.remove('open'); }); });
+
+  /* Índice: marca a seção visível */
+  var links = {}; document.querySelectorAll('nav.toc a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  var secs = Array.prototype.slice.call(document.querySelectorAll('section.sec[id]'));
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ Object.keys(links).forEach(function(k){ links[k].classList.toggle('on', k===e.target.id); }); } });
+    }, {rootMargin:'-20% 0px -70% 0px'});
+    secs.forEach(function(s){ io.observe(s); });
+  }
+
+  /* Copiar comando */
+  function copyText(t){
+    if(navigator.clipboard && window.isSecureContext !== false){ return navigator.clipboard.writeText(t).catch(function(){ return legacy(t); }); }
+    return Promise.resolve(legacy(t));
+  }
+  function legacy(t){ var ta=document.createElement('textarea'); ta.value=t; ta.setAttribute('readonly',''); ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); }catch(e){} document.body.removeChild(ta); }
+  document.querySelectorAll('.cmd').forEach(function(box){
+    var btn = box.querySelector('.copy'); if(!btn) return;
+    btn.addEventListener('click', function(){
+      var pre = box.querySelector('pre').cloneNode(true);
+      pre.querySelectorAll('.p,.c').forEach(function(n){ n.remove(); });
+      var text = pre.textContent.split('\n').map(function(l){ return l.replace(/\s+$/,''); }).filter(Boolean).join('\n');
+      copyText(text).then(function(){
+        var label = btn.querySelector('span'); var old = label.textContent;
+        btn.classList.add('done'); label.textContent = 'Copiado';
+        setTimeout(function(){ btn.classList.remove('done'); label.textContent = old; }, 1600);
+      });
+    });
+  });
+
+  /* Abas (sistema operacional sincronizado em todo o manual) */
+  function detectOS(){ var p=(navigator.userAgentData&&navigator.userAgentData.platform)||navigator.platform||navigator.userAgent; p=String(p).toLowerCase(); if(p.indexOf('mac')>-1) return 'mac'; if(p.indexOf('linux')>-1&&p.indexOf('android')<0) return 'linux'; return 'win'; }
+  function selectTab(group, key, save){
+    document.querySelectorAll('.tabs[data-group="'+group+'"]').forEach(function(t){
+      var has = t.querySelector('[data-key="'+key+'"]'); if(!has) return;
+      t.querySelectorAll('.tablist button').forEach(function(b){ b.setAttribute('aria-selected', String(b.dataset.key===key)); b.tabIndex = b.dataset.key===key?0:-1; });
+      t.querySelectorAll('.tabpanel').forEach(function(p){ p.hidden = p.dataset.key!==key; });
+    });
+    if(save) store('re-aba-'+group, key);
+  }
+  var groups = {};
+  document.querySelectorAll('.tabs').forEach(function(t){
+    groups[t.dataset.group]=1;
+    t.querySelectorAll('.tablist button').forEach(function(b){
+      b.addEventListener('click', function(){ selectTab(t.dataset.group, b.dataset.key, true); });
+      b.addEventListener('keydown', function(e){
+        if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft') return;
+        var bs=[].slice.call(t.querySelectorAll('.tablist button')); var i=bs.indexOf(b)+(e.key==='ArrowRight'?1:-1);
+        var n=bs[(i+bs.length)%bs.length]; n.focus(); selectTab(t.dataset.group, n.dataset.key, true);
+      });
+    });
+  });
+  Object.keys(groups).forEach(function(g){
+    var first = document.querySelector('.tabs[data-group="'+g+'"] .tablist button');
+    selectTab(g, store('re-aba-'+g) || (g==='os'?detectOS():first.dataset.key), false);
+  });
+
+  /* Busca simples: títulos e texto das seções */
+  var input = document.querySelector('.search input'), list = document.querySelector('.results');
+  var index = [];
+  document.querySelectorAll('[data-busca]').forEach(function(el){
+    var sec = el.closest('section.sec'); var title = el.getAttribute('data-busca') || el.textContent;
+    var text = '';
+    if(/^H[1-6]$/.test(el.tagName)){
+      var n = el.closest('.tools') || el; text = el.textContent; n = n.nextElementSibling;
+      while(n && !/^H[23]$/.test(n.tagName) && !n.classList.contains('tools') && !(n.querySelector && n.querySelector('h3[data-busca]'))){ text += ' ' + n.textContent; n = n.nextElementSibling; }
+    } else if(el.matches('section')){
+      var head = el.querySelector('.sec-head'); text = head ? head.textContent : '';
+    } else text = el.textContent;
+    index.push({id: el.id || (sec&&sec.id), title: title.trim(), sec: sec ? sec.getAttribute('data-titulo') : '', text: text.replace(/\s+/g,' ')});
+  });
+  function norm(s){ return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+  function esc(s){ return s.replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function snippet(text, q){
+    var i = norm(text).indexOf(q); if(i<0) return '';
+    var a = Math.max(0,i-38), b = Math.min(text.length, i+q.length+60);
+    return (a>0?'…':'') + esc(text.slice(a,i)) + '<mark>' + esc(text.slice(i,i+q.length)) + '</mark>' + esc(text.slice(i+q.length,b)) + (b<text.length?'…':'');
+  }
+  function run(){
+    var q = norm(input.value.trim()); list.innerHTML='';
+    if(q.length<2) return;
+    var hits = index.map(function(it){ var t=norm(it.title).indexOf(q)>-1, x=norm(it.text).indexOf(q)>-1; return (t||x)?{it:it,score:t?2:1}:null; }).filter(Boolean).sort(function(a,b){ return b.score-a.score; }).slice(0,8);
+    if(!hits.length){ list.innerHTML='<li class="none">Nada encontrado. Tente outra palavra (ex.: terminal, erro, fonte).</li>'; return; }
+    hits.forEach(function(h, k){
+      var li=document.createElement('li');
+      li.innerHTML='<a href="#'+h.it.id+'"'+(k===0?' class="on"':'')+'>'+esc(h.it.title)+'<small>'+(snippet(h.it.text,q)||esc(h.it.sec||''))+'</small></a>';
+      li.querySelector('a').addEventListener('click', function(){ input.value=''; list.innerHTML=''; app.classList.remove('open'); });
+      list.appendChild(li);
+    });
+  }
+  if(input){
+    input.addEventListener('input', run);
+    input.addEventListener('keydown', function(e){
+      var as=[].slice.call(list.querySelectorAll('a')); if(!as.length) return;
+      var i=as.findIndex(function(a){ return a.classList.contains('on'); });
+      if(e.key==='ArrowDown'||e.key==='ArrowUp'){ e.preventDefault(); as[i].classList.remove('on'); i=(i+(e.key==='ArrowDown'?1:-1)+as.length)%as.length; as[i].classList.add('on'); }
+      if(e.key==='Enter'){ e.preventDefault(); as[Math.max(i,0)].click(); location.hash = as[Math.max(i,0)].getAttribute('href'); }
+      if(e.key==='Escape'){ input.value=''; list.innerHTML=''; }
+    });
+    document.addEventListener('keydown', function(e){
+      var typing = /input|textarea/i.test((document.activeElement||{}).tagName||'');
+      if((e.key==='/'&&!typing) || ((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k')){ e.preventDefault(); app.classList.add('open'); input.focus(); }
+    });
+  }
+
+  /* Âncora dentro de um bloco fechado (Deu erro?): abre o bloco */
+  function openTarget(){
+    var id = decodeURIComponent(location.hash.slice(1)); if(!id) return;
+    var el = document.getElementById(id); if(!el) return;
+    var d = el.closest('details'); if(d && !d.open){ d.open = true; el.scrollIntoView(); }
+    if(el.tagName==='DETAILS'){ el.open = true; }
+  }
+  window.addEventListener('hashchange', openTarget); openTarget();
+
+  /* Checklist: lembra o que você já marcou (só neste navegador) */
+  document.querySelectorAll('.checklist input[type=checkbox]').forEach(function(cb){
+    var k = 're-check-' + cb.id;
+    if(store(k)==='1') cb.checked = true;
+    cb.addEventListener('change', function(){ store(k, cb.checked?'1':'0'); });
+  });
+
+  /* Miniaturas animadas: tocam só quando visíveis; botão pausar */
+  var thumbs = document.querySelectorAll('.thumb');
+  var playBtn = document.querySelector('[data-play]');
+  var paused = store('re-miniaturas') === 'pausa';
+  function setPaused(p){ paused=p; root.classList.toggle('thumbs-paused', p); if(playBtn){ playBtn.setAttribute('aria-pressed', String(!p)); playBtn.querySelector('span').textContent = p ? 'Animar miniaturas' : 'Pausar miniaturas'; } }
+  setPaused(paused);
+  if(playBtn) playBtn.addEventListener('click', function(){ setPaused(!paused); store('re-miniaturas', paused?'pausa':'anima'); });
+  if('IntersectionObserver' in window && thumbs.length){
+    var tio = new IntersectionObserver(function(es){ es.forEach(function(e){ e.target.classList.toggle('live', e.isIntersecting); }); }, {threshold:.2});
+    thumbs.forEach(function(t){ tio.observe(t); });
+  } else thumbs.forEach(function(t){ t.classList.add('live'); });
+})();
+</script>
+</body>
+</html>

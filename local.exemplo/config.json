@@ -1,0 +1,6 @@
+{
+  "$schema": "reels-engine.local-config/1",
+  "agente": {
+    "projetosProtegidos": []
+  }
+}

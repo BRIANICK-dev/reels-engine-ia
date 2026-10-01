@@ -1,0 +1,1543 @@
+<!doctype html>
+<!-- Gerado por "npm run manuais" a partir de manuais/fonte/. Não edite este arquivo: edite a fonte e gere de novo. -->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manual de Uso — Reels Engine IA</title>
+<meta name="description" content="Do briefing ao MP4: como criar um Reels com o Reels Engine IA e o Claude.">
+<style>/* Reels Engine IA — manuais. Fonte do estilo: edite aqui e rode "npm run manuais". */
+:root{
+  --bg:#F7F6F2; --surface:#FFFFFF; --surface-2:#EFEDE6; --ink:#17171C; --ink-2:#5A5A66; --ink-3:#8A8A95;
+  --line:#E2DFD6; --accent:#5236F0; --accent-soft:#ECE8FF; --accent-ink:#FFFFFF;
+  --ok:#1C7F47; --ok-soft:#E3F4EA; --warn:#9A5B00; --warn-soft:#FFF1D9; --err:#B8292F; --err-soft:#FDE6E6;
+  --code-bg:#16161C; --code-ink:#ECECF2; --code-dim:#8C8C9C; --code-acc:#B3A6FF;
+  --radius:14px; --radius-s:9px;
+  --sans: "Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,"SF Pro Text","Helvetica Neue",Arial,sans-serif;
+  --display: "Segoe UI Variable Display","Segoe UI",system-ui,-apple-system,"SF Pro Display","Helvetica Neue",Arial,sans-serif;
+  --mono: ui-monospace,"Cascadia Mono","Cascadia Code",Consolas,"SF Mono",Menlo,monospace;
+  --shadow: 0 1px 0 rgba(20,20,30,.04), 0 8px 24px -12px rgba(20,20,30,.18);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E0E12; --surface:#16161C; --surface-2:#1E1E26; --ink:#ECECF2; --ink-2:#A3A3B0; --ink-3:#71717E;
+    --line:#2A2A34; --accent:#9584FF; --accent-soft:#25213F; --accent-ink:#0E0E12;
+    --ok:#4FC88B; --ok-soft:#15291F; --warn:#F2AE45; --warn-soft:#2D2312; --err:#FF7272; --err-soft:#331718;
+    --code-bg:#09090C; --code-ink:#ECECF2; --code-dim:#7B7B8A; --code-acc:#B3A6FF;
+    --shadow: 0 1px 0 rgba(0,0,0,.3), 0 10px 30px -14px rgba(0,0,0,.7);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E0E12; --surface:#16161C; --surface-2:#1E1E26; --ink:#ECECF2; --ink-2:#A3A3B0; --ink-3:#71717E;
+  --line:#2A2A34; --accent:#9584FF; --accent-soft:#25213F; --accent-ink:#0E0E12;
+  --ok:#4FC88B; --ok-soft:#15291F; --warn:#F2AE45; --warn-soft:#2D2312; --err:#FF7272; --err-soft:#331718;
+  --code-bg:#09090C; --code-ink:#ECECF2; --code-dim:#7B7B8A; --code-acc:#B3A6FF;
+  --shadow: 0 1px 0 rgba(0,0,0,.3), 0 10px 30px -14px rgba(0,0,0,.7);
+  color-scheme: dark;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:24px}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+body{margin:0; background:var(--bg); color:var(--ink); font:16px/1.65 var(--sans); -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility}
+a{color:var(--accent); text-underline-offset:3px; text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+code{font:0.88em/1.4 var(--mono); background:var(--surface-2); border:1px solid var(--line); padding:.1em .38em; border-radius:6px; white-space:nowrap}
+kbd{font:600 .8em/1 var(--mono); padding:.28em .5em; border:1px solid var(--line); border-bottom-width:2px; border-radius:6px; background:var(--surface)}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:6px}
+
+/* ---------- Layout ---------- */
+.app{display:grid; grid-template-columns:292px minmax(0,1fr); min-height:100vh}
+.side{position:sticky; top:0; height:100vh; overflow:auto; border-right:1px solid var(--line); background:var(--surface); display:flex; flex-direction:column}
+.side-head{padding:22px 20px 14px}
+.brand{display:flex; gap:11px; align-items:center; text-decoration:none; color:var(--ink)}
+.brand svg{flex:none}
+.brand b{display:block; font:700 15px/1.2 var(--display); letter-spacing:-.01em}
+.brand span{display:block; font-size:12.5px; color:var(--ink-2)}
+.ver{display:inline-block; margin-top:12px; font:600 11px/1 var(--mono); color:var(--ink-2); border:1px solid var(--line); border-radius:99px; padding:5px 8px}
+.search{position:relative; margin:4px 16px 8px}
+.search input{width:100%; font:15px var(--sans); color:var(--ink); background:var(--surface-2); border:1px solid transparent; border-radius:10px; padding:10px 34px 10px 36px}
+.search input:focus{outline:none; border-color:var(--accent); background:var(--surface)}
+.search svg{position:absolute; left:11px; top:11px; color:var(--ink-3)}
+.search kbd{position:absolute; right:9px; top:9px}
+.results{margin:0 16px; padding:0; list-style:none}
+.results li a{display:block; padding:8px 10px; border-radius:8px; color:var(--ink); text-decoration:none; font-size:14px}
+.results li a:hover,.results li a.on{background:var(--accent-soft)}
+.results small{display:block; color:var(--ink-2); font-size:12.5px; line-height:1.4}
+.results mark{background:transparent; color:var(--accent); font-weight:700}
+.results .none{padding:8px 10px; color:var(--ink-2); font-size:14px}
+nav.toc{padding:6px 10px 20px; flex:1}
+nav.toc ol{list-style:none; margin:0; padding:0; counter-reset:t}
+nav.toc > ol > li > a{counter-increment:t}
+nav.toc a{display:flex; gap:10px; align-items:baseline; padding:7px 10px; border-radius:8px; color:var(--ink-2); text-decoration:none; font-size:14.5px; line-height:1.35}
+nav.toc a:hover{background:var(--surface-2); color:var(--ink)}
+nav.toc a.on{background:var(--accent-soft); color:var(--ink); font-weight:600}
+nav.toc .n{font:600 11.5px/1 var(--mono); color:var(--ink-3); min-width:18px}
+nav.toc a.on .n{color:var(--accent)}
+nav.toc .tag{margin-left:auto; font:600 10.5px/1 var(--sans); text-transform:uppercase; letter-spacing:.06em; color:var(--ink-3)}
+nav.toc .grp{margin:14px 10px 4px; font:700 11px/1 var(--sans); letter-spacing:.09em; text-transform:uppercase; color:var(--ink-3)}
+.side-foot{border-top:1px solid var(--line); padding:12px 16px 16px; display:flex; flex-direction:column; gap:10px; font-size:13.5px}
+.theme{display:flex; background:var(--surface-2); border-radius:10px; padding:3px}
+.theme button{flex:1; font:600 12.5px var(--sans); color:var(--ink-2); background:none; border:0; border-radius:8px; padding:7px 4px; cursor:pointer}
+.theme button[aria-pressed="true"]{background:var(--surface); color:var(--ink); box-shadow:var(--shadow)}
+.other{display:flex; justify-content:space-between; align-items:center; text-decoration:none; color:var(--ink); padding:9px 11px; border:1px solid var(--line); border-radius:10px}
+.other:hover{border-color:var(--accent)}
+.other small{color:var(--ink-2); display:block; font-size:12px}
+
+main{min-width:0; padding:56px clamp(16px,5vw,72px) 120px}
+.wrap{max-width:780px; margin:0 auto}
+.topbar{display:none}
+.scrim{display:none}
+
+/* ---------- Tipografia ---------- */
+.kicker{font:700 12px/1 var(--sans); letter-spacing:.12em; text-transform:uppercase; color:var(--accent)}
+h1{font:750 clamp(34px,5vw,50px)/1.05 var(--display); letter-spacing:-.025em; margin:14px 0 16px}
+h2{font:720 clamp(26px,3.4vw,34px)/1.12 var(--display); letter-spacing:-.02em; margin:0 0 12px}
+h3{font:680 20px/1.3 var(--display); letter-spacing:-.01em; margin:40px 0 10px}
+h4{font:700 15px/1.3 var(--sans); margin:22px 0 6px}
+p{margin:0 0 14px}
+.lede{font-size:19px; line-height:1.55; color:var(--ink-2); max-width:62ch}
+.muted{color:var(--ink-2)}
+section.sec{padding-top:64px; margin-top:64px; border-top:1px solid var(--line)}
+section.sec:first-of-type{border-top:0; margin-top:0; padding-top:0}
+.sec-head{display:flex; gap:16px; align-items:flex-start; margin-bottom:18px}
+.sec-num{flex:none; width:44px; height:44px; border-radius:12px; display:grid; place-items:center; font:700 17px/1 var(--mono); background:var(--ink); color:var(--bg)}
+.sec-head .meta{font-size:13.5px; color:var(--ink-2); margin-top:4px; display:flex; flex-wrap:wrap; gap:6px 14px}
+.sec-head .meta span{display:inline-flex; gap:6px; align-items:center}
+
+/* Termo explicado na primeira aparição */
+dfn{font-style:normal; font-weight:650; border-bottom:1.5px dotted var(--accent); cursor:help}
+.def{display:block; margin:6px 0 16px; padding:10px 14px; border-radius:var(--radius-s); background:var(--accent-soft); font-size:14.5px; line-height:1.55}
+.def b{color:var(--accent)}
+
+/* ---------- Passos ---------- */
+.steps{list-style:none; padding:0; margin:22px 0; counter-reset:s}
+.steps > li{position:relative; padding:0 0 26px 54px; counter-increment:s}
+.steps > li::before{content:counter(s); position:absolute; left:0; top:-2px; width:34px; height:34px; border-radius:50%; display:grid; place-items:center; font:700 15px/1 var(--mono); background:var(--accent); color:var(--accent-ink)}
+.steps > li::after{content:""; position:absolute; left:16.5px; top:38px; bottom:6px; width:1.5px; background:var(--line)}
+.steps > li:last-child::after{display:none}
+.steps > li > h4{margin:3px 0 6px; font-size:16.5px}
+
+/* ---------- Comandos ---------- */
+.cmd{margin:14px 0 18px; border-radius:var(--radius-s); background:var(--code-bg); color:var(--code-ink); overflow:hidden; box-shadow:var(--shadow)}
+.cmd-bar{display:flex; align-items:center; gap:10px; padding:8px 8px 8px 14px; border-bottom:1px solid rgba(255,255,255,.07); font:600 11.5px/1 var(--sans); letter-spacing:.04em; color:var(--code-dim); text-transform:uppercase}
+.cmd-bar .where{display:inline-flex; gap:6px; align-items:center}
+.cmd-bar .where i{width:7px; height:7px; border-radius:50%; background:var(--code-acc); display:inline-block}
+.copy{margin-left:auto; display:inline-flex; gap:6px; align-items:center; font:600 12px/1 var(--sans); color:var(--code-ink); background:rgba(255,255,255,.08); border:0; border-radius:7px; padding:7px 10px; cursor:pointer; text-transform:none; letter-spacing:0}
+.copy:hover{background:rgba(255,255,255,.16)}
+.copy.done{background:var(--ok); color:#fff}
+.cmd pre{margin:0; padding:14px 16px 16px; overflow-x:auto; font:14.5px/1.6 var(--mono)}
+.cmd pre .p{color:var(--code-dim); user-select:none}
+.cmd pre .c{color:var(--code-dim)}
+
+/* Saída do terminal (não é para copiar) */
+.out{margin:14px 0; border-radius:var(--radius-s); border:1px solid var(--line); background:var(--surface); overflow:hidden}
+.out-bar{display:flex; gap:7px; align-items:center; padding:9px 12px; background:var(--surface-2); font:600 12px/1 var(--sans); color:var(--ink-2)}
+.out-bar i{width:10px; height:10px; border-radius:50%; background:var(--line)}
+.out-bar span{margin-left:6px}
+.out pre{margin:0; padding:12px 16px 14px; font:13.5px/1.7 var(--mono); overflow-x:auto; color:var(--ink)}
+.out pre .dim{color:var(--ink-3)}
+.out pre .ok{color:var(--ok); font-weight:700}
+.out pre .bad{color:var(--err); font-weight:700}
+.out pre .hl{background:var(--accent-soft); outline:1.5px solid var(--accent); border-radius:4px; padding:0 3px}
+.out.ok{border-color:color-mix(in srgb,var(--ok) 50%,var(--line))}
+.out.bad{border-color:color-mix(in srgb,var(--err) 50%,var(--line))}
+.out.ok .out-bar{background:var(--ok-soft); color:var(--ok)}
+.out.bad .out-bar{background:var(--err-soft); color:var(--err)}
+
+/* ---------- Abas por sistema ---------- */
+.tabs{margin:18px 0}
+.tablist{display:inline-flex; gap:2px; padding:3px; background:var(--surface-2); border-radius:11px; margin-bottom:12px}
+.tablist button{font:600 13.5px var(--sans); color:var(--ink-2); background:none; border:0; border-radius:8px; padding:8px 14px; cursor:pointer}
+.tablist button[aria-selected="true"]{background:var(--surface); color:var(--ink); box-shadow:var(--shadow)}
+.tabpanel[hidden]{display:none}
+
+/* ---------- Avisos ---------- */
+.note{display:grid; grid-template-columns:28px 1fr; gap:4px 12px; margin:18px 0; padding:14px 16px; border-radius:var(--radius-s); border:1px solid var(--line); background:var(--surface); font-size:15px}
+.note > svg{margin-top:2px}
+.note p:last-child{margin-bottom:0}
+.note strong.t{display:block; margin-bottom:2px}
+.note.adv{border-style:dashed}
+.note.adv > svg{color:var(--ink-2)}
+.note.warn{background:var(--warn-soft); border-color:transparent}
+.note.warn > svg{color:var(--warn)}
+.note.ok{background:var(--ok-soft); border-color:transparent}
+.note.ok > svg{color:var(--ok)}
+.note.info{background:var(--accent-soft); border-color:transparent}
+.note.info > svg{color:var(--accent)}
+
+/* ---------- Figuras ---------- */
+figure{margin:26px 0}
+figure.wide{margin-left:clamp(-120px,-6vw,0px); margin-right:clamp(-120px,-6vw,0px)}
+.fig{border-radius:var(--radius); background:var(--surface); border:1px solid var(--line); padding:clamp(14px,3vw,28px); box-shadow:var(--shadow)}
+.fig svg{display:block; width:100%; height:auto}
+figcaption{font-size:13.5px; color:var(--ink-2); margin-top:10px; text-align:center}
+
+/* ---------- Comparação lado a lado ---------- */
+.duo{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:18px 0}
+.duo h4{margin:0 0 8px; display:flex; gap:8px; align-items:center}
+.duo .out{margin:0}
+.duo p{font-size:14.5px; margin:10px 0 0}
+
+/* ---------- Selos ---------- */
+.badge{display:inline-flex; align-items:center; gap:6px; font:700 11px/1 var(--sans); letter-spacing:.07em; text-transform:uppercase; padding:6px 9px; border-radius:99px; background:var(--surface-2); color:var(--ink-2)}
+.badge.win{background:var(--accent-soft); color:var(--accent)}
+
+/* ---------- Chips ---------- */
+.chips{display:flex; flex-wrap:wrap; gap:6px}
+.chip{font:600 12px/1 var(--sans); padding:6px 9px; border-radius:99px; background:var(--surface-2); color:var(--ink-2); white-space:nowrap}
+.chip b{color:var(--ink); font-weight:700}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 960px){
+  .app{grid-template-columns:1fr}
+  .side{position:fixed; inset:0 auto 0 0; width:min(320px,88vw); z-index:20; transform:translateX(-102%); transition:transform .25s ease; box-shadow:var(--shadow)}
+  .app.open .side{transform:none}
+  .scrim{display:block; position:fixed; inset:0; background:rgba(0,0,0,.35); z-index:15; opacity:0; pointer-events:none; transition:opacity .2s}
+  .app.open .scrim{opacity:1; pointer-events:auto}
+  .topbar{display:flex; position:sticky; top:0; z-index:10; align-items:center; gap:12px; padding:10px 16px; background:color-mix(in srgb,var(--bg) 88%,transparent); backdrop-filter:blur(10px); border-bottom:1px solid var(--line)}
+  .topbar button{display:inline-flex; align-items:center; gap:8px; font:600 14px var(--sans); color:var(--ink); background:var(--surface); border:1px solid var(--line); border-radius:9px; padding:8px 12px}
+  .topbar b{font:700 14px var(--display)}
+  main{padding:28px 16px 96px}
+  figure.wide{margin-left:0; margin-right:0}
+}
+@media (max-width: 640px){
+  .duo{grid-template-columns:1fr}
+  body{font-size:15.5px}
+  .lede{font-size:17px}
+  .steps > li{padding-left:46px}
+}
+@media print{
+  .side,.topbar,.copy,.scrim{display:none!important}
+  .app{display:block}
+  main{padding:0}
+  section.sec{break-before:page}
+  .cmd,.out{box-shadow:none}
+}
+
+/* ---------- Classes de ilustração (SVG segue o tema) ---------- */
+.f-surface{fill:var(--surface)} .f-surface2{fill:var(--surface-2)} .f-bg{fill:var(--bg)} .f-ink{fill:var(--ink)} .f-ink2{fill:var(--ink-2)} .f-ink3{fill:var(--ink-3)}
+.f-line{fill:var(--line)} .f-accent{fill:var(--accent)} .f-asoft{fill:var(--accent-soft)} .f-aink{fill:var(--accent-ink)} .f-code{fill:var(--code-bg)} .f-codeink{fill:var(--code-ink)} .f-codedim{fill:var(--code-dim)} .f-codeacc{fill:var(--code-acc)} .f-ok{fill:var(--ok)} .f-none{fill:none}
+.s-line{stroke:var(--line)} .s-accent{stroke:var(--accent)} .s-ink3{stroke:var(--ink-3)} .s-ink{stroke:var(--ink)}
+svg text{font-family:var(--sans)} svg .mono{font-family:var(--mono)}
+.caret{animation:blink 1.05s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+@media (prefers-reduced-motion: reduce){ .caret{animation:none} }
+
+/* Storyboard de passos (4 quadros) */
+.board{display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin:22px 0}
+.board .frame{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:10px 10px 12px; box-shadow:var(--shadow)}
+.board svg{display:block; width:100%; height:auto; border-radius:8px; background:var(--bg)}
+.board p{display:flex; gap:10px; align-items:flex-start; margin:12px 4px 2px; font-size:15px; line-height:1.45}
+.board p b{flex:none; width:22px; height:22px; border-radius:50%; display:grid; place-items:center; font:700 12px/1 var(--mono); background:var(--accent); color:var(--accent-ink)}
+@media (max-width:520px){ .board{grid-template-columns:1fr} }
+
+/* Mapa de etapas no topo */
+.route{display:flex; flex-wrap:wrap; gap:8px; margin:26px 0 8px; padding:0; list-style:none; counter-reset:r}
+.route li{counter-increment:r; flex:1 1 130px; display:flex; flex-direction:column; gap:2px; padding:12px 14px; border-radius:12px; background:var(--surface); border:1px solid var(--line); font-size:14px; line-height:1.35; position:relative}
+.route li::before{content:counter(r); font:700 11px/1 var(--mono); color:var(--accent)}
+.route li b{font-weight:650}
+.route li small{color:var(--ink-2); font-size:12.5px}
+.route li.here{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
+.route li.opt{border-style:dashed}
+
+/* ---------- Linguagens: cartões e miniaturas ---------- */
+.axes{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:22px 0}
+.axis{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:14px 14px 12px}
+.axis svg{display:block; width:100%; height:46px; margin-bottom:10px}
+.axis b{display:block; font:700 15px/1.2 var(--display)}
+.axis span{display:block; font-size:13px; color:var(--ink-2); line-height:1.45; margin-top:4px}
+@media (max-width:820px){ .axes{grid-template-columns:repeat(2,1fr)} }
+
+.curves{display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:10px; margin:12px 0 26px}
+.curve{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:10px 10px 9px; text-align:center}
+.curve svg{display:block; width:100%; height:auto; overflow:visible}
+.curve svg .g{stroke:var(--line)} .curve svg .k{stroke:var(--accent); fill:none; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round}
+.curve svg .dot{fill:var(--accent)}
+.curve b{display:block; font:700 12.5px/1.2 var(--sans); margin-top:6px; overflow-wrap:anywhere}
+.curve small{display:block; font-size:11.5px; color:var(--ink-2); line-height:1.35}
+@media (max-width:820px){ .curves{grid-template-columns:repeat(3,minmax(0,1fr))} }
+
+.tools{display:flex; justify-content:space-between; align-items:center; gap:12px; margin:30px 0 12px; flex-wrap:wrap}
+.tools h3{margin:0}
+.btn{display:inline-flex; gap:8px; align-items:center; font:600 13.5px var(--sans); color:var(--ink); background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:8px 12px; cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+
+.langs{display:grid; grid-template-columns:1fr; gap:14px}
+.lang{display:grid; grid-template-columns:128px 1fr; grid-template-rows:auto 1fr; gap:0 20px; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:14px; scroll-margin-top:24px}
+.lang:target{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
+.lang .thumb{grid-row:1/3}
+.thumb{width:128px; aspect-ratio:9/16; border-radius:10px; overflow:hidden; box-shadow:0 0 0 1px rgba(0,0,0,.08), 0 6px 18px -8px rgba(0,0,0,.4)}
+.thumb svg{display:block; width:100%; height:100%}
+.lang h4{margin:0 0 2px; font:700 17px/1.25 var(--display)}
+.lang .id{font:12px var(--mono); color:var(--ink-3)}
+.lang p{font-size:14px; line-height:1.5; margin:8px 0 0}
+.lang .chips{margin-top:10px}
+.lang dl{margin:12px 0 0; font-size:13.5px; line-height:1.45; display:grid; grid-template-columns:auto 1fr; gap:4px 10px}
+.lang dt{font-weight:700; color:var(--ink-2)}
+.lang dd{margin:0}
+@media (max-width:640px){ .lang{grid-template-columns:84px 1fr; gap:0 14px} .lang .thumb{grid-row:1} .thumb{width:84px} .lang .lb{grid-column:1/-1; margin-top:4px} .lang dl{grid-template-columns:1fr; gap:0} .lang dd{margin-bottom:8px} .lang p{font-size:13.5px} }
+
+/* Animações: só tocam quando visíveis (.live) e nunca com movimento reduzido */
+.thumb *{transform-box:fill-box; transform-origin:center}
+.thumb .a{animation-play-state:paused}
+.thumb.live .a{animation-play-state:running}
+.thumbs-paused .thumb .a{animation-play-state:paused!important}
+@media (prefers-reduced-motion: reduce){ .thumb .a{animation:none!important} }
+
+/* 1 editorial · suave · maskUp */
+.t-ed .a.m{animation:edMask 4s cubic-bezier(.22,1,.36,1) infinite}
+.t-ed .a.m2{animation:edMask 4s cubic-bezier(.22,1,.36,1) infinite; animation-delay:.18s}
+.t-ed .a.ph{animation:edPh 4s cubic-bezier(.22,1,.36,1) infinite}
+@keyframes edMask{0%{transform:translateY(110%)} 18%,86%{transform:none} 100%{transform:translateY(-110%)}}
+@keyframes edPh{0%{opacity:0; transform:translateX(6px)} 20%,88%{opacity:1; transform:none} 100%{opacity:0}}
+
+/* 2 elegante · cinematográfica · blurIn */
+.t-el .a.bl{animation:elBlur 6s cubic-bezier(.65,0,.35,1) infinite}
+.t-el .a.ln{animation:elLine 6s cubic-bezier(.65,0,.35,1) infinite}
+
+.t-el .a.bl,.t-el .a.ln{animation-delay:-2.6s}
+@keyframes elBlur{0%{opacity:0; filter:blur(5px)} 26%,82%{opacity:1; filter:blur(0)} 100%{opacity:0; filter:blur(3px)}}
+@keyframes elLine{0%,14%{transform:scaleX(0)} 40%,82%{transform:scaleX(1)} 100%{transform:scaleX(0)}}
+
+/* 3 tipografia cinética · seca · cortes rápidos */
+.t-tc .a.f{animation:tcCut 2.4s step-end infinite; opacity:0}
+.t-tc .a.f2{animation-delay:.8s} .t-tc .a.f3{animation-delay:1.6s}
+.t-tc .a.w{animation:tcPop 2.4s cubic-bezier(.9,0,.1,1) infinite}
+.t-tc .a.w2{animation-delay:.8s} .t-tc .a.w3{animation-delay:1.6s}
+@keyframes tcCut{0%{opacity:1} 33.33%{opacity:0} 100%{opacity:0}}
+@keyframes tcPop{0%{transform:scale(.4)} 4%,100%{transform:none}}
+
+/* 4 cinematográfico · Ken Burns lento */
+.t-ci .a.kb{animation:ciKB 9s cubic-bezier(.45,0,.55,1) infinite alternate}
+.t-ci .a.cap{animation:ciCap 9s ease infinite alternate}
+@keyframes ciKB{from{transform:scale(1)} to{transform:scale(1.16) translateX(-3%)}}
+@keyframes ciCap{0%,20%{opacity:0} 45%,100%{opacity:1}}
+
+/* 5 colagem · degraus (12 fps) · popIn */
+.t-co .a.pc{animation:coPop 3.6s steps(3,end) infinite}
+.t-co .a.pc2{animation-delay:.25s} .t-co .a.pc3{animation-delay:.5s}
+@keyframes coPop{0%{transform:scale(.3) rotate(-12deg); opacity:0} 12%,88%{transform:none; opacity:1} 100%{opacity:0}}
+
+/* 6 interface/tech · mecânica · maskLeft */
+.t-it .a.bar{animation:itBar 3.2s linear infinite}
+.t-it .a.bar2{animation-delay:.12s} .t-it .a.bar3{animation-delay:.24s} .t-it .a.bar4{animation-delay:.36s}
+.t-it .a.num{animation:itNum 3.2s linear infinite}
+@keyframes itBar{0%{transform:scaleY(0)} 14%,86%{transform:scaleY(1)} 100%{transform:scaleY(0)}}
+@keyframes itNum{0%{clip-path:inset(0 100% 0 0)} 14%,86%{clip-path:inset(0 0 0 0)} 100%{clip-path:inset(0 100% 0 0)}}
+.t-it .bar{transform-origin:bottom}
+
+/* 7 retrô · degraus · tremor de projeção */
+.t-re .a.wv{animation:reWeave .5s steps(2,end) infinite}
+.t-re .a.fl{animation:reFlick .25s steps(2,end) infinite}
+.t-re .a.ti{animation:reTitle 4s steps(4,end) infinite}
+@keyframes reWeave{0%{transform:translate(0,0)} 50%{transform:translate(.6px,-.8px)} 100%{transform:translate(-.4px,.5px)}}
+@keyframes reFlick{0%{opacity:.08} 100%{opacity:.16}}
+@keyframes reTitle{0%{opacity:0; transform:translateY(8px)} 20%,85%{opacity:1; transform:none} 100%{opacity:0}}
+
+/* 8 orgânico · degraus lento · fadeUp */
+.t-or .a.up{animation:orUp 5s steps(4,end) infinite}
+.t-or .a.up2{animation-delay:.4s} .t-or .a.up3{animation-delay:.8s}
+@keyframes orUp{0%{opacity:0; transform:translateY(10px)} 26%,86%{opacity:1; transform:none} 100%{opacity:0}}
+
+/* 9 pop colorido · elástica · popIn */
+.t-po .a.bk{animation:poPop 3s cubic-bezier(.34,1.9,.64,1) infinite}
+.t-po .a.bk2{animation-delay:.08s} .t-po .a.bk3{animation-delay:.16s} .t-po .a.bk4{animation-delay:.24s} .t-po .a.bk5{animation-delay:.4s}
+@keyframes poPop{0%{transform:scale(0)} 22%,88%{transform:scale(1)} 100%{transform:scale(0)}}
+
+/* 10 nativo de rede · seca · legendas que entram palavra a palavra */
+.t-na .a.wd{animation:naWord 3s cubic-bezier(.9,0,.1,1) infinite}
+.t-na .a.wd2{animation-delay:.35s} .t-na .a.wd3{animation-delay:.7s}
+.t-na .a.pr{animation:naProg 3s linear infinite}
+@keyframes naWord{0%{opacity:0; transform:scale(.6)} 5%,88%{opacity:1; transform:none} 100%{opacity:0}}
+@keyframes naProg{from{transform:scaleX(0)} to{transform:scaleX(1)}}
+.t-na .pr{transform-origin:left}
+@media (prefers-reduced-motion: reduce){ .t-tc .a.f{opacity:0} .t-tc .a.f:not(.f2):not(.f3){opacity:1} }
+
+
+/* ---------- Tabelas ---------- */
+.tbl{width:100%; border-collapse:separate; border-spacing:0; margin:18px 0; font-size:14.5px; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden}
+.tbl th,.tbl td{text-align:left; vertical-align:top; padding:11px 14px; border-bottom:1px solid var(--line)}
+.tbl tr:last-child td{border-bottom:0}
+.tbl th{font:700 12px/1.3 var(--sans); letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2); background:var(--surface-2)}
+.tbl td:first-child{font-weight:600}
+.tbl code{white-space:normal}
+.tbl-scroll{overflow-x:auto; margin:18px 0}
+.tbl-scroll .tbl{margin:0; min-width:560px}
+
+/* ---------- Comparação em colunas ---------- */
+.cols{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:20px 0}
+.col{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:18px 18px 8px}
+.col h4{margin:0 0 4px; font:700 18px/1.25 var(--display); display:flex; gap:10px; align-items:center}
+.col .sub{font-size:13.5px; color:var(--ink-2); margin-bottom:12px}
+.col ul{margin:0 0 12px; padding-left:18px; font-size:14.5px}
+.col li{margin:4px 0}
+.col.pick{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
+@media (max-width:720px){ .cols{grid-template-columns:1fr} }
+
+/* ---------- Árvore de pastas ---------- */
+.tree-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:18px 20px 16px; box-shadow:var(--shadow); margin:18px 0}
+.tree-card > .cap{font:700 12px/1 var(--sans); letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); margin-bottom:12px}
+.tree,.tree ul{list-style:none; margin:0; padding:0}
+.tree ul{margin-left:9px; padding-left:18px; border-left:1.5px solid var(--line)}
+.tree li{position:relative; padding:4px 0}
+.tree ul > li::before{content:""; position:absolute; left:-18px; top:17px; width:13px; border-top:1.5px solid var(--line)}
+.tree .row{display:grid; grid-template-columns:minmax(210px,max-content) 1fr; gap:2px 18px; align-items:baseline}
+.tree .nm{display:inline-flex; gap:8px; align-items:center; font:600 14px/1.5 var(--mono); color:var(--ink); white-space:nowrap}
+.tree .nm .ico{flex:none; color:var(--ink-3)}
+.tree .why{font-size:13.5px; line-height:1.5; color:var(--ink-2)}
+.tree .why b{color:var(--ink); font-weight:650}
+.tree .you > .row .nm{color:var(--accent)} .tree .you > .row .nm .ico{color:var(--accent)}
+.tree .here > .row .nm{background:var(--accent); color:var(--accent-ink); padding:1px 8px; border-radius:7px} .tree .here > .row .nm .ico{color:var(--accent-ink)}
+.tree .sys > .row .nm{color:var(--ink-2)}
+.tree .no > .row .nm{color:var(--ink-3)} .tree .no > .row .nm .ico{color:var(--warn)}
+.tree .fade > .row{opacity:.55}
+.tree .new > .row .nm::after{content:"novo"; font:700 10px/1 var(--sans); letter-spacing:.06em; text-transform:uppercase; color:var(--ok); background:var(--ok-soft); padding:3px 6px; border-radius:99px; margin-left:4px}
+.legend{display:flex; flex-wrap:wrap; gap:8px 16px; font-size:13px; color:var(--ink-2); margin:4px 0 2px}
+.legend span{display:inline-flex; gap:7px; align-items:center}
+.legend i{width:11px; height:11px; border-radius:3px; display:inline-block}
+.legend .l-you{background:var(--accent)} .legend .l-sys{background:var(--ink-2)} .legend .l-no{background:var(--warn)}
+@media (max-width:720px){ .tree .row{grid-template-columns:1fr} .tree .why{padding-left:26px} }
+
+/* Caminho até a pasta do projeto */
+.crumbs{display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin:16px 0; padding:14px 16px; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius)}
+.crumbs span{display:inline-flex; align-items:center; gap:7px; font:600 13.5px var(--mono); padding:6px 10px; border-radius:8px; background:var(--surface-2); color:var(--ink-2)}
+.crumbs span.on{background:var(--accent); color:var(--accent-ink)}
+.crumbs em{font-style:normal; color:var(--ink-3)}
+
+/* ---------- Cartões de pergunta (briefing) ---------- */
+.qs{display:grid; gap:16px; margin:22px 0; counter-reset:q}
+.q{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:18px 20px; scroll-margin-top:24px}
+.q-head{display:flex; gap:14px; align-items:flex-start}
+.q-num{flex:none; width:36px; height:36px; border-radius:10px; display:grid; place-items:center; font:700 16px/1 var(--mono); background:var(--accent); color:var(--accent-ink)}
+.q-head h4{margin:5px 0 0; font:700 17.5px/1.3 var(--display)}
+.q > p{margin:12px 0 0; font-size:15px}
+.gb{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:14px}
+.gb > div{border-radius:11px; padding:12px 14px; font-size:14.5px; line-height:1.5}
+.gb .good{background:var(--ok-soft)} .gb .bad{background:var(--err-soft)}
+.gb .lbl{display:flex; gap:6px; align-items:center; font:700 12px/1 var(--sans); letter-spacing:.06em; text-transform:uppercase; margin-bottom:7px}
+.gb .good .lbl{color:var(--ok)} .gb .bad .lbl{color:var(--err)}
+.gb blockquote{margin:0; font-weight:600; color:var(--ink)}
+.gb small{display:block; margin-top:6px; color:var(--ink-2); font-size:13px}
+.q .tip{margin-top:12px; font-size:13.5px; color:var(--ink-2); display:flex; gap:8px}
+@media (max-width:640px){ .gb{grid-template-columns:1fr} .q{padding:16px} }
+
+/* ---------- Linha de produção ---------- */
+.flow{list-style:none; margin:22px 0; padding:0; display:flex; flex-wrap:wrap; gap:8px; align-items:stretch}
+.flow li{display:flex; flex-direction:column; justify-content:center; gap:2px; padding:10px 12px; border-radius:11px; background:var(--surface); border:1px solid var(--line); font-size:13.5px; line-height:1.3; min-width:118px; flex:1 1 118px}
+.flow li small{font:600 11px/1 var(--mono); color:var(--ink-3)}
+.flow li b{font-weight:650}
+.flow li em{font-style:normal; font-size:12px; color:var(--ink-2)}
+.flow li.you{border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
+.flow li.gate{flex:0 0 auto; min-width:0; background:var(--ink); color:var(--bg); border-color:var(--ink); align-items:center; text-align:center; padding:10px 12px}
+.flow li.gate small{color:inherit; opacity:.7}
+.flow li.gate.lock{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+@media (max-width:640px){ .flow{flex-direction:column} .flow li,.flow li.gate{flex:none; align-items:flex-start; text-align:left} }
+
+/* ---------- Gates ---------- */
+.gates{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin:20px 0}
+.gate-c{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:18px; position:relative}
+.gate-c .gn{font:700 12px/1 var(--mono); color:var(--accent); letter-spacing:.06em}
+.gate-c h4{margin:6px 0 8px; font:700 19px/1.2 var(--display)}
+.gate-c p{font-size:14.5px; margin:0 0 8px}
+.gate-c .pill{display:inline-flex; gap:6px; align-items:center; font:700 11.5px/1 var(--sans); padding:6px 9px; border-radius:99px; background:var(--surface-2); color:var(--ink-2)}
+.gate-c.lock{border-color:var(--accent)}
+.gate-c.lock .pill{background:var(--accent); color:var(--accent-ink)}
+.gate-c .say{margin-top:10px; padding:9px 12px; border-radius:10px; background:var(--surface-2); font-size:14px}
+.gate-c .say b{font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:2px}
+@media (max-width:720px){ .gates{grid-template-columns:1fr} }
+
+/* ---------- Mensagem para o Claude (copiar) ---------- */
+.cmd.chat{background:var(--surface); color:var(--ink); border:1px solid var(--line)}
+.cmd.chat .cmd-bar{color:var(--ink-2); border-bottom-color:var(--line)}
+.cmd.chat .cmd-bar .where i{background:var(--accent)}
+.cmd.chat .copy{background:var(--surface-2); color:var(--ink)}
+.cmd.chat .copy:hover{background:var(--accent-soft)}
+.cmd.chat pre{font:15px/1.6 var(--sans); white-space:pre-wrap}
+
+/* ---------- Deu erro? ---------- */
+details.err{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); margin:10px 0; scroll-margin-top:24px}
+details.err > summary{list-style:none; cursor:pointer; padding:14px 18px; display:grid; grid-template-columns:1fr auto; gap:4px 12px; align-items:center}
+details.err > summary::-webkit-details-marker{display:none}
+details.err > summary b{font:700 16px/1.35 var(--display)}
+details.err > summary small{grid-column:1; font:13px/1.45 var(--mono); color:var(--err); overflow-wrap:anywhere}
+details.err > summary::after{content:"+"; grid-row:1/3; grid-column:2; font:400 22px/1 var(--sans); color:var(--ink-3); transition:transform .2s}
+details.err[open] > summary::after{transform:rotate(45deg)}
+details.err[open]{border-color:color-mix(in srgb,var(--accent) 40%,var(--line))}
+details.err .body{padding:0 18px 16px; font-size:15px}
+details.err .body h5{font:700 12px/1 var(--sans); letter-spacing:.07em; text-transform:uppercase; color:var(--ink-3); margin:14px 0 6px}
+details.err .body ol,details.err .body ul{margin:0; padding-left:20px}
+details.err .body li{margin:5px 0}
+
+/* ---------- Checklist final ---------- */
+.checklist{list-style:none; padding:0; margin:20px 0; display:grid; gap:10px}
+.checklist li{display:grid; grid-template-columns:auto 1fr auto; gap:14px; align-items:center; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:14px 16px}
+.checklist input{appearance:none; -webkit-appearance:none; width:24px; height:24px; border-radius:7px; border:2px solid var(--ink-3); display:grid; place-items:center; cursor:pointer; margin:0}
+.checklist input:checked{background:var(--ok); border-color:var(--ok)}
+.checklist input:checked::after{content:""; width:6px; height:11px; border:solid #fff; border-width:0 2.5px 2.5px 0; transform:translateY(-1px) rotate(45deg)}
+.checklist li:has(input:checked){border-color:color-mix(in srgb,var(--ok) 50%,var(--line))}
+.checklist label{cursor:pointer; font-size:15.5px; line-height:1.45}
+.checklist label small{display:block; color:var(--ink-2); font-size:13px}
+.checklist a{font-size:13.5px; white-space:nowrap; text-decoration:none; font-weight:600}
+.checklist .badge{margin-left:6px; vertical-align:2px}
+.done-all{display:none}
+.checklist:not(:has(input:not(:checked))) + .done-all{display:grid}
+@media (max-width:520px){ .checklist li{grid-template-columns:auto 1fr} .checklist a{grid-column:2} }
+
+/* ---------- Glossário ---------- */
+.gloss{display:grid; grid-template-columns:minmax(150px,max-content) 1fr; gap:0; margin:20px 0; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden}
+.gloss dt,.gloss dd{padding:12px 16px; border-bottom:1px solid var(--line); margin:0}
+.gloss dt{font-weight:700; scroll-margin-top:24px}
+.gloss dd{font-size:14.5px; color:var(--ink-2)}
+.gloss dd a{font-size:13px; white-space:nowrap}
+.gloss dt:nth-last-of-type(1),.gloss dd:last-child{border-bottom:0}
+@media (max-width:600px){ .gloss{grid-template-columns:1fr} .gloss dt{border-bottom:0; padding-bottom:0} }
+
+/* ---------- Figura do Studio e outras ilustrações ---------- */
+.illus{margin:20px 0; border-radius:var(--radius); overflow:hidden; border:1px solid var(--line); background:var(--surface); box-shadow:var(--shadow)}
+.illus svg{display:block; width:100%; height:auto}
+.illus figcaption{margin:0; padding:10px 14px; text-align:left; border-top:1px solid var(--line)}
+
+/* Etapas numeradas grandes no "primeiro vídeo" */
+.quick{list-style:none; padding:0; margin:22px 0; display:grid; gap:12px; counter-reset:k}
+.quick > li{counter-increment:k; display:grid; grid-template-columns:auto 1fr; gap:4px 16px; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:16px 18px}
+.quick > li::before{content:counter(k); grid-row:1/4; width:38px; height:38px; border-radius:11px; display:grid; place-items:center; font:700 17px/1 var(--mono); background:var(--accent); color:var(--accent-ink)}
+.quick > li > h4{margin:6px 0 2px; font-size:16.5px}
+.quick > li > p{margin:0; font-size:15px}
+.quick > li > .cmd,.quick > li > .note,.quick > li > .out{grid-column:2}
+.quick .who{display:inline-flex; gap:6px; align-items:center; font:700 11px/1 var(--sans); letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3); margin-left:8px}
+.route li a{color:var(--ink); text-decoration:none}
+.route li a::after{content:""; position:absolute; inset:0; border-radius:12px}
+.route li:hover{border-color:var(--accent)}
+.cols .tree .row{display:flex; flex-wrap:wrap; gap:0 10px; align-items:baseline}
+.cols .tree .why{padding-left:0}
+.route li{flex:1 1 96px}
+.note code,.def code,.q code,.col code{white-space:normal; overflow-wrap:anywhere}
+/* Coluna "o que é" alinhada em todos os níveis da árvore (recuo de 28,5 px por nível) */
+.tree > li > .row{grid-template-columns:minmax(370px,max-content) 1fr}
+.tree > li > ul > li > .row{grid-template-columns:minmax(341.5px,max-content) 1fr}
+.tree > li > ul > li > ul > li > .row{grid-template-columns:minmax(313px,max-content) 1fr}
+.tree > li > ul > li > ul > li > ul > li > .row{grid-template-columns:minmax(284.5px,max-content) 1fr}
+@media (max-width:900px){ .tree .row,.tree > li .row{grid-template-columns:1fr !important} .tree .why{padding-left:26px} .tree .nm{white-space:normal; overflow-wrap:anywhere} }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="scrim" data-menu></div>
+  <aside class="side" aria-label="Índice">
+    <div class="side-head">
+      <a class="brand" href="#topo"><svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="9" class="f-ink"/><rect x="11" y="6" width="12" height="22" rx="2.5" fill="none" stroke="var(--bg)" stroke-width="1.8"/><path d="M15 13.5v7l5.5-3.5z" class="f-accent"/></svg><span><b>Reels Engine IA</b><span>Manual de Uso</span></span></a>
+      <span class="ver">motor v1.0.0</span>
+    </div>
+    <div class="search" role="search">
+      <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" placeholder="Buscar no manual" aria-label="Buscar no manual" autocomplete="off">
+      <kbd>/</kbd>
+    </div>
+    <ul class="results" aria-live="polite"></ul>
+    <nav class="toc">
+      <div class="grp">Comece aqui</div>
+      <ol>
+        <li><a href="#rapido"><span class="n">1</span>Primeiro vídeo em ~15 min</a></li>
+        <li><a href="#como"><span class="n">2</span>Como funciona</a></li>
+      </ol>
+      <div class="grp">Preparar</div>
+      <ol start="3">
+        <li><a href="#pastas"><span class="n">3</span>Pastas e slug</a></li>
+        <li><a href="#briefing"><span class="n">4</span>Briefing Rápido</a></li>
+        <li><a href="#completo"><span class="n">5</span>Briefing Completo</a></li>
+      </ol>
+      <div class="grp">Criar</div>
+      <ol start="6">
+        <li><a href="#linguagens"><span class="n">6</span>Linguagens visuais</a></li>
+        <li><a href="#gates"><span class="n">7</span>Os 4 gates</a></li>
+        <li><a href="#versoes"><span class="n">8</span>Alterações e versões</a></li>
+      </ol>
+      <div class="grp">Personalizar</div>
+      <ol start="9">
+        <li><a href="#clientes"><span class="n">9</span>Clientes recorrentes</a></li>
+        <li><a href="#local"><span class="n">10</span>Camada local</a></li>
+      </ol>
+      <div class="grp">Referência</div>
+      <ol start="11">
+        <li><a href="#comandos"><span class="n">11</span>Comandos</a></li>
+        <li><a href="#glossario"><span class="n">12</span>Glossário</a></li>
+      </ol>
+    </nav>
+    <div class="side-foot">
+      <div class="theme" role="group" aria-label="Tema">
+        <button data-t="auto" aria-pressed="true">Auto</button><button data-t="light">Claro</button><button data-t="dark">Escuro</button>
+      </div>
+      <a class="other" href="implantacao.html"><span><small>Ainda não instalou?</small>Manual de Implantação</span>→</a>
+    </div>
+  </aside>
+
+  <main id="topo">
+    <div class="topbar"><button data-menu aria-label="Abrir índice"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg> Índice</button><b>Manual de Uso</b></div>
+    <div class="wrap">
+
+      <header style="margin-bottom:56px">
+        <div class="kicker">Manual de Uso</div>
+        <h1>Do briefing ao MP4</h1>
+        <p class="lede">Como pedir um Reels ao Claude, o que você aprova em cada etapa e onde o vídeo aparece no seu computador.</p>
+        <ol class="route" aria-label="Por onde começar">
+          <li><a href="#rapido"><b>Primeiro vídeo</b></a><small>pule a teoria</small></li>
+          <li><a href="#pastas"><b>Pastas e slug</b></a><small>essencial</small></li>
+          <li><a href="#briefing"><b>Briefing Rápido</b></a><small>essencial</small></li>
+          <li><a href="#gates"><b>Os 4 gates</b></a><small>o que você aprova</small></li>
+          <li><a href="#versoes"><b>Ajustes e versões</b></a><small>v01, v02…</small></li>
+        </ol>
+        <p class="muted" style="font-size:14px">Ainda não instalou o motor? Comece pelo <a href="implantacao.html">Manual de Implantação</a>.</p>
+      </header>
+
+      <!-- ============ 1 ============ -->
+      <section class="sec" id="rapido" data-titulo="Primeiro vídeo em ~15 minutos" data-busca="Primeiro vídeo em ~15 minutos">
+        <div class="sec-head"><div class="sec-num">1</div><div><h2>Primeiro vídeo em ~15 minutos</h2><div class="meta"><span><svg class="ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> ~15 minutos, com o motor já instalado</span><span><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg> Resultado: um MP4 de 15 s, só com texto</span></div></div></div>
+
+        <p>Para conhecer o caminho inteiro sem ler a teoria: um vídeo de 15 segundos só com texto e grafismo, sem fotos nem música. O tempo depende do computador e de quanto o Claude precisa ajustar, mas fica perto disso.</p>
+        <ol class="quick">
+          <li><h4>Abra o Claude <span class="who"><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg> você</span></h4><p>No <strong>Cowork</strong>, com a pasta <code>reels-engine-ia</code> conectada, ou no <strong>Claude Code</strong>, aberto na raiz. Veja <a href="implantacao.html#caminhos">Cowork ou Claude Code?</a></p></li>
+          <li><h4>Cole este pedido <span class="who"><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg> você</span></h4><p>É um briefing completo de um café fictício. Depois troque pelos dados do seu vídeo.</p>
+            <div class="cmd chat"><div class="cmd-bar"><span class="where"><i></i>Mensagem para o Claude</span><button class="copy" type="button"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h9"/></svg><span>Copiar</span></button></div>
+<pre>Crie um projeto novo: slug cafe-exemplo-abertura, cliente "Café Exemplo", projeto "Abertura", 15 segundos.
+
+Briefing Rápido:
+1. Inauguração do Café Exemplo, um café de bairro, para quem mora perto.
+2. Visitar o café.
+3. Abrimos: café fresco a dois passos de casa.
+4. 15 segundos.
+5. Textos exatos: "Abrimos", "Café Exemplo", "Rua Exemplo, 100", "Venha provar". Sem preços nem datas.
+6. Não tenho fotos nem música: só texto e grafismo.
+7. Acolhedor e simples. Linguagem visual: automático.
+8. Fazer direto e me mostrar no Studio.</pre></div></li>
+          <li><h4>O Claude monta o vídeo <span class="who"><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3M12 15h5"/></svg> Claude</span></h4><p>Cria a pasta do projeto, registra o briefing, escolhe a linguagem visual, escreve o roteiro e monta as cenas. Com “fazer direto”, ele pula as aprovações de conceito e de roteiro e avisa quando o vídeo estiver pronto para você assistir.</p></li>
+          <li><h4>Assista no Studio <span class="who"><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M10 9.5v5l4-2.5z"/></svg> você</span></h4><p>No Claude Code, ele abre o Studio para você. No Cowork, rode no terminal, na raiz:</p>
+            <div class="cmd"><div class="cmd-bar"><span class="where"><i></i>Terminal · na raiz</span><button class="copy" type="button"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h9"/></svg><span>Copiar</span></button></div>
+<pre>npm run studio -- cafe-exemplo-abertura</pre></div></li>
+          <li><h4>Aprove ou peça ajustes <span class="who"><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg> você</span></h4><p>Quer mudar algo? Diga o quê (veja <a href="#ajustes">como pedir ajustes</a>). Gostou? Escreva: <strong>“Aprovado no Studio, pode renderizar.”</strong> O Claude faz uma simulação técnica antes e só então gera o vídeo.</p></li>
+          <li><h4>Pegue o MP4 <span class="who"><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M10 9.5v5l4-2.5z"/></svg> pronto</span></h4><p>Ele aparece em <code>projects/cafe-exemplo-abertura/renders/cafe-exemplo_abertura_v01.mp4</code>. No Windows com Cowork, quem gera é o Agente de Render, sozinho. No Mac e no Linux com Cowork, o Claude pede que você rode <code>npm run render -- cafe-exemplo-abertura</code>. No Claude Code, ele mesmo roda.</p></li>
+        </ol>
+        <div class="note info"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.8.8 1 1.5 1 2.5h6c0-1 .2-1.7 1-2.5A6 6 0 0 0 12 3z"/></svg><div><strong class="t">Para os vídeos de verdade</strong><p>Leia <a href="#pastas">Pastas e slug</a> e <a href="#briefing">Briefing Rápido</a>: são as duas seções que mais fazem diferença no resultado.</p></div></div>
+      </section>
+
+      <!-- ============ 2 ============ -->
+      <section class="sec" id="como" data-titulo="Como funciona" data-busca="Como funciona (etapas)">
+        <div class="sec-head"><div class="sec-num">2</div><div><h2>Como funciona</h2><div class="meta"><span><svg class="ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 3 minutos de leitura</span></div></div></div>
+
+        <p>Cada vídeo passa pela mesma linha de produção. O Claude faz o trabalho técnico sozinho e para nos <dfn>gates</dfn>, os pontos em que a decisão é sua.</p>
+        <p class="def"><b>Gate</b> (portão, em inglês) é um ponto de aprovação: o vídeo só segue para a etapa seguinte depois que você aprova. São quatro, explicados em <a href="#gates">Os 4 gates</a>.</p>
+
+        <ol class="flow" aria-label="Linha de produção de um vídeo">
+          <li class="you"><small>00</small><b>Briefing</b><em>você responde</em></li>
+          <li><small>01</small><b>Conceito</b><em>ideia + linguagem</em></li>
+          <li class="gate"><small>GATE</small><b>1</b></li>
+          <li><small>02–03</small><b>Roteiro e storyboard</b><em>cena a cena</em></li>
+          <li class="gate"><small>GATE</small><b>2</b></li>
+          <li class="you"><small>04</small><b>Material</b><em>seus arquivos</em></li>
+          <li><small>05–06</small><b>Montagem e conferência</b><em>o Claude</em></li>
+          <li class="you"><small>07</small><b>Studio</b><em>você assiste</em></li>
+          <li class="gate lock"><small>GATE</small><b>3</b></li>
+          <li><small>08</small><b>Simulação</b><em>conferência final</em></li>
+          <li class="gate lock"><small>GATE</small><b>4</b></li>
+          <li><small>09–10</small><b>Render e entrega</b><em>o MP4</em></li>
+        </ol>
+        <div class="legend"><span><i style="background:var(--ink)"></i>gate que pode ser pulado com “fazer direto”</span><span><i style="background:var(--accent)"></i>gate que nunca é pulado</span><span><i style="border:1.5px solid var(--accent)"></i>etapa com você</span></div>
+
+        <h3 id="modos" data-busca="Modo Diretor e Modo Produção">Dois jeitos de trabalhar</h3>
+        <p>A pergunta 8 do briefing decide quanto você acompanha.</p>
+        <div class="cols">
+          <div class="col pick"><h4>Modo Diretor</h4><div class="sub">“Aprovar cada etapa” — recomendado no começo</div><ul><li>Você escolhe entre 2 ou 3 conceitos (GATE 1).</li><li>Aprova roteiro e storyboard antes da montagem (GATE 2).</li><li>Aprova no Studio e autoriza o render (GATES 3 e 4).</li></ul></div>
+          <div class="col"><h4>Modo Produção</h4><div class="sub">“Fazer direto” — quando a direção já está clara</div><ul><li>O Claude decide conceito, roteiro e storyboard e registra o motivo.</li><li>Você vê o vídeo pronto no Studio.</li><li>Aprova no Studio e autoriza o render (GATES 3 e 4), sempre.</li></ul></div>
+        </div>
+
+        <h3 id="onde-estou" data-busca="Onde está o meu projeto (status)">Onde está o meu projeto?</h3>
+        <p>Pergunte no chat: <em>“Qual a situação do projeto loja-exemplo-promo-natal?”</em>. Quem usa o terminal pode ver o mesmo relatório:</p>
+        <div class="cmd"><div class="cmd-bar"><span class="where"><i></i>Terminal · na raiz</span><button class="copy" type="button"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h9"/></svg><span>Copiar</span></button></div>
+<pre>npm run status -- loja-exemplo-promo-natal</pre></div>
+        <div class="out"><div class="out-bar"><i></i><i></i><i></i><span>O que esperar (trecho)</span></div><pre>STATUS DO PROJETO — loja-exemplo-promo-natal
+
+Etapa atual:  <span class="hl">00_BRIEFING</span> (briefing)
+Versão:       v01
+
+Aguardando:
+  → o briefing ainda está vazio — responda as 8 perguntas no arquivo
+    ou descreva o vídeo no chat
+  → colocar os arquivos do vídeo (fotos, vídeos, logo, fontes) em
+    projects/loja-exemplo-promo-natal/assets/</pre></div>
+        <div class="note info"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></svg><div><strong class="t">Quando o Claude para e pergunta</strong><p>Só quando falta algo essencial (um preço, uma data, um arquivo), quando há uma decisão criativa sua, num gate ou numa questão de licença. Problemas técnicos ele resolve sozinho e conta no relatório da etapa.</p></div></div>
+      </section>
+
+      <!-- ============ 3 ============ -->
+      <section class="sec" id="pastas" data-titulo="Pastas e slug" data-busca="Pastas e slug">
+        <div class="sec-head"><div class="sec-num">3</div><div><h2>Pastas e slug</h2><div class="meta"><span><svg class="ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 5 minutos de leitura</span><span><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg> Você vai saber onde colocar cada arquivo</span></div></div></div>
+
+        <p>Cada vídeo mora numa pasta própria dentro de <code>projects</code>. É lá que você coloca as fotos, os vídeos e o logo, e é lá que o MP4 aparece no final.</p>
+
+        <h3 id="onde-criar" data-busca="Onde fica a pasta do projeto">Onde fica a pasta do projeto</h3>
+        <div class="crumbs" aria-label="Caminho até a pasta do projeto"><span><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>reels-engine-ia</span><em>›</em><span><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>projects</span><em>›</em><span class="on"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>loja-exemplo-promo-natal</span></div>
+        <div class="note warn"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17.5v.01"/></svg><div><strong class="t">Não crie essa pasta à mão</strong><p>Peça ao Claude (“crie um projeto novo: slug loja-exemplo-promo-natal, cliente Loja Exemplo, projeto Promo Natal, 20 segundos”). Ele cria a pasta a partir do molde, com o briefing, o código e o controle de etapas. Uma pasta criada à mão fica sem tudo isso.</p></div></div>
+        <div class="note adv"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-5 4 5 4M16 8l5 4-5 4M13.5 5l-3 14"/></svg><div><strong class="t">Para quem já programa</strong><p><code>npm run new -- loja-exemplo-promo-natal --cliente "Loja Exemplo" --projeto "Promo Natal" --duracao 20</code></p></div></div>
+
+        <div class="tree-card">
+          <div class="cap">A raiz, vista de cima</div>
+          <ul class="tree">
+            <li class="sys"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>reels-engine-ia</span><span class="why">a raiz</span></div>
+              <ul>
+                <li class="sys"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>projects</span><span class="why">um vídeo por pasta</span></div>
+                  <ul>
+                    <li class="no"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>_MOLDE</span><span class="why">o modelo de todo projeto novo — <b>não mexa</b></span></div></li>
+                    <li class="sys"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>exemplo-loja-promo</span><span class="why">o exemplo que vem com o motor</span></div></li>
+                    <li class="here"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>loja-exemplo-promo-natal</span><span class="why"><b>o seu vídeo</b> (detalhado abaixo)</span></div></li>
+                  </ul></li>
+                <li class="you"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>clients</span><span class="why">fichas dos clientes recorrentes (<a href="#clientes">ver seção</a>)</span></div></li>
+                <li class="you"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>local</span><span class="why">suas regras e preferências (<a href="#local">ver seção</a>)</span></div></li>
+                <li class="no"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>docs, engine, scripts, manuais</span><span class="why">o motor — <b>não mexa</b></span></div></li>
+              </ul></li>
+          </ul>
+          <div class="legend" style="margin-top:12px"><span><i class="l-you"></i>você usa</span><span><i class="l-sys"></i>o motor ou o Claude cria</span><span><i class="l-no"></i>não mexa</span></div>
+        </div>
+
+        <h3 id="dentro-do-projeto" data-busca="Dentro da pasta do projeto (assets, fonts, referencias)">Dentro da pasta do projeto</h3>
+        <p>Veja como a pasta nasce e como fica depois de preenchida, num exemplo completo: a promoção de Natal de uma loja de roupas fictícia.</p>
+        <div class="tabs" data-group="arvore">
+          <div class="tablist" role="tablist" aria-label="Estado do projeto">
+            <button role="tab" data-key="cheio">Exemplo completo</button><button role="tab" data-key="novo">Recém-criado</button>
+          </div>
+          <div class="tabpanel" role="tabpanel" data-key="cheio">
+            <div class="tree-card">
+              <div class="cap">projects/loja-exemplo-promo-natal — pronto para produzir</div>
+              <ul class="tree">
+                <li class="here"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>loja-exemplo-promo-natal</span></div>
+                  <ul>
+                    <li class="you"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>assets</span><span class="why"><b>Tudo o que entra no vídeo</b>: vídeos, fotos, logo, música</span></div>
+                      <ul>
+                        <li><div class="row"><span class="nm"><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M10 9.5v5l4-2.5z"/></svg>vitrine-abertura.mp4</span><span class="why">vídeo do celular, em pé</span></div></li>
+                        <li><div class="row"><span class="nm"><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M10 9.5v5l4-2.5z"/></svg>detalhe-tecido.mp4</span><span class="why">vídeo curto de detalhe</span></div></li>
+                        <li><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>look-01.jpg</span><span class="why">fotos das peças, uma por arquivo</span></div></li>
+                        <li><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>look-02.jpg · look-03.jpg</span></div></li>
+                        <li><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>logo-loja-exemplo.png</span><span class="why">logo com fundo transparente</span></div></li>
+                        <li><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>trilha-natal.mp3</span><span class="why">opcional, só com licença</span></div></li>
+                        <li class="you"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>fonts</span><span class="why"><b>As fontes da marca</b>, com a licença</span></div>
+                          <ul>
+                            <li><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>MarcaSans-Bold.woff2</span></div></li>
+                            <li><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>MarcaSans-Regular.woff2</span></div></li>
+                            <li><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>LICENCA-MarcaSans.txt</span></div></li>
+                          </ul></li>
+                      </ul></li>
+                    <li class="you"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>referencias</span><span class="why"><b>Inspiração</b>: nunca entra no vídeo</span></div>
+                      <ul>
+                        <li><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>REFERENCIAS.md</span><span class="why">links e o que aproveitar de cada um</span></div></li>
+                        <li><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>print-reels-ritmo.png</span><span class="why">um Reels de que você gosta</span></div></li>
+                        <li><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>vitrine-cores.jpg</span><span class="why">paleta de cores da vitrine</span></div></li>
+                      </ul></li>
+                    <li class="sys"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>renders</span><span class="why"><b>Os MP4 finais aparecem aqui</b></span></div>
+                      <ul>
+                        <li><div class="row"><span class="nm"><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M10 9.5v5l4-2.5z"/></svg>loja-exemplo_promo-natal_v01.mp4</span><span class="why">primeira versão, criada pelo render</span></div></li>
+                        <li><div class="row"><span class="nm"><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M10 9.5v5l4-2.5z"/></svg>loja-exemplo_promo-natal_v02.mp4</span><span class="why">depois de um ajuste; a v01 continua lá</span></div></li>
+                        <li class="sys"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>_rascunhos</span><span class="why">prévias, que não contam como versão</span></div></li>
+                      </ul></li>
+                    <li class="you"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>briefing.md</span><span class="why">as 8 perguntas, respondidas</span></div></li>
+                    <li class="sys"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>storyboard.md</span><span class="why">o plano cena a cena, escrito pelo Claude</span></div></li>
+                    <li class="sys"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>manifesto-de-assets.md</span><span class="why">a lista dos seus arquivos e de onde vieram</span></div></li>
+                    <li class="sys"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>versoes.md</span><span class="why">o registro de cada versão e do que mudou</span></div></li>
+                    <li class="sys"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>project.json · project-status.json</span><span class="why">dados e etapa do projeto</span></div></li>
+                    <li class="no"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>src</span><span class="why">o código do vídeo — <b>quem mexe é o Claude</b></span></div></li>
+                  </ul></li>
+              </ul>
+              <div class="legend" style="margin-top:12px"><span><i class="l-you"></i>você coloca ou responde</span><span><i class="l-sys"></i>o motor ou o Claude cria</span><span><i class="l-no"></i>não mexa</span></div>
+            </div>
+          </div>
+          <div class="tabpanel" role="tabpanel" data-key="novo" hidden>
+            <div class="tree-card">
+              <div class="cap">projects/loja-exemplo-promo-natal — logo depois de criado</div>
+              <ul class="tree">
+                <li class="here"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>loja-exemplo-promo-natal</span></div>
+                  <ul>
+                    <li class="you"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>assets</span><span class="why">vazia: <b>coloque aqui os seus arquivos</b></span></div></li>
+                    <li class="you"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>referencias</span><span class="why">só com o <code>REFERENCIAS.md</code> em branco</span></div></li>
+                    <li class="sys"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>renders</span><span class="why">vazia até o primeiro render</span></div></li>
+                    <li class="you"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>briefing.md</span><span class="why">as 8 perguntas, <b>esperando as suas respostas</b></span></div></li>
+                    <li class="sys"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>storyboard.md · manifesto-de-assets.md · versoes.md</span><span class="why">modelos que o Claude preenche</span></div></li>
+                    <li class="sys"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>project.json · project-status.json</span><span class="why">criados pelo motor</span></div></li>
+                    <li class="no"><div class="row"><span class="nm"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>src</span><span class="why">código inicial e uma cópia do motor</span></div></li>
+                  </ul></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <h3 id="o-que-colocar" data-busca="O que colocar em cada pasta (formatos)">O que colocar em cada pasta</h3>
+        <div class="tbl-scroll"><table class="tbl">
+          <thead><tr><th>Pasta</th><th>O que colocar</th><th>Formatos e dicas</th></tr></thead>
+          <tbody>
+            <tr><td><code>assets/</code></td><td>Vídeos e fotos</td><td>Vídeo: MP4 ou MOV, de preferência em pé (vertical). Mande o arquivo original do celular ou da câmera: o que passou pelo WhatsApp perde qualidade. Foto: JPG ou PNG, com pelo menos 1080 px de largura.</td></tr>
+            <tr><td><code>assets/</code></td><td>Logo</td><td>PNG com fundo transparente, ou SVG. Evite logo dentro de uma foto ou de um print.</td></tr>
+            <tr><td><code>assets/</code></td><td>Música e narração</td><td>MP3 ou WAV, só com licença para redes sociais (veja <a href="implantacao.html#licenca-midia">Licenças</a>).</td></tr>
+            <tr><td><code>assets/fonts/</code></td><td>Fontes da marca</td><td>Arquivos <code>.woff2</code>, <code>.ttf</code> ou <code>.otf</code>, com o arquivo da licença. Ter a fonte instalada no computador não basta: o vídeo usa só o que está nesta pasta. Se ela não existir, crie.</td></tr>
+            <tr><td><code>referencias/</code></td><td>Inspiração</td><td>Prints, vídeos de referência e paletas; os links vão no <code>REFERENCIAS.md</code>, com o que aproveitar de cada um (ritmo, cor, tipografia). Nada daqui entra no vídeo.</td></tr>
+            <tr><td><code>renders/</code></td><td>Nada</td><td>O motor guarda os MP4 aqui. Não coloque nem renomeie arquivos.</td></tr>
+          </tbody>
+        </table></div>
+        <div class="note info"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.8.8 1 1.5 1 2.5h6c0-1 .2-1.7 1-2.5A6 6 0 0 0 12 3z"/></svg><div><strong class="t">Três hábitos que evitam problemas</strong>
+          <p><strong>Nomes de arquivo sem espaço e sem acento:</strong> <code>look-01.jpg</code>, e não <code>Look 01 (final).JPG</code>.<br><strong>Subpastas são permitidas</strong> dentro de <code>assets</code> (por exemplo, <code>fotos/</code> e <code>videos/</code>): o Claude encontra.<br><strong>Faça backup:</strong> <code>assets</code>, <code>referencias</code> e <code>renders</code> ficam só no seu computador.</p></div></div>
+
+        <h3 id="slug" data-busca="Slug: o nome curto do projeto">O slug</h3>
+        <p class="def"><b>Slug</b> é o nome curto do projeto. Ele vira o nome da pasta e é como você e o Claude se referem ao vídeo. Só pode ter <b>letras minúsculas, números e hífens</b>.</p>
+        <div class="chips" style="margin:6px 0 14px"><span class="chip"><b>a–z</b> minúsculas</span><span class="chip"><b>0–9</b> números</span><span class="chip"><b>-</b> hífen entre as palavras</span><span class="chip">sem espaço</span><span class="chip">sem acento ou ç</span><span class="chip">sem _ (underline)</span></div>
+        <p>Um bom padrão: <strong>cliente + assunto</strong>, com um detalhe se precisar.</p>
+        <div class="tbl-scroll"><table class="tbl">
+          <thead><tr><th>Slug</th><th></th><th>Por quê</th></tr></thead>
+          <tbody>
+            <tr><td><code>loja-exemplo-promo-natal</code></td><td style="color:var(--ok)"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></td><td>Cliente + assunto + detalhe</td></tr>
+            <tr><td><code>cafe-exemplo-abertura</code></td><td style="color:var(--ok)"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></td><td>Curto e claro</td></tr>
+            <tr><td><code>studio-exemplo-aula-experimental</code></td><td style="color:var(--ok)"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></td><td>Dá para saber o vídeo só pelo nome</td></tr>
+            <tr><td><code>Promo Natal</code></td><td style="color:var(--err)"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></svg></td><td>Tem espaço e maiúscula</td></tr>
+            <tr><td><code>promoção-natal</code></td><td style="color:var(--err)"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></svg></td><td>Tem acento e cedilha</td></tr>
+            <tr><td><code>promo_natal</code></td><td style="color:var(--err)"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></svg></td><td>Usa underline em vez de hífen</td></tr>
+            <tr><td><code>video1</code></td><td style="color:var(--err)"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></svg></td><td>Não diz de quem nem do quê</td></tr>
+            <tr><td><code>loja-exemplo-promo-natal-v2</code></td><td style="color:var(--err)"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></svg></td><td>A versão não vai no slug: o motor numera sozinho (v01, v02…)</td></tr>
+          </tbody>
+        </table></div>
+        <h4>E o nome do MP4?</h4>
+        <p>Vem do <strong>cliente</strong> e do <strong>projeto</strong> que você informou ao criar, mais a versão:</p>
+        <div class="crumbs" aria-label="Como o nome do MP4 é formado"><span>Loja Exemplo</span><em>+</em><span>Promo Natal</span><em>+</em><span>versão 1</span><em>→</em><span class="on">loja-exemplo_promo-natal_v01.mp4</span></div>
+        <p class="muted">Escolha o slug com calma: renomear a pasta depois, à mão, desliga o projeto do controle de etapas. Se precisar mudar, peça ao Claude.</p>
+      </section>
+
+      <!-- ============ 4 ============ -->
+      <section class="sec" id="briefing" data-titulo="Briefing Rápido" data-busca="Briefing Rápido (8 perguntas)">
+        <div class="sec-head"><div class="sec-num">4</div><div><h2>Briefing Rápido</h2><div class="meta"><span><svg class="ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 5 a 10 minutos para responder</span><span><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg> Resultado: o Claude entende o vídeo sem adivinhar</span></div></div></div>
+
+        <p>São 8 perguntas simples, que já vêm no <code>briefing.md</code> de todo projeto novo. Frases curtas bastam. O briefing é o que mais pesa no resultado: <strong>o Claude nunca inventa preço, data ou condição</strong>, então o que não estiver aqui ele vai perguntar.</p>
+        <div class="cols">
+          <div class="col"><h4><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg> No arquivo</h4><div class="sub"><code>projects/&lt;slug&gt;/briefing.md</code></div><ul><li>Abra com o Bloco de Notas (Windows) ou o TextEdit (Mac).</li><li>Escreva cada resposta no lugar do <code>___</code>, embaixo da pergunta.</li><li>Salve e avise o Claude no chat.</li></ul></div>
+          <div class="col"><h4><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg> No chat</h4><div class="sub">O Claude registra no arquivo</div><ul><li>Cole as respostas numeradas, de 1 a 8.</li><li>Pode responder em mais de uma mensagem.</li><li>Ele pergunta só o que for essencial e faltar.</li></ul></div>
+        </div>
+        <p class="muted">Enquanto o briefing estiver em branco, o projeto não sai da primeira etapa: o status mostra “o briefing ainda está vazio”.</p>
+
+        <div class="qs">
+          <article class="q" id="q1" data-busca="Pergunta 1: o que é o vídeo e para quem">
+            <div class="q-head"><div class="q-num">1</div><h4>O que é o vídeo e para quem?</h4></div>
+            <p>O que você está divulgando (produto, serviço, evento) e quem deve assistir.</p>
+            <div class="gb">
+              <div class="good"><div class="lbl"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg> Bom</div><blockquote>Promoção de Natal da Loja Exemplo, loja de roupas femininas. Para clientes da cidade que já seguem a loja.</blockquote></div>
+              <div class="bad"><div class="lbl"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></svg> Evite</div><blockquote>Um vídeo para o Instagram.</blockquote><small>Não diz o que é divulgado nem para quem.</small></div>
+            </div>
+          </article>
+          <article class="q" id="q2" data-busca="Pergunta 2: o que fazer depois de assistir (CTA)">
+            <div class="q-head"><div class="q-num">2</div><h4>O que a pessoa deve fazer depois de assistir?</h4></div>
+            <p>Uma ação só. Ela vira o <strong>CTA</strong>, a chamada final do vídeo, que aparece completa no último quadro.</p>
+            <div class="gb">
+              <div class="good"><div class="lbl"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg> Bom</div><blockquote>Chamar no WhatsApp para reservar a peça.</blockquote></div>
+              <div class="bad"><div class="lbl"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></svg> Evite</div><blockquote>Seguir, curtir, compartilhar, visitar o site e chamar no WhatsApp.</blockquote><small>Cinco pedidos viram nenhum: escolha um.</small></div>
+            </div>
+          </article>
+          <article class="q" id="q3" data-busca="Pergunta 3: mensagem principal">
+            <div class="q-head"><div class="q-num">3</div><h4>Qual é a mensagem principal, em uma frase?</h4></div>
+            <p>O que a pessoa precisa lembrar mesmo se só vir 3 segundos. Ela costuma virar o <strong>hook</strong>, a frase de abertura.</p>
+            <div class="gb">
+              <div class="good"><div class="lbl"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg> Bom</div><blockquote>No Natal, toda a loja com 20% de desconto.</blockquote></div>
+              <div class="bad"><div class="lbl"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></svg> Evite</div><blockquote>Mostrar a coleção nova, os descontos, o atendimento, o estacionamento e o horário especial.</blockquote><small>Isso é uma lista de assuntos. A mensagem é uma só.</small></div>
+            </div>
+          </article>
+          <article class="q" id="q4" data-busca="Pergunta 4: duração em segundos">
+            <div class="q-head"><div class="q-num">4</div><h4>Quantos segundos?</h4></div>
+            <p>Um número. Ofertas e anúncios funcionam bem entre 15 e 30 segundos; histórias e bastidores, entre 30 e 60.</p>
+            <div class="gb">
+              <div class="good"><div class="lbl"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg> Bom</div><blockquote>20 segundos.</blockquote></div>
+              <div class="bad"><div class="lbl"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></svg> Evite</div><blockquote>Curtinho.</blockquote><small>O Claude vai precisar perguntar: a duração define o número de cenas.</small></div>
+            </div>
+          </article>
+          <article class="q" id="q5" data-busca="Pergunta 5: textos obrigatórios e fatos">
+            <div class="q-head"><div class="q-num">5</div><h4>Textos obrigatórios e fatos</h4></div>
+            <p>Escreva <strong>exatamente</strong> como deve aparecer, com maiúsculas, vírgulas e símbolos. E diga o que não pode aparecer.</p>
+            <div class="gb">
+              <div class="good"><div class="lbl"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg> Bom</div><blockquote>"20% OFF em toda a loja" · "de 1 a 24 de dezembro" · "Rua Exemplo, 123". Não pode aparecer a palavra "liquidação".</blockquote></div>
+              <div class="bad"><div class="lbl"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></svg> Evite</div><blockquote>Coloca o desconto e a data.</blockquote><small>O Claude nunca inventa um número, uma data ou uma condição: ele vai parar e perguntar.</small></div>
+            </div>
+          </article>
+          <article class="q" id="q6" data-busca="Pergunta 6: material disponível">
+            <div class="q-head"><div class="q-num">6</div><h4>Que material você tem e o que falta?</h4></div>
+            <p>Liste o que você tem e coloque os arquivos em <code>assets/</code> (veja <a href="#o-que-colocar">O que colocar em cada pasta</a>). Faltou algo? Diga também: o Claude adapta o vídeo ao material.</p>
+            <div class="gb">
+              <div class="good"><div class="lbl"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg> Bom</div><blockquote>3 vídeos da vitrine (celular, em pé), 6 fotos de peças, logo em PNG transparente e a fonte da marca. Sem música.</blockquote></div>
+              <div class="bad"><div class="lbl"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></svg> Evite</div><blockquote>Tenho umas fotos aí.</blockquote><small>Sem saber o quê nem quantas, não dá para planejar as cenas.</small></div>
+            </div>
+          </article>
+          <article class="q" id="q7" data-busca="Pergunta 7: tom e referências (linguagem automática)">
+            <div class="q-head"><div class="q-num">7</div><h4>Tom e referências</h4></div>
+            <p>O clima do vídeo, em palavras, e de preferência um exemplo. Não sabe que estilo escolher? Escreva <strong>“automático”</strong>: o Claude propõe 2 ou 3 caminhos (veja <a href="#linguagens">Linguagens visuais</a>).</p>
+            <div class="gb">
+              <div class="good"><div class="lbl"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg> Bom</div><blockquote>Alegre, mas elegante, sem cara de liquidação. Gosto do ritmo deste Reels: (link). Linguagem: automático.</blockquote></div>
+              <div class="bad"><div class="lbl"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></svg> Evite</div><blockquote>Moderno e chamativo.</blockquote><small>Todo mundo quer isso. Diga o clima e mostre uma referência.</small></div>
+            </div>
+          </article>
+          <article class="q" id="q8" data-busca="Pergunta 8: aprovar cada etapa ou fazer direto">
+            <div class="q-head"><div class="q-num">8</div><h4>Quer aprovar cada etapa antes (recomendado) ou prefere que o Claude faça direto e mostre o resultado?</h4></div>
+            <p>“Aprovar cada etapa” é o <a href="#modos">Modo Diretor</a>; “fazer direto” é o Modo Produção. Em branco vale “aprovar cada etapa”.</p>
+            <div class="gb">
+              <div class="good"><div class="lbl"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg> Bom</div><blockquote>Aprovar cada etapa.</blockquote><small>Recomendado nos primeiros vídeos. Quando a direção já estiver clara: “fazer direto e me mostrar no Studio”.</small></div>
+              <div class="bad"><div class="lbl"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></svg> Evite</div><blockquote>Faz direto e já gera o MP4 sem eu ver.</blockquote><small>Não existe: a aprovação no Studio e a autorização do render são sempre suas.</small></div>
+            </div>
+          </article>
+        </div>
+
+        <h3 id="briefing-exemplo" data-busca="Exemplo de briefing completo para copiar">O exemplo inteiro, para usar de modelo</h3>
+        <div class="cmd chat"><div class="cmd-bar"><span class="where"><i></i>Mensagem para o Claude</span><button class="copy" type="button"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h9"/></svg><span>Copiar</span></button></div>
+<pre>Briefing Rápido do projeto loja-exemplo-promo-natal:
+1. Promoção de Natal da Loja Exemplo, loja de roupas femininas. Para clientes da cidade que já seguem a loja.
+2. Chamar no WhatsApp para reservar a peça.
+3. No Natal, toda a loja com 20% de desconto.
+4. 20 segundos.
+5. "20% OFF em toda a loja" · "de 1 a 24 de dezembro" · "Rua Exemplo, 123". Não pode aparecer a palavra "liquidação".
+6. 3 vídeos da vitrine (celular, em pé), 6 fotos de peças, logo em PNG transparente e a fonte da marca, já em assets. Sem música.
+7. Alegre, mas elegante, sem cara de liquidação. Linguagem: automático.
+8. Aprovar cada etapa.</pre></div>
+      </section>
+
+      <!-- ============ 5 ============ -->
+      <section class="sec" id="completo" data-titulo="Briefing Completo" data-busca="Briefing Completo">
+        <div class="sec-head"><div class="sec-num">5</div><div><h2>Briefing Completo</h2><div class="meta"><span><svg class="ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 2 minutos de leitura</span></div></div></div>
+        <p>Para quem já sabe o que quer em detalhe. Use quando o vídeo tiver muitas exigências:</p>
+        <ul>
+          <li>a marca tem manual de identidade (cores, fontes, uso do logo);</li>
+          <li>há muito texto obrigatório, legendas ou narração;</li>
+          <li>o trabalho é de agência, com aprovação do cliente final.</li>
+        </ul>
+        <p>Ele está em <code>docs/02-BRIEFING.md</code>, na parte “Briefing Completo”, dividido em blocos:</p>
+        <div class="chips" style="margin:10px 0 16px"><span class="chip">Identificação</span><span class="chip">Objetivo</span><span class="chip">Conceito</span><span class="chip">Formato</span><span class="chip">Texto</span><span class="chip">Assets</span><span class="chip">Áudio</span><span class="chip">Legendas</span><span class="chip">Identidade</span><span class="chip">Referência</span><span class="chip">Restrições</span><span class="chip">Execução</span></div>
+        <ol class="steps">
+          <li><h4>Responda primeiro as 8 perguntas do Briefing Rápido</h4><p>Elas continuam valendo como base.</p></li>
+          <li><h4>Copie só os blocos de que precisar</h4><p>Cole no fim do <code>briefing.md</code> do projeto, ou mande no chat. Campos que não se aplicam podem ficar em branco.</p></li>
+        </ol>
+      </section>
+
+      <!-- ============ 6 ============ -->
+      <section class="sec" id="linguagens" data-titulo="Linguagens visuais" data-busca="Linguagens visuais">
+        <div class="sec-head"><div class="sec-num">6</div><div>
+          <h2>Linguagens visuais</h2>
+          <div class="meta"><span><svg class="ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 6 minutos de leitura</span><span><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg> Você vai saber escolher (ou deixar o Claude escolher)</span></div>
+        </div></div>
+
+        <p>Se todo vídeo usa o mesmo ritmo, o mesmo layout e o mesmo jeito de se mexer, todos parecem o mesmo vídeo. Por isso, cada Reels escolhe uma <dfn>linguagem visual</dfn> antes de começar.</p>
+        <p class="def"><b>Linguagem visual</b> é um pacote de decisões de design que andam juntas: quanto tempo cada cena dura, onde as coisas ficam na tela, a textura da imagem e o jeito de tudo se mexer. O motor tem 10 linguagens prontas.</p>
+
+        <div class="note info"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></svg><div><strong class="t">Não precisa decorar nada disso.</strong><p>Na <a href="#q7">pergunta 7 do briefing</a>, responda <strong>“automático”</strong>: o Claude propõe 2 ou 3 caminhos com linguagens diferentes, cada um com uma frase explicando a ideia, e você escolhe.</p></div></div>
+
+        <h3 id="eixos" data-busca="Os 4 eixos de uma linguagem">O que muda de uma linguagem para outra</h3>
+        <p>Toda linguagem é definida por quatro escolhas. Duas linguagens do catálogo nunca coincidem em mais de duas delas: é isso que garante que pareçam vídeos diferentes, e não variações do mesmo.</p>
+        <div class="axes">
+          <div class="axis">
+            <svg viewBox="0 0 160 46" aria-hidden="true">
+              <g class="f-ink3"><rect x="0" y="4" width="76" height="9" rx="2"/><rect x="80" y="4" width="80" height="9" rx="2"/></g>
+              <g class="f-ink2"><rect x="0" y="18" width="37" height="9" rx="2"/><rect x="41" y="18" width="37" height="9" rx="2"/><rect x="82" y="18" width="37" height="9" rx="2"/><rect x="123" y="18" width="37" height="9" rx="2"/></g>
+              <g class="f-accent"><rect x="0" y="32" width="17" height="9" rx="2"/><rect x="20.5" y="32" width="17" height="9" rx="2"/><rect x="41" y="32" width="17" height="9" rx="2"/><rect x="61.5" y="32" width="17" height="9" rx="2"/><rect x="82" y="32" width="17" height="9" rx="2"/><rect x="102.5" y="32" width="17" height="9" rx="2"/><rect x="123" y="32" width="17" height="9" rx="2"/><rect x="143.5" y="32" width="16.5" height="9" rx="2"/></g>
+            </svg>
+            <b>Ritmo</b><span>Quanto tempo cada cena fica na tela: lento, médio ou rápido.</span>
+          </div>
+          <div class="axis">
+            <svg viewBox="0 0 160 46" aria-hidden="true">
+              <g class="f-none s-line" stroke-width="1.2"><rect x="8" y="2" width="24" height="42" rx="3"/><rect x="48" y="2" width="24" height="42" rx="3"/><rect x="88" y="2" width="24" height="42" rx="3"/><rect x="128" y="2" width="24" height="42" rx="3"/></g>
+              <rect x="13" y="17" width="14" height="12" rx="1.5" class="f-accent"/>
+              <rect x="51" y="6" width="12" height="14" rx="1.5" class="f-accent"/><rect x="51" y="33" width="16" height="3" rx="1" class="f-ink2"/>
+              <g class="f-accent"><rect x="91" y="6" width="8.5" height="10" rx="1.2"/><rect x="100.5" y="6" width="8.5" height="10" rx="1.2"/><rect x="91" y="18" width="8.5" height="10" rx="1.2"/><rect x="100.5" y="18" width="8.5" height="10" rx="1.2"/></g>
+              <rect x="128" y="2" width="24" height="42" rx="3" class="f-accent"/>
+            </svg>
+            <b>Layout</b><span>Onde as coisas ficam: centralizado, assimétrico, em grade ou tela cheia.</span>
+          </div>
+          <div class="axis">
+            <svg viewBox="0 0 160 46" aria-hidden="true">
+              <defs><pattern id="ax-dots" width="4" height="4" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".7" class="f-ink2"/><circle cx="3" cy="3" r=".5" class="f-ink3"/></pattern></defs>
+              <rect x="6" y="5" width="36" height="36" rx="4" class="f-surface2 s-line"/>
+              <rect x="62" y="5" width="36" height="36" rx="4" fill="url(#ax-dots)" class="s-line"/>
+              <g transform="rotate(-8 136 23)"><rect x="121" y="12" width="32" height="22" class="f-ink" transform="translate(2.5 2.5)"/><rect x="121" y="12" width="32" height="22" class="f-accent"/></g>
+            </svg>
+            <b>Textura</b><span>A superfície da imagem: limpa, granulada (grão de filme) ou recortada (papel).</span>
+          </div>
+          <div class="axis">
+            <svg viewBox="0 0 160 46" aria-hidden="true">
+              <line x1="4" y1="42" x2="156" y2="42" class="s-line" stroke-width="1"/>
+              <path d="M6 40 C60 40, 70 6, 152 6" class="s-accent" fill="none" stroke-width="2.4" stroke-linecap="round"/>
+              <circle cx="152" cy="6" r="3.5" class="f-accent"/>
+            </svg>
+            <b>Movimento</b><span>O jeito de tudo se mexer no vídeo. São 6 personalidades:</span>
+          </div>
+        </div>
+
+        <div class="curves" aria-label="As 6 personalidades de movimento">
+          <div class="curve"><svg viewBox="0 0 80 50" aria-hidden="true"><path class="g" d="M4 46H76"/><path class="k" d="M6 44 C18 8, 38 6, 74 6"/><circle class="dot" cx="74" cy="6" r="2.6"/></svg><b>suave</b><small>desacelera com calma</small></div>
+          <div class="curve"><svg viewBox="0 0 80 50" aria-hidden="true"><path class="g" d="M4 46H76 M4 6H76" stroke-dasharray="2 3"/><path class="k" d="M6 44 C16 -10, 32 -4, 44 2 C52 6, 60 8, 74 6"/><circle class="dot" cx="74" cy="6" r="2.6"/></svg><b>elástica</b><small>passa do ponto e volta</small></div>
+          <div class="curve"><svg viewBox="0 0 80 50" aria-hidden="true"><path class="g" d="M4 46H76"/><path class="k" d="M6 44 C9 10, 12 6, 20 6 L74 6"/><circle class="dot" cx="74" cy="6" r="2.6"/></svg><b>seca</b><small>arranca e para firme</small></div>
+          <div class="curve"><svg viewBox="0 0 80 50" aria-hidden="true"><path class="g" d="M4 46H76"/><path class="k" d="M6 44 C44 44, 36 6, 74 6"/><circle class="dot" cx="74" cy="6" r="2.6"/></svg><b>cinemato&shy;gráfica</b><small>longa e elegante</small></div>
+          <div class="curve"><svg viewBox="0 0 80 50" aria-hidden="true"><path class="g" d="M4 46H76"/><path class="k" d="M6 44 L62 6 L74 6"/><circle class="dot" cx="74" cy="6" r="2.6"/></svg><b>mecânica</b><small>velocidade constante</small></div>
+          <div class="curve"><svg viewBox="0 0 80 50" aria-hidden="true"><path class="g" d="M4 46H76"/><path class="k" d="M6 44 H18 V35 H30 V26 H42 V16 H54 V6 H74"/><circle class="dot" cx="74" cy="6" r="2.6"/></svg><b>degraus</b><small>quadro a quadro</small></div>
+        </div>
+
+        <div class="tools">
+          <h3 id="catalogo" data-busca="Catálogo das 10 linguagens">As 10 linguagens</h3>
+          <button class="btn" type="button" data-play aria-pressed="true"><svg class="ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><span>Pausar miniaturas</span></button>
+        </div>
+        <p class="muted" style="margin-top:0">Cada miniatura imita o ritmo e o movimento da linguagem. São ilustrações: o vídeo de verdade usa os seus textos, cores e imagens.</p>
+        <div class="langs">
+          <article class="lang" id="lang-editorial-minimalista" data-busca="Editorial minimalista">
+            <div class="thumb t-ed"><svg viewBox="0 0 90 160" role="img" aria-label="Miniatura ilustrativa: Editorial minimalista"><rect width="90" height="160" fill="#F3F0E9"/>
+<g class="a ph"><rect x="38" y="14" width="44" height="66" fill="#D2CABB"/><path d="M38 80 L56 56 L66 66 L74 58 L82 68 L82 80Z" fill="#B9AF9C"/><circle cx="72" cy="30" r="5" fill="#E9E2D4"/></g>
+<text x="8" y="20" font-size="5.5" fill="#7B7468" font-weight="600" letter-spacing=".5">N.º 03</text>
+<line x1="8" y1="92" x2="30" y2="92" stroke="#1E1C19" stroke-width=".6"/>
+<clipPath id="ed-c1"><rect x="6" y="96" width="70" height="12"/></clipPath>
+<clipPath id="ed-c2"><rect x="6" y="108" width="70" height="12"/></clipPath>
+<g clip-path="url(#ed-c1)"><text class="a m" x="8" y="106" font-size="10" fill="#1E1C19" font-weight="500">Coleção</text></g>
+<g clip-path="url(#ed-c2)"><text class="a m2" x="8" y="118" font-size="10" fill="#1E1C19" font-weight="500">de verão</text></g>
+<rect x="8" y="128" width="34" height="2" fill="#A39C8F"/><rect x="8" y="133" width="26" height="2" fill="#A39C8F"/>
+<rect x="76" y="140" width="6" height="6" fill="#C2522D"/></svg></div>
+            <div class="lh">
+              <h4>Editorial minimalista</h4><span class="id">editorial-minimalista</span>
+              <p>Página de revista em movimento: muito respiro, texto contido e preciso, composição fora do centro.</p>
+            </div>
+            <div class="lb">
+              <div class="chips"><span class="chip">ritmo <b>médio</b></span><span class="chip">layout <b>assimétrico</b></span><span class="chip">textura <b>limpa</b></span><span class="chip">movimento <b>suave</b></span></div>
+              <dl><dt>Bom para</dt><dd>Marcas de design, moda, arquitetura, produtos com boa fotografia; mensagens curtas que ganham peso com o silêncio visual.</dd><dt>Evite</dt><dd>Ofertas com muita informação, público que precisa de impacto imediato, material visual fraco.</dd><dt>Cortes</dt><dd>de 1,5 a 2,5 s por cena</dd></dl>
+            </div>
+          </article>
+          <article class="lang" id="lang-elegante-premium" data-busca="Elegante / premium">
+            <div class="thumb t-el"><svg viewBox="0 0 90 160" role="img" aria-label="Miniatura ilustrativa: Elegante / premium"><defs><radialGradient id="el-g" cx="50%" cy="45%" r="70%"><stop offset="0" stop-color="#2A2420"/><stop offset="1" stop-color="#0B0A09"/></radialGradient><filter id="gr-el" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.1 0"/></filter></defs>
+<rect width="90" height="160" fill="url(#el-g)"/>
+<rect width="90" height="160" filter="url(#gr-el)"/>
+<g class="a bl"><text x="45" y="76" font-size="7.4" fill="#EEE7DB" font-weight="300" text-anchor="middle" letter-spacing="2.6">ATELIÊ</text>
+<text x="45" y="88" font-size="4.2" fill="#B9AE9C" text-anchor="middle" letter-spacing="1.6">EDIÇÃO LIMITADA</text></g>
+<rect class="a ln" x="35" y="94" width="20" height=".7" fill="#C2A26E"/></svg></div>
+            <div class="lh">
+              <h4>Elegante / premium</h4><span class="id">elegante-premium</span>
+              <p>Luxo silencioso: tudo centralizado, lento e simétrico, com letras espaçadas e fundo escuro.</p>
+            </div>
+            <div class="lb">
+              <div class="chips"><span class="chip">ritmo <b>lento</b></span><span class="chip">layout <b>centralizado</b></span><span class="chip">textura <b>limpa</b></span><span class="chip">movimento <b>cinematográfica</b></span></div>
+              <dl><dt>Bom para</dt><dd>Produtos e serviços de alto valor, lançamentos exclusivos, experiências, joias, gastronomia sofisticada.</dd><dt>Evite</dt><dd>Promoção de preço, público jovem que espera energia, conteúdo informativo denso.</dd><dt>Cortes</dt><dd>de 2,5 a 4,5 s por cena</dd></dl>
+            </div>
+          </article>
+          <article class="lang" id="lang-tipografia-cinetica" data-busca="Tipografia cinética">
+            <div class="thumb t-tc"><svg viewBox="0 0 90 160" role="img" aria-label="Miniatura ilustrativa: Tipografia cinética"><rect width="90" height="160" fill="#111"/>
+<g class="a f"><rect width="90" height="160" fill="#FFD400"/><text class="a w" x="45" y="92" font-size="40" font-weight="900" text-anchor="middle" fill="#111">SÓ</text></g>
+<g class="a f f2"><rect width="90" height="160" fill="#111"/><text class="a w w2" x="45" y="89" font-size="27" font-weight="900" text-anchor="middle" fill="#FFD400" textLength="74" lengthAdjust="spacingAndGlyphs">HOJE</text></g>
+<g class="a f f3"><rect width="90" height="160" fill="#FFD400"/><text class="a w w3" x="45" y="88" font-size="21" font-weight="900" text-anchor="middle" fill="#111" textLength="76" lengthAdjust="spacingAndGlyphs">AGORA</text></g></svg></div>
+            <div class="lh">
+              <h4>Tipografia cinética</h4><span class="id">tipografia-cinetica</span>
+              <p>A palavra é a imagem: texto enorme, uma ou duas palavras por vez, cortes rápidos e secos.</p>
+            </div>
+            <div class="lb">
+              <div class="chips"><span class="chip">ritmo <b>rápido</b></span><span class="chip">layout <b>centralizado</b></span><span class="chip">textura <b>limpa</b></span><span class="chip">movimento <b>seca</b></span></div>
+              <dl><dt>Bom para</dt><dd>Anúncios, chamadas, lançamentos, frases de efeito, vídeos sem bom material de imagem.</dd><dt>Evite</dt><dd>Mensagens longas, público mais velho que lê devagar, marcas que pedem calma.</dd><dt>Cortes</dt><dd>de 0,4 a 1 s por cena</dd></dl>
+            </div>
+          </article>
+          <article class="lang" id="lang-cinematografico-documental" data-busca="Cinematográfico / documental">
+            <div class="thumb t-ci"><svg viewBox="0 0 90 160" role="img" aria-label="Miniatura ilustrativa: Cinematográfico / documental"><defs><linearGradient id="ci-s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6F7FA6"/><stop offset=".55" stop-color="#E7A97A"/><stop offset="1" stop-color="#F2C79A"/></linearGradient>
+<linearGradient id="ci-sc" x1="0" y1="0" x2="0" y2="1"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".65"/></linearGradient><filter id="gr-ci" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.14 0"/></filter></defs>
+<g class="a kb"><rect width="90" height="160" fill="url(#ci-s)"/><circle cx="58" cy="76" r="9" fill="#FBE2BE"/>
+<path d="M0 98 L22 74 L38 90 L55 68 L90 100 L90 160 L0 160Z" fill="#4A4F66"/><path d="M0 116 L30 96 L52 112 L72 98 L90 110 L90 160 L0 160Z" fill="#2B2E3D"/></g>
+<rect width="90" height="160" fill="url(#ci-sc)"/>
+<rect width="90" height="160" filter="url(#gr-ci)"/>
+<text class="a cap" x="45" y="142" font-size="5.6" fill="#F4EFE8" text-anchor="middle">o caminho até lá</text></svg></div>
+            <div class="lh">
+              <h4>Cinematográfico / documental</h4><span class="id">cinematografico-documental</span>
+              <p>A imagem conta a história: planos em tela cheia, movimento lento de câmera, texto mínimo sobre a imagem.</p>
+            </div>
+            <div class="lb">
+              <div class="chips"><span class="chip">ritmo <b>lento</b></span><span class="chip">layout <b>tela cheia</b></span><span class="chip">textura <b>granulada</b></span><span class="chip">movimento <b>cinematográfica</b></span></div>
+              <dl><dt>Bom para</dt><dd>Lugares, experiências, bastidores, histórias reais; quando há bons vídeos ou fotos.</dd><dt>Evite</dt><dd>Não há material visual de qualidade; a mensagem depende de muito texto.</dd><dt>Cortes</dt><dd>de 2,5 a 4,5 s por cena</dd></dl>
+            </div>
+          </article>
+          <article class="lang" id="lang-colagem-recorte" data-busca="Colagem / recorte">
+            <div class="thumb t-co"><svg viewBox="0 0 90 160" role="img" aria-label="Miniatura ilustrativa: Colagem / recorte"><defs><filter id="gr-co" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.22 0"/></filter></defs>
+<rect width="90" height="160" fill="#EFE5CF"/>
+<rect width="90" height="160" filter="url(#gr-co)"/>
+<g class="a pc"><g transform="rotate(-6 45 52)"><rect x="17" y="40" width="58" height="26" fill="#1C1A17" transform="translate(2.5 2.5)"/><rect x="17" y="40" width="58" height="26" fill="#D9482B"/><text x="46" y="59" font-size="14" font-weight="900" text-anchor="middle" fill="#FFF6E6" textLength="44" lengthAdjust="spacingAndGlyphs">NOVO</text></g></g>
+<g class="a pc pc2"><g transform="rotate(4 40 88)"><rect x="10" y="78" width="60" height="20" fill="#1C1A17" transform="translate(2.5 2.5)"/><rect x="10" y="78" width="60" height="20" fill="#2F7F79"/><text x="40" y="92" font-size="9" font-weight="800" text-anchor="middle" fill="#FFF6E6" textLength="48" lengthAdjust="spacingAndGlyphs">no sábado</text></g></g>
+<g class="a pc pc3"><g transform="rotate(-3 52 120)"><rect x="26" y="110" width="52" height="20" fill="#1C1A17" transform="translate(2.5 2.5)"/><rect x="26" y="110" width="52" height="20" fill="#E8B526"/><text x="52" y="124" font-size="8.5" font-weight="800" text-anchor="middle" fill="#1C1A17" textLength="42" lengthAdjust="spacingAndGlyphs">VENHA VER</text></g></g></svg></div>
+            <div class="lh">
+              <h4>Colagem / recorte</h4><span class="id">colagem-recorte</span>
+              <p>Papel recortado e colado: peças tortas, sombras duras, movimento quadro a quadro.</p>
+            </div>
+            <div class="lb">
+              <div class="chips"><span class="chip">ritmo <b>médio</b></span><span class="chip">layout <b>assimétrico</b></span><span class="chip">textura <b>recortada</b></span><span class="chip">movimento <b>degraus</b></span></div>
+              <dl><dt>Bom para</dt><dd>Marcas criativas, público jovem, conteúdo leve, eventos culturais, moda de rua.</dd><dt>Evite</dt><dd>Marcas corporativas sóbrias, temas sensíveis, luxo.</dd><dt>Cortes</dt><dd>de 1,2 a 2,2 s por cena</dd></dl>
+            </div>
+          </article>
+          <article class="lang" id="lang-interface-tech" data-busca="Interface / tech">
+            <div class="thumb t-it"><svg viewBox="0 0 90 160" role="img" aria-label="Miniatura ilustrativa: Interface / tech"><rect width="90" height="160" fill="#0C1016"/>
+<g stroke="#1B2430" stroke-width=".5"><line x1="15" y1="0" x2="15" y2="160"/><line x1="45" y1="0" x2="45" y2="160"/><line x1="75" y1="0" x2="75" y2="160"/><line x1="0" y1="30" x2="90" y2="30"/><line x1="0" y1="70" x2="90" y2="70"/><line x1="0" y1="110" x2="90" y2="110"/><line x1="0" y1="140" x2="90" y2="140"/></g>
+<text x="10" y="24" font-size="4.6" fill="#7F8EA3" letter-spacing=".9" font-weight="700" textLength="68" lengthAdjust="spacingAndGlyphs">TEMPO DE RESPOSTA</text>
+<g class="a num"><text x="9" y="58" font-size="25" font-weight="800" fill="#4DE1A4" textLength="64" lengthAdjust="spacingAndGlyphs">-42%</text></g>
+<rect class="a bar" x="14" y="98" width="10" height="38" fill="#2A3A4E"/>
+<rect class="a bar bar2" x="30" y="108" width="10" height="28" fill="#2A3A4E"/>
+<rect class="a bar bar3" x="46" y="116" width="10" height="20" fill="#2A3A4E"/>
+<rect class="a bar bar4" x="62" y="122" width="10" height="14" fill="#4DE1A4"/>
+<rect x="10" y="146" width="22" height="6" rx="1" fill="none" stroke="#4DE1A4" stroke-width=".6"/><text x="21" y="150.6" font-size="3.6" fill="#4DE1A4" text-anchor="middle" font-weight="700">V2.0</text></svg></div>
+            <div class="lh">
+              <h4>Interface / tech</h4><span class="id">interface-tech</span>
+              <p>Tela de sistema: grade visível, blocos que entram com precisão mecânica, dados e rótulos.</p>
+            </div>
+            <div class="lb">
+              <div class="chips"><span class="chip">ritmo <b>rápido</b></span><span class="chip">layout <b>grade</b></span><span class="chip">textura <b>limpa</b></span><span class="chip">movimento <b>mecânica</b></span></div>
+              <dl><dt>Bom para</dt><dd>Tecnologia, apps, serviços digitais, números e comparativos, processos passo a passo.</dd><dt>Evite</dt><dd>Temas afetivos, natureza, artesanato.</dd><dt>Cortes</dt><dd>de 0,6 a 1,2 s por cena</dd></dl>
+            </div>
+          </article>
+          <article class="lang" id="lang-retro-filme" data-busca="Retrô / filme">
+            <div class="thumb t-re"><svg viewBox="0 0 90 160" role="img" aria-label="Miniatura ilustrativa: Retrô / filme"><defs><linearGradient id="re-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C79A6C"/><stop offset="1" stop-color="#5E3F2B"/></linearGradient>
+<radialGradient id="re-v" cx="50%" cy="50%" r="75%"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#1A0E06" stop-opacity=".75"/></radialGradient><filter id="gr-re" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.3 0"/></filter></defs>
+<g class="a wv"><rect x="-2" y="-2" width="94" height="164" fill="url(#re-g)"/>
+<circle cx="45" cy="62" r="22" fill="#E5C595" opacity=".55"/><path d="M-2 108 Q25 92 45 104 T92 98 L92 162 L-2 162Z" fill="#3F2A1D" opacity=".85"/>
+<g class="a ti"><text x="45" y="134" font-size="11" font-weight="900" text-anchor="middle" fill="#F3E3C3" letter-spacing="1">DESDE</text><text x="45" y="146" font-size="8" font-weight="800" text-anchor="middle" fill="#F3E3C3" letter-spacing="2.5">SEMPRE</text></g></g>
+<rect width="90" height="160" fill="url(#re-v)"/>
+<rect width="90" height="160" filter="url(#gr-re)"/>
+<rect class="a fl" width="90" height="160" fill="#FFF3DA"/></svg></div>
+            <div class="lh">
+              <h4>Retrô / filme</h4><span class="id">retro-filme</span>
+              <p>Filme antigo: grão, tela cheia, cadência quadro a quadro e dissolves de projeção.</p>
+            </div>
+            <div class="lb">
+              <div class="chips"><span class="chip">ritmo <b>médio</b></span><span class="chip">layout <b>tela cheia</b></span><span class="chip">textura <b>granulada</b></span><span class="chip">movimento <b>degraus</b></span></div>
+              <dl><dt>Bom para</dt><dd>Nostalgia, marcas tradicionais, aniversários, lançamentos com apelo afetivo.</dd><dt>Evite</dt><dd>Tecnologia de ponta, mensagens de urgência, marcas que querem parecer novas.</dd><dt>Cortes</dt><dd>de 1,2 a 2,5 s por cena</dd></dl>
+            </div>
+          </article>
+          <article class="lang" id="lang-organico-feito-a-mao" data-busca="Orgânico / feito à mão">
+            <div class="thumb t-or"><svg viewBox="0 0 90 160" role="img" aria-label="Miniatura ilustrativa: Orgânico / feito à mão"><defs><filter id="gr-or" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.2 0"/></filter></defs>
+<rect width="90" height="160" fill="#EBE1CE"/>
+<rect width="90" height="160" filter="url(#gr-or)"/>
+<g class="a up"><path d="M58 30 C74 26 84 44 78 58 C72 72 52 74 46 60 C40 46 44 34 58 30Z" fill="#C9774E"/></g>
+<g class="a up up2"><path d="M18 74 C30 56 46 62 44 76 C42 88 30 98 20 94 C12 90 12 82 18 74Z" fill="#7C8C5B"/><path d="M22 92 Q30 80 40 70" stroke="#56633D" stroke-width=".8" fill="none"/></g>
+<g class="a up up3"><text x="12" y="124" font-size="9.5" fill="#3E3428" font-weight="600">feito</text><text x="24" y="136" font-size="9.5" fill="#3E3428" font-weight="600">à mão</text>
+<path d="M22 140 Q38 144 56 139" stroke="#C9774E" stroke-width="1.2" fill="none" stroke-linecap="round"/></g></svg></div>
+            <div class="lh">
+              <h4>Orgânico / feito à mão</h4><span class="id">organico-feito-a-mao</span>
+              <p>Calmo e artesanal: papel com grão, elementos soltos fora do centro, movimento quadro a quadro lento.</p>
+            </div>
+            <div class="lb">
+              <div class="chips"><span class="chip">ritmo <b>lento</b></span><span class="chip">layout <b>assimétrico</b></span><span class="chip">textura <b>granulada</b></span><span class="chip">movimento <b>degraus</b></span></div>
+              <dl><dt>Bom para</dt><dd>Produtos artesanais, alimentação natural, bem-estar, educação infantil, pequenos negócios locais.</dd><dt>Evite</dt><dd>Tecnologia, finanças, ofertas agressivas.</dd><dt>Cortes</dt><dd>de 2,5 a 4 s por cena</dd></dl>
+            </div>
+          </article>
+          <article class="lang" id="lang-pop-colorido" data-busca="Pop colorido">
+            <div class="thumb t-po"><svg viewBox="0 0 90 160" role="img" aria-label="Miniatura ilustrativa: Pop colorido"><rect width="90" height="160" fill="#FFF7EC"/>
+<rect class="a bk" x="6" y="18" width="37" height="52" rx="4" fill="#FF4F8B"/>
+<rect class="a bk bk2" x="47" y="18" width="37" height="52" rx="4" fill="#2D5BFF"/>
+<rect class="a bk bk3" x="6" y="74" width="37" height="52" rx="4" fill="#FFCF3A"/>
+<rect class="a bk bk4" x="47" y="74" width="37" height="52" rx="4" fill="#20C77A"/>
+<circle cx="65" cy="44" r="9" fill="#FFF7EC" opacity=".9"/><circle cx="24" cy="100" r="8" fill="#FF4F8B"/>
+<g class="a bk bk5"><rect x="14" y="132" width="62" height="16" rx="8" fill="#16161A"/><text x="45" y="143" font-size="8" font-weight="900" text-anchor="middle" fill="#FFF7EC" textLength="50" lengthAdjust="spacingAndGlyphs">NOVO SABOR</text></g></svg></div>
+            <div class="lh">
+              <h4>Pop colorido</h4><span class="id">pop-colorido</span>
+              <p>Energia pura: blocos de cor em grade, peças recortadas que pulam com mola, transições de chicote.</p>
+            </div>
+            <div class="lb">
+              <div class="chips"><span class="chip">ritmo <b>rápido</b></span><span class="chip">layout <b>grade</b></span><span class="chip">textura <b>recortada</b></span><span class="chip">movimento <b>elástica</b></span></div>
+              <dl><dt>Bom para</dt><dd>Promoções divertidas, produtos infantis ou jovens, comida, entretenimento.</dd><dt>Evite</dt><dd>Luxo, temas sérios, marcas que pedem sobriedade.</dd><dt>Cortes</dt><dd>de 0,5 a 1,2 s por cena</dd></dl>
+            </div>
+          </article>
+          <article class="lang" id="lang-nativo-de-rede" data-busca="Nativo de rede (UGC)">
+            <div class="thumb t-na"><svg viewBox="0 0 90 160" role="img" aria-label="Miniatura ilustrativa: Nativo de rede (UGC)"><defs><linearGradient id="na-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5B6B78"/><stop offset="1" stop-color="#20272E"/></linearGradient></defs>
+<rect width="90" height="160" fill="url(#na-g)"/>
+<circle cx="45" cy="58" r="15" fill="#8C98A3"/><path d="M14 132 C14 98 30 84 45 84 C60 84 76 98 76 132 L76 160 L14 160Z" fill="#7A8692"/>
+<rect x="6" y="6" width="25" height="1.6" rx=".8" fill="#FFFFFF" opacity=".9"/><rect x="33" y="6" width="25" height="1.6" rx=".8" fill="#FFFFFF" opacity=".35"/><rect class="a pr" x="33" y="6" width="25" height="1.6" rx=".8" fill="#FFFFFF"/><rect x="60" y="6" width="24" height="1.6" rx=".8" fill="#FFFFFF" opacity=".35"/>
+<g fill="#FFFFFF" opacity=".85"><circle cx="81" cy="96" r="3.2"/><circle cx="81" cy="106" r="3.2"/><circle cx="81" cy="116" r="3.2"/></g>
+<g class="a wd"><rect x="16" y="108" width="24" height="12" rx="2.5" fill="#FFFFFF"/><text x="28" y="117" font-size="7.5" font-weight="900" text-anchor="middle" fill="#111" textLength="17" lengthAdjust="spacingAndGlyphs">isso</text></g>
+<g class="a wd wd2"><rect x="42" y="108" width="30" height="12" rx="2.5" fill="#FFE14D"/><text x="57" y="117" font-size="7.5" font-weight="900" text-anchor="middle" fill="#111" textLength="24" lengthAdjust="spacingAndGlyphs">mudou</text></g>
+<g class="a wd wd3"><rect x="27" y="122" width="34" height="12" rx="2.5" fill="#FFFFFF"/><text x="44" y="131" font-size="7.5" font-weight="900" text-anchor="middle" fill="#111" textLength="18" lengthAdjust="spacingAndGlyphs">tudo</text></g></svg></div>
+            <div class="lh">
+              <h4>Nativo de rede (UGC)</h4><span class="id">nativo-de-rede</span>
+              <p>Parece feito no celular: vídeo em tela cheia, legendas grandes, cortes secos de fala.</p>
+            </div>
+            <div class="lb">
+              <div class="chips"><span class="chip">ritmo <b>médio</b></span><span class="chip">layout <b>tela cheia</b></span><span class="chip">textura <b>limpa</b></span><span class="chip">movimento <b>seca</b></span></div>
+              <dl><dt>Bom para</dt><dd>Depoimentos reais, bastidores, dicas, conteúdo de criador; quando a autenticidade vende mais que a produção.</dd><dt>Evite</dt><dd>Marcas que precisam parecer institucionais; não há vídeo de pessoas.</dd><dt>Cortes</dt><dd>de 1,2 a 2,5 s por cena</dd></dl>
+            </div>
+          </article>
+        </div>
+
+        <h3 id="como-escolher" data-busca="Como escolher a linguagem">Como escolher</h3>
+        <ol class="steps">
+          <li><h4>Comece pelo material que você tem</h4><p>Sem bons vídeos ou fotos? Prefira linguagens de texto e grafismo (tipografia cinética, colagem, pop, interface). Com imagens de qualidade, cinematográfico e nativo de rede brilham.</p></li>
+          <li><h4>Depois, pelo tom da marca</h4><p>Calma e sofisticação pedem ritmo lento; promoção e energia pedem ritmo rápido. Os campos “bom para” e “evite” de cada cartão ajudam.</p></li>
+          <li><h4>Na dúvida, deixe “automático”</h4><p>O Claude propõe 2 ou 3 caminhos que diferem de verdade entre si, e você escolhe no <a href="#gates">GATE 1</a>.</p></li>
+        </ol>
+        <div class="note warn"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17.5v.01"/></svg><div><strong class="t">Repetindo a linguagem para o mesmo cliente?</strong><p>Se a escolhida for a mesma de um dos 3 últimos vídeos desse cliente, o Claude pede um motivo de uma linha (por exemplo, “continuação da mesma campanha”). É só para evitar que os vídeos fiquem todos iguais sem querer.</p></div></div>
+        <div class="note adv"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-5 4 5 4M16 8l5 4-5 4M13.5 5l-3 14"/></svg><div><strong class="t">Para quem já programa</strong><p>O catálogo é o arquivo <code>engine/linguagens.json</code>; no terminal, <code>npm run linguagens</code> lista tudo e <code>npm run linguagens -- &lt;id&gt;</code> mostra os detalhes. Linguagens próprias ficam em <code>local/linguagens.json</code> (veja <a href="#local">Camada local</a>).</p></div></div>
+      </section>
+
+      <!-- ============ 7 ============ -->
+      <section class="sec" id="gates" data-titulo="Os 4 gates" data-busca="Os 4 gates (aprovações)">
+        <div class="sec-head"><div class="sec-num">7</div><div><h2>Os 4 gates</h2><div class="meta"><span><svg class="ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 4 minutos de leitura</span><span><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg> Você sabe o que está aprovando em cada um</span></div></div></div>
+
+        <p>Em cada gate, o Claude para, mostra o que fez e espera a sua resposta no chat. Aprovar é só escrever; pedir mudança também.</p>
+        <div class="gates">
+          <div class="gate-c">
+            <div class="gn">GATE 1</div><h4>Conceito</h4>
+            <p><strong>O que você vê:</strong> 2 ou 3 caminhos, cada um com uma ideia em uma frase, a <a href="#linguagens">linguagem visual</a> e o porquê.</p>
+            <p><strong>O que você decide:</strong> o caminho do vídeo.</p>
+            <span class="pill">pode ser pulado com “fazer direto”</span>
+            <div class="say"><b>Exemplo de resposta</b>“Gostei do caminho B, mas com o tom do A.”</div>
+          </div>
+          <div class="gate-c">
+            <div class="gn">GATE 2</div><h4>Roteiro + storyboard</h4>
+            <p><strong>O que você vê:</strong> o texto de cada cena e o que aparece nela, com o tempo de cada uma. A soma dá a duração do briefing.</p>
+            <p><strong>O que você decide:</strong> a história e a ordem das cenas, antes de qualquer montagem.</p>
+            <span class="pill">pode ser pulado com “fazer direto”</span>
+            <div class="say"><b>Exemplo de resposta</b>“Aprovado. Só troque ‘venha’ por ‘visite’ na cena 4.”</div>
+          </div>
+          <div class="gate-c lock">
+            <div class="gn">GATE 3</div><h4>Studio</h4>
+            <p><strong>O que você vê:</strong> o vídeo de verdade, no Studio, com seus textos, imagens e movimento.</p>
+            <p><strong>O que você decide:</strong> se o vídeo está pronto. Confira com calma (lista abaixo).</p>
+            <span class="pill"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> nunca é pulado</span>
+            <div class="say"><b>Exemplo de resposta</b>“Aprovado no Studio.”</div>
+          </div>
+          <div class="gate-c lock">
+            <div class="gn">GATE 4</div><h4>Render</h4>
+            <p><strong>O que você vê:</strong> o resultado de uma simulação técnica e o nome do arquivo que vai ser gerado.</p>
+            <p><strong>O que você decide:</strong> autorizar a criação do MP4 final.</p>
+            <span class="pill"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> nunca é pulado</span>
+            <div class="say"><b>Exemplo de resposta</b>“Pode renderizar.”</div>
+          </div>
+        </div>
+        <div class="note info"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></svg><div><strong class="t">Dá para aprovar o 3 e o 4 de uma vez</strong><p>“Aprovado no Studio, pode renderizar.” O Claude faz a simulação técnica e, se estiver tudo certo, segue para o render sem perguntar de novo.</p></div></div>
+
+        <h3 id="conferir-studio" data-busca="O que conferir no Studio (GATE 3)">O que conferir no Studio</h3>
+        <p>Depois do GATE 3 o vídeo vira arquivo. Antes de aprovar, assista do começo ao fim pelo menos duas vezes e confira:</p>
+        <table class="tbl">
+          <thead><tr><th>Confira</th><th>Por quê</th></tr></thead>
+          <tbody>
+            <tr><td>Preços, datas, endereços e telefones</td><td>Letra por letra, iguais à pergunta 5 do briefing.</td></tr>
+            <tr><td>Ortografia de todos os textos</td><td>Pause em cada cena. Erro de digitação é o problema mais comum.</td></tr>
+            <tr><td>Os primeiros segundos</td><td>A frase de abertura precisa estar legível em meio segundo: é quando a pessoa decide se continua.</td></tr>
+            <tr><td>Leitura no tamanho do celular</td><td>Diminua a janela do navegador ou veja a prévia de longe. Texto pequeno ou fino demais some no celular.</td></tr>
+            <tr><td>As bordas</td><td>O Instagram cobre o topo e a parte de baixo com botões e legenda: nada importante perto delas.</td></tr>
+            <tr><td>O último quadro</td><td>A chamada final (“chame no WhatsApp”, “visite a loja”) precisa estar inteira e funcionar sozinha.</td></tr>
+            <tr><td>O som</td><td>Volume da música e da narração, e se a música combina com o corte.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ============ 8 ============ -->
+      <section class="sec" id="versoes" data-titulo="Alterações e versões" data-busca="Alterações e versões">
+        <div class="sec-head"><div class="sec-num">8</div><div><h2>Alterações e versões</h2><div class="meta"><span><svg class="ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 4 minutos de leitura</span></div></div></div>
+
+        <h3 id="ajustes" data-busca="Como pedir ajustes">Como pedir ajustes</h3>
+        <p>Diga <strong>onde</strong> (o número da cena ou o tempo que o Studio mostra), <strong>o quê</strong> e <strong>como deve ficar</strong>.</p>
+        <div class="gb">
+          <div class="good"><div class="lbl"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg> Bom</div><blockquote>Na cena 3, troque “Venha” por “Visite” e deixe o texto 1 segundo a mais na tela.</blockquote></div>
+          <div class="bad"><div class="lbl"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></svg> Evite</div><blockquote>Não gostei, muda aí.</blockquote><small>O Claude não sabe o que mudar e pode estragar o que estava bom.</small></div>
+        </div>
+        <p style="margin-top:16px">Outros pedidos claros:</p>
+        <ul>
+          <li>“Em 00:07, use o vídeo <code>detalhe-tecido.mp4</code> no lugar da foto <code>look-02.jpg</code>.”</li>
+          <li>“O logo está pequeno no final: aumente uns 30%.”</li>
+          <li>“A música está alta demais em relação à narração.”</li>
+          <li>“Gostei do ritmo, mas as transições estão chamando atenção demais: deixe mais discretas.”</li>
+        </ul>
+
+        <h3 id="o-que-acontece" data-busca="O que acontece depois de um ajuste">O que acontece depois de um ajuste</h3>
+        <table class="tbl">
+          <thead><tr><th>Quando você pede</th><th>O que acontece</th></tr></thead>
+          <tbody>
+            <tr><td>Antes de aprovar no Studio</td><td>O Claude ajusta e você assiste de novo. Nenhum MP4 foi gerado ainda.</td></tr>
+            <tr><td>Depois do MP4 (ajuste visual)</td><td>O projeto volta para a montagem; você aprova no Studio e autoriza de novo; sai a <strong>v02</strong>.</td></tr>
+            <tr><td>Depois do MP4 (mudança no texto ou na ordem das cenas)</td><td>Volta para o roteiro e o storyboard (GATE 2) e segue até a <strong>v02</strong>.</td></tr>
+          </tbody>
+        </table>
+        <div class="note ok"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><div><strong class="t">Nenhuma versão é apagada nem substituída</strong><p>A v01 continua na pasta quando nasce a v02. O <code>versoes.md</code> registra a data de cada uma e o que mudou.</p></div></div>
+
+        <h3 id="onde-mp4" data-busca="Onde o MP4 aparece">Onde o MP4 aparece</h3>
+        <div class="crumbs" aria-label="Caminho até o MP4"><span><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>projects</span><em>›</em><span><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>loja-exemplo-promo-natal</span><em>›</em><span><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v8.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>renders</span><em>›</em><span class="on"><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M10 9.5v5l4-2.5z"/></svg>loja-exemplo_promo-natal_v01.mp4</span></div>
+        <ul>
+          <li>O nome junta <strong>cliente</strong>, <strong>projeto</strong> e <strong>versão</strong> (veja <a href="#slug">O slug</a>).</li>
+          <li><code>renders/_rascunhos/</code> guarda prévias rápidas: servem para conferir, não para postar.</li>
+          <li>No Cowork, os arquivos que o Claude manda no chat (prévias, imagens de conferência) também aparecem numa pasta <code>Claude outputs</code>, na raiz. <strong>O vídeo final é sempre o de <code>renders/</code>.</strong></li>
+        </ul>
+        <div class="note warn"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17.5v.01"/></svg><div><strong class="t">Faça backup</strong><p>Os MP4 e os seus arquivos ficam só no seu computador. Copie a pasta do projeto para um HD ou para a nuvem depois de entregar.</p></div></div>
+        <div class="note adv"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-5 4 5 4M16 8l5 4-5 4M13.5 5l-3 14"/></svg><div><strong class="t">Para quem já programa</strong><p><code>npm run archive -- &lt;slug&gt; --destino "D:\Backup"</code> faz uma cópia conferida do projeto. <code>npm run render -- &lt;slug&gt; --draft</code> gera um rascunho em <code>renders/_rascunhos/</code>.</p></div></div>
+      </section>
+
+      <!-- ============ 9 ============ -->
+      <section class="sec" id="clientes" data-titulo="Clientes recorrentes" data-busca="Clientes recorrentes (DNA de cliente)">
+        <div class="sec-head"><div class="sec-num">9</div><div><h2>Clientes recorrentes</h2><div class="meta"><span><svg class="ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 3 minutos de leitura</span></div></div></div>
+        <p class="def"><b>DNA de cliente</b> é uma ficha com o que vale para <b>todos os vídeos</b> de um cliente: personalidade, público, cores, fontes, tom, chamadas preferidas. Com ela, você não repete essas informações a cada briefing.</p>
+        <h3 id="dna-criar" data-busca="Criar o DNA de um cliente">Como criar</h3>
+        <p>Peça ao Claude, com as informações que você já tem:</p>
+        <div class="cmd chat"><div class="cmd-bar"><span class="where"><i></i>Mensagem para o Claude</span><button class="copy" type="button"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h9"/></svg><span>Copiar</span></button></div>
+<pre>Crie o DNA do cliente Loja Exemplo: loja de roupas femininas, público de 25 a 45 anos da cidade, tom alegre e elegante, cores vinho e creme, fonte da marca MarcaSans. Chamada preferida: "Chame no WhatsApp".</pre></div>
+        <p>Ele cria <code>clients/loja-exemplo.md</code> a partir do molde <code>clients/_MOLDE-DNA-DE-CLIENTE.md</code> e deixa em branco o que você não informou. A ficha tem estes blocos:</p>
+        <div class="chips" style="margin:8px 0 16px"><span class="chip">Personalidade</span><span class="chip">Público</span><span class="chip">Posicionamento</span><span class="chip">Estética</span><span class="chip">Cores</span><span class="chip">Tipografia</span><span class="chip">Linguagens visuais</span><span class="chip">Elementos visuais</span><span class="chip">Linguagem</span><span class="chip">CTAs</span><span class="chip">Informações factuais</span><span class="chip">Regras específicas</span><span class="chip">Assets recorrentes</span></div>
+        <h3 id="dna-precedencia" data-busca="O que vale mais: briefing, DNA ou regras">O que vale mais</h3>
+        <ol class="flow" aria-label="Ordem de prioridade">
+          <li class="you"><small>1º</small><b>Briefing do vídeo</b><em>manda sempre</em></li>
+          <li><small>2º</small><b>DNA do cliente</b><em>quando o briefing não diz</em></li>
+          <li><small>3º</small><b>Suas regras em local/</b><em>regras gerais</em></li>
+          <li><small>4º</small><b>Padrão do motor</b><em>docs/</em></li>
+        </ol>
+        <ul>
+          <li><strong>Preços, horários e condições</strong> da ficha servem só de referência: o Claude confirma com você antes de usar num vídeo.</li>
+          <li><strong>Logo e fontes</strong> do cliente são copiados para o <code>assets/</code> de cada vídeo. Não existe pasta de arquivos compartilhada entre projetos.</li>
+          <li>Repetir a mesma linguagem visual dos últimos vídeos do cliente pede um motivo (veja <a href="#linguagens">Linguagens visuais</a>).</li>
+        </ul>
+      </section>
+
+      <!-- ============ 10 ============ -->
+      <section class="sec" id="local" data-titulo="Camada local" data-busca="Camada local (personalizar)">
+        <div class="sec-head"><div class="sec-num">10</div><div><h2>Camada local</h2><div class="meta"><span><svg class="ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 4 minutos de leitura</span><span><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg> Suas regras, sem mexer no motor</span></div></div></div>
+        <p class="def"><b>Camada local</b> é a pasta <code>local/</code>, na raiz, com as <b>suas</b> regras e preferências: o seu jeito de trabalhar, o modo padrão, regras sobre clientes. Ela fica fora do repositório público e nenhuma atualização do motor apaga.</p>
+
+        <div class="cols">
+          <div class="col pick"><h4>Pode mudar</h4><div class="sub">O que estiver em <code>local/</code> vale mais que o padrão</div>
+            <ul><li>Estilo, ritmo, tom dos textos, palavras a evitar</li><li>Modo padrão (Diretor ou Produção)</li><li>Fluxo: o que você quer ver antes, formato dos relatórios</li><li>Regras gerais sobre clientes e entregas</li><li>Linguagens visuais próprias</li></ul></div>
+          <div class="col"><h4><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> Não pode mudar</h4><div class="sub">As 4 travas do motor</div>
+            <ul><li>A aprovação no Studio (GATE 3)</li><li>A autorização do render (GATE 4)</li><li>Nunca inventar fatos: preços, datas, descontos, números, depoimentos</li><li>Nunca sobrescrever uma versão</li></ul></div>
+        </div>
+
+        <h3 id="local-ativar" data-busca="Ativar a camada local">Como ativar</h3>
+        <ol class="steps">
+          <li><h4>Copie a pasta <code>local.exemplo</code> e renomeie a cópia para <code>local</code></h4><p>As duas ficam lado a lado, na raiz. Não escreva nada seu na <code>local.exemplo</code>: ela é o molde e é substituída nas atualizações.</p></li>
+          <li><h4>Edite <code>local/REGRAS.md</code></h4><p>Escreva em frases simples, em cada seção. O que ficar em branco segue o padrão do motor. Por exemplo:</p>
+            <div class="out"><div class="out-bar"><i></i><i></i><i></i><span>local/REGRAS.md (trecho)</span></div><pre>## Modo padrão
+PRODUÇÃO quando o briefing trouxer roteiro fechado; DIRETOR nos demais.
+
+## Estilo e linguagem
+Textos sempre em caixa alta. Nunca usar emojis no vídeo.
+
+## Entrega
+Depois do render final, me passe a legenda sugerida para o post.</pre></div></li>
+          <li><h4>Confira</h4>
+            <div class="cmd"><div class="cmd-bar"><span class="where"><i></i>Terminal · na raiz</span><button class="copy" type="button"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h9"/></svg><span>Copiar</span></button></div>
+<pre>npm run local:check</pre></div>
+            <p>Ou peça ao Claude: “confira a minha camada local”.</p></li>
+        </ol>
+        <h3 id="local-arquivos" data-busca="Arquivos da camada local">Os outros arquivos</h3>
+        <table class="tbl">
+          <thead><tr><th>Arquivo</th><th>Para quê</th></tr></thead>
+          <tbody>
+            <tr><td><code>config.json</code></td><td>Proteger vídeos já entregues contra uma versão nova por engano (para o Agente de Render).</td></tr>
+            <tr><td><code>linguagens.json</code></td><td>Criar linguagens visuais próprias, com os mesmos campos das do motor (<code>docs/14-LINGUAGENS-VISUAIS.md</code>).</td></tr>
+            <tr><td><code>termos-proibidos.txt</code></td><td>Só para quem vai publicar uma cópia do motor: nomes que nunca podem ir a público.</td></tr>
+          </tbody>
+        </table>
+        <div class="note warn"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17.5v.01"/></svg><div><strong class="t">Se uma regra local contrariar uma trava</strong><p>O Claude segue o motor e avisa. Se o <code>config.json</code> tentar mudar uma trava, os comandos param com uma mensagem clara até o campo ser removido.</p></div></div>
+      </section>
+
+      <!-- ============ 11 ============ -->
+      <section class="sec" id="comandos" data-titulo="Comandos" data-busca="Comandos (referência)">
+        <div class="sec-head"><div class="sec-num">11</div><div><h2>Comandos</h2><div class="meta"><span>Para consulta. No dia a dia, o Claude roda ou indica cada um.</span></div></div></div>
+        <p>Todos rodam no terminal, <a href="implantacao.html#raiz">na raiz</a>. Troque <code>&lt;slug&gt;</code> pelo nome do seu projeto.</p>
+        <div class="tbl-scroll"><table class="tbl">
+          <thead><tr><th>Comando</th><th>Para que serve</th></tr></thead>
+          <tbody>
+            <tr><td><code>npm run status</code></td><td>Lista os projetos e a etapa de cada um.</td></tr>
+            <tr><td><code>npm run status -- &lt;slug&gt;</code></td><td>Relatório do projeto: etapa, gates, o que falta.</td></tr>
+            <tr><td><code>npm run new -- &lt;slug&gt; --cliente "…" --projeto "…" --duracao 20</code></td><td>Cria um projeto novo a partir do molde.</td></tr>
+            <tr><td><code>npm run studio -- &lt;slug&gt;</code></td><td>Abre o Studio para assistir ao vídeo.</td></tr>
+            <tr><td><code>npm run render -- &lt;slug&gt; --dry-run</code></td><td>Simulação: mostra o que seria feito, sem gerar o vídeo.</td></tr>
+            <tr><td><code>npm run render -- &lt;slug&gt;</code></td><td>Gera o MP4 final na próxima versão livre.</td></tr>
+            <tr><td><code>npm run render -- &lt;slug&gt; --draft</code></td><td>Gera um rascunho em <code>renders/_rascunhos/</code>.</td></tr>
+            <tr><td><code>npm run assets -- &lt;slug&gt;</code></td><td>Ficha técnica dos arquivos de <code>assets/</code> (resolução, duração, orientação).</td></tr>
+            <tr><td><code>npm run preflight -- &lt;slug&gt;</code></td><td>Conferência técnica antes do render (fontes, textos, legibilidade).</td></tr>
+            <tr><td><code>npm run inspect -- &lt;slug&gt;</code></td><td>Confere o MP4 gerado (formato, duração, som).</td></tr>
+            <tr><td><code>npm run archive -- &lt;slug&gt; --destino "…"</code></td><td>Copia o projeto concluído para um backup, conferindo cada arquivo.</td></tr>
+            <tr><td><code>npm run linguagens</code></td><td>Lista as linguagens visuais (<code>-- &lt;id&gt;</code> para os detalhes de uma).</td></tr>
+            <tr><td><code>npm run local:check</code></td><td>Confere a camada local.</td></tr>
+            <tr><td><code>npm run agent:install</code></td><td>Instala o Agente de Render (Windows). <code>-- --remover</code> desinstala.</td></tr>
+            <tr><td><code>npm run agent:status</code></td><td>Mostra se o agente está instalado e ativo.</td></tr>
+            <tr><td><code>npm run agent:check</code></td><td>Diagnóstico completo do agente (só leitura).</td></tr>
+            <tr><td><code>npm test</code></td><td>Testa o motor inteiro.</td></tr>
+            <tr><td><code>npm run typecheck</code></td><td>Confere os tipos do código.</td></tr>
+            <tr><td><code>npm run manuais</code></td><td>Gera de novo estes manuais (para quem edita <code>manuais/fonte/</code>).</td></tr>
+            <tr><td><code>npm run verificar-publico</code></td><td>Confere uma cópia do motor antes de publicá-la.</td></tr>
+          </tbody>
+        </table></div>
+      </section>
+
+      <!-- ============ 12 ============ -->
+      <section class="sec" id="glossario" data-titulo="Glossário" data-busca="Glossário">
+        <div class="sec-head"><div class="sec-num">12</div><div><h2>Glossário</h2><div class="meta"><span>Em ordem alfabética, com link para onde o termo aparece</span></div></div></div>
+        <dl class="gloss">
+          <dt id="g-assets">Assets</dt><dd>Os arquivos que entram no vídeo: vídeos, fotos, logo, fontes, música. Ficam em <code>assets/</code>. <a href="#o-que-colocar">ver seção</a></dd>
+          <dt id="g-briefing">Briefing</dt><dd>As respostas que descrevem o vídeo. O Rápido tem 8 perguntas. <a href="#briefing">ver seção</a></dd>
+          <dt id="g-camada-local">Camada local</dt><dd>A pasta <code>local/</code>, com as suas regras. <a href="#local">ver seção</a></dd>
+          <dt id="g-composicao">Composição</dt><dd>Cada vídeo dentro de um projeto, listado à esquerda no Studio. <a href="implantacao.html#studio">ver no Manual de Implantação</a></dd>
+          <dt id="g-cta">CTA</dt><dd>Chamada para a ação: o que a pessoa deve fazer depois de assistir. Fica inteira no último quadro. <a href="#q2">ver seção</a></dd>
+          <dt id="g-dna">DNA de cliente</dt><dd>Ficha com o que vale para todos os vídeos de um cliente. <a href="#clientes">ver seção</a></dd>
+          <dt id="g-gate">Gate</dt><dd>Ponto de aprovação. São 4; o 3 (Studio) e o 4 (Render) nunca são pulados. <a href="#gates">ver seção</a></dd>
+          <dt id="g-hook">Hook</dt><dd>A frase de abertura, legível já no primeiro meio segundo. <a href="#q3">ver seção</a></dd>
+          <dt id="g-linguagem">Linguagem visual</dt><dd>Pacote de decisões de design: ritmo, layout, textura e movimento. São 10. <a href="#linguagens">ver seção</a></dd>
+          <dt id="g-manifesto">Manifesto de assets</dt><dd>A lista dos arquivos do projeto e de onde vieram (<code>manifesto-de-assets.md</code>). <a href="#dentro-do-projeto">ver seção</a></dd>
+          <dt id="g-modo-diretor">Modo Diretor</dt><dd>Você aprova cada etapa. É o padrão. <a href="#modos">ver seção</a></dd>
+          <dt id="g-modo-producao">Modo Produção</dt><dd>“Fazer direto”: o Claude pula os gates 1 e 2 e mostra o vídeo pronto no Studio. <a href="#modos">ver seção</a></dd>
+          <dt id="g-mp4">MP4</dt><dd>O arquivo de vídeo final, em <code>renders/</code>. <a href="#onde-mp4">ver seção</a></dd>
+          <dt id="g-personalidade">Personalidade de movimento</dt><dd>O jeito de tudo se mexer num vídeo: suave, elástica, seca, cinematográfica, mecânica ou degraus. <a href="#eixos">ver seção</a></dd>
+          <dt id="g-rascunho">Rascunho</dt><dd>Uma prévia rápida em <code>renders/_rascunhos/</code>, que não conta como versão. <a href="#onde-mp4">ver seção</a></dd>
+          <dt id="g-render">Render</dt><dd>A etapa em que o vídeo vira um arquivo MP4. <a href="#gates">ver seção</a></dd>
+          <dt id="g-slug">Slug</dt><dd>O nome curto do projeto: minúsculas, números e hífens. <a href="#slug">ver seção</a></dd>
+          <dt id="g-storyboard">Storyboard</dt><dd>O plano do vídeo cena a cena, com texto, imagem e tempo. <a href="#gates">ver seção</a></dd>
+          <dt id="g-studio">Studio</dt><dd>A tela de pré-visualização, no navegador, onde você aprova o vídeo. <a href="#conferir-studio">ver seção</a></dd>
+          <dt id="g-versao">Versão</dt><dd>Cada MP4 final: v01, v02… Nenhuma é sobrescrita. <a href="#versoes">ver seção</a></dd>
+        </dl>
+        <p class="muted">Termos de instalação (terminal, Node, npm, raiz) estão no <a href="implantacao.html#glossario">glossário do Manual de Implantação</a>.</p>
+      </section>
+
+    </div>
+  </main>
+</div>
+<script>// Reels Engine IA — manuais. Fonte do comportamento: edite aqui e rode "npm run manuais".
+(function(){
+  'use strict';
+  var root = document.documentElement;
+  function store(k, v){ try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k, v); }catch(e){ return null; } }
+
+  /* Tema: auto / claro / escuro */
+  var themeBtns = document.querySelectorAll('.theme button');
+  function applyTheme(t){
+    if(t==='light'||t==='dark') root.setAttribute('data-theme', t); else root.removeAttribute('data-theme');
+    themeBtns.forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.t===(t||'auto'))); });
+  }
+  applyTheme(store('re-tema') || 'auto');
+  themeBtns.forEach(function(b){ b.addEventListener('click', function(){ store('re-tema', b.dataset.t); applyTheme(b.dataset.t); }); });
+
+  /* Menu no celular */
+  var app = document.querySelector('.app');
+  document.querySelectorAll('[data-menu]').forEach(function(b){ b.addEventListener('click', function(){ app.classList.toggle('open'); }); });
+  document.querySelectorAll('.side a[href^="#"]').forEach(function(a){ a.addEventListener('click', function(){ app.classList.remove('open'); }); });
+
+  /* Índice: marca a seção visível */
+  var links = {}; document.querySelectorAll('nav.toc a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  var secs = Array.prototype.slice.call(document.querySelectorAll('section.sec[id]'));
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ Object.keys(links).forEach(function(k){ links[k].classList.toggle('on', k===e.target.id); }); } });
+    }, {rootMargin:'-20% 0px -70% 0px'});
+    secs.forEach(function(s){ io.observe(s); });
+  }
+
+  /* Copiar comando */
+  function copyText(t){
+    if(navigator.clipboard && window.isSecureContext !== false){ return navigator.clipboard.writeText(t).catch(function(){ return legacy(t); }); }
+    return Promise.resolve(legacy(t));
+  }
+  function legacy(t){ var ta=document.createElement('textarea'); ta.value=t; ta.setAttribute('readonly',''); ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); }catch(e){} document.body.removeChild(ta); }
+  document.querySelectorAll('.cmd').forEach(function(box){
+    var btn = box.querySelector('.copy'); if(!btn) return;
+    btn.addEventListener('click', function(){
+      var pre = box.querySelector('pre').cloneNode(true);
+      pre.querySelectorAll('.p,.c').forEach(function(n){ n.remove(); });
+      var text = pre.textContent.split('\n').map(function(l){ return l.replace(/\s+$/,''); }).filter(Boolean).join('\n');
+      copyText(text).then(function(){
+        var label = btn.querySelector('span'); var old = label.textContent;
+        btn.classList.add('done'); label.textContent = 'Copiado';
+        setTimeout(function(){ btn.classList.remove('done'); label.textContent = old; }, 1600);
+      });
+    });
+  });
+
+  /* Abas (sistema operacional sincronizado em todo o manual) */
+  function detectOS(){ var p=(navigator.userAgentData&&navigator.userAgentData.platform)||navigator.platform||navigator.userAgent; p=String(p).toLowerCase(); if(p.indexOf('mac')>-1) return 'mac'; if(p.indexOf('linux')>-1&&p.indexOf('android')<0) return 'linux'; return 'win'; }
+  function selectTab(group, key, save){
+    document.querySelectorAll('.tabs[data-group="'+group+'"]').forEach(function(t){
+      var has = t.querySelector('[data-key="'+key+'"]'); if(!has) return;
+      t.querySelectorAll('.tablist button').forEach(function(b){ b.setAttribute('aria-selected', String(b.dataset.key===key)); b.tabIndex = b.dataset.key===key?0:-1; });
+      t.querySelectorAll('.tabpanel').forEach(function(p){ p.hidden = p.dataset.key!==key; });
+    });
+    if(save) store('re-aba-'+group, key);
+  }
+  var groups = {};
+  document.querySelectorAll('.tabs').forEach(function(t){
+    groups[t.dataset.group]=1;
+    t.querySelectorAll('.tablist button').forEach(function(b){
+      b.addEventListener('click', function(){ selectTab(t.dataset.group, b.dataset.key, true); });
+      b.addEventListener('keydown', function(e){
+        if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft') return;
+        var bs=[].slice.call(t.querySelectorAll('.tablist button')); var i=bs.indexOf(b)+(e.key==='ArrowRight'?1:-1);
+        var n=bs[(i+bs.length)%bs.length]; n.focus(); selectTab(t.dataset.group, n.dataset.key, true);
+      });
+    });
+  });
+  Object.keys(groups).forEach(function(g){
+    var first = document.querySelector('.tabs[data-group="'+g+'"] .tablist button');
+    selectTab(g, store('re-aba-'+g) || (g==='os'?detectOS():first.dataset.key), false);
+  });
+
+  /* Busca simples: títulos e texto das seções */
+  var input = document.querySelector('.search input'), list = document.querySelector('.results');
+  var index = [];
+  document.querySelectorAll('[data-busca]').forEach(function(el){
+    var sec = el.closest('section.sec'); var title = el.getAttribute('data-busca') || el.textContent;
+    var text = '';
+    if(/^H[1-6]$/.test(el.tagName)){
+      var n = el.closest('.tools') || el; text = el.textContent; n = n.nextElementSibling;
+      while(n && !/^H[23]$/.test(n.tagName) && !n.classList.contains('tools') && !(n.querySelector && n.querySelector('h3[data-busca]'))){ text += ' ' + n.textContent; n = n.nextElementSibling; }
+    } else if(el.matches('section')){
+      var head = el.querySelector('.sec-head'); text = head ? head.textContent : '';
+    } else text = el.textContent;
+    index.push({id: el.id || (sec&&sec.id), title: title.trim(), sec: sec ? sec.getAttribute('data-titulo') : '', text: text.replace(/\s+/g,' ')});
+  });
+  function norm(s){ return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+  function esc(s){ return s.replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function snippet(text, q){
+    var i = norm(text).indexOf(q); if(i<0) return '';
+    var a = Math.max(0,i-38), b = Math.min(text.length, i+q.length+60);
+    return (a>0?'…':'') + esc(text.slice(a,i)) + '<mark>' + esc(text.slice(i,i+q.length)) + '</mark>' + esc(text.slice(i+q.length,b)) + (b<text.length?'…':'');
+  }
+  function run(){
+    var q = norm(input.value.trim()); list.innerHTML='';
+    if(q.length<2) return;
+    var hits = index.map(function(it){ var t=norm(it.title).indexOf(q)>-1, x=norm(it.text).indexOf(q)>-1; return (t||x)?{it:it,score:t?2:1}:null; }).filter(Boolean).sort(function(a,b){ return b.score-a.score; }).slice(0,8);
+    if(!hits.length){ list.innerHTML='<li class="none">Nada encontrado. Tente outra palavra (ex.: terminal, erro, fonte).</li>'; return; }
+    hits.forEach(function(h, k){
+      var li=document.createElement('li');
+      li.innerHTML='<a href="#'+h.it.id+'"'+(k===0?' class="on"':'')+'>'+esc(h.it.title)+'<small>'+(snippet(h.it.text,q)||esc(h.it.sec||''))+'</small></a>';
+      li.querySelector('a').addEventListener('click', function(){ input.value=''; list.innerHTML=''; app.classList.remove('open'); });
+      list.appendChild(li);
+    });
+  }
+  if(input){
+    input.addEventListener('input', run);
+    input.addEventListener('keydown', function(e){
+      var as=[].slice.call(list.querySelectorAll('a')); if(!as.length) return;
+      var i=as.findIndex(function(a){ return a.classList.contains('on'); });
+      if(e.key==='ArrowDown'||e.key==='ArrowUp'){ e.preventDefault(); as[i].classList.remove('on'); i=(i+(e.key==='ArrowDown'?1:-1)+as.length)%as.length; as[i].classList.add('on'); }
+      if(e.key==='Enter'){ e.preventDefault(); as[Math.max(i,0)].click(); location.hash = as[Math.max(i,0)].getAttribute('href'); }
+      if(e.key==='Escape'){ input.value=''; list.innerHTML=''; }
+    });
+    document.addEventListener('keydown', function(e){
+      var typing = /input|textarea/i.test((document.activeElement||{}).tagName||'');
+      if((e.key==='/'&&!typing) || ((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k')){ e.preventDefault(); app.classList.add('open'); input.focus(); }
+    });
+  }
+
+  /* Âncora dentro de um bloco fechado (Deu erro?): abre o bloco */
+  function openTarget(){
+    var id = decodeURIComponent(location.hash.slice(1)); if(!id) return;
+    var el = document.getElementById(id); if(!el) return;
+    var d = el.closest('details'); if(d && !d.open){ d.open = true; el.scrollIntoView(); }
+    if(el.tagName==='DETAILS'){ el.open = true; }
+  }
+  window.addEventListener('hashchange', openTarget); openTarget();
+
+  /* Checklist: lembra o que você já marcou (só neste navegador) */
+  document.querySelectorAll('.checklist input[type=checkbox]').forEach(function(cb){
+    var k = 're-check-' + cb.id;
+    if(store(k)==='1') cb.checked = true;
+    cb.addEventListener('change', function(){ store(k, cb.checked?'1':'0'); });
+  });
+
+  /* Miniaturas animadas: tocam só quando visíveis; botão pausar */
+  var thumbs = document.querySelectorAll('.thumb');
+  var playBtn = document.querySelector('[data-play]');
+  var paused = store('re-miniaturas') === 'pausa';
+  function setPaused(p){ paused=p; root.classList.toggle('thumbs-paused', p); if(playBtn){ playBtn.setAttribute('aria-pressed', String(!p)); playBtn.querySelector('span').textContent = p ? 'Animar miniaturas' : 'Pausar miniaturas'; } }
+  setPaused(paused);
+  if(playBtn) playBtn.addEventListener('click', function(){ setPaused(!paused); store('re-miniaturas', paused?'pausa':'anima'); });
+  if('IntersectionObserver' in window && thumbs.length){
+    var tio = new IntersectionObserver(function(es){ es.forEach(function(e){ e.target.classList.toggle('live', e.isIntersecting); }); }, {threshold:.2});
+    thumbs.forEach(function(t){ tio.observe(t); });
+  } else thumbs.forEach(function(t){ t.classList.add('live'); });
+})();
+</script>
+</body>
+</html>

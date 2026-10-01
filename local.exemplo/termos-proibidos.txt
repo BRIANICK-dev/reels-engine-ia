@@ -1,0 +1,17 @@
+# Termos que NUNCA podem aparecer num repositório público.
+# Usado por: npm run verificar-publico
+#
+# Um termo por linha. Linhas vazias e linhas começando com # são ignoradas.
+# A busca ignora maiúsculas e acentos e procura o termo como TRECHO, em
+# nomes de arquivos e no conteúdo: prefira termos específicos (4 letras ou mais).
+#
+# Liste aqui, por exemplo: o seu nome e o da sua empresa, nomes e slugs de
+# clientes, domínios, telefones, cidades, nomes de músicas e fontes licenciadas.
+#
+# Este arquivo fica em local/, fora do Git: os termos nunca são publicados.
+# Os exemplos abaixo são fictícios e estão comentados: apague o # e troque
+# pelos seus termos.
+
+# nome-do-cliente-real
+# Nome da Sua Empresa
+# seudominio.com.br

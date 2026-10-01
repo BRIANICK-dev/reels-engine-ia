@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manual de Uso — Reels Engine IA</title>
+<meta name="description" content="Do briefing ao MP4: como criar um Reels com o Reels Engine IA e o Claude.">
+<style>{{CSS}}</style>
+</head>
+<body>
+<div class="app">
+  <div class="scrim" data-menu></div>
+  <aside class="side" aria-label="Índice">
+    <div class="side-head">
+      <a class="brand" href="#topo">{{LOGO}}<span><b>Reels Engine IA</b><span>Manual de Uso</span></span></a>
+      <span class="ver">motor v{{VERSION}}</span>
+    </div>
+    <div class="search" role="search">
+      {{I:search}}
+      <input type="search" placeholder="Buscar no manual" aria-label="Buscar no manual" autocomplete="off">
+      <kbd>/</kbd>
+    </div>
+    <ul class="results" aria-live="polite"></ul>
+    <nav class="toc">
+      <div class="grp">Comece aqui</div>
+      <ol>
+        <li><a href="#rapido"><span class="n">1</span>Primeiro vídeo em ~15 min</a></li>
+        <li><a href="#como"><span class="n">2</span>Como funciona</a></li>
+      </ol>
+      <div class="grp">Preparar</div>
+      <ol start="3">
+        <li><a href="#pastas"><span class="n">3</span>Pastas e slug</a></li>
+        <li><a href="#briefing"><span class="n">4</span>Briefing Rápido</a></li>
+        <li><a href="#completo"><span class="n">5</span>Briefing Completo</a></li>
+      </ol>
+      <div class="grp">Criar</div>
+      <ol start="6">
+        <li><a href="#linguagens"><span class="n">6</span>Linguagens visuais</a></li>
+        <li><a href="#gates"><span class="n">7</span>Os 4 gates</a></li>
+        <li><a href="#versoes"><span class="n">8</span>Alterações e versões</a></li>
+      </ol>
+      <div class="grp">Personalizar</div>
+      <ol start="9">
+        <li><a href="#clientes"><span class="n">9</span>Clientes recorrentes</a></li>
+        <li><a href="#local"><span class="n">10</span>Camada local</a></li>
+      </ol>
+      <div class="grp">Referência</div>
+      <ol start="11">
+        <li><a href="#comandos"><span class="n">11</span>Comandos</a></li>
+        <li><a href="#glossario"><span class="n">12</span>Glossário</a></li>
+      </ol>
+    </nav>
+    <div class="side-foot">
+      <div class="theme" role="group" aria-label="Tema">
+        <button data-t="auto" aria-pressed="true">Auto</button><button data-t="light">Claro</button><button data-t="dark">Escuro</button>
+      </div>
+      <a class="other" href="implantacao.html"><span><small>Ainda não instalou?</small>Manual de Implantação</span>→</a>
+    </div>
+  </aside>
+
+  <main id="topo">
+    <div class="topbar"><button data-menu aria-label="Abrir índice">{{I:menu}} Índice</button><b>Manual de Uso</b></div>
+    <div class="wrap">
+
+      <header style="margin-bottom:56px">
+        <div class="kicker">Manual de Uso</div>
+        <h1>Do briefing ao MP4</h1>
+        <p class="lede">Como pedir um Reels ao Claude, o que você aprova em cada etapa e onde o vídeo aparece no seu computador.</p>
+        <ol class="route" aria-label="Por onde começar">
+          <li><a href="#rapido"><b>Primeiro vídeo</b></a><small>pule a teoria</small></li>
+          <li><a href="#pastas"><b>Pastas e slug</b></a><small>essencial</small></li>
+          <li><a href="#briefing"><b>Briefing Rápido</b></a><small>essencial</small></li>
+          <li><a href="#gates"><b>Os 4 gates</b></a><small>o que você aprova</small></li>
+          <li><a href="#versoes"><b>Ajustes e versões</b></a><small>v01, v02…</small></li>
+        </ol>
+        <p class="muted" style="font-size:14px">Ainda não instalou o motor? Comece pelo <a href="implantacao.html">Manual de Implantação</a>.</p>
+      </header>
+
+      <!-- ============ 1 ============ -->
+      <section class="sec" id="rapido" data-titulo="Primeiro vídeo em ~15 minutos" data-busca="Primeiro vídeo em ~15 minutos">
+        <div class="sec-head"><div class="sec-num">1</div><div><h2>Primeiro vídeo em ~15 minutos</h2><div class="meta"><span>{{I:clock}} ~15 minutos, com o motor já instalado</span><span>{{I:check}} Resultado: um MP4 de 15 s, só com texto</span></div></div></div>
+
+        <p>Para conhecer o caminho inteiro sem ler a teoria: um vídeo de 15 segundos só com texto e grafismo, sem fotos nem música. O tempo depende do computador e de quanto o Claude precisa ajustar, mas fica perto disso.</p>
+        <ol class="quick">
+          <li><h4>Abra o Claude <span class="who">{{I:chat}} você</span></h4><p>No <strong>Cowork</strong>, com a pasta <code>reels-engine-ia</code> conectada, ou no <strong>Claude Code</strong>, aberto na raiz. Veja <a href="implantacao.html#caminhos">Cowork ou Claude Code?</a></p></li>
+          <li><h4>Cole este pedido <span class="who">{{I:chat}} você</span></h4><p>É um briefing completo de um café fictício. Depois troque pelos dados do seu vídeo.</p>
+            <div class="cmd chat"><div class="cmd-bar"><span class="where"><i></i>Mensagem para o Claude</span><button class="copy" type="button">{{I:copy}}<span>Copiar</span></button></div>
+<pre>Crie um projeto novo: slug cafe-exemplo-abertura, cliente "Café Exemplo", projeto "Abertura", 15 segundos.
+
+Briefing Rápido:
+1. Inauguração do Café Exemplo, um café de bairro, para quem mora perto.
+2. Visitar o café.
+3. Abrimos: café fresco a dois passos de casa.
+4. 15 segundos.
+5. Textos exatos: "Abrimos", "Café Exemplo", "Rua Exemplo, 100", "Venha provar". Sem preços nem datas.
+6. Não tenho fotos nem música: só texto e grafismo.
+7. Acolhedor e simples. Linguagem visual: automático.
+8. Fazer direto e me mostrar no Studio.</pre></div></li>
+          <li><h4>O Claude monta o vídeo <span class="who">{{I:term}} Claude</span></h4><p>Cria a pasta do projeto, registra o briefing, escolhe a linguagem visual, escreve o roteiro e monta as cenas. Com “fazer direto”, ele pula as aprovações de conceito e de roteiro e avisa quando o vídeo estiver pronto para você assistir.</p></li>
+          <li><h4>Assista no Studio <span class="who">{{I:film}} você</span></h4><p>No Claude Code, ele abre o Studio para você. No Cowork, rode no terminal, na raiz:</p>
+            <div class="cmd"><div class="cmd-bar"><span class="where"><i></i>Terminal · na raiz</span><button class="copy" type="button">{{I:copy}}<span>Copiar</span></button></div>
+<pre>npm run studio -- cafe-exemplo-abertura</pre></div></li>
+          <li><h4>Aprove ou peça ajustes <span class="who">{{I:chat}} você</span></h4><p>Quer mudar algo? Diga o quê (veja <a href="#ajustes">como pedir ajustes</a>). Gostou? Escreva: <strong>“Aprovado no Studio, pode renderizar.”</strong> O Claude faz uma simulação técnica antes e só então gera o vídeo.</p></li>
+          <li><h4>Pegue o MP4 <span class="who">{{I:film}} pronto</span></h4><p>Ele aparece em <code>projects/cafe-exemplo-abertura/renders/cafe-exemplo_abertura_v01.mp4</code>. No Windows com Cowork, quem gera é o Agente de Render, sozinho. No Mac e no Linux com Cowork, o Claude pede que você rode <code>npm run render -- cafe-exemplo-abertura</code>. No Claude Code, ele mesmo roda.</p></li>
+        </ol>
+        <div class="note info">{{I:bulb}}<div><strong class="t">Para os vídeos de verdade</strong><p>Leia <a href="#pastas">Pastas e slug</a> e <a href="#briefing">Briefing Rápido</a>: são as duas seções que mais fazem diferença no resultado.</p></div></div>
+      </section>
+
+      <!-- ============ 2 ============ -->
+      <section class="sec" id="como" data-titulo="Como funciona" data-busca="Como funciona (etapas)">
+        <div class="sec-head"><div class="sec-num">2</div><div><h2>Como funciona</h2><div class="meta"><span>{{I:clock}} 3 minutos de leitura</span></div></div></div>
+
+        <p>Cada vídeo passa pela mesma linha de produção. O Claude faz o trabalho técnico sozinho e para nos <dfn>gates</dfn>, os pontos em que a decisão é sua.</p>
+        <p class="def"><b>Gate</b> (portão, em inglês) é um ponto de aprovação: o vídeo só segue para a etapa seguinte depois que você aprova. São quatro, explicados em <a href="#gates">Os 4 gates</a>.</p>
+
+        <ol class="flow" aria-label="Linha de produção de um vídeo">
+          <li class="you"><small>00</small><b>Briefing</b><em>você responde</em></li>
+          <li><small>01</small><b>Conceito</b><em>ideia + linguagem</em></li>
+          <li class="gate"><small>GATE</small><b>1</b></li>
+          <li><small>02–03</small><b>Roteiro e storyboard</b><em>cena a cena</em></li>
+          <li class="gate"><small>GATE</small><b>2</b></li>
+          <li class="you"><small>04</small><b>Material</b><em>seus arquivos</em></li>
+          <li><small>05–06</small><b>Montagem e conferência</b><em>o Claude</em></li>
+          <li class="you"><small>07</small><b>Studio</b><em>você assiste</em></li>
+          <li class="gate lock"><small>GATE</small><b>3</b></li>
+          <li><small>08</small><b>Simulação</b><em>conferência final</em></li>
+          <li class="gate lock"><small>GATE</small><b>4</b></li>
+          <li><small>09–10</small><b>Render e entrega</b><em>o MP4</em></li>
+        </ol>
+        <div class="legend"><span><i style="background:var(--ink)"></i>gate que pode ser pulado com “fazer direto”</span><span><i style="background:var(--accent)"></i>gate que nunca é pulado</span><span><i style="border:1.5px solid var(--accent)"></i>etapa com você</span></div>
+
+        <h3 id="modos" data-busca="Modo Diretor e Modo Produção">Dois jeitos de trabalhar</h3>
+        <p>A pergunta 8 do briefing decide quanto você acompanha.</p>
+        <div class="cols">
+          <div class="col pick"><h4>Modo Diretor</h4><div class="sub">“Aprovar cada etapa” — recomendado no começo</div><ul><li>Você escolhe entre 2 ou 3 conceitos (GATE 1).</li><li>Aprova roteiro e storyboard antes da montagem (GATE 2).</li><li>Aprova no Studio e autoriza o render (GATES 3 e 4).</li></ul></div>
+          <div class="col"><h4>Modo Produção</h4><div class="sub">“Fazer direto” — quando a direção já está clara</div><ul><li>O Claude decide conceito, roteiro e storyboard e registra o motivo.</li><li>Você vê o vídeo pronto no Studio.</li><li>Aprova no Studio e autoriza o render (GATES 3 e 4), sempre.</li></ul></div>
+        </div>
+
+        <h3 id="onde-estou" data-busca="Onde está o meu projeto (status)">Onde está o meu projeto?</h3>
+        <p>Pergunte no chat: <em>“Qual a situação do projeto loja-exemplo-promo-natal?”</em>. Quem usa o terminal pode ver o mesmo relatório:</p>
+        <div class="cmd"><div class="cmd-bar"><span class="where"><i></i>Terminal · na raiz</span><button class="copy" type="button">{{I:copy}}<span>Copiar</span></button></div>
+<pre>npm run status -- loja-exemplo-promo-natal</pre></div>
+        <div class="out"><div class="out-bar"><i></i><i></i><i></i><span>O que esperar (trecho)</span></div><pre>STATUS DO PROJETO — loja-exemplo-promo-natal
+
+Etapa atual:  <span class="hl">00_BRIEFING</span> (briefing)
+Versão:       v01
+
+Aguardando:
+  → o briefing ainda está vazio — responda as 8 perguntas no arquivo
+    ou descreva o vídeo no chat
+  → colocar os arquivos do vídeo (fotos, vídeos, logo, fontes) em
+    projects/loja-exemplo-promo-natal/assets/</pre></div>
+        <div class="note info">{{I:info}}<div><strong class="t">Quando o Claude para e pergunta</strong><p>Só quando falta algo essencial (um preço, uma data, um arquivo), quando há uma decisão criativa sua, num gate ou numa questão de licença. Problemas técnicos ele resolve sozinho e conta no relatório da etapa.</p></div></div>
+      </section>
+
+      <!-- ============ 3 ============ -->
+      <section class="sec" id="pastas" data-titulo="Pastas e slug" data-busca="Pastas e slug">
+        <div class="sec-head"><div class="sec-num">3</div><div><h2>Pastas e slug</h2><div class="meta"><span>{{I:clock}} 5 minutos de leitura</span><span>{{I:check}} Você vai saber onde colocar cada arquivo</span></div></div></div>
+
+        <p>Cada vídeo mora numa pasta própria dentro de <code>projects</code>. É lá que você coloca as fotos, os vídeos e o logo, e é lá que o MP4 aparece no final.</p>
+
+        <h3 id="onde-criar" data-busca="Onde fica a pasta do projeto">Onde fica a pasta do projeto</h3>
+        <div class="crumbs" aria-label="Caminho até a pasta do projeto"><span>{{I:folder}}reels-engine-ia</span><em>›</em><span>{{I:folder}}projects</span><em>›</em><span class="on">{{I:folder}}loja-exemplo-promo-natal</span></div>
+        <div class="note warn">{{I:warn}}<div><strong class="t">Não crie essa pasta à mão</strong><p>Peça ao Claude (“crie um projeto novo: slug loja-exemplo-promo-natal, cliente Loja Exemplo, projeto Promo Natal, 20 segundos”). Ele cria a pasta a partir do molde, com o briefing, o código e o controle de etapas. Uma pasta criada à mão fica sem tudo isso.</p></div></div>
+        <div class="note adv">{{I:code}}<div><strong class="t">Para quem já programa</strong><p><code>npm run new -- loja-exemplo-promo-natal --cliente "Loja Exemplo" --projeto "Promo Natal" --duracao 20</code></p></div></div>
+
+        <div class="tree-card">
+          <div class="cap">A raiz, vista de cima</div>
+          <ul class="tree">
+            <li class="sys"><div class="row"><span class="nm">{{I:folder}}reels-engine-ia</span><span class="why">a raiz</span></div>
+              <ul>
+                <li class="sys"><div class="row"><span class="nm">{{I:folder}}projects</span><span class="why">um vídeo por pasta</span></div>
+                  <ul>
+                    <li class="no"><div class="row"><span class="nm">{{I:folder}}_MOLDE</span><span class="why">o modelo de todo projeto novo — <b>não mexa</b></span></div></li>
+                    <li class="sys"><div class="row"><span class="nm">{{I:folder}}exemplo-loja-promo</span><span class="why">o exemplo que vem com o motor</span></div></li>
+                    <li class="here"><div class="row"><span class="nm">{{I:folder}}loja-exemplo-promo-natal</span><span class="why"><b>o seu vídeo</b> (detalhado abaixo)</span></div></li>
+                  </ul></li>
+                <li class="you"><div class="row"><span class="nm">{{I:folder}}clients</span><span class="why">fichas dos clientes recorrentes (<a href="#clientes">ver seção</a>)</span></div></li>
+                <li class="you"><div class="row"><span class="nm">{{I:folder}}local</span><span class="why">suas regras e preferências (<a href="#local">ver seção</a>)</span></div></li>
+                <li class="no"><div class="row"><span class="nm">{{I:folder}}docs, engine, scripts, manuais</span><span class="why">o motor — <b>não mexa</b></span></div></li>
+              </ul></li>
+          </ul>
+          <div class="legend" style="margin-top:12px"><span><i class="l-you"></i>você usa</span><span><i class="l-sys"></i>o motor ou o Claude cria</span><span><i class="l-no"></i>não mexa</span></div>
+        </div>
+
+        <h3 id="dentro-do-projeto" data-busca="Dentro da pasta do projeto (assets, fonts, referencias)">Dentro da pasta do projeto</h3>
+        <p>Veja como a pasta nasce e como fica depois de preenchida, num exemplo completo: a promoção de Natal de uma loja de roupas fictícia.</p>
+        <div class="tabs" data-group="arvore">
+          <div class="tablist" role="tablist" aria-label="Estado do projeto">
+            <button role="tab" data-key="cheio">Exemplo completo</button><button role="tab" data-key="novo">Recém-criado</button>
+          </div>
+          <div class="tabpanel" role="tabpanel" data-key="cheio">
+            <div class="tree-card">
+              <div class="cap">projects/loja-exemplo-promo-natal — pronto para produzir</div>
+              <ul class="tree">
+                <li class="here"><div class="row"><span class="nm">{{I:folder}}loja-exemplo-promo-natal</span></div>
+                  <ul>
+                    <li class="you"><div class="row"><span class="nm">{{I:folder}}assets</span><span class="why"><b>Tudo o que entra no vídeo</b>: vídeos, fotos, logo, música</span></div>
+                      <ul>
+                        <li><div class="row"><span class="nm">{{I:film}}vitrine-abertura.mp4</span><span class="why">vídeo do celular, em pé</span></div></li>
+                        <li><div class="row"><span class="nm">{{I:film}}detalhe-tecido.mp4</span><span class="why">vídeo curto de detalhe</span></div></li>
+                        <li><div class="row"><span class="nm">{{I:file}}look-01.jpg</span><span class="why">fotos das peças, uma por arquivo</span></div></li>
+                        <li><div class="row"><span class="nm">{{I:file}}look-02.jpg · look-03.jpg</span></div></li>
+                        <li><div class="row"><span class="nm">{{I:file}}logo-loja-exemplo.png</span><span class="why">logo com fundo transparente</span></div></li>
+                        <li><div class="row"><span class="nm">{{I:file}}trilha-natal.mp3</span><span class="why">opcional, só com licença</span></div></li>
+                        <li class="you"><div class="row"><span class="nm">{{I:folder}}fonts</span><span class="why"><b>As fontes da marca</b>, com a licença</span></div>
+                          <ul>
+                            <li><div class="row"><span class="nm">{{I:file}}MarcaSans-Bold.woff2</span></div></li>
+                            <li><div class="row"><span class="nm">{{I:file}}MarcaSans-Regular.woff2</span></div></li>
+                            <li><div class="row"><span class="nm">{{I:file}}LICENCA-MarcaSans.txt</span></div></li>
+                          </ul></li>
+                      </ul></li>
+                    <li class="you"><div class="row"><span class="nm">{{I:folder}}referencias</span><span class="why"><b>Inspiração</b>: nunca entra no vídeo</span></div>
+                      <ul>
+                        <li><div class="row"><span class="nm">{{I:file}}REFERENCIAS.md</span><span class="why">links e o que aproveitar de cada um</span></div></li>
+                        <li><div class="row"><span class="nm">{{I:file}}print-reels-ritmo.png</span><span class="why">um Reels de que você gosta</span></div></li>
+                        <li><div class="row"><span class="nm">{{I:file}}vitrine-cores.jpg</span><span class="why">paleta de cores da vitrine</span></div></li>
+                      </ul></li>
+                    <li class="sys"><div class="row"><span class="nm">{{I:folder}}renders</span><span class="why"><b>Os MP4 finais aparecem aqui</b></span></div>
+                      <ul>
+                        <li><div class="row"><span class="nm">{{I:film}}loja-exemplo_promo-natal_v01.mp4</span><span class="why">primeira versão, criada pelo render</span></div></li>
+                        <li><div class="row"><span class="nm">{{I:film}}loja-exemplo_promo-natal_v02.mp4</span><span class="why">depois de um ajuste; a v01 continua lá</span></div></li>
+                        <li class="sys"><div class="row"><span class="nm">{{I:folder}}_rascunhos</span><span class="why">prévias, que não contam como versão</span></div></li>
+                      </ul></li>
+                    <li class="you"><div class="row"><span class="nm">{{I:file}}briefing.md</span><span class="why">as 8 perguntas, respondidas</span></div></li>
+                    <li class="sys"><div class="row"><span class="nm">{{I:file}}storyboard.md</span><span class="why">o plano cena a cena, escrito pelo Claude</span></div></li>
+                    <li class="sys"><div class="row"><span class="nm">{{I:file}}manifesto-de-assets.md</span><span class="why">a lista dos seus arquivos e de onde vieram</span></div></li>
+                    <li class="sys"><div class="row"><span class="nm">{{I:file}}versoes.md</span><span class="why">o registro de cada versão e do que mudou</span></div></li>
+                    <li class="sys"><div class="row"><span class="nm">{{I:file}}project.json · project-status.json</span><span class="why">dados e etapa do projeto</span></div></li>
+                    <li class="no"><div class="row"><span class="nm">{{I:folder}}src</span><span class="why">o código do vídeo — <b>quem mexe é o Claude</b></span></div></li>
+                  </ul></li>
+              </ul>
+              <div class="legend" style="margin-top:12px"><span><i class="l-you"></i>você coloca ou responde</span><span><i class="l-sys"></i>o motor ou o Claude cria</span><span><i class="l-no"></i>não mexa</span></div>
+            </div>
+          </div>
+          <div class="tabpanel" role="tabpanel" data-key="novo" hidden>
+            <div class="tree-card">
+              <div class="cap">projects/loja-exemplo-promo-natal — logo depois de criado</div>
+              <ul class="tree">
+                <li class="here"><div class="row"><span class="nm">{{I:folder}}loja-exemplo-promo-natal</span></div>
+                  <ul>
+                    <li class="you"><div class="row"><span class="nm">{{I:folder}}assets</span><span class="why">vazia: <b>coloque aqui os seus arquivos</b></span></div></li>
+                    <li class="you"><div class="row"><span class="nm">{{I:folder}}referencias</span><span class="why">só com o <code>REFERENCIAS.md</code> em branco</span></div></li>
+                    <li class="sys"><div class="row"><span class="nm">{{I:folder}}renders</span><span class="why">vazia até o primeiro render</span></div></li>
+                    <li class="you"><div class="row"><span class="nm">{{I:file}}briefing.md</span><span class="why">as 8 perguntas, <b>esperando as suas respostas</b></span></div></li>
+                    <li class="sys"><div class="row"><span class="nm">{{I:file}}storyboard.md · manifesto-de-assets.md · versoes.md</span><span class="why">modelos que o Claude preenche</span></div></li>
+                    <li class="sys"><div class="row"><span class="nm">{{I:file}}project.json · project-status.json</span><span class="why">criados pelo motor</span></div></li>
+                    <li class="no"><div class="row"><span class="nm">{{I:folder}}src</span><span class="why">código inicial e uma cópia do motor</span></div></li>
+                  </ul></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <h3 id="o-que-colocar" data-busca="O que colocar em cada pasta (formatos)">O que colocar em cada pasta</h3>
+        <div class="tbl-scroll"><table class="tbl">
+          <thead><tr><th>Pasta</th><th>O que colocar</th><th>Formatos e dicas</th></tr></thead>
+          <tbody>
+            <tr><td><code>assets/</code></td><td>Vídeos e fotos</td><td>Vídeo: MP4 ou MOV, de preferência em pé (vertical). Mande o arquivo original do celular ou da câmera: o que passou pelo WhatsApp perde qualidade. Foto: JPG ou PNG, com pelo menos 1080 px de largura.</td></tr>
+            <tr><td><code>assets/</code></td><td>Logo</td><td>PNG com fundo transparente, ou SVG. Evite logo dentro de uma foto ou de um print.</td></tr>
+            <tr><td><code>assets/</code></td><td>Música e narração</td><td>MP3 ou WAV, só com licença para redes sociais (veja <a href="implantacao.html#licenca-midia">Licenças</a>).</td></tr>
+            <tr><td><code>assets/fonts/</code></td><td>Fontes da marca</td><td>Arquivos <code>.woff2</code>, <code>.ttf</code> ou <code>.otf</code>, com o arquivo da licença. Ter a fonte instalada no computador não basta: o vídeo usa só o que está nesta pasta. Se ela não existir, crie.</td></tr>
+            <tr><td><code>referencias/</code></td><td>Inspiração</td><td>Prints, vídeos de referência e paletas; os links vão no <code>REFERENCIAS.md</code>, com o que aproveitar de cada um (ritmo, cor, tipografia). Nada daqui entra no vídeo.</td></tr>
+            <tr><td><code>renders/</code></td><td>Nada</td><td>O motor guarda os MP4 aqui. Não coloque nem renomeie arquivos.</td></tr>
+          </tbody>
+        </table></div>
+        <div class="note info">{{I:bulb}}<div><strong class="t">Três hábitos que evitam problemas</strong>
+          <p><strong>Nomes de arquivo sem espaço e sem acento:</strong> <code>look-01.jpg</code>, e não <code>Look 01 (final).JPG</code>.<br><strong>Subpastas são permitidas</strong> dentro de <code>assets</code> (por exemplo, <code>fotos/</code> e <code>videos/</code>): o Claude encontra.<br><strong>Faça backup:</strong> <code>assets</code>, <code>referencias</code> e <code>renders</code> ficam só no seu computador.</p></div></div>
+
+        <h3 id="slug" data-busca="Slug: o nome curto do projeto">O slug</h3>
+        <p class="def"><b>Slug</b> é o nome curto do projeto. Ele vira o nome da pasta e é como você e o Claude se referem ao vídeo. Só pode ter <b>letras minúsculas, números e hífens</b>.</p>
+        <div class="chips" style="margin:6px 0 14px"><span class="chip"><b>a–z</b> minúsculas</span><span class="chip"><b>0–9</b> números</span><span class="chip"><b>-</b> hífen entre as palavras</span><span class="chip">sem espaço</span><span class="chip">sem acento ou ç</span><span class="chip">sem _ (underline)</span></div>
+        <p>Um bom padrão: <strong>cliente + assunto</strong>, com um detalhe se precisar.</p>
+        <div class="tbl-scroll"><table class="tbl">
+          <thead><tr><th>Slug</th><th></th><th>Por quê</th></tr></thead>
+          <tbody>
+            <tr><td><code>loja-exemplo-promo-natal</code></td><td style="color:var(--ok)">{{I:check}}</td><td>Cliente + assunto + detalhe</td></tr>
+            <tr><td><code>cafe-exemplo-abertura</code></td><td style="color:var(--ok)">{{I:check}}</td><td>Curto e claro</td></tr>
+            <tr><td><code>studio-exemplo-aula-experimental</code></td><td style="color:var(--ok)">{{I:check}}</td><td>Dá para saber o vídeo só pelo nome</td></tr>
+            <tr><td><code>Promo Natal</code></td><td style="color:var(--err)">{{I:x}}</td><td>Tem espaço e maiúscula</td></tr>
+            <tr><td><code>promoção-natal</code></td><td style="color:var(--err)">{{I:x}}</td><td>Tem acento e cedilha</td></tr>
+            <tr><td><code>promo_natal</code></td><td style="color:var(--err)">{{I:x}}</td><td>Usa underline em vez de hífen</td></tr>
+            <tr><td><code>video1</code></td><td style="color:var(--err)">{{I:x}}</td><td>Não diz de quem nem do quê</td></tr>
+            <tr><td><code>loja-exemplo-promo-natal-v2</code></td><td style="color:var(--err)">{{I:x}}</td><td>A versão não vai no slug: o motor numera sozinho (v01, v02…)</td></tr>
+          </tbody>
+        </table></div>
+        <h4>E o nome do MP4?</h4>
+        <p>Vem do <strong>cliente</strong> e do <strong>projeto</strong> que você informou ao criar, mais a versão:</p>
+        <div class="crumbs" aria-label="Como o nome do MP4 é formado"><span>Loja Exemplo</span><em>+</em><span>Promo Natal</span><em>+</em><span>versão 1</span><em>→</em><span class="on">loja-exemplo_promo-natal_v01.mp4</span></div>
+        <p class="muted">Escolha o slug com calma: renomear a pasta depois, à mão, desliga o projeto do controle de etapas. Se precisar mudar, peça ao Claude.</p>
+      </section>
+
+      <!-- ============ 4 ============ -->
+      <section class="sec" id="briefing" data-titulo="Briefing Rápido" data-busca="Briefing Rápido (8 perguntas)">
+        <div class="sec-head"><div class="sec-num">4</div><div><h2>Briefing Rápido</h2><div class="meta"><span>{{I:clock}} 5 a 10 minutos para responder</span><span>{{I:check}} Resultado: o Claude entende o vídeo sem adivinhar</span></div></div></div>
+
+        <p>São 8 perguntas simples, que já vêm no <code>briefing.md</code> de todo projeto novo. Frases curtas bastam. O briefing é o que mais pesa no resultado: <strong>o Claude nunca inventa preço, data ou condição</strong>, então o que não estiver aqui ele vai perguntar.</p>
+        <div class="cols">
+          <div class="col"><h4>{{I:file}} No arquivo</h4><div class="sub"><code>projects/&lt;slug&gt;/briefing.md</code></div><ul><li>Abra com o Bloco de Notas (Windows) ou o TextEdit (Mac).</li><li>Escreva cada resposta no lugar do <code>___</code>, embaixo da pergunta.</li><li>Salve e avise o Claude no chat.</li></ul></div>
+          <div class="col"><h4>{{I:chat}} No chat</h4><div class="sub">O Claude registra no arquivo</div><ul><li>Cole as respostas numeradas, de 1 a 8.</li><li>Pode responder em mais de uma mensagem.</li><li>Ele pergunta só o que for essencial e faltar.</li></ul></div>
+        </div>
+        <p class="muted">Enquanto o briefing estiver em branco, o projeto não sai da primeira etapa: o status mostra “o briefing ainda está vazio”.</p>
+
+        <div class="qs">
+          <article class="q" id="q1" data-busca="Pergunta 1: o que é o vídeo e para quem">
+            <div class="q-head"><div class="q-num">1</div><h4>{{PERGUNTA:1}}</h4></div>
+            <p>O que você está divulgando (produto, serviço, evento) e quem deve assistir.</p>
+            <div class="gb">
+              <div class="good"><div class="lbl">{{I:check}} Bom</div><blockquote>Promoção de Natal da Loja Exemplo, loja de roupas femininas. Para clientes da cidade que já seguem a loja.</blockquote></div>
+              <div class="bad"><div class="lbl">{{I:x}} Evite</div><blockquote>Um vídeo para o Instagram.</blockquote><small>Não diz o que é divulgado nem para quem.</small></div>
+            </div>
+          </article>
+          <article class="q" id="q2" data-busca="Pergunta 2: o que fazer depois de assistir (CTA)">
+            <div class="q-head"><div class="q-num">2</div><h4>{{PERGUNTA:2}}</h4></div>
+            <p>Uma ação só. Ela vira o <strong>CTA</strong>, a chamada final do vídeo, que aparece completa no último quadro.</p>
+            <div class="gb">
+              <div class="good"><div class="lbl">{{I:check}} Bom</div><blockquote>Chamar no WhatsApp para reservar a peça.</blockquote></div>
+              <div class="bad"><div class="lbl">{{I:x}} Evite</div><blockquote>Seguir, curtir, compartilhar, visitar o site e chamar no WhatsApp.</blockquote><small>Cinco pedidos viram nenhum: escolha um.</small></div>
+            </div>
+          </article>
+          <article class="q" id="q3" data-busca="Pergunta 3: mensagem principal">
+            <div class="q-head"><div class="q-num">3</div><h4>{{PERGUNTA:3}}</h4></div>
+            <p>O que a pessoa precisa lembrar mesmo se só vir 3 segundos. Ela costuma virar o <strong>hook</strong>, a frase de abertura.</p>
+            <div class="gb">
+              <div class="good"><div class="lbl">{{I:check}} Bom</div><blockquote>No Natal, toda a loja com 20% de desconto.</blockquote></div>
+              <div class="bad"><div class="lbl">{{I:x}} Evite</div><blockquote>Mostrar a coleção nova, os descontos, o atendimento, o estacionamento e o horário especial.</blockquote><small>Isso é uma lista de assuntos. A mensagem é uma só.</small></div>
+            </div>
+          </article>
+          <article class="q" id="q4" data-busca="Pergunta 4: duração em segundos">
+            <div class="q-head"><div class="q-num">4</div><h4>{{PERGUNTA:4}}</h4></div>
+            <p>Um número. Ofertas e anúncios funcionam bem entre 15 e 30 segundos; histórias e bastidores, entre 30 e 60.</p>
+            <div class="gb">
+              <div class="good"><div class="lbl">{{I:check}} Bom</div><blockquote>20 segundos.</blockquote></div>
+              <div class="bad"><div class="lbl">{{I:x}} Evite</div><blockquote>Curtinho.</blockquote><small>O Claude vai precisar perguntar: a duração define o número de cenas.</small></div>
+            </div>
+          </article>
+          <article class="q" id="q5" data-busca="Pergunta 5: textos obrigatórios e fatos">
+            <div class="q-head"><div class="q-num">5</div><h4>{{PERGUNTA:5}}</h4></div>
+            <p>Escreva <strong>exatamente</strong> como deve aparecer, com maiúsculas, vírgulas e símbolos. E diga o que não pode aparecer.</p>
+            <div class="gb">
+              <div class="good"><div class="lbl">{{I:check}} Bom</div><blockquote>"20% OFF em toda a loja" · "de 1 a 24 de dezembro" · "Rua Exemplo, 123". Não pode aparecer a palavra "liquidação".</blockquote></div>
+              <div class="bad"><div class="lbl">{{I:x}} Evite</div><blockquote>Coloca o desconto e a data.</blockquote><small>O Claude nunca inventa um número, uma data ou uma condição: ele vai parar e perguntar.</small></div>
+            </div>
+          </article>
+          <article class="q" id="q6" data-busca="Pergunta 6: material disponível">
+            <div class="q-head"><div class="q-num">6</div><h4>{{PERGUNTA:6}}</h4></div>
+            <p>Liste o que você tem e coloque os arquivos em <code>assets/</code> (veja <a href="#o-que-colocar">O que colocar em cada pasta</a>). Faltou algo? Diga também: o Claude adapta o vídeo ao material.</p>
+            <div class="gb">
+              <div class="good"><div class="lbl">{{I:check}} Bom</div><blockquote>3 vídeos da vitrine (celular, em pé), 6 fotos de peças, logo em PNG transparente e a fonte da marca. Sem música.</blockquote></div>
+              <div class="bad"><div class="lbl">{{I:x}} Evite</div><blockquote>Tenho umas fotos aí.</blockquote><small>Sem saber o quê nem quantas, não dá para planejar as cenas.</small></div>
+            </div>
+          </article>
+          <article class="q" id="q7" data-busca="Pergunta 7: tom e referências (linguagem automática)">
+            <div class="q-head"><div class="q-num">7</div><h4>{{PERGUNTA:7}}</h4></div>
+            <p>O clima do vídeo, em palavras, e de preferência um exemplo. Não sabe que estilo escolher? Escreva <strong>“automático”</strong>: o Claude propõe 2 ou 3 caminhos (veja <a href="#linguagens">Linguagens visuais</a>).</p>
+            <div class="gb">
+              <div class="good"><div class="lbl">{{I:check}} Bom</div><blockquote>Alegre, mas elegante, sem cara de liquidação. Gosto do ritmo deste Reels: (link). Linguagem: automático.</blockquote></div>
+              <div class="bad"><div class="lbl">{{I:x}} Evite</div><blockquote>Moderno e chamativo.</blockquote><small>Todo mundo quer isso. Diga o clima e mostre uma referência.</small></div>
+            </div>
+          </article>
+          <article class="q" id="q8" data-busca="Pergunta 8: aprovar cada etapa ou fazer direto">
+            <div class="q-head"><div class="q-num">8</div><h4>{{PERGUNTA:8}}</h4></div>
+            <p>“Aprovar cada etapa” é o <a href="#modos">Modo Diretor</a>; “fazer direto” é o Modo Produção. Em branco vale “aprovar cada etapa”.</p>
+            <div class="gb">
+              <div class="good"><div class="lbl">{{I:check}} Bom</div><blockquote>Aprovar cada etapa.</blockquote><small>Recomendado nos primeiros vídeos. Quando a direção já estiver clara: “fazer direto e me mostrar no Studio”.</small></div>
+              <div class="bad"><div class="lbl">{{I:x}} Evite</div><blockquote>Faz direto e já gera o MP4 sem eu ver.</blockquote><small>Não existe: a aprovação no Studio e a autorização do render são sempre suas.</small></div>
+            </div>
+          </article>
+        </div>
+
+        <h3 id="briefing-exemplo" data-busca="Exemplo de briefing completo para copiar">O exemplo inteiro, para usar de modelo</h3>
+        <div class="cmd chat"><div class="cmd-bar"><span class="where"><i></i>Mensagem para o Claude</span><button class="copy" type="button">{{I:copy}}<span>Copiar</span></button></div>
+<pre>Briefing Rápido do projeto loja-exemplo-promo-natal:
+1. Promoção de Natal da Loja Exemplo, loja de roupas femininas. Para clientes da cidade que já seguem a loja.
+2. Chamar no WhatsApp para reservar a peça.
+3. No Natal, toda a loja com 20% de desconto.
+4. 20 segundos.
+5. "20% OFF em toda a loja" · "de 1 a 24 de dezembro" · "Rua Exemplo, 123". Não pode aparecer a palavra "liquidação".
+6. 3 vídeos da vitrine (celular, em pé), 6 fotos de peças, logo em PNG transparente e a fonte da marca, já em assets. Sem música.
+7. Alegre, mas elegante, sem cara de liquidação. Linguagem: automático.
+8. Aprovar cada etapa.</pre></div>
+      </section>
+
+      <!-- ============ 5 ============ -->
+      <section class="sec" id="completo" data-titulo="Briefing Completo" data-busca="Briefing Completo">
+        <div class="sec-head"><div class="sec-num">5</div><div><h2>Briefing Completo</h2><div class="meta"><span>{{I:clock}} 2 minutos de leitura</span></div></div></div>
+        <p>Para quem já sabe o que quer em detalhe. Use quando o vídeo tiver muitas exigências:</p>
+        <ul>
+          <li>a marca tem manual de identidade (cores, fontes, uso do logo);</li>
+          <li>há muito texto obrigatório, legendas ou narração;</li>
+          <li>o trabalho é de agência, com aprovação do cliente final.</li>
+        </ul>
+        <p>Ele está em <code>docs/02-BRIEFING.md</code>, na parte “Briefing Completo”, dividido em blocos:</p>
+        <div class="chips" style="margin:10px 0 16px"><span class="chip">Identificação</span><span class="chip">Objetivo</span><span class="chip">Conceito</span><span class="chip">Formato</span><span class="chip">Texto</span><span class="chip">Assets</span><span class="chip">Áudio</span><span class="chip">Legendas</span><span class="chip">Identidade</span><span class="chip">Referência</span><span class="chip">Restrições</span><span class="chip">Execução</span></div>
+        <ol class="steps">
+          <li><h4>Responda primeiro as 8 perguntas do Briefing Rápido</h4><p>Elas continuam valendo como base.</p></li>
+          <li><h4>Copie só os blocos de que precisar</h4><p>Cole no fim do <code>briefing.md</code> do projeto, ou mande no chat. Campos que não se aplicam podem ficar em branco.</p></li>
+        </ol>
+      </section>
+
+      <!-- ============ 6 ============ -->
+      <section class="sec" id="linguagens" data-titulo="Linguagens visuais" data-busca="Linguagens visuais">
+        <div class="sec-head"><div class="sec-num">6</div><div>
+          <h2>Linguagens visuais</h2>
+          <div class="meta"><span>{{I:clock}} 6 minutos de leitura</span><span>{{I:check}} Você vai saber escolher (ou deixar o Claude escolher)</span></div>
+        </div></div>
+
+        <p>Se todo vídeo usa o mesmo ritmo, o mesmo layout e o mesmo jeito de se mexer, todos parecem o mesmo vídeo. Por isso, cada Reels escolhe uma <dfn>linguagem visual</dfn> antes de começar.</p>
+        <p class="def"><b>Linguagem visual</b> é um pacote de decisões de design que andam juntas: quanto tempo cada cena dura, onde as coisas ficam na tela, a textura da imagem e o jeito de tudo se mexer. O motor tem 10 linguagens prontas.</p>
+
+        <div class="note info">{{I:info}}<div><strong class="t">Não precisa decorar nada disso.</strong><p>Na <a href="#q7">pergunta 7 do briefing</a>, responda <strong>“automático”</strong>: o Claude propõe 2 ou 3 caminhos com linguagens diferentes, cada um com uma frase explicando a ideia, e você escolhe.</p></div></div>
+
+        <h3 id="eixos" data-busca="Os 4 eixos de uma linguagem">O que muda de uma linguagem para outra</h3>
+        <p>Toda linguagem é definida por quatro escolhas. Duas linguagens do catálogo nunca coincidem em mais de duas delas: é isso que garante que pareçam vídeos diferentes, e não variações do mesmo.</p>
+        <div class="axes">
+          <div class="axis">
+            <svg viewBox="0 0 160 46" aria-hidden="true">
+              <g class="f-ink3"><rect x="0" y="4" width="76" height="9" rx="2"/><rect x="80" y="4" width="80" height="9" rx="2"/></g>
+              <g class="f-ink2"><rect x="0" y="18" width="37" height="9" rx="2"/><rect x="41" y="18" width="37" height="9" rx="2"/><rect x="82" y="18" width="37" height="9" rx="2"/><rect x="123" y="18" width="37" height="9" rx="2"/></g>
+              <g class="f-accent"><rect x="0" y="32" width="17" height="9" rx="2"/><rect x="20.5" y="32" width="17" height="9" rx="2"/><rect x="41" y="32" width="17" height="9" rx="2"/><rect x="61.5" y="32" width="17" height="9" rx="2"/><rect x="82" y="32" width="17" height="9" rx="2"/><rect x="102.5" y="32" width="17" height="9" rx="2"/><rect x="123" y="32" width="17" height="9" rx="2"/><rect x="143.5" y="32" width="16.5" height="9" rx="2"/></g>
+            </svg>
+            <b>Ritmo</b><span>Quanto tempo cada cena fica na tela: lento, médio ou rápido.</span>
+          </div>
+          <div class="axis">
+            <svg viewBox="0 0 160 46" aria-hidden="true">
+              <g class="f-none s-line" stroke-width="1.2"><rect x="8" y="2" width="24" height="42" rx="3"/><rect x="48" y="2" width="24" height="42" rx="3"/><rect x="88" y="2" width="24" height="42" rx="3"/><rect x="128" y="2" width="24" height="42" rx="3"/></g>
+              <rect x="13" y="17" width="14" height="12" rx="1.5" class="f-accent"/>
+              <rect x="51" y="6" width="12" height="14" rx="1.5" class="f-accent"/><rect x="51" y="33" width="16" height="3" rx="1" class="f-ink2"/>
+              <g class="f-accent"><rect x="91" y="6" width="8.5" height="10" rx="1.2"/><rect x="100.5" y="6" width="8.5" height="10" rx="1.2"/><rect x="91" y="18" width="8.5" height="10" rx="1.2"/><rect x="100.5" y="18" width="8.5" height="10" rx="1.2"/></g>
+              <rect x="128" y="2" width="24" height="42" rx="3" class="f-accent"/>
+            </svg>
+            <b>Layout</b><span>Onde as coisas ficam: centralizado, assimétrico, em grade ou tela cheia.</span>
+          </div>
+          <div class="axis">
+            <svg viewBox="0 0 160 46" aria-hidden="true">
+              <defs><pattern id="ax-dots" width="4" height="4" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".7" class="f-ink2"/><circle cx="3" cy="3" r=".5" class="f-ink3"/></pattern></defs>
+              <rect x="6" y="5" width="36" height="36" rx="4" class="f-surface2 s-line"/>
+              <rect x="62" y="5" width="36" height="36" rx="4" fill="url(#ax-dots)" class="s-line"/>
+              <g transform="rotate(-8 136 23)"><rect x="121" y="12" width="32" height="22" class="f-ink" transform="translate(2.5 2.5)"/><rect x="121" y="12" width="32" height="22" class="f-accent"/></g>
+            </svg>
+            <b>Textura</b><span>A superfície da imagem: limpa, granulada (grão de filme) ou recortada (papel).</span>
+          </div>
+          <div class="axis">
+            <svg viewBox="0 0 160 46" aria-hidden="true">
+              <line x1="4" y1="42" x2="156" y2="42" class="s-line" stroke-width="1"/>
+              <path d="M6 40 C60 40, 70 6, 152 6" class="s-accent" fill="none" stroke-width="2.4" stroke-linecap="round"/>
+              <circle cx="152" cy="6" r="3.5" class="f-accent"/>
+            </svg>
+            <b>Movimento</b><span>O jeito de tudo se mexer no vídeo. São 6 personalidades:</span>
+          </div>
+        </div>
+
+        <div class="curves" aria-label="As 6 personalidades de movimento">
+          <div class="curve"><svg viewBox="0 0 80 50" aria-hidden="true"><path class="g" d="M4 46H76"/><path class="k" d="M6 44 C18 8, 38 6, 74 6"/><circle class="dot" cx="74" cy="6" r="2.6"/></svg><b>suave</b><small>desacelera com calma</small></div>
+          <div class="curve"><svg viewBox="0 0 80 50" aria-hidden="true"><path class="g" d="M4 46H76 M4 6H76" stroke-dasharray="2 3"/><path class="k" d="M6 44 C16 -10, 32 -4, 44 2 C52 6, 60 8, 74 6"/><circle class="dot" cx="74" cy="6" r="2.6"/></svg><b>elástica</b><small>passa do ponto e volta</small></div>
+          <div class="curve"><svg viewBox="0 0 80 50" aria-hidden="true"><path class="g" d="M4 46H76"/><path class="k" d="M6 44 C9 10, 12 6, 20 6 L74 6"/><circle class="dot" cx="74" cy="6" r="2.6"/></svg><b>seca</b><small>arranca e para firme</small></div>
+          <div class="curve"><svg viewBox="0 0 80 50" aria-hidden="true"><path class="g" d="M4 46H76"/><path class="k" d="M6 44 C44 44, 36 6, 74 6"/><circle class="dot" cx="74" cy="6" r="2.6"/></svg><b>cinemato&shy;gráfica</b><small>longa e elegante</small></div>
+          <div class="curve"><svg viewBox="0 0 80 50" aria-hidden="true"><path class="g" d="M4 46H76"/><path class="k" d="M6 44 L62 6 L74 6"/><circle class="dot" cx="74" cy="6" r="2.6"/></svg><b>mecânica</b><small>velocidade constante</small></div>
+          <div class="curve"><svg viewBox="0 0 80 50" aria-hidden="true"><path class="g" d="M4 46H76"/><path class="k" d="M6 44 H18 V35 H30 V26 H42 V16 H54 V6 H74"/><circle class="dot" cx="74" cy="6" r="2.6"/></svg><b>degraus</b><small>quadro a quadro</small></div>
+        </div>
+
+        <div class="tools">
+          <h3 id="catalogo" data-busca="Catálogo das 10 linguagens">As 10 linguagens</h3>
+          <button class="btn" type="button" data-play aria-pressed="true">{{I:pause}}<span>Pausar miniaturas</span></button>
+        </div>
+        <p class="muted" style="margin-top:0">Cada miniatura imita o ritmo e o movimento da linguagem. São ilustrações: o vídeo de verdade usa os seus textos, cores e imagens.</p>
+        <div class="langs">
+{{LINGUAGENS}}
+        </div>
+
+        <h3 id="como-escolher" data-busca="Como escolher a linguagem">Como escolher</h3>
+        <ol class="steps">
+          <li><h4>Comece pelo material que você tem</h4><p>Sem bons vídeos ou fotos? Prefira linguagens de texto e grafismo (tipografia cinética, colagem, pop, interface). Com imagens de qualidade, cinematográfico e nativo de rede brilham.</p></li>
+          <li><h4>Depois, pelo tom da marca</h4><p>Calma e sofisticação pedem ritmo lento; promoção e energia pedem ritmo rápido. Os campos “bom para” e “evite” de cada cartão ajudam.</p></li>
+          <li><h4>Na dúvida, deixe “automático”</h4><p>O Claude propõe 2 ou 3 caminhos que diferem de verdade entre si, e você escolhe no <a href="#gates">GATE 1</a>.</p></li>
+        </ol>
+        <div class="note warn">{{I:warn}}<div><strong class="t">Repetindo a linguagem para o mesmo cliente?</strong><p>Se a escolhida for a mesma de um dos 3 últimos vídeos desse cliente, o Claude pede um motivo de uma linha (por exemplo, “continuação da mesma campanha”). É só para evitar que os vídeos fiquem todos iguais sem querer.</p></div></div>
+        <div class="note adv">{{I:code}}<div><strong class="t">Para quem já programa</strong><p>O catálogo é o arquivo <code>engine/linguagens.json</code>; no terminal, <code>npm run linguagens</code> lista tudo e <code>npm run linguagens -- &lt;id&gt;</code> mostra os detalhes. Linguagens próprias ficam em <code>local/linguagens.json</code> (veja <a href="#local">Camada local</a>).</p></div></div>
+      </section>
+
+      <!-- ============ 7 ============ -->
+      <section class="sec" id="gates" data-titulo="Os 4 gates" data-busca="Os 4 gates (aprovações)">
+        <div class="sec-head"><div class="sec-num">7</div><div><h2>Os 4 gates</h2><div class="meta"><span>{{I:clock}} 4 minutos de leitura</span><span>{{I:check}} Você sabe o que está aprovando em cada um</span></div></div></div>
+
+        <p>Em cada gate, o Claude para, mostra o que fez e espera a sua resposta no chat. Aprovar é só escrever; pedir mudança também.</p>
+        <div class="gates">
+          <div class="gate-c">
+            <div class="gn">GATE 1</div><h4>Conceito</h4>
+            <p><strong>O que você vê:</strong> 2 ou 3 caminhos, cada um com uma ideia em uma frase, a <a href="#linguagens">linguagem visual</a> e o porquê.</p>
+            <p><strong>O que você decide:</strong> o caminho do vídeo.</p>
+            <span class="pill">pode ser pulado com “fazer direto”</span>
+            <div class="say"><b>Exemplo de resposta</b>“Gostei do caminho B, mas com o tom do A.”</div>
+          </div>
+          <div class="gate-c">
+            <div class="gn">GATE 2</div><h4>Roteiro + storyboard</h4>
+            <p><strong>O que você vê:</strong> o texto de cada cena e o que aparece nela, com o tempo de cada uma. A soma dá a duração do briefing.</p>
+            <p><strong>O que você decide:</strong> a história e a ordem das cenas, antes de qualquer montagem.</p>
+            <span class="pill">pode ser pulado com “fazer direto”</span>
+            <div class="say"><b>Exemplo de resposta</b>“Aprovado. Só troque ‘venha’ por ‘visite’ na cena 4.”</div>
+          </div>
+          <div class="gate-c lock">
+            <div class="gn">GATE 3</div><h4>Studio</h4>
+            <p><strong>O que você vê:</strong> o vídeo de verdade, no Studio, com seus textos, imagens e movimento.</p>
+            <p><strong>O que você decide:</strong> se o vídeo está pronto. Confira com calma (lista abaixo).</p>
+            <span class="pill">{{I:lock}} nunca é pulado</span>
+            <div class="say"><b>Exemplo de resposta</b>“Aprovado no Studio.”</div>
+          </div>
+          <div class="gate-c lock">
+            <div class="gn">GATE 4</div><h4>Render</h4>
+            <p><strong>O que você vê:</strong> o resultado de uma simulação técnica e o nome do arquivo que vai ser gerado.</p>
+            <p><strong>O que você decide:</strong> autorizar a criação do MP4 final.</p>
+            <span class="pill">{{I:lock}} nunca é pulado</span>
+            <div class="say"><b>Exemplo de resposta</b>“Pode renderizar.”</div>
+          </div>
+        </div>
+        <div class="note info">{{I:info}}<div><strong class="t">Dá para aprovar o 3 e o 4 de uma vez</strong><p>“Aprovado no Studio, pode renderizar.” O Claude faz a simulação técnica e, se estiver tudo certo, segue para o render sem perguntar de novo.</p></div></div>
+
+        <h3 id="conferir-studio" data-busca="O que conferir no Studio (GATE 3)">O que conferir no Studio</h3>
+        <p>Depois do GATE 3 o vídeo vira arquivo. Antes de aprovar, assista do começo ao fim pelo menos duas vezes e confira:</p>
+        <table class="tbl">
+          <thead><tr><th>Confira</th><th>Por quê</th></tr></thead>
+          <tbody>
+            <tr><td>Preços, datas, endereços e telefones</td><td>Letra por letra, iguais à pergunta 5 do briefing.</td></tr>
+            <tr><td>Ortografia de todos os textos</td><td>Pause em cada cena. Erro de digitação é o problema mais comum.</td></tr>
+            <tr><td>Os primeiros segundos</td><td>A frase de abertura precisa estar legível em meio segundo: é quando a pessoa decide se continua.</td></tr>
+            <tr><td>Leitura no tamanho do celular</td><td>Diminua a janela do navegador ou veja a prévia de longe. Texto pequeno ou fino demais some no celular.</td></tr>
+            <tr><td>As bordas</td><td>O Instagram cobre o topo e a parte de baixo com botões e legenda: nada importante perto delas.</td></tr>
+            <tr><td>O último quadro</td><td>A chamada final (“chame no WhatsApp”, “visite a loja”) precisa estar inteira e funcionar sozinha.</td></tr>
+            <tr><td>O som</td><td>Volume da música e da narração, e se a música combina com o corte.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ============ 8 ============ -->
+      <section class="sec" id="versoes" data-titulo="Alterações e versões" data-busca="Alterações e versões">
+        <div class="sec-head"><div class="sec-num">8</div><div><h2>Alterações e versões</h2><div class="meta"><span>{{I:clock}} 4 minutos de leitura</span></div></div></div>
+
+        <h3 id="ajustes" data-busca="Como pedir ajustes">Como pedir ajustes</h3>
+        <p>Diga <strong>onde</strong> (o número da cena ou o tempo que o Studio mostra), <strong>o quê</strong> e <strong>como deve ficar</strong>.</p>
+        <div class="gb">
+          <div class="good"><div class="lbl">{{I:check}} Bom</div><blockquote>Na cena 3, troque “Venha” por “Visite” e deixe o texto 1 segundo a mais na tela.</blockquote></div>
+          <div class="bad"><div class="lbl">{{I:x}} Evite</div><blockquote>Não gostei, muda aí.</blockquote><small>O Claude não sabe o que mudar e pode estragar o que estava bom.</small></div>
+        </div>
+        <p style="margin-top:16px">Outros pedidos claros:</p>
+        <ul>
+          <li>“Em 00:07, use o vídeo <code>detalhe-tecido.mp4</code> no lugar da foto <code>look-02.jpg</code>.”</li>
+          <li>“O logo está pequeno no final: aumente uns 30%.”</li>
+          <li>“A música está alta demais em relação à narração.”</li>
+          <li>“Gostei do ritmo, mas as transições estão chamando atenção demais: deixe mais discretas.”</li>
+        </ul>
+
+        <h3 id="o-que-acontece" data-busca="O que acontece depois de um ajuste">O que acontece depois de um ajuste</h3>
+        <table class="tbl">
+          <thead><tr><th>Quando você pede</th><th>O que acontece</th></tr></thead>
+          <tbody>
+            <tr><td>Antes de aprovar no Studio</td><td>O Claude ajusta e você assiste de novo. Nenhum MP4 foi gerado ainda.</td></tr>
+            <tr><td>Depois do MP4 (ajuste visual)</td><td>O projeto volta para a montagem; você aprova no Studio e autoriza de novo; sai a <strong>v02</strong>.</td></tr>
+            <tr><td>Depois do MP4 (mudança no texto ou na ordem das cenas)</td><td>Volta para o roteiro e o storyboard (GATE 2) e segue até a <strong>v02</strong>.</td></tr>
+          </tbody>
+        </table>
+        <div class="note ok">{{I:check}}<div><strong class="t">Nenhuma versão é apagada nem substituída</strong><p>A v01 continua na pasta quando nasce a v02. O <code>versoes.md</code> registra a data de cada uma e o que mudou.</p></div></div>
+
+        <h3 id="onde-mp4" data-busca="Onde o MP4 aparece">Onde o MP4 aparece</h3>
+        <div class="crumbs" aria-label="Caminho até o MP4"><span>{{I:folder}}projects</span><em>›</em><span>{{I:folder}}loja-exemplo-promo-natal</span><em>›</em><span>{{I:folder}}renders</span><em>›</em><span class="on">{{I:film}}loja-exemplo_promo-natal_v01.mp4</span></div>
+        <ul>
+          <li>O nome junta <strong>cliente</strong>, <strong>projeto</strong> e <strong>versão</strong> (veja <a href="#slug">O slug</a>).</li>
+          <li><code>renders/_rascunhos/</code> guarda prévias rápidas: servem para conferir, não para postar.</li>
+          <li>No Cowork, os arquivos que o Claude manda no chat (prévias, imagens de conferência) também aparecem numa pasta <code>Claude outputs</code>, na raiz. <strong>O vídeo final é sempre o de <code>renders/</code>.</strong></li>
+        </ul>
+        <div class="note warn">{{I:warn}}<div><strong class="t">Faça backup</strong><p>Os MP4 e os seus arquivos ficam só no seu computador. Copie a pasta do projeto para um HD ou para a nuvem depois de entregar.</p></div></div>
+        <div class="note adv">{{I:code}}<div><strong class="t">Para quem já programa</strong><p><code>npm run archive -- &lt;slug&gt; --destino "D:\Backup"</code> faz uma cópia conferida do projeto. <code>npm run render -- &lt;slug&gt; --draft</code> gera um rascunho em <code>renders/_rascunhos/</code>.</p></div></div>
+      </section>
+
+      <!-- ============ 9 ============ -->
+      <section class="sec" id="clientes" data-titulo="Clientes recorrentes" data-busca="Clientes recorrentes (DNA de cliente)">
+        <div class="sec-head"><div class="sec-num">9</div><div><h2>Clientes recorrentes</h2><div class="meta"><span>{{I:clock}} 3 minutos de leitura</span></div></div></div>
+        <p class="def"><b>DNA de cliente</b> é uma ficha com o que vale para <b>todos os vídeos</b> de um cliente: personalidade, público, cores, fontes, tom, chamadas preferidas. Com ela, você não repete essas informações a cada briefing.</p>
+        <h3 id="dna-criar" data-busca="Criar o DNA de um cliente">Como criar</h3>
+        <p>Peça ao Claude, com as informações que você já tem:</p>
+        <div class="cmd chat"><div class="cmd-bar"><span class="where"><i></i>Mensagem para o Claude</span><button class="copy" type="button">{{I:copy}}<span>Copiar</span></button></div>
+<pre>Crie o DNA do cliente Loja Exemplo: loja de roupas femininas, público de 25 a 45 anos da cidade, tom alegre e elegante, cores vinho e creme, fonte da marca MarcaSans. Chamada preferida: "Chame no WhatsApp".</pre></div>
+        <p>Ele cria <code>clients/loja-exemplo.md</code> a partir do molde <code>clients/_MOLDE-DNA-DE-CLIENTE.md</code> e deixa em branco o que você não informou. A ficha tem estes blocos:</p>
+        <div class="chips" style="margin:8px 0 16px"><span class="chip">Personalidade</span><span class="chip">Público</span><span class="chip">Posicionamento</span><span class="chip">Estética</span><span class="chip">Cores</span><span class="chip">Tipografia</span><span class="chip">Linguagens visuais</span><span class="chip">Elementos visuais</span><span class="chip">Linguagem</span><span class="chip">CTAs</span><span class="chip">Informações factuais</span><span class="chip">Regras específicas</span><span class="chip">Assets recorrentes</span></div>
+        <h3 id="dna-precedencia" data-busca="O que vale mais: briefing, DNA ou regras">O que vale mais</h3>
+        <ol class="flow" aria-label="Ordem de prioridade">
+          <li class="you"><small>1º</small><b>Briefing do vídeo</b><em>manda sempre</em></li>
+          <li><small>2º</small><b>DNA do cliente</b><em>quando o briefing não diz</em></li>
+          <li><small>3º</small><b>Suas regras em local/</b><em>regras gerais</em></li>
+          <li><small>4º</small><b>Padrão do motor</b><em>docs/</em></li>
+        </ol>
+        <ul>
+          <li><strong>Preços, horários e condições</strong> da ficha servem só de referência: o Claude confirma com você antes de usar num vídeo.</li>
+          <li><strong>Logo e fontes</strong> do cliente são copiados para o <code>assets/</code> de cada vídeo. Não existe pasta de arquivos compartilhada entre projetos.</li>
+          <li>Repetir a mesma linguagem visual dos últimos vídeos do cliente pede um motivo (veja <a href="#linguagens">Linguagens visuais</a>).</li>
+        </ul>
+      </section>
+
+      <!-- ============ 10 ============ -->
+      <section class="sec" id="local" data-titulo="Camada local" data-busca="Camada local (personalizar)">
+        <div class="sec-head"><div class="sec-num">10</div><div><h2>Camada local</h2><div class="meta"><span>{{I:clock}} 4 minutos de leitura</span><span>{{I:check}} Suas regras, sem mexer no motor</span></div></div></div>
+        <p class="def"><b>Camada local</b> é a pasta <code>local/</code>, na raiz, com as <b>suas</b> regras e preferências: o seu jeito de trabalhar, o modo padrão, regras sobre clientes. Ela fica fora do repositório público e nenhuma atualização do motor apaga.</p>
+
+        <div class="cols">
+          <div class="col pick"><h4>Pode mudar</h4><div class="sub">O que estiver em <code>local/</code> vale mais que o padrão</div>
+            <ul><li>Estilo, ritmo, tom dos textos, palavras a evitar</li><li>Modo padrão (Diretor ou Produção)</li><li>Fluxo: o que você quer ver antes, formato dos relatórios</li><li>Regras gerais sobre clientes e entregas</li><li>Linguagens visuais próprias</li></ul></div>
+          <div class="col"><h4>{{I:lock}} Não pode mudar</h4><div class="sub">As 4 travas do motor</div>
+            <ul><li>A aprovação no Studio (GATE 3)</li><li>A autorização do render (GATE 4)</li><li>Nunca inventar fatos: preços, datas, descontos, números, depoimentos</li><li>Nunca sobrescrever uma versão</li></ul></div>
+        </div>
+
+        <h3 id="local-ativar" data-busca="Ativar a camada local">Como ativar</h3>
+        <ol class="steps">
+          <li><h4>Copie a pasta <code>local.exemplo</code> e renomeie a cópia para <code>local</code></h4><p>As duas ficam lado a lado, na raiz. Não escreva nada seu na <code>local.exemplo</code>: ela é o molde e é substituída nas atualizações.</p></li>
+          <li><h4>Edite <code>local/REGRAS.md</code></h4><p>Escreva em frases simples, em cada seção. O que ficar em branco segue o padrão do motor. Por exemplo:</p>
+            <div class="out"><div class="out-bar"><i></i><i></i><i></i><span>local/REGRAS.md (trecho)</span></div><pre>## Modo padrão
+PRODUÇÃO quando o briefing trouxer roteiro fechado; DIRETOR nos demais.
+
+## Estilo e linguagem
+Textos sempre em caixa alta. Nunca usar emojis no vídeo.
+
+## Entrega
+Depois do render final, me passe a legenda sugerida para o post.</pre></div></li>
+          <li><h4>Confira</h4>
+            <div class="cmd"><div class="cmd-bar"><span class="where"><i></i>Terminal · na raiz</span><button class="copy" type="button">{{I:copy}}<span>Copiar</span></button></div>
+<pre>npm run local:check</pre></div>
+            <p>Ou peça ao Claude: “confira a minha camada local”.</p></li>
+        </ol>
+        <h3 id="local-arquivos" data-busca="Arquivos da camada local">Os outros arquivos</h3>
+        <table class="tbl">
+          <thead><tr><th>Arquivo</th><th>Para quê</th></tr></thead>
+          <tbody>
+            <tr><td><code>config.json</code></td><td>Proteger vídeos já entregues contra uma versão nova por engano (para o Agente de Render).</td></tr>
+            <tr><td><code>linguagens.json</code></td><td>Criar linguagens visuais próprias, com os mesmos campos das do motor (<code>docs/14-LINGUAGENS-VISUAIS.md</code>).</td></tr>
+            <tr><td><code>termos-proibidos.txt</code></td><td>Só para quem vai publicar uma cópia do motor: nomes que nunca podem ir a público.</td></tr>
+          </tbody>
+        </table>
+        <div class="note warn">{{I:warn}}<div><strong class="t">Se uma regra local contrariar uma trava</strong><p>O Claude segue o motor e avisa. Se o <code>config.json</code> tentar mudar uma trava, os comandos param com uma mensagem clara até o campo ser removido.</p></div></div>
+      </section>
+
+      <!-- ============ 11 ============ -->
+      <section class="sec" id="comandos" data-titulo="Comandos" data-busca="Comandos (referência)">
+        <div class="sec-head"><div class="sec-num">11</div><div><h2>Comandos</h2><div class="meta"><span>Para consulta. No dia a dia, o Claude roda ou indica cada um.</span></div></div></div>
+        <p>Todos rodam no terminal, <a href="implantacao.html#raiz">na raiz</a>. Troque <code>&lt;slug&gt;</code> pelo nome do seu projeto.</p>
+        <div class="tbl-scroll"><table class="tbl">
+          <thead><tr><th>Comando</th><th>Para que serve</th></tr></thead>
+          <tbody>
+            <tr><td><code>npm run status</code></td><td>Lista os projetos e a etapa de cada um.</td></tr>
+            <tr><td><code>npm run status -- &lt;slug&gt;</code></td><td>Relatório do projeto: etapa, gates, o que falta.</td></tr>
+            <tr><td><code>npm run new -- &lt;slug&gt; --cliente "…" --projeto "…" --duracao 20</code></td><td>Cria um projeto novo a partir do molde.</td></tr>
+            <tr><td><code>npm run studio -- &lt;slug&gt;</code></td><td>Abre o Studio para assistir ao vídeo.</td></tr>
+            <tr><td><code>npm run render -- &lt;slug&gt; --dry-run</code></td><td>Simulação: mostra o que seria feito, sem gerar o vídeo.</td></tr>
+            <tr><td><code>npm run render -- &lt;slug&gt;</code></td><td>Gera o MP4 final na próxima versão livre.</td></tr>
+            <tr><td><code>npm run render -- &lt;slug&gt; --draft</code></td><td>Gera um rascunho em <code>renders/_rascunhos/</code>.</td></tr>
+            <tr><td><code>npm run assets -- &lt;slug&gt;</code></td><td>Ficha técnica dos arquivos de <code>assets/</code> (resolução, duração, orientação).</td></tr>
+            <tr><td><code>npm run preflight -- &lt;slug&gt;</code></td><td>Conferência técnica antes do render (fontes, textos, legibilidade).</td></tr>
+            <tr><td><code>npm run inspect -- &lt;slug&gt;</code></td><td>Confere o MP4 gerado (formato, duração, som).</td></tr>
+            <tr><td><code>npm run archive -- &lt;slug&gt; --destino "…"</code></td><td>Copia o projeto concluído para um backup, conferindo cada arquivo.</td></tr>
+            <tr><td><code>npm run linguagens</code></td><td>Lista as linguagens visuais (<code>-- &lt;id&gt;</code> para os detalhes de uma).</td></tr>
+            <tr><td><code>npm run local:check</code></td><td>Confere a camada local.</td></tr>
+            <tr><td><code>npm run agent:install</code></td><td>Instala o Agente de Render (Windows). <code>-- --remover</code> desinstala.</td></tr>
+            <tr><td><code>npm run agent:status</code></td><td>Mostra se o agente está instalado e ativo.</td></tr>
+            <tr><td><code>npm run agent:check</code></td><td>Diagnóstico completo do agente (só leitura).</td></tr>
+            <tr><td><code>npm test</code></td><td>Testa o motor inteiro.</td></tr>
+            <tr><td><code>npm run typecheck</code></td><td>Confere os tipos do código.</td></tr>
+            <tr><td><code>npm run manuais</code></td><td>Gera de novo estes manuais (para quem edita <code>manuais/fonte/</code>).</td></tr>
+            <tr><td><code>npm run verificar-publico</code></td><td>Confere uma cópia do motor antes de publicá-la.</td></tr>
+          </tbody>
+        </table></div>
+      </section>
+
+      <!-- ============ 12 ============ -->
+      <section class="sec" id="glossario" data-titulo="Glossário" data-busca="Glossário">
+        <div class="sec-head"><div class="sec-num">12</div><div><h2>Glossário</h2><div class="meta"><span>Em ordem alfabética, com link para onde o termo aparece</span></div></div></div>
+        <dl class="gloss">
+          <dt id="g-assets">Assets</dt><dd>Os arquivos que entram no vídeo: vídeos, fotos, logo, fontes, música. Ficam em <code>assets/</code>. <a href="#o-que-colocar">ver seção</a></dd>
+          <dt id="g-briefing">Briefing</dt><dd>As respostas que descrevem o vídeo. O Rápido tem 8 perguntas. <a href="#briefing">ver seção</a></dd>
+          <dt id="g-camada-local">Camada local</dt><dd>A pasta <code>local/</code>, com as suas regras. <a href="#local">ver seção</a></dd>
+          <dt id="g-composicao">Composição</dt><dd>Cada vídeo dentro de um projeto, listado à esquerda no Studio. <a href="implantacao.html#studio">ver no Manual de Implantação</a></dd>
+          <dt id="g-cta">CTA</dt><dd>Chamada para a ação: o que a pessoa deve fazer depois de assistir. Fica inteira no último quadro. <a href="#q2">ver seção</a></dd>
+          <dt id="g-dna">DNA de cliente</dt><dd>Ficha com o que vale para todos os vídeos de um cliente. <a href="#clientes">ver seção</a></dd>
+          <dt id="g-gate">Gate</dt><dd>Ponto de aprovação. São 4; o 3 (Studio) e o 4 (Render) nunca são pulados. <a href="#gates">ver seção</a></dd>
+          <dt id="g-hook">Hook</dt><dd>A frase de abertura, legível já no primeiro meio segundo. <a href="#q3">ver seção</a></dd>
+          <dt id="g-linguagem">Linguagem visual</dt><dd>Pacote de decisões de design: ritmo, layout, textura e movimento. São 10. <a href="#linguagens">ver seção</a></dd>
+          <dt id="g-manifesto">Manifesto de assets</dt><dd>A lista dos arquivos do projeto e de onde vieram (<code>manifesto-de-assets.md</code>). <a href="#dentro-do-projeto">ver seção</a></dd>
+          <dt id="g-modo-diretor">Modo Diretor</dt><dd>Você aprova cada etapa. É o padrão. <a href="#modos">ver seção</a></dd>
+          <dt id="g-modo-producao">Modo Produção</dt><dd>“Fazer direto”: o Claude pula os gates 1 e 2 e mostra o vídeo pronto no Studio. <a href="#modos">ver seção</a></dd>
+          <dt id="g-mp4">MP4</dt><dd>O arquivo de vídeo final, em <code>renders/</code>. <a href="#onde-mp4">ver seção</a></dd>
+          <dt id="g-personalidade">Personalidade de movimento</dt><dd>O jeito de tudo se mexer num vídeo: suave, elástica, seca, cinematográfica, mecânica ou degraus. <a href="#eixos">ver seção</a></dd>
+          <dt id="g-rascunho">Rascunho</dt><dd>Uma prévia rápida em <code>renders/_rascunhos/</code>, que não conta como versão. <a href="#onde-mp4">ver seção</a></dd>
+          <dt id="g-render">Render</dt><dd>A etapa em que o vídeo vira um arquivo MP4. <a href="#gates">ver seção</a></dd>
+          <dt id="g-slug">Slug</dt><dd>O nome curto do projeto: minúsculas, números e hífens. <a href="#slug">ver seção</a></dd>
+          <dt id="g-storyboard">Storyboard</dt><dd>O plano do vídeo cena a cena, com texto, imagem e tempo. <a href="#gates">ver seção</a></dd>
+          <dt id="g-studio">Studio</dt><dd>A tela de pré-visualização, no navegador, onde você aprova o vídeo. <a href="#conferir-studio">ver seção</a></dd>
+          <dt id="g-versao">Versão</dt><dd>Cada MP4 final: v01, v02… Nenhuma é sobrescrita. <a href="#versoes">ver seção</a></dd>
+        </dl>
+        <p class="muted">Termos de instalação (terminal, Node, npm, raiz) estão no <a href="implantacao.html#glossario">glossário do Manual de Implantação</a>.</p>
+      </section>
+
+    </div>
+  </main>
+</div>
+<script>{{JS}}</script>
+</body>
+</html>

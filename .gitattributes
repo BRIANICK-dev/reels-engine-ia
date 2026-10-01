@@ -1,0 +1,15 @@
+# Normaliza finais de linha. Scripts do Windows precisam de CRLF
+# (o .cmd pode falhar com LF); o resto do repositório usa LF.
+* text=auto eol=lf
+*.cmd text eol=crlf
+*.bat text eol=crlf
+*.vbs text eol=crlf
+
+# Binários (fontes do projeto de exemplo etc.)
+*.woff2 binary
+*.woff binary
+*.ttf binary
+*.otf binary
+*.png binary
+*.jpg binary
+*.wav binary

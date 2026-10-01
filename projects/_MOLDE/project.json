@@ -1,0 +1,9 @@
+{
+  "slug": "{{SLUG}}",
+  "cliente": "{{CLIENTE}}",
+  "projeto": "{{PROJETO}}",
+  "durationSeconds": null,
+  "linguagem": null,
+  "engineVersion": "{{ENGINE_VERSION}}",
+  "createdAt": "{{CREATED_AT}}"
+}

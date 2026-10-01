@@ -1,0 +1,48 @@
+# Publica os dois manuais (manuais/*.html) no GitHub Pages.
+# Só os manuais vão para o site: o resto do repositório não é publicado.
+# Enquanto o repositório for privado, o job é pulado (não falha).
+# Ativação, uma vez: Settings → Pages → Source: GitHub Actions.
+name: Publicar manuais
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'manuais/*.html'
+      - '.github/workflows/manuais.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    if: ${{ !github.event.repository.private }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.publicacao.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Montar o site (só os manuais; a página inicial é a Implantação)
+        run: |
+          mkdir -p site
+          cp manuais/implantacao.html manuais/uso.html site/
+          cp manuais/implantacao.html site/index.html
+
+      - uses: actions/configure-pages@v6
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+
+      - id: publicacao
+        uses: actions/deploy-pages@v5

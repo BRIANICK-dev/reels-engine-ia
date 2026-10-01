@@ -1,0 +1,90 @@
+# ─────────────────────────────────────────────────────────────
+# Reels Engine IA — o Git guarda o MOTOR: código, configuração,
+# documentação, moldes e o projeto de exemplo.
+#
+# O conteúdo de quem usa a ferramenta (projetos, clientes e a
+# camada local) fica fora do Git por padrão. Para versionar os
+# seus projetos, use um repositório PRIVADO seu e remova as
+# regras de "Conteúdo do usuário" abaixo nele.
+# ─────────────────────────────────────────────────────────────
+
+# Dependências (reinstale com: npm ci)
+node_modules/
+
+# ── Conteúdo do usuário ─────────────────────────────────────
+# Projetos: só o molde e o projeto de exemplo vão para o Git
+projects/*
+!projects/_MOLDE/
+!projects/exemplo-loja-promo/
+# O exemplo é versionado SEM estado de produção (cada clone começa limpo)
+projects/exemplo-loja-promo/project-status.json
+
+# Clientes: só o molde vai para o Git
+clients/*
+!clients/_MOLDE-DNA-DE-CLIENTE.md
+
+# Camada local (regras privadas, configuração, termos proibidos).
+# O molde público dela é local.exemplo/, que vai para o Git.
+local/
+
+# ── Mídia dentro dos projetos versionados ───────────────────
+# Assets: pasta existe localmente, conteúdo fora do Git
+projects/*/assets/*
+!projects/*/assets/.gitkeep
+# Exceção: o projeto de exemplo precisa rodar logo depois do clone.
+# Só material livre (licenças listadas no manifesto-de-assets.md dele).
+!projects/exemplo-loja-promo/assets/**
+
+# Renders (MP4 finais e rascunhos) — só locais
+projects/*/renders/*
+!projects/*/renders/.gitkeep
+
+# Referências: mídia fica local; notas em .md vão para o Git
+projects/*/referencias/*
+!projects/*/referencias/*.md
+
+# Saídas do app Claude: arquivos enviados ao chat são gravados aqui na pasta
+# conectada (stills, previews, relatórios de validação). Nunca vão para o Git.
+Claude outputs/
+
+# Saídas avulsas do Remotion / bundles
+out/
+build/
+dist/
+.remotion/
+*.mp4
+*.mov
+*.m4v
+*.webm
+*.part
+
+# Agente de Render: fila de pedidos, recibos e logs — só locais
+.reels-engine/
+
+# Logs e temporários
+*.log
+npm-debug.log*
+*.tmp
+*.temp
+*.bak
+~$*
+.cache/
+
+# Variáveis de ambiente / segredos
+.env
+.env.*
+
+# Sistema operacional
+desktop.ini
+Desktop.ini
+Thumbs.db
+ehthumbs.db
+$RECYCLE.BIN/
+.DS_Store
+._*
+
+# Editores
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
