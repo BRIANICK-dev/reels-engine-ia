@@ -1,0 +1,105 @@
+# Formulário de Issue: relato de instalação (deu certo ou travou).
+# Link direto: https://github.com/BRIANICK-dev/reels-engine-ia/issues/new?template=relato-de-instalacao.yml
+name: Relato de instalação
+description: Conte como foi instalar o Reels Engine IA no seu computador — deu certo ou travou em algum passo.
+title: "[Instalação] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por ajudar! Relatos de **macOS e Linux** são especialmente úteis: o manual foi testado de ponta a ponta só no Windows.
+        Relatos de instalação que **deu certo** também valem.
+
+        **Privacidade:** antes de colar o que apareceu na tela, troque o seu nome de usuário nos caminhos (ex.: `C:\Users\voce\…`, `/Users/voce/…`) e apague e-mails, tokens ou senhas.
+
+  - type: dropdown
+    id: sistema
+    attributes:
+      label: Sistema operacional
+      options:
+        - Windows 11
+        - Windows 10
+        - macOS (chip Apple)
+        - macOS (Intel)
+        - Linux
+        - Outro
+    validations:
+      required: true
+
+  - type: input
+    id: versao-sistema
+    attributes:
+      label: Versão do sistema
+      description: "Windows: Configurações → Sistema → Sobre. macOS: menu da maçã → Sobre este Mac. Linux: distribuição e versão."
+      placeholder: "ex.: Windows 11 24H2 · macOS 15.6 · Ubuntu 24.04"
+    validations:
+      required: true
+
+  - type: input
+    id: node
+    attributes:
+      label: Versão do Node (resultado de `node -v`)
+      placeholder: "ex.: v24.13.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: forma
+    attributes:
+      label: Como você usa o Claude com o motor
+      options:
+        - Cowork (app Claude para computador)
+        - Claude Code (terminal)
+        - Ainda não cheguei nessa parte
+    validations:
+      required: true
+
+  - type: dropdown
+    id: npm-test
+    attributes:
+      label: Resultado do `npm test`
+      options:
+        - "fail 0 (tudo certo)"
+        - "fail maior que 0 (algum teste falhou)"
+        - "Deu erro antes de terminar"
+        - "Não cheguei a rodar"
+    validations:
+      required: true
+
+  - type: textarea
+    id: resumo-teste
+    attributes:
+      label: Resumo do `npm test`
+      description: "As últimas linhas (ℹ tests · ℹ pass · ℹ fail). Se algum teste falhou, cole desde a primeira linha com ✖ até o fim."
+      render: shell
+
+  - type: dropdown
+    id: passo
+    attributes:
+      label: Em qual passo do Manual de Implantação travou?
+      options:
+        - "Não travou: deu tudo certo"
+        - "2. Instalar o Node 24"
+        - "3. Baixar o projeto"
+        - "4. Abrir o terminal e testar (npm ci / npm test)"
+        - "5. Cowork ou Claude Code"
+        - "6. Agente de Render (Windows)"
+        - "7. Primeiro teste no Studio"
+        - "8. Está tudo pronto se…"
+        - "9. Atualizar o motor"
+        - "Outro (explique abaixo)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: tela
+    attributes:
+      label: O que apareceu na tela
+      description: "Cole a mensagem de erro ou as últimas linhas do terminal. Um print também ajuda (arraste a imagem para cá)."
+      render: shell
+
+  - type: textarea
+    id: observacoes
+    attributes:
+      label: Observações
+      description: "O que você esperava que acontecesse, o que já tentou, ou algo no manual que estava diferente na sua tela."

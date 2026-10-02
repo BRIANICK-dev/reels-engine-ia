@@ -1,6 +1,6 @@
 {
   "name": "reels-engine-ia",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Reels Engine IA — ambiente Remotion para produzir Instagram Reels a partir de briefing e assets, compatível com Claude. Cada vídeo vive em projects/<slug>/.",
   "license": "MIT",

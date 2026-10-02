@@ -328,9 +328,9 @@ found <span class="ok">0 vulnerabilities</span></pre></div>
         <div class="duo">
           <div>
             <div class="out ok"><div class="out-bar">{{I:check}}<span>Tudo certo</span></div><pre><span class="dim">✔ … (dezenas de linhas)</span>
-ℹ tests <span class="hl">102</span>
+ℹ tests <span class="hl">104</span>
 ℹ suites 0
-ℹ pass <span class="hl">102</span>
+ℹ pass <span class="hl">104</span>
 ℹ fail <span class="ok">0</span>
 ℹ cancelled 0
 <span class="dim">ℹ duration_ms 41897</span></pre></div>
@@ -339,9 +339,9 @@ found <span class="ok">0 vulnerabilities</span></pre></div>
           <div>
             <div class="out bad"><div class="out-bar">{{I:x}}<span>Algo falhou</span></div><pre><span class="bad">✖ nome do teste que falhou</span>
   AssertionError: …
-ℹ tests 102
+ℹ tests 104
 ℹ suites 0
-ℹ pass 101
+ℹ pass 103
 ℹ fail <span class="bad">1</span>
 <span class="dim">ℹ duration_ms 40112</span></pre></div>
             <p><strong><code>fail</code> maior que 0.</strong> Copie desde a primeira linha com <code>✖</code> até o fim e mande para o Claude no chat, ou veja <a href="#err-teste">Um teste falhou</a>.</p>
@@ -523,7 +523,7 @@ Built in 3891ms</pre></div>
           <li><input type="checkbox" id="ck-agente"><label for="ck-agente"><code>npm run agent:status</code> mostra “Agente ativo agora: sim” <span class="badge win">Windows + Cowork</span><small>Com o Claude Code, ou no Mac e no Linux, pode marcar direto.</small></label><a href="#agente-conferir">Agente de Render →</a></li>
         </ul>
         <div class="note ok done-all">{{I:check}}<div><strong class="t">Tudo pronto.</strong><p>Siga para o <a href="uso.html#rapido">primeiro vídeo em ~15 minutos</a>, no Manual de Uso.</p></div></div>
-        <p class="muted">Algum item não deu certo? Veja <a href="#erros">Deu erro?</a> Daqui em diante, o manual é de consulta: volte a ele para atualizar o motor, resolver um erro ou conferir as licenças.</p>
+        <p class="muted">Algum item não deu certo? Veja <a href="#erros">Deu erro?</a> ou <a href="#relato">conte como foi</a>. Daqui em diante, o manual é de consulta: volte a ele para atualizar o motor, resolver um erro ou conferir as licenças.</p>
       </section>
 
       <!-- ============ 9 ============ -->
@@ -580,6 +580,7 @@ npm test</pre></div>
       <section class="sec" id="erros" data-titulo="Deu erro?" data-busca="Deu erro?">
         <div class="sec-head"><div class="sec-num">10</div><div><h2>Deu erro?</h2><div class="meta"><span>Clique no problema para ver a solução</span></div></div></div>
         <p>Cada item mostra o sintoma (a mensagem que aparece), a causa e o que fazer. Se nada aqui resolver, copie as últimas linhas do terminal e mande para o Claude no chat: ele sabe ler esses erros.</p>
+        <div class="note info" id="relato">{{I:chat}}<div><strong class="t">Travou num passo, ou instalou no macOS ou no Linux?</strong><p>Conte como foi no <a href="https://github.com/BRIANICK-dev/reels-engine-ia/issues/new?template=relato-de-instalacao.yml" target="_blank" rel="noopener">formulário “Relato de instalação” {{I:out}}</a>: sistema, versão do Node, resultado do <code>npm test</code>, o passo em que travou e o que apareceu na tela. Relatos de instalação que deu certo também ajudam, principalmente de macOS e Linux. É preciso ter uma conta (gratuita) no GitHub.</p></div></div>
 
         <details class="err" id="err-node" data-busca="Node errado (EBADENGINE)">
           <summary><b>Node na versão errada</b><small>npm warn EBADENGINE Unsupported engine · node -v mostra v20 ou v22</small></summary>

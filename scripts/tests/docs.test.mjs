@@ -61,7 +61,8 @@ test('arquivos obsoletos não existem mais (apague-os se o teste falhar)', () =>
 test('nenhum arquivo do motor cita nomes antigos', () => {
   const hits = [];
   for (const f of motorFiles()) {
-    const lines = read(f).split(/\r?\n/);
+    // .github/ISSUE_TEMPLATE é o nome exigido pelo GitHub, não um nome antigo do motor.
+    const lines = read(f).replaceAll('ISSUE_TEMPLATE', 'ISSUE-MODELOS').split(/\r?\n/);
     lines.forEach((line, i) => {
       for (const name of OLD_NAMES) if (line.includes(name)) hits.push(`${f}:${i + 1} → "${name}"`);
     });

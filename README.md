@@ -20,6 +20,10 @@ A versão online acompanha sempre a versão mais nova do motor. Se você tem uma
 - **Sem programar:** botão verde **Code** → **Download ZIP** (ou o ZIP da versão em [Releases](https://github.com/BRIANICK-dev/reels-engine-ia/releases)). Depois siga o [Manual de Implantação](https://brianick-dev.github.io/reels-engine-ia/implantacao.html).
 - **Com git:** `git clone https://github.com/BRIANICK-dev/reels-engine-ia.git`
 
+## Relatar a instalação
+
+Travou em algum passo do manual, ou instalou no macOS ou no Linux? Conte como foi no formulário **[Relato de instalação](https://github.com/BRIANICK-dev/reels-engine-ia/issues/new?template=relato-de-instalacao.yml)**: sistema, versão do Node, resultado do `npm test`, o passo em que travou e o que apareceu na tela. Relatos de instalação que deu certo também ajudam.
+
 ## Requisitos
 
 - **Node.js 24** (veja `.nvmrc`). Versões mais novas também funcionam; a 24 é a versão testada.

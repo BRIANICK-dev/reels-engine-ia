@@ -2,6 +2,17 @@
 
 Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). Versões em [SemVer](https://semver.org/lang/pt-BR/); a versão atual está no arquivo `VERSION`.
 
+## [1.0.1] — 2026-10-01
+
+### Adicionado
+- Formulário de Issue **“Relato de instalação”** (`.github/ISSUE_TEMPLATE/relato-de-instalacao.yml`): sistema e versão, versão do Node, resultado do `npm test`, passo do manual em que travou e o que apareceu na tela. Link no Manual de Implantação ("Deu erro?" e checklist) e no README.
+
+### Alterado
+- Workflows do GitHub Actions fixados em `ubuntu-24.04` (antes `ubuntu-latest`, que muda para o Ubuntu 26 em 19/10/2026), para os testes e a publicação dos manuais não mudarem de ambiente sem aviso.
+- Manual de Implantação: avisos do Windows conferidos num download real — o `.cmd` de um ZIP bloqueado abre “Abrir Arquivo - Aviso de Segurança” (botão **Executar**); “Desbloquear” fica em Propriedades → Geral → Segurança; nas versões novas do Windows 11 o “Extrair tudo” não cria pasta dupla.
+- Estatística de linguagens do GitHub ignora `manuais/` (`.gitattributes`).
+- README: pasta `manuais/` na tabela de pastas.
+
 ## [1.0.0] — 2026-10-01
 
 ### Adicionado
